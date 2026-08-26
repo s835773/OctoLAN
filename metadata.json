@@ -1,0 +1,6 @@
+{
+  "name": "OcuLAN - On-Premise Network Intelligence & Auditing Console",
+  "description": "Enterprise LAN topology mapping, NetFlow telemetry, broadcast storm detection, NetAlertX-style alerting, 802.1Q VLAN audit, and portable POSIX C toolkit.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

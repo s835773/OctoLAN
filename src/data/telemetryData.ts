@@ -1,0 +1,451 @@
+import { NetflowRecord, TopTalker, StormMetric, StormNodeActivity, AlertRule, AlertEvent, AlertConfig } from '../types';
+
+export const SAMPLE_NETFLOW_RECORDS: NetflowRecord[] = [
+  {
+    id: 'flow-101',
+    timestamp: '12:35:42',
+    srcIp: '192.168.10.101',
+    srcPort: 54122,
+    srcHostname: 'FINANCE-PC04',
+    dstIp: '192.168.10.15',
+    dstPort: 445,
+    dstHostname: 'CORP-FILE01',
+    protocol: 'TCP',
+    application: 'SMBv3 File Sharing',
+    bytes: 48920150,
+    packets: 34120,
+    durationMs: 12400,
+    tcpFlags: 'ACK, PSH',
+    vlanId: 10,
+    flowDirection: 'Internal',
+    rateMbps: 31.5
+  },
+  {
+    id: 'flow-102',
+    timestamp: '12:35:40',
+    srcIp: '192.168.30.101',
+    srcPort: 554,
+    srcHostname: 'CAM-ENTRANCE-01',
+    dstIp: '192.168.10.15',
+    dstPort: 58920,
+    dstHostname: 'CORP-FILE01 (NVR)',
+    protocol: 'TCP',
+    application: 'RTSP Video Stream',
+    bytes: 18450000,
+    packets: 14200,
+    durationMs: 30000,
+    tcpFlags: 'ACK, PSH',
+    vlanId: 30,
+    flowDirection: 'Internal',
+    rateMbps: 4.9
+  },
+  {
+    id: 'flow-103',
+    timestamp: '12:35:38',
+    srcIp: '192.168.10.102',
+    srcPort: 49812,
+    srcHostname: 'dev-macbook-pro',
+    dstIp: '192.168.10.20',
+    dstPort: 5432,
+    dstHostname: 'pg-cluster-node01',
+    protocol: 'TCP',
+    application: 'PostgreSQL Query Stream',
+    bytes: 12400500,
+    packets: 9800,
+    durationMs: 8200,
+    tcpFlags: 'ACK, PSH',
+    vlanId: 10,
+    flowDirection: 'Internal',
+    rateMbps: 12.1
+  },
+  {
+    id: 'flow-104',
+    timestamp: '12:35:35',
+    srcIp: '192.168.20.51',
+    srcPort: 16402,
+    srcHostname: 'poly-desk-frontdesk',
+    dstIp: '192.168.20.10',
+    dstPort: 10240,
+    dstHostname: 'pbx01.voip',
+    protocol: 'UDP',
+    application: 'RTP G.711 Audio Codec',
+    bytes: 840000,
+    packets: 4200,
+    durationMs: 20000,
+    tcpFlags: 'NONE',
+    vlanId: 20,
+    flowDirection: 'Internal',
+    rateMbps: 0.33
+  },
+  {
+    id: 'flow-105',
+    timestamp: '12:35:30',
+    srcIp: '192.168.10.10',
+    srcPort: 389,
+    srcHostname: 'CORP-DC01',
+    dstIp: '192.168.10.105',
+    dstPort: 51200,
+    dstHostname: 'HR-LAPTOP-02',
+    protocol: 'TCP',
+    application: 'LDAP Kerberos Ticket Grant',
+    bytes: 320400,
+    packets: 410,
+    durationMs: 450,
+    tcpFlags: 'ACK, FIN',
+    vlanId: 10,
+    flowDirection: 'Internal',
+    rateMbps: 5.69
+  },
+  {
+    id: 'flow-106',
+    timestamp: '12:35:28',
+    srcIp: '192.168.50.120',
+    srcPort: 44102,
+    srcHostname: 'guest-unidentified (Kali)',
+    dstIp: '192.168.1.1',
+    dstPort: 22,
+    dstHostname: 'edge-firewall',
+    protocol: 'TCP',
+    application: 'SSH Scan Attempt',
+    bytes: 64,
+    packets: 1,
+    durationMs: 10,
+    tcpFlags: 'SYN',
+    vlanId: 50,
+    flowDirection: 'Internal',
+    rateMbps: 0.05,
+    isAnomalous: true,
+    anomalyReason: 'Cross-VLAN probing from Isolated Guest VLAN 50 to Management VLAN 1'
+  },
+  {
+    id: 'flow-107',
+    timestamp: '12:35:25',
+    srcIp: '192.168.10.15',
+    srcPort: 443,
+    srcHostname: 'CORP-FILE01',
+    dstIp: '142.250.190.46',
+    dstPort: 443,
+    dstHostname: 'google-cloud-storage.net',
+    protocol: 'TCP',
+    application: 'Offsite Cloud Backup (HTTPS)',
+    bytes: 92400000,
+    packets: 62000,
+    durationMs: 45000,
+    tcpFlags: 'ACK, PSH',
+    vlanId: 10,
+    flowDirection: 'Egress',
+    rateMbps: 16.4
+  },
+  {
+    id: 'flow-108',
+    timestamp: '12:35:20',
+    srcIp: '192.168.30.50',
+    srcPort: 9100,
+    srcHostname: 'HP-LaserJet-MFP',
+    dstIp: '192.168.10.101',
+    dstPort: 52100,
+    dstHostname: 'FINANCE-PC04',
+    protocol: 'TCP',
+    application: 'Raw JetDirect Print Spool',
+    bytes: 4520100,
+    packets: 3100,
+    durationMs: 5100,
+    tcpFlags: 'ACK, FIN',
+    vlanId: 30,
+    flowDirection: 'Internal',
+    rateMbps: 7.09
+  }
+];
+
+export const SAMPLE_TOP_TALKERS: TopTalker[] = [
+  {
+    ip: '192.168.10.15',
+    hostname: 'CORP-FILE01.corp.local',
+    deviceType: 'File & Backup Server',
+    vlanId: 10,
+    totalBytes: 159720150,
+    totalPackets: 110320,
+    bandwidthMbps: 52.8,
+    flowCount: 42,
+    percentage: 38.4
+  },
+  {
+    ip: '192.168.10.101',
+    hostname: 'FINANCE-PC04.corp.local',
+    deviceType: 'Corporate Workstation',
+    vlanId: 10,
+    totalBytes: 53440250,
+    totalPackets: 37220,
+    bandwidthMbps: 38.59,
+    flowCount: 18,
+    percentage: 18.6
+  },
+  {
+    ip: '192.168.30.101',
+    hostname: 'CAM-ENTRANCE-01',
+    deviceType: 'Hikvision IP Camera',
+    vlanId: 30,
+    totalBytes: 36900000,
+    totalPackets: 28400,
+    bandwidthMbps: 9.8,
+    flowCount: 6,
+    percentage: 12.8
+  },
+  {
+    ip: '192.168.10.20',
+    hostname: 'pg-cluster-node01.corp.local',
+    deviceType: 'PostgreSQL Database Server',
+    vlanId: 10,
+    totalBytes: 24801000,
+    totalPackets: 19600,
+    bandwidthMbps: 24.2,
+    flowCount: 24,
+    percentage: 8.6
+  },
+  {
+    ip: '192.168.10.102',
+    hostname: 'dev-macbook-pro.local',
+    deviceType: 'Engineering Workstation',
+    vlanId: 10,
+    totalBytes: 18400500,
+    totalPackets: 14800,
+    bandwidthMbps: 16.3,
+    flowCount: 15,
+    percentage: 6.4
+  },
+  {
+    ip: '192.168.20.10',
+    hostname: 'pbx01.voip.corp.local',
+    deviceType: 'Asterisk PBX Server',
+    vlanId: 20,
+    totalBytes: 12600000,
+    totalPackets: 63000,
+    bandwidthMbps: 1.2,
+    flowCount: 31,
+    percentage: 4.4
+  }
+];
+
+export const SAMPLE_STORM_METRICS: StormMetric[] = [
+  { timestamp: '12:30:00', broadcastPps: 18, multicastPps: 34, unicastPps: 1240, totalBandwidthKbps: 420, status: 'Normal' },
+  { timestamp: '12:31:00', broadcastPps: 22, multicastPps: 41, unicastPps: 1390, totalBandwidthKbps: 480, status: 'Normal' },
+  { timestamp: '12:32:00', broadcastPps: 35, multicastPps: 58, unicastPps: 1520, totalBandwidthKbps: 590, status: 'Normal' },
+  { timestamp: '12:33:00', broadcastPps: 48, multicastPps: 82, unicastPps: 1610, totalBandwidthKbps: 710, status: 'Normal' },
+  { timestamp: '12:34:00', broadcastPps: 142, multicastPps: 180, unicastPps: 1940, totalBandwidthKbps: 1420, status: 'Elevated', topEmitterIp: '192.168.50.120', protocolType: 'ARP Who-has Flood' },
+  { timestamp: '12:35:00', broadcastPps: 480, multicastPps: 420, unicastPps: 2850, totalBandwidthKbps: 4890, status: 'Critical Storm', topEmitterIp: '192.168.10.10', protocolType: 'STP Topology Change Loop' }
+];
+
+export const SAMPLE_STORM_NODES: StormNodeActivity[] = [
+  {
+    id: 'storm-node-1',
+    ip: '192.168.1.2',
+    hostname: 'core-sw01.corp.local',
+    mac: '70:69:79:ab:cd:10',
+    vlanId: 1,
+    broadcastPps: 12,
+    multicastPps: 38,
+    dominantProtocol: 'STP BPDU',
+    stormStatus: 'Calm',
+    packetRingSize: 28
+  },
+  {
+    id: 'storm-node-2',
+    ip: '192.168.10.10',
+    hostname: 'CORP-DC01.corp.local',
+    mac: '00:50:56:b1:44:77',
+    vlanId: 10,
+    broadcastPps: 320,
+    multicastPps: 185,
+    dominantProtocol: 'LLMNR',
+    stormStatus: 'Flooding',
+    packetRingSize: 64
+  },
+  {
+    id: 'storm-node-3',
+    ip: '192.168.50.120',
+    hostname: 'guest-unidentified (Kali)',
+    mac: '48:2a:e3:99:88:11',
+    vlanId: 50,
+    broadcastPps: 450,
+    multicastPps: 12,
+    dominantProtocol: 'ARP',
+    stormStatus: 'Flooding',
+    packetRingSize: 76
+  },
+  {
+    id: 'storm-node-4',
+    ip: '192.168.10.101',
+    hostname: 'FINANCE-PC04.corp.local',
+    mac: '8c:85:90:12:34:56',
+    vlanId: 10,
+    broadcastPps: 45,
+    multicastPps: 62,
+    dominantProtocol: 'mDNS',
+    stormStatus: 'Calm',
+    packetRingSize: 32
+  },
+  {
+    id: 'storm-node-5',
+    ip: '192.168.30.50',
+    hostname: 'HP-LaserJet-MFP-M428',
+    mac: '00:1b:78:33:44:55',
+    vlanId: 30,
+    broadcastPps: 28,
+    multicastPps: 84,
+    dominantProtocol: 'SSDP',
+    stormStatus: 'Calm',
+    packetRingSize: 36
+  },
+  {
+    id: 'storm-node-6',
+    ip: '192.168.1.1',
+    hostname: 'edge-firewall.corp.local',
+    mac: '00:0c:29:4f:8a:12',
+    vlanId: 1,
+    broadcastPps: 8,
+    multicastPps: 16,
+    dominantProtocol: 'DHCP',
+    stormStatus: 'Calm',
+    packetRingSize: 24
+  }
+];
+
+export const INITIAL_ALERT_RULES: AlertRule[] = [
+  {
+    id: 'rule-new-device',
+    name: 'New Rogue Device / Unknown MAC Vendor Detected (NetAlertX model)',
+    category: 'Rogue Device',
+    enabled: true,
+    severity: 'High',
+    triggerCondition: 'ARP/DHCP discovers host with unmapped OUI or unknown hostname on any VLAN',
+    channel: 'all',
+    cooldownMinutes: 5,
+    lastTriggered: '10 minutes ago'
+  },
+  {
+    id: 'rule-storm-threshold',
+    name: 'Layer 2 Broadcast Storm Rate Exceeded (> 250 PPS)',
+    category: 'Storm / Loop',
+    enabled: true,
+    severity: 'Critical',
+    triggerCondition: 'Broadcast/Multicast PPS exceeds 250 pkts/sec for > 3 consecutive seconds',
+    channel: 'all',
+    cooldownMinutes: 2,
+    lastTriggered: '2 minutes ago'
+  },
+  {
+    id: 'rule-stp-loop',
+    name: 'Spanning Tree (STP) Topology Change / Bridging Loop',
+    category: 'Storm / Loop',
+    enabled: true,
+    severity: 'Critical',
+    triggerCondition: 'Root bridge change flag or BPDU frequency exceeds 10 per second',
+    channel: 'all',
+    cooldownMinutes: 5
+  },
+  {
+    id: 'rule-vlan-violation',
+    name: 'Inter-VLAN Boundary Leak / Guest Access Attempt',
+    category: 'VLAN Violation',
+    enabled: true,
+    severity: 'Critical',
+    triggerCondition: 'Packet from Guest VLAN 50 or IoT VLAN 30 targets Management VLAN 1 or Server VLAN 10',
+    channel: 'all',
+    cooldownMinutes: 1,
+    lastTriggered: '12:35:28'
+  },
+  {
+    id: 'rule-risky-port',
+    name: 'Insecure Plaintext or Management Port Opened (HTTP / Telnet / SNMPv2c)',
+    category: 'Port / Service',
+    enabled: true,
+    severity: 'High',
+    triggerCondition: 'Host opens port 23 (Telnet), 80 (HTTP on mgmt), 139 (NetBIOS), or 161 (SNMP public)',
+    channel: 'email',
+    cooldownMinutes: 15,
+    lastTriggered: '25 minutes ago'
+  },
+  {
+    id: 'rule-core-offline',
+    name: 'Core Infrastructure Gateway / Switch Latency Spike (> 50ms) or Offline',
+    category: 'Availability',
+    enabled: true,
+    severity: 'Critical',
+    triggerCondition: 'ICMP ping packet loss >= 50% or latency > 50ms to core gateway/switch',
+    channel: 'all',
+    cooldownMinutes: 3
+  }
+];
+
+export const INITIAL_ALERT_EVENTS: AlertEvent[] = [
+  {
+    id: 'evt-1001',
+    timestamp: '12:35:28',
+    ruleId: 'rule-vlan-violation',
+    ruleName: 'Inter-VLAN Boundary Leak / Guest Access Attempt',
+    severity: 'Critical',
+    category: 'VLAN Violation',
+    targetDevice: 'guest-unidentified (Kali Linux)',
+    targetIp: '192.168.50.120',
+    message: 'Host on Isolated Guest VLAN 50 initiated TCP SYN probe targeting Management Gateway (192.168.1.1:22).',
+    deliveredTo: ['steven.leggio@gmail.com', 'Webhook: Discord #sec-alerts'],
+    status: 'Delivered',
+    technicalDetails: 'Src: 192.168.50.120:44102 -> Dst: 192.168.1.1:22 [TCP SYN] | Interface: eth0.50 -> 802.1Q ACL Dropped'
+  },
+  {
+    id: 'evt-1002',
+    timestamp: '12:34:55',
+    ruleId: 'rule-storm-threshold',
+    ruleName: 'Layer 2 Broadcast Storm Rate Exceeded (> 250 PPS)',
+    severity: 'Critical',
+    category: 'Storm / Loop',
+    targetDevice: 'guest-unidentified (Kali Linux)',
+    targetIp: '192.168.50.120',
+    message: 'Broadcast ARP Who-has flood reached 450 PPS on VLAN 50. Potential network discovery sweep or ARP poisoning.',
+    deliveredTo: ['steven.leggio@gmail.com', 'Webhook: Slack #netops'],
+    status: 'Delivered',
+    technicalDetails: 'Peak Rate: 480 PPS (4.89 Mbps) | Top MAC: 48:2a:e3:99:88:11 | Action: Storm-control threshold tripped'
+  },
+  {
+    id: 'evt-1003',
+    timestamp: '12:25:10',
+    ruleId: 'rule-new-device',
+    ruleName: 'New Rogue Device / Unknown MAC Vendor Detected',
+    severity: 'High',
+    category: 'Rogue Device',
+    targetDevice: 'guest-unidentified.lan',
+    targetIp: '192.168.50.120',
+    message: 'New unauthenticated host joined VLAN 50 with unlisted OUI MAC 48:2a:e3:99:88:11.',
+    deliveredTo: ['steven.leggio@gmail.com'],
+    status: 'Delivered',
+    technicalDetails: 'Fingerprint: Linux 6.x | DHCP Hostname: guest-unidentified.lan | Lease Time: 3600s'
+  },
+  {
+    id: 'evt-1004',
+    timestamp: '12:10:04',
+    ruleId: 'rule-risky-port',
+    ruleName: 'Insecure Plaintext or Management Port Opened',
+    severity: 'High',
+    category: 'Port / Service',
+    targetDevice: 'pbx01.voip.corp.local',
+    targetIp: '192.168.20.10',
+    message: 'Administrative GUI exposed over unencrypted HTTP (Port 80) and plaintext SIP 5060.',
+    deliveredTo: ['steven.leggio@gmail.com'],
+    status: 'Delivered',
+    technicalDetails: 'Open ports: 80/tcp (Apache FreePBX), 5060/udp (SIP). Remediation: Enforce HTTPS & TLS SIP 5061.'
+  }
+];
+
+export const DEFAULT_ALERT_CONFIG: AlertConfig = {
+  smtpServer: 'smtp.sendgrid.net',
+  smtpPort: 587,
+  smtpUser: 'apikey',
+  smtpFrom: 'oculan-alerts@corp.network',
+  smtpTo: 'steven.leggio@gmail.com',
+  enableSsl: true,
+  webhookUrl: 'https://hooks.slack.com/services/T00/B00/XXXXX',
+  webhookFormat: 'Slack / Discord',
+  stormThresholdPps: 250,
+  rogueMacAlert: true,
+  interVlanLeakAlert: true
+};
