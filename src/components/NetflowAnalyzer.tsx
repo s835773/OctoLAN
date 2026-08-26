@@ -76,7 +76,7 @@ export const NetflowAnalyzer: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      {/* Header Banner with Auvik / ntopng reference */}
+      {/* Header Banner */}
       <div className="bg-[#161b22] border border-[#30363d] p-4 rounded flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
@@ -88,7 +88,7 @@ export const NetflowAnalyzer: React.FC = () => {
             </h2>
           </div>
           <p className="text-xs text-[#8b949e] mt-1 max-w-3xl leading-relaxed">
-            Real-time traffic flow inspection and bandwidth utilization modeled after enterprise flow collectors like <strong>Auvik</strong> and <strong>ntopng</strong>. Captures IP 5-tuples, duration, packet rates, TCP flag signatures, and cross-VLAN flow anomalies.
+            Real-time traffic flow inspection and bandwidth utilization analysis. Captures IP 5-tuples, duration, packet rates, TCP flag signatures, and cross-VLAN flow anomalies.
           </p>
         </div>
 

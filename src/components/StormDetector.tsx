@@ -98,7 +98,7 @@ export const StormDetector: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      {/* Intro Header referencing EtherApe & Auvik */}
+      {/* Intro Header */}
       <div className="bg-[#161b22] border border-[#30363d] p-4 rounded flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
@@ -110,7 +110,7 @@ export const StormDetector: React.FC = () => {
             </h2>
           </div>
           <p className="text-xs text-[#8b949e] mt-1 max-w-3xl leading-relaxed">
-            Real-time broadcast/multicast PPS rate-limiting and Spanning Tree bridging loop detection inspired by <strong>EtherApe</strong> packet flow ring dynamics and <strong>Auvik</strong> storm mitigation telemetry.
+            Real-time broadcast/multicast PPS rate-limiting and Spanning Tree bridging loop detection with live dynamic packet flow ring indicators and storm mitigation controls.
           </p>
         </div>
 
@@ -182,13 +182,13 @@ export const StormDetector: React.FC = () => {
         </div>
       </div>
 
-      {/* EtherApe-style Visual Packet Flow Ring Grid */}
+      {/* Dynamic Visual Packet Flow Ring Grid */}
       <div className="bg-[#161b22] border border-[#30363d] rounded p-4 space-y-3">
         <div className="flex items-center justify-between border-b border-[#30363d] pb-2">
           <div>
             <h3 className="text-xs font-bold text-[#f0f6fc] flex items-center gap-2 uppercase tracking-wider">
               <Radio className="w-3.5 h-3.5 text-[#58a6ff]" />
-              EtherApe Dynamic Node Flow & Chatter Rings
+              Dynamic Node Flow & Chatter Rings
             </h3>
             <span className="text-[11px] text-[#8b949e]">
               Ring diameter and pulsation scale with broadcast/multicast frames dispatched per second.

@@ -10,38 +10,38 @@ export const AuditKnowledgeView: React.FC = () => {
 
   const guides = [
     {
-      title: '1. Comparative Network Auditing Architectures: OcuLAN, Auvik, NetAlertX & EtherApe',
+      title: '1. Modern Network Auditing Architectures: Probing, Flow Telemetry & Storm Guard',
       icon: <Layers className="w-4 h-4 text-[#58a6ff]" />,
       content: (
         <div className="space-y-3 text-xs text-[#c9d1d9] leading-relaxed">
           <p>
-            Understanding how modern on-premise network intelligence engines monitor and secure local infrastructure:
+            Understanding how modern on-premise network intelligence engines monitor, analyze, and secure local infrastructure:
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
             <div className="bg-[#010409] p-3 rounded border border-[#30363d] space-y-1.5">
               <span className="font-bold text-[#58a6ff] text-xs flex items-center gap-1.5">
-                <Globe className="w-3.5 h-3.5" /> Auvik Topology & Flows
+                <Globe className="w-3.5 h-3.5" /> Topology & Flow Telemetry
               </span>
               <p className="text-[11px] text-[#8b949e]">
-                Enterprise network management system that combines <strong>SNMP, LLDP, CDP, WMI, and NetFlow/IPFIX</strong> to generate automated Layer 2/3 topology graphs, track switchport mapping, and inspect real-time bandwidth talkers.
+                Enterprise network management paradigm combining <strong>SNMP, LLDP, CDP, and NetFlow/IPFIX</strong> to generate automated Layer 2/3 topology graphs, track switchport mapping, and inspect real-time bandwidth talkers.
               </p>
             </div>
 
             <div className="bg-[#010409] p-3 rounded border border-[#30363d] space-y-1.5">
               <span className="font-bold text-[#7ee787] text-xs flex items-center gap-1.5">
-                <Bell className="w-3.5 h-3.5" /> NetAlertX Continuous Alerts
+                <Bell className="w-3.5 h-3.5" /> Continuous Presence & Intrusion Alerting
               </span>
               <p className="text-[11px] text-[#8b949e]">
-                Dedicated WiFi / LAN intruder detector and device presence tracker. Continuously sweeps ARP/DHCP leases to alert instantly via <strong>Email, Webhook, and Push</strong> when unknown MAC vendors, rogue APs, or port changes appear.
+                Dedicated WiFi / LAN intruder detector and device presence tracking. Continuously sweeps ARP/DHCP leases to alert instantly via <strong>Email and Webhooks</strong> when unknown MAC vendors, rogue devices, or port changes appear.
               </p>
             </div>
 
             <div className="bg-[#010409] p-3 rounded border border-[#30363d] space-y-1.5">
               <span className="font-bold text-[#d29922] text-xs flex items-center gap-1.5">
-                <Radio className="w-3.5 h-3.5" /> EtherApe Packet Rings
+                <Radio className="w-3.5 h-3.5" /> Dynamic Packet Flow Rings
               </span>
               <p className="text-[11px] text-[#8b949e]">
-                Classic Unix graphical packet monitor. Visualizes network activity as <strong>dynamic nodes with expanding color-coded protocol rings</strong>, exposing broadcast chatter spikes, ARP floods, and storm emitters in real time.
+                Real-time graphical packet monitoring. Visualizes network activity as <strong>dynamic nodes with expanding color-coded protocol rings</strong>, exposing broadcast chatter spikes, ARP floods, and storm emitters in real time.
               </p>
             </div>
           </div>
@@ -171,7 +171,7 @@ export const AuditKnowledgeView: React.FC = () => {
             </h2>
           </div>
           <p className="text-xs text-[#8b949e] mt-1 max-w-2xl">
-            In-depth architectural explanations comparing <strong>Auvik</strong>, <strong>NetAlertX</strong>, and <strong>EtherApe</strong> paradigms with raw socket C packet construction.
+            In-depth architectural explanations covering network flow telemetry, Layer 2 broadcast loops, and raw socket C packet construction.
           </p>
         </div>
       </div>

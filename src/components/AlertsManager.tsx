@@ -48,7 +48,7 @@ export const AlertsManager: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      {/* Header Referencing NetAlertX & Auvik */}
+      {/* Header Banner */}
       <div className="bg-[#161b22] border border-[#30363d] p-4 rounded flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
@@ -60,7 +60,7 @@ export const AlertsManager: React.FC = () => {
             </h2>
           </div>
           <p className="text-xs text-[#8b949e] mt-1 max-w-3xl leading-relaxed">
-            Continuous threat detection and notification dispatch inspired by <strong>NetAlertX</strong> (rogue MACs, unknown device join alerts) and <strong>Auvik</strong> (STP loops, broadcast storm thresholds, and inter-VLAN boundary leaks).
+            Continuous threat detection and notification dispatch for rogue MACs, unknown device joins, Spanning Tree loops, broadcast storm thresholds, and inter-VLAN boundary leaks.
           </p>
         </div>
 

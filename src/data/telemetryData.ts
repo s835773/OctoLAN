@@ -313,7 +313,7 @@ export const SAMPLE_STORM_NODES: StormNodeActivity[] = [
 export const INITIAL_ALERT_RULES: AlertRule[] = [
   {
     id: 'rule-new-device',
-    name: 'New Rogue Device / Unknown MAC Vendor Detected (NetAlertX model)',
+    name: 'New Rogue Device / Unknown MAC Vendor Detected',
     category: 'Rogue Device',
     enabled: true,
     severity: 'High',
