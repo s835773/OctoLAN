@@ -388,7 +388,7 @@ export const INITIAL_ALERT_EVENTS: AlertEvent[] = [
     targetDevice: 'guest-unidentified (Kali Linux)',
     targetIp: '192.168.50.120',
     message: 'Host on Isolated Guest VLAN 50 initiated TCP SYN probe targeting Management Gateway (192.168.1.1:22).',
-    deliveredTo: ['steven.leggio@gmail.com', 'Webhook: Discord #sec-alerts'],
+    deliveredTo: ['test@test.com', 'Webhook: Discord #sec-alerts'],
     status: 'Delivered',
     technicalDetails: 'Src: 192.168.50.120:44102 -> Dst: 192.168.1.1:22 [TCP SYN] | Interface: eth0.50 -> 802.1Q ACL Dropped'
   },
@@ -402,7 +402,7 @@ export const INITIAL_ALERT_EVENTS: AlertEvent[] = [
     targetDevice: 'guest-unidentified (Kali Linux)',
     targetIp: '192.168.50.120',
     message: 'Broadcast ARP Who-has flood reached 450 PPS on VLAN 50. Potential network discovery sweep or ARP poisoning.',
-    deliveredTo: ['steven.leggio@gmail.com', 'Webhook: Slack #netops'],
+    deliveredTo: ['test@test.com', 'Webhook: Slack #netops'],
     status: 'Delivered',
     technicalDetails: 'Peak Rate: 480 PPS (4.89 Mbps) | Top MAC: 48:2a:e3:99:88:11 | Action: Storm-control threshold tripped'
   },
@@ -416,7 +416,7 @@ export const INITIAL_ALERT_EVENTS: AlertEvent[] = [
     targetDevice: 'guest-unidentified.lan',
     targetIp: '192.168.50.120',
     message: 'New unauthenticated host joined VLAN 50 with unlisted OUI MAC 48:2a:e3:99:88:11.',
-    deliveredTo: ['steven.leggio@gmail.com'],
+    deliveredTo: ['test@test.com'],
     status: 'Delivered',
     technicalDetails: 'Fingerprint: Linux 6.x | DHCP Hostname: guest-unidentified.lan | Lease Time: 3600s'
   },
@@ -430,7 +430,7 @@ export const INITIAL_ALERT_EVENTS: AlertEvent[] = [
     targetDevice: 'pbx01.voip.corp.local',
     targetIp: '192.168.20.10',
     message: 'Administrative GUI exposed over unencrypted HTTP (Port 80) and plaintext SIP 5060.',
-    deliveredTo: ['steven.leggio@gmail.com'],
+    deliveredTo: ['test@test.com'],
     status: 'Delivered',
     technicalDetails: 'Open ports: 80/tcp (Apache FreePBX), 5060/udp (SIP). Remediation: Enforce HTTPS & TLS SIP 5061.'
   }
@@ -441,7 +441,7 @@ export const DEFAULT_ALERT_CONFIG: AlertConfig = {
   smtpPort: 587,
   smtpUser: 'apikey',
   smtpFrom: 'octolan-alerts@corp.network',
-  smtpTo: 'steven.leggio@gmail.com',
+  smtpTo: 'test@test.com',
   enableSsl: true,
   webhookUrl: 'https://hooks.slack.com/services/T00/B00/XXXXX',
   webhookFormat: 'Slack / Discord',

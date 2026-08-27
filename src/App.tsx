@@ -56,23 +56,42 @@ export default function App() {
       {/* Top Navigation Bar */}
       <header className="bg-[#161b22] border-b border-[#30363d] sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-3">
-          {/* Brand Logo & Title */}
-          <div className="flex items-center gap-3">
-            <OctoMascot size={34} variant="badge" />
+          {/* Brand Logo & Title (Home Navigation) */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab('topology');
+              setSelectedDevice(null);
+              setFilterVlan('all');
+              setDeviceSearch('');
+            }}
+            className="flex items-center gap-3 text-left group focus:outline-none cursor-pointer"
+            title="OctoLAN Home - Return to Topology Dashboard"
+          >
+            <OctoMascot 
+              size={34} 
+              variant="badge" 
+              onClick={() => {
+                setActiveTab('topology');
+                setSelectedDevice(null);
+                setFilterVlan('all');
+                setDeviceSearch('');
+              }}
+            />
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-sm font-bold tracking-tight text-[#f0f6fc] sm:text-base">
+                <h1 className="text-sm font-bold tracking-tight text-[#f0f6fc] sm:text-base group-hover:text-[#58a6ff] transition">
                   OctoLAN
                 </h1>
                 <span className="text-xs text-[#8b949e] font-mono">
                   v2.0-telemetry
                 </span>
-                <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[10px] font-mono font-medium bg-[#010409] text-[#7ee787] border border-[#30363d]">
+                <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[10px] font-mono font-medium bg-[#010409] text-[#7ee787] border border-[#30363d] group-hover:border-[#58a6ff]/50 transition">
                   POSIX / NetFlow / Storm Guard
                 </span>
               </div>
             </div>
-          </div>
+          </button>
 
           {/* Quick Actions & Status Badges */}
           <div className="flex items-center gap-2.5">

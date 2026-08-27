@@ -7,6 +7,7 @@ interface OctoMascotProps {
   showDialogue?: boolean;
   dialogueText?: string;
   interactive?: boolean;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 export const OctoMascot: React.FC<OctoMascotProps> = ({
@@ -15,7 +16,8 @@ export const OctoMascot: React.FC<OctoMascotProps> = ({
   className = '',
   showDialogue = false,
   dialogueText = 'OctoLAN probes all 8 network tentacles across your broadcast domain!',
-  interactive = true
+  interactive = true,
+  onClick
 }) => {
   const [isWaving, setIsWaving] = useState(false);
   const [dialogueOpen, setDialogueOpen] = useState(showDialogue);
@@ -31,7 +33,10 @@ export const OctoMascot: React.FC<OctoMascotProps> = ({
     'Tentacle 8: Zero-dependency native POSIX C99 raw socket engine ready!'
   ];
 
-  const handleInteraction = () => {
+  const handleInteraction = (e?: React.MouseEvent) => {
+    if (onClick && e) {
+      onClick(e);
+    }
     if (!interactive) return;
     setIsWaving(true);
     setDialogueOpen(prev => !prev);
