@@ -2,14 +2,14 @@
 
 <div align="center">
 
-<img src="./public/octolan-mascot.svg" alt="OctoLAN Mascot" width="220" />
+<img src="./public/octolan-mascot.svg" alt="OctoLAN Mascot" width="200" />
 
 ### *“8 Tentacles Probing Every Packet Across Your Broadcast Domain”*
 
 **An educational, enterprise-grade on-premise network reconnaissance, flow telemetry, and broadcast watchdog suite.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](#license)
-[![Mascot: Inky the Octo](https://img.shields.io/badge/Mascot-OctoLAN%20Octopus-7ee787.svg?logo=octopus-deploy&logoColor=white)](#-meet-the-mascot-inky-the-octolan-guardian)
+[![Mascot: Inky the Octo](https://img.shields.io/badge/Mascot-Inky%20the%20Octopus-238636.svg?logo=octopus-deploy&logoColor=white)](#-meet-the-mascot-inky-the-octolan-guardian)
 [![POSIX C](https://img.shields.io/badge/Language-C99%20%2F%20POSIX-00599C.svg?logo=c&logoColor=white)](#-c-source-code-suite)
 [![Architecture: Educational Standards](https://img.shields.io/badge/Architecture-Standards--Based%20Network%20Auditing-238636.svg)](#-architectural-overview)
 [![NetFlow](https://img.shields.io/badge/Protocol-NetFlow%20v5%20%2F%20IPFIX-58a6ff.svg)](#2-netflow-v5--ipfix-telemetry-collector)
@@ -21,132 +21,132 @@
 
 ## 🐙 Meet the Mascot: Inky the OctoLAN Guardian
 
-**OctoLAN** is represented by its mascot — **Inky**, a cartoon octopus whose 8 cyber tentacles represent the 8 foundational network auditing and telemetry capabilities built directly into the platform:
+**OctoLAN** is represented by **Inky**, a monochrome black cartoon octopus on a vibrant green badge. Inky's 8 cyber tentacles represent the 8 foundational network auditing and telemetry capabilities built directly into the platform:
 
-```
-                      .---.
-                     /     \
-                    | () () |  <-- "Inky: OctoLAN Network Sentinel"
-                     \  ^  /
-                      |||||
-  /=====\   /=====\  /=====\  /=====\   /=====\   /=====\  /=====\   /=====\
- ( Tent.1) ( Tent.2)( Tent.3)( Tent.4) ( Tent.5) ( Tent.6)( Tent.7) ( Tent.8)
-  \ L2   /   \ L3   /  \ L4   /  \ 802.1Q/  \ Passive/ \ NetFlow/ \ Storm /  \ POSIX /
-   \ ARP /    \ICMP /   \ OS  /    \ LLDP /   \ DHCP  /   \ UDP  /   \ Guard/   \ C99  /
+```text
+Tentacle 1: Layer 2 ARP           -> Raw Ethernet frame crafting (AF_PACKET / ETH_P_ARP)
+Tentacle 2: Layer 3 ICMP          -> Raw socket ICMP echo sweeps with round-trip latency precision
+Tentacle 3: Layer 4 OS Fingerprint-> Heuristic TCP SYN/ACK analysis of IP TTL, TCP Window, and DF bit
+Tentacle 4: IEEE 802.1AB & VLAN   -> LLDP switch chassis discovery and 802.1Q VLAN trunk tag auditing
+Tentacle 5: Passive Sniffer       -> Stealth capture of DHCP Option 12 hostnames, mDNS, and SSDP
+Tentacle 6: NetFlow v5 & IPFIX    -> High-speed UDP listener on port 2055 extracting 5-tuple flows
+Tentacle 7: Broadcast Storm Guard -> Promiscuous PPS accounting and Spanning Tree (STP) loop protection
+Tentacle 8: POSIX C99 Engine      -> Standalone, zero-dependency C binaries for edge routers & Linux servers
 ```
 
-### The 8 Tentacles of OctoLAN:
-1. **Tentacle 1 (Layer 2 ARP)**: Raw Ethernet frame crafting (`AF_PACKET` / `ETH_P_ARP`) bypassing IP firewalls.
-2. **Tentacle 2 (Layer 3 ICMP)**: Raw socket ICMP echo sweeps with round-trip latency precision.
-3. **Tentacle 3 (Layer 4 OS Fingerprinting)**: TCP SYN/ACK heuristic analysis of IP TTL, TCP Window, and DF bit.
-4. **Tentacle 4 (IEEE 802.1AB & VLAN)**: LLDP switch chassis discovery and 802.1Q VLAN trunk tag auditing.
-5. **Tentacle 5 (Zero-Footprint Passive Sniffer)**: Stealth capture of DHCP Option 12 hostnames, mDNS, and SSDP.
-6. **Tentacle 6 (NetFlow v5 & IPFIX)**: High-speed UDP listener on port 2055 extracting 5-tuple conversation flows.
-7. **Tentacle 7 (Broadcast Storm Guard)**: Promiscuous PPS accounting and Spanning Tree (STP) loop protection.
-8. **Tentacle 8 (POSIX C99 Static Engine)**: Standalone, zero-dependency C binaries for edge routers and Linux servers.
+### The 8 Capabilities:
+* **Tentacle 1 (Layer 2 ARP)**: Raw Ethernet frame crafting (`AF_PACKET` / `ETH_P_ARP`) bypassing IP firewalls to uncover all active MAC addresses.
+* **Tentacle 2 (Layer 3 ICMP)**: Raw socket ICMP echo sweeps with microsecond round-trip latency measurements.
+* **Tentacle 3 (Layer 4 OS Fingerprinting)**: Heuristic inspection of initial IP TTL, TCP Window Size, and DF (Don't Fragment) flag.
+* **Tentacle 4 (IEEE 802.1AB & VLAN)**: LLDP switch chassis discovery and IEEE 802.1Q tagged/untagged trunk verification.
+* **Tentacle 5 (Zero-Footprint Passive Sniffer)**: Stealth listening on `eth0` for DHCP Option 12 client hostnames, mDNS announcements, and SSDP broadcasts without transmitting any packets.
+* **Tentacle 6 (NetFlow v5 & IPFIX)**: High-throughput UDP listener on port 2055 aggregating conversation flows, byte counters, and protocol splits.
+* **Tentacle 7 (Broadcast Storm Guard)**: Promiscuous Packets-Per-Second (PPS) meter and Spanning Tree (STP) bridging loop protector.
+* **Tentacle 8 (POSIX C99 Static Engine)**: Standalone, zero-dependency C tools that compile statically for embedded routers, OpenWrt, and Linux environments.
 
 ---
 
-## 📸 Interactive Application Screenshots & UI Console
+## 📸 Key Modules & Functional Overview
 
 ### 1. Interactive Layer 2/3 Topology & Active Discovery Console
+
+```text
+GATEWAY: 192.168.1.1 (Cisco ISR 4451)
+  │
+  └── CORE-SW01: 192.168.1.2 (Cisco Catalyst 2960-X)
+        ├── VLAN 10 (Corp Workstations): 192.168.10.0/24
+        │     ├── 192.168.10.100 (Dell OptiPlex 7090 - Win11) [TTL: 128 | Win: 64512]
+        │     ├── 192.168.10.101 (Apple MacBook Pro - macOS)  [TTL: 64  | Win: 65535]
+        │     └── 192.168.10.102 (Ubuntu Linux Server - Linux) [TTL: 64  | Win: 29200]
+        ├── VLAN 20 (Voice VoIP): 192.168.20.0/24
+        │     └── 192.168.20.10  (Cisco IP Phone 8845 - SIP 5060)
+        ├── VLAN 30 (Surveillance): 192.168.30.0/24
+        │     └── 192.168.30.101 (Axis 4K Dome Camera - RTSP 554)
+        └── VLAN 50 (IoT / Guest): 192.168.50.0/24
+              └── 192.168.50.42  (Smart Thermostat - MQTT 1883)
 ```
-+---------------------------------------------------------------------------------------------------------+
-| [🐙 OctoLAN v2.0]  [Topology Map] [Active Discovery (14)] [VLANs] [NetFlow] [Storms] [Alerts] [C Code]   |
-+---------------------------------------------------------------------------------------------------------+
-|  +-- [GATEWAY: 192.168.1.1 (Cisco ISR 4451)] --------------------------------------------------------+ |
-|  |   |                                                                                                | |
-|  |   +---> [CORE-SW01: 192.168.1.2 (Cisco Catalyst 2960-X)]                                          | |
-|  |         |--- [VLAN 10: Corp Workstations]                                                          | |
-|  |         |    |-- 192.168.10.100 (Dell OptiPlex 7090 - Win11) [TTL: 128 | Win: 64512]               | |
-|  |         |    |-- 192.168.10.101 (Apple MacBook Pro - macOS) [TTL: 64 | Win: 65535]                 | |
-|  |         |    `-- 192.168.10.102 (Ubuntu Linux Server - Linux 6.2) [TTL: 64 | Win: 29200]           | |
-|  |         |--- [VLAN 20: Voice VoIP] ---> 192.168.20.10 (Cisco IP Phone 8845 - SIP 5060)             | |
-|  |         |--- [VLAN 30: Surveillance] ---> 192.168.30.101 (Axis 4K Dome Camera - RTSP 554)          | |
-|  |         `--- [VLAN 50: IoT / Guest] ---> 192.168.50.42 (Smart Thermostat - MQTT 1883)              | |
-|  +----------------------------------------------------------------------------------------------------+ |
-+---------------------------------------------------------------------------------------------------------+
-```
-- **Dynamic Node Graph**: Visualizes Core Gateways, Managed Switches, 802.1Q VLAN clusters, and connected endpoints with real-time operational status.
-- **Deep Device Inspector**: Audits MAC vendor OUI allocations, TCP/UDP open ports, OS fingerprinting heuristics (IP TTL + TCP Window size), and CVE vulnerability profiles.
-- **Multi-Subnet Layer 2 Probing**: Promiscuous ARP and ICMP discovery capable of identifying stealth devices that filter standard ping requests.
+
+* **Interactive Multi-View Layouts**: Switch seamlessly between Card Grid view, Hierarchical Tree view, and 2D Interactive Canvas Graph.
+* **VLAN Cluster Grouping**: Organizes endpoints by 802.1Q broadcast domains with collapsible cluster hubs.
+* **Deep Device Inspector**: Audits MAC vendor OUI allocations, TCP/UDP open ports, OS fingerprinting heuristics, and vulnerability risk scores.
+* **Multi-Subnet Layer 2 Probing**: Promiscuous ARP and ICMP discovery capable of identifying stealth devices filtering ping requests.
 
 ---
 
 ### 2. NetFlow v5 & IPFIX Telemetry Collector
+
+```text
+NetFlow Collector: UDP Port 2055 | Active Flows: 8 | Cumulative Rate: 14.8 MB/s
+
+TIME      SOURCE ENDPOINT          DESTINATION ENDPOINT     PROTO  PACKETS    OCTETS (BYTES)  FLAGS
+17:18:02  192.168.10.101:54122     192.168.10.15:445 (SMB)  TCP    34,120     48,920,150 B    [ACK, PSH]
+17:18:00  192.168.30.101:554(RTSP) 192.168.10.15:58920     TCP    14,200     18,450,000 B    [ACK, PSH]
+17:17:58  192.168.10.102:49812     192.168.10.20:5432 (SQL) TCP     9,800     12,400,500 B    [ACK, PSH]
+17:17:55  192.168.20.51:16402      192.168.20.10:10240      UDP     4,200        840,000 B    [-]
+17:17:50  192.168.50.42:38910(IoT) 192.168.1.1:80 (MGMT!)  TCP       450         28,900 B    ⚠️ LEAK!
 ```
-===========================================================================================================
- [🐙 OctoLAN NetFlow Collector (UDP Port 2055)] - Active Flows: 8 | Cumulative Rate: 14.8 MB/s
-===========================================================================================================
- TIME     SOURCE ENDPOINT          DESTINATION ENDPOINT     PROTO   PACKETS      OCTETS (BYTES)   FLAGS
- ---------------------------------------------------------------------------------------------------------
- 17:18:02 192.168.10.101:54122     192.168.10.15:445 (SMB)  TCP     34,120       48,920,150 B     [ACK, PSH]
- 17:18:00 192.168.30.101:554 (RTSP) 192.168.10.15:58920     TCP     14,200       18,450,000 B     [ACK, PSH]
- 17:17:58 192.168.10.102:49812     192.168.10.20:5432 (SQL) TCP      9,800       12,400,500 B     [ACK, PSH]
- 17:17:55 192.168.20.51:16402      192.168.20.10:10240      UDP      4,200          840,000 B     [-]
- 17:17:50 192.168.50.42:38910 (IoT)192.168.1.1:80 (MGMT!)  TCP        450           28,900 B  ⚠️ LEAK!
-===========================================================================================================
-```
-- **5-Tuple Flow Aggregation**: Decouples packet payload inspection by collecting unidirectional flow tuples:
+
+* **5-Tuple Flow Aggregation**: Decouples packet payload inspection by collecting unidirectional flow tuples:
   $$\text{Flow} = (\text{Src IP}, \text{Src Port}, \text{Dst IP}, \text{Dst Port}, \text{Proto}, \text{Octets}, \text{Packets}, \text{TCP Flags})$$
-- **Top Talkers & Bandwidth Analyzer**: Identifies heavy bandwidth consumers and packet volume anomalies to spot unauthorized file transfers, streaming hogs, and egress spikes.
-- **Inter-VLAN Boundary Leak Detection**: Flags unexpected traffic crossing isolated broadcast domains (e.g., IoT VLAN 50 sending packets directly to Management VLAN 1).
-- **Native C UDP Daemon (`netflow_collector.c`)**: Listens on UDP port 2055 with zero dynamic memory allocations per packet for ultra-low latency processing.
+* **Top Talkers & Bandwidth Analyzer**: Identifies heavy bandwidth consumers and packet volume anomalies to spot unauthorized file transfers, streaming hogs, and egress spikes.
+* **Inter-VLAN Boundary Leak Detection**: Flags unexpected traffic crossing isolated broadcast domains (e.g., IoT VLAN 50 sending packets directly to Management VLAN 1).
+* **Native C UDP Daemon (`netflow_collector.c`)**: Listens on UDP port 2055 with zero dynamic memory allocations per packet for ultra-low latency processing.
 
 ---
 
 ### 3. Layer 2 Broadcast Storm & STP Loop Watchdog
+
+```text
+Interface: eth0 | Current Rate: 42 PPS | Alarm Threshold: 250 PPS | Status: NORMAL
+
+Node Chatter Breakdown:
+- 192.168.1.1 (Gateway):       18 PPS [Normal - ARP/Default Route]
+- 192.168.10.100 (Workstation): 8 PPS [Normal - NetBIOS/mDNS]
+- 192.168.10.101 (Workstation): 6 PPS [Normal - SSDP]
+- 192.168.50.254 (Rogue Hub): 380 PPS [CRITICAL - Storm / Bridging Loop]
+
+STP Diagnostic: BPDU Guard Enabled | PortFast Filtering Active | Status: 0 Loops Detected
 ```
-+---------------------------------------------------------------------------------------------------------+
-| [⚡ BROADCAST STORM WATCHDOG] Interface: eth0 | Current Rate: 42 PPS | Alarm Threshold: 250 PPS [NORMAL]   |
-+---------------------------------------------------------------------------------------------------------+
-|                                                                                                         |
-|       ( ( ( 192.168.1.1 ) ) )       <-- Dynamic Node Flow Ring (Radius scales with L2 Chatter PPS)      |
-|             /         \                                                                                 |
-|   ( 192.168.10.100 )   ( 192.168.10.101 )   <-- Green: Normal (< 50 PPS)                                |
-|             \         /                     <-- Amber: Elevated (100 - 249 PPS)                         |
-|      (((( 192.168.50.254 ))))               <-- Red Pulsing Halo: Storm Emitter (> 250 PPS)             |
-|                                                                                                         |
-| [STP Loop Guard Diagnostic]: BPDU Guard Enabled | PortFast Filtering Active | Status: 0 Loops Detected  |
-+---------------------------------------------------------------------------------------------------------+
-```
-- **Dynamic Flow & Chatter Rings**: Circular topology diagram featuring real-time expanding halo rings around nodes exhibiting elevated broadcast (`FF:FF:FF:FF:FF:FF`) or multicast (`01:00:5E` / `33:33`) frame output.
-- **Real-Time PPS Threshold Meter**: Live gauge tracking Layer 2 chatter against user-configurable Packets-Per-Second (PPS) alarm triggers.
-- **Spanning Tree Protocol (STP) Diagnostics**: Isolates unmanaged hub bridging loops and ARP flooding storms before switch control-plane CPU exhaustion occurs.
-- **Promiscuous C Sniffer (`storm_detector.c`)**: Directly taps `AF_PACKET` with `ETH_P_ALL` to calculate per-second L2 broadcast metrics.
+
+* **Dynamic Chatter & Pulse Rings**: Visualizes expanding halo rings around nodes exhibiting elevated broadcast (`FF:FF:FF:FF:FF:FF`) or multicast (`01:00:5E` / `33:33`) output.
+* **Real-Time PPS Threshold Meter**: Live gauge tracking Layer 2 chatter against user-configurable Packets-Per-Second (PPS) alarm triggers.
+* **Spanning Tree Protocol (STP) Diagnostics**: Isolates unmanaged hub bridging loops and ARP flooding storms before switch control-plane CPU exhaustion occurs.
+* **Promiscuous C Sniffer (`storm_detector.c`)**: Directly taps `AF_PACKET` with `ETH_P_ALL` to calculate per-second L2 broadcast metrics.
 
 ---
 
 ### 4. Continuous Presence & Anomaly Alerting Engine
+
+```text
+Alert Engine: Active Rules: 4/4 | Dispatch Channels: SMTP + Webhook JSON
+
+Recent Dispatches:
+- [CRITICAL] 17:15:10 - Rogue Access Point Broadcast (SSID: "CORP-GUEST-FREE", BSSID: 00:14:22:98:76:54)
+- [HIGH]     17:10:04 - Inter-VLAN Boundary Leak (VLAN 50 IoT host 192.168.50.42 -> VLAN 1 Switch HTTP)
+- [INFO]     17:02:11 - New Authorized Device Joined (MAC: 3c:22:fb:11:22:33, Hostname: "MacBook-Air")
+- [STATUS]   Webhook Dispatcher: Payload delivered to https://api.corp.internal/hooks/lan-alerts (HTTP 200 OK)
 ```
-+---------------------------------------------------------------------------------------------------------+
-| [🔔 CONTINUOUS ALERTING & PRESENCE ENGINE] Active Rules: 4/4 | Dispatch Channels: SMTP + Webhook JSON    |
-+---------------------------------------------------------------------------------------------------------+
-| [🚨 CRITICAL] 17:15:10 - Rogue Access Point Broadcast (SSID: "CORP-GUEST-FREE", BSSID: 00:14:22:98:76:54)|
-| [⚠️ HIGH]     17:10:04 - Inter-VLAN Boundary Leak (VLAN 50 IoT host 192.168.50.42 -> VLAN 1 Switch HTTP)|
-| [ℹ️ INFO]     17:02:11 - New Authorized Device Joined (MAC: 3c:22:fb:11:22:33, Hostname: "MacBook-Air") |
-+---------------------------------------------------------------------------------------------------------+
-| [⚡ Webhook Dispatcher]: Payload sent to https://api.corp.internal/hooks/lan-alerts (HTTP 200 OK)        |
-+---------------------------------------------------------------------------------------------------------+
-```
-- **Automated Anomaly Detection**: Generates notifications when newly connected MAC addresses, rogue APs, or abnormal port states appear.
-- **Multi-Channel Dispatch**:
-  - **SMTP Email Notifications**: Automated incident summaries with source IP, MAC vendor, and recommended mitigation actions.
-  - **Webhook Integration**: Direct JSON payload delivery to webhook endpoints and log management systems.
-- **Interactive Simulator**: Test webhook and email endpoints on demand directly from the UI.
+
+* **Automated Anomaly Detection**: Generates instant notifications when newly connected MAC addresses, rogue APs, or abnormal port states appear.
+* **Multi-Channel Dispatch**:
+  * **SMTP Email Notifications**: Automated incident summaries with source IP, MAC vendor, and recommended mitigation actions.
+  * **Webhook Integration**: Direct JSON payload delivery to webhook endpoints and log management systems.
+* **Interactive Simulator**: Test webhook and email endpoints on demand directly from the UI.
 
 ---
 
 ### 5. 802.1Q VLAN Segmentation & Trunk Audit
-- **VLAN Matrix**: Visualizes Management (VLAN 1), Corporate Workstations (VLAN 10), Voice VoIP (VLAN 20), Surveillance (VLAN 30), and Guest/IoT (VLAN 50).
-- **Trunk Tagging Verifier**: Parses IEEE 802.1Q 4-byte tags (`TPID 0x8100` + `TCI: PCP/VID`) to verify untagged access vs. tagged trunk configurations.
-- **Broadcast Isolation Score**: Evaluates subnet segregation health to minimize cross-boundary attack surfaces.
+
+* **VLAN Matrix**: Visualizes Management (VLAN 1), Corporate Workstations (VLAN 10), Voice VoIP (VLAN 20), Surveillance (VLAN 30), and Guest/IoT (VLAN 50).
+* **Trunk Tagging Verifier**: Parses IEEE 802.1Q 4-byte tags (`TPID 0x8100` + `TCI: PCP/VID`) to verify untagged access vs. tagged trunk configurations.
+* **Broadcast Isolation Score**: Evaluates subnet segregation health to minimize cross-boundary attack surfaces.
 
 ---
 
 ### 6. AI Network Hygiene Advisor
-- **Automated Security Auditing**: Analyzes all discovered devices, open ports, and flow anomalies to generate an actionable hardening checklist.
-- **Vendor-Neutral & CLI Remediation**: Generates ready-to-paste CLI commands for standard network operating systems (Cisco IOS, Linux iptables/nftables, MikroTik, Ubiquiti).
+
+* **Automated Security Auditing**: Analyzes all discovered devices, open ports, and flow anomalies to generate an actionable hardening checklist.
+* **Vendor-Neutral CLI Remediation**: Generates ready-to-paste CLI commands for standard network operating systems (Cisco IOS, Linux iptables/nftables, MikroTik, Ubiquiti).
 
 ---
 
