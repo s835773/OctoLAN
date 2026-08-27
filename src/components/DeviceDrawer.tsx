@@ -22,10 +22,15 @@ export const DeviceDrawer: React.FC<DeviceDrawerProps> = ({ device, vlan, onClos
   const getRiskBadge = (score: NetworkDevice['riskScore']) => {
     switch (score) {
       case 'Critical':
+        return (
+          <span className="px-2 py-0.5 rounded text-xs font-semibold bg-[#da3633]/20 text-[#f85149] border border-[#da3633]/40 flex items-center gap-1">
+            <AlertTriangle className="w-3 h-3" /> Critical Risk
+          </span>
+        );
       case 'High':
         return (
           <span className="px-2 py-0.5 rounded text-xs font-semibold bg-[#da3633]/20 text-[#f85149] border border-[#da3633]/40 flex items-center gap-1">
-            <AlertTriangle className="w-3 h-3" /> High Risk ({score})
+            <AlertTriangle className="w-3 h-3" /> High Risk
           </span>
         );
       case 'Medium':

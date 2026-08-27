@@ -28,15 +28,15 @@ export const AlertsManager: React.FC = () => {
         id: `evt-${Date.now()}`,
         timestamp: new Date().toLocaleTimeString(),
         ruleId: 'rule-test-email',
-        ruleName: 'Manual OcuLAN Diagnostic Test Dispatch',
+        ruleName: 'Manual OctoLAN Diagnostic Test Dispatch',
         severity: 'Low',
         category: 'Diagnostic',
-        targetDevice: 'OcuLAN Core Sensor (eth0)',
+        targetDevice: 'OctoLAN Core Sensor (eth0)',
         targetIp: '192.168.1.5',
         message: `SMTP test alert delivered successfully to ${config.smtpTo} via ${config.smtpServer}:${config.smtpPort}.`,
         deliveredTo: [config.smtpTo, `Webhook: ${config.webhookFormat}`],
         status: 'Delivered',
-        technicalDetails: `SMTP Handshake: TLS 1.3 / STARTTLS 250 OK | Message-ID: <${Date.now()}@oculan.internal>`
+        technicalDetails: `SMTP Handshake: TLS 1.3 / STARTTLS 250 OK | Message-ID: <${Date.now()}@octolan.internal>`
       };
 
       setEvents(prev => [newEvent, ...prev]);

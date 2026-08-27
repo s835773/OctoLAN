@@ -222,7 +222,7 @@ export const INITIAL_DEVICES: NetworkDevice[] = [
     status: 'online',
     latencyMs: 1.1,
     riskScore: 'High',
-    riskFactors: ['Legacy NetBIOS port 139 active', 'LLMNR broadcasts detected on LAN', 'Active Directory Domain Controller holds high value credentials']
+    riskFactors: ['Legacy NetBIOS port 139 active', 'LLMNR broadcasts detected on LAN', 'Active Directory Domain Controller holds high-value credentials']
   },
   {
     id: 'dev-srv-file01',

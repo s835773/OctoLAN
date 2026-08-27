@@ -165,7 +165,7 @@ export const CodeLabView: React.FC = () => {
         setTerminalOutput(prev => [
           ...prev,
           `========================================================`,
-          ` OcuLAN - Broadcast Storm & Layer 2 Watchdog Active     `,
+          ` OctoLAN - Broadcast Storm & Layer 2 Watchdog Active    `,
           `========================================================`,
           `[+] Interface: eth0 | Threshold: ${customArgs.split(' ')[1] || '250'} PPS`,
           `[+] Promiscuous packet capture started. Monitoring for storms...`,

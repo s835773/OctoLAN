@@ -440,7 +440,7 @@ export const DEFAULT_ALERT_CONFIG: AlertConfig = {
   smtpServer: 'smtp.sendgrid.net',
   smtpPort: 587,
   smtpUser: 'apikey',
-  smtpFrom: 'oculan-alerts@corp.network',
+  smtpFrom: 'octolan-alerts@corp.network',
   smtpTo: 'steven.leggio@gmail.com',
   enableSsl: true,
   webhookUrl: 'https://hooks.slack.com/services/T00/B00/XXXXX',
