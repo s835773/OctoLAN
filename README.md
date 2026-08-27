@@ -10,6 +10,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](#license)
 [![Mascot: Inky the Octo](https://img.shields.io/badge/Mascot-Inky%20the%20Octopus-238636.svg?logo=octopus-deploy&logoColor=white)](#-meet-the-mascot-inky-the-octolan-guardian)
+[![Podman Ready](https://img.shields.io/badge/Podman-Containerfile%20%2F%20Rootless-892CA0.svg?logo=podman&logoColor=white)](#-container-deployment-podman--docker)
 [![POSIX C](https://img.shields.io/badge/Language-C99%20%2F%20POSIX-00599C.svg?logo=c&logoColor=white)](#-c-source-code-suite)
 [![Architecture: Educational Standards](https://img.shields.io/badge/Architecture-Standards--Based%20Network%20Auditing-238636.svg)](#-architectural-overview)
 [![NetFlow](https://img.shields.io/badge/Protocol-NetFlow%20v5%20%2F%20IPFIX-58a6ff.svg)](#2-netflow-v5--ipfix-telemetry-collector)
@@ -21,7 +22,7 @@
 
 ## 🐙 Meet the Mascot: Inky the OctoLAN Guardian
 
-**OctoLAN** is represented by **Inky**, a monochrome black cartoon octopus on a vibrant green badge. Inky's 8 cyber tentacles represent the 8 foundational network auditing and telemetry capabilities built directly into the platform:
+**OctoLAN** is represented by **Inky**, a sleek monochrome black security icon on a vibrant green badge. Inky's 8 cyber tentacles represent the 8 foundational network auditing and telemetry capabilities built directly into the platform:
 
 ```text
 Tentacle 1: Layer 2 ARP           -> Raw Ethernet frame crafting (AF_PACKET / ETH_P_ARP)
@@ -147,6 +148,84 @@ Recent Dispatches:
 
 * **Automated Security Auditing**: Analyzes all discovered devices, open ports, and flow anomalies to generate an actionable hardening checklist.
 * **Vendor-Neutral CLI Remediation**: Generates ready-to-paste CLI commands for standard network operating systems (Cisco IOS, Linux iptables/nftables, MikroTik, Ubiquiti).
+
+---
+
+## 📦 Container Deployment (Podman & Docker)
+
+OctoLAN is fully containerized with a rootless, multi-stage `Containerfile` / `Dockerfile` powered by an unprivileged Alpine Nginx server serving the static frontend and REST telemetry endpoints on port `3000`.
+
+### 1. Quick Start with Podman (Rootless CLI)
+
+```bash
+# Build the rootless container image using the native Containerfile
+podman build -t octolan:latest -f Containerfile .
+
+# Run the container (maps host port 3000 -> container 3000)
+podman run -d \
+  --name octolan-console \
+  -p 3000:3000 \
+  --restart unless-stopped \
+  octolan:latest
+
+# Open the console in your browser
+# URL: http://localhost:3000
+```
+
+### 2. Run with Host Networking (For LAN Sniffing & NetFlow Visibility)
+
+If you are running network auditing utilities on your local machine and want the container to share the host's network interfaces directly:
+
+```bash
+podman run -d \
+  --name octolan-console \
+  --network host \
+  --restart unless-stopped \
+  octolan:latest
+```
+
+### 3. Quick Start with Podman Compose
+
+```bash
+# Start via podman-compose
+podman-compose up -d
+
+# Check running status and health check
+podman-compose ps
+
+# View container logs
+podman-compose logs -f
+```
+
+### 4. Running via Podman Quadlet (systemd on Fedora / RHEL / Debian / Ubuntu)
+
+OctoLAN includes an `octolan.container` Quadlet unit file for native systemd service management:
+
+```bash
+# Copy Quadlet unit file to user systemd directory
+mkdir -p ~/.config/containers/systemd/
+cp octolan.container ~/.config/containers/systemd/
+
+# Reload systemd and start the OctoLAN service
+systemctl --user daemon-reload
+systemctl --user start octolan
+
+# Enable at startup (rootless linger)
+systemctl --user enable octolan
+loginctl enable-linger $USER
+```
+
+### 5. Automated Launcher Script
+
+You can also use the included launcher script:
+
+```bash
+# Run standard rootless container
+./scripts/run-podman.sh
+
+# Rebuild and run with host networking
+./scripts/run-podman.sh --build --host-net
+```
 
 ---
 

@@ -1,0 +1,22 @@
+# OctoLAN - Podman Quadlet (systemd) Definition File
+# Place this file in ~/.config/containers/systemd/octolan.container (for rootless)
+# or /etc/containers/systemd/octolan.container (for system-wide)
+# Then run: systemctl --user daemon-reload && systemctl --user start octolan
+
+[Unit]
+Description=OctoLAN On-Premise Network Intelligence Console
+After=network-online.target
+
+[Container]
+ContainerName=octolan
+Image=localhost/octolan:latest
+PublishPort=3000:3000
+SecurityLabelDisable=false
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
