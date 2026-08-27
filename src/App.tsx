@@ -13,11 +13,13 @@ import { NetflowAnalyzer } from './components/NetflowAnalyzer';
 import { StormDetector } from './components/StormDetector';
 import { AlertsManager } from './components/AlertsManager';
 import { OctoMascot } from './components/OctoMascot';
+import { ThemeSelector } from './components/ThemeSelector';
+import { ExportModal } from './components/ExportModal';
 import { 
   Network, Server, Layers, Activity, FileCode, 
   BookOpen, Sparkles, Radio, Shield, Search, 
   Filter, Plus, RefreshCw, Smartphone, Laptop, Download, Info,
-  Zap, Bell, Eye
+  Zap, Bell, Eye, FileText
 } from 'lucide-react';
 
 export default function App() {
@@ -29,6 +31,7 @@ export default function App() {
   const [selectedDevice, setSelectedDevice] = useState<NetworkDevice | null>(null);
   const [filterVlan, setFilterVlan] = useState<number | 'all'>('all');
   const [isScannerOpen, setIsScannerOpen] = useState(false);
+  const [isExportOpen, setIsExportOpen] = useState(false);
   const [deviceSearch, setDeviceSearch] = useState('');
 
   const handleScanComplete = (scannedDevices: NetworkDevice[]) => {
@@ -94,8 +97,8 @@ export default function App() {
           </button>
 
           {/* Quick Actions & Status Badges */}
-          <div className="flex items-center gap-2.5">
-            <div className="hidden md:flex items-center gap-2 text-xs text-[#8b949e] bg-[#010409] px-2.5 py-1 rounded border border-[#30363d]">
+          <div className="flex items-center gap-2">
+            <div className="hidden xl:flex items-center gap-2 text-xs text-[#8b949e] bg-[#010409] px-2.5 py-1 rounded border border-[#30363d]">
               <span>Sensor:</span>
               <span className="text-[#58a6ff] font-mono font-semibold">eth0 (Promisc)</span>
             </div>
@@ -105,9 +108,24 @@ export default function App() {
               <span className="text-[#7ee787] font-mono font-semibold">UDP:2055</span>
             </div>
 
+            {/* UI Theme Switcher */}
+            <ThemeSelector />
+
+            {/* Export Reports Dropdown/Modal Trigger */}
+            <button
+              type="button"
+              onClick={() => setIsExportOpen(true)}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-[#21262d] hover:bg-[#30363d] text-xs font-medium text-[#c9d1d9] border border-[#30363d] transition active:scale-95"
+              title="Export Network Audit Reports (PDF, CSV, TXT)"
+            >
+              <Download className="w-3.5 h-3.5 text-[#7ee787]" />
+              <span className="hidden sm:inline-block">Export</span>
+            </button>
+
+            {/* Execute Scan Trigger */}
             <button
               onClick={() => setIsScannerOpen(true)}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-[#238636] hover:bg-[#2ea043] text-white text-xs font-semibold shadow-sm transition active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#238636] hover:bg-[#2ea043] text-white text-xs font-semibold shadow-sm transition active:scale-95"
             >
               <Radio className="w-3.5 h-3.5" />
               <span>Execute Scan</span>
@@ -294,6 +312,16 @@ export default function App() {
                     <option key={v.id} value={v.id}>VLAN {v.id}: {v.name}</option>
                   ))}
                 </select>
+
+                <button
+                  type="button"
+                  onClick={() => setIsExportOpen(true)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#21262d] hover:bg-[#30363d] text-[#7ee787] text-xs font-medium border border-[#30363d] transition whitespace-nowrap"
+                  title="Export Discovered Hosts (PDF / CSV / TXT)"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Export ({filteredDevices.length})</span>
+                </button>
               </div>
             </div>
 
@@ -455,6 +483,14 @@ export default function App() {
         isOpen={isScannerOpen}
         onClose={() => setIsScannerOpen(false)}
         onScanComplete={handleScanComplete}
+      />
+
+      {/* Audit & Telemetry Export Modal (PDF, CSV, TXT) */}
+      <ExportModal
+        isOpen={isExportOpen}
+        onClose={() => setIsExportOpen(false)}
+        devices={devices}
+        vlans={vlans}
       />
 
       {/* Mobile Bottom Navigation Bar */}
