@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SAMPLE_NETFLOW_RECORDS, SAMPLE_TOP_TALKERS } from '../data/telemetryData';
 import { NetflowRecord } from '../types';
+import { PpsSpikeVisualizer } from './PpsSpikeVisualizer';
 import { 
   Activity, ArrowDownLeft, ArrowUpRight, ArrowLeftRight, 
   Search, ShieldAlert, Cpu, HardDrive, Download, RefreshCw,
@@ -151,6 +152,9 @@ export const NetflowAnalyzer: React.FC = () => {
           <span className="text-[10px] text-[#d29922] mt-1 block">VLAN Leak / Scan Probes</span>
         </div>
       </div>
+
+      {/* Real-time PPS Counter & Traffic Spike Visualizer */}
+      <PpsSpikeVisualizer />
 
       {/* Top Talkers & Application Breakdown Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
