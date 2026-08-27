@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { OctoMascot } from './OctoMascot';
 import { 
   BookOpen, Terminal, Shield, Cpu, Layers, 
   HelpCircle, CheckCircle2, ChevronDown, ChevronRight,
@@ -160,20 +161,21 @@ export const AuditKnowledgeView: React.FC = () => {
   return (
     <div className="space-y-4">
       {/* Header Banner */}
-      <div className="bg-[#161b22] border border-[#30363d] p-4 rounded flex items-center justify-between">
+      <div className="bg-[#161b22] border border-[#30363d] p-4 rounded flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded bg-[#238636] text-white flex items-center justify-center font-bold text-xs shadow-sm">
               <BookOpen className="w-3.5 h-3.5" />
             </div>
             <h2 className="text-sm font-bold text-[#f0f6fc]">
-              OcuLAN On-Premise Network Engineering & Security Handbook
+              OctoLAN On-Premise Network Engineering & Security Handbook
             </h2>
           </div>
           <p className="text-xs text-[#8b949e] mt-1 max-w-2xl">
             In-depth architectural explanations covering network flow telemetry, Layer 2 broadcast loops, and raw socket C packet construction.
           </p>
         </div>
+        <OctoMascot size={36} variant="badge" />
       </div>
 
       {/* Accordion List */}

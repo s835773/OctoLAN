@@ -12,6 +12,7 @@ import { AiAdvisor } from './components/AiAdvisor';
 import { NetflowAnalyzer } from './components/NetflowAnalyzer';
 import { StormDetector } from './components/StormDetector';
 import { AlertsManager } from './components/AlertsManager';
+import { OctoMascot } from './components/OctoMascot';
 import { 
   Network, Server, Layers, Activity, FileCode, 
   BookOpen, Sparkles, Radio, Shield, Search, 
@@ -57,13 +58,11 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-3">
           {/* Brand Logo & Title */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded bg-gradient-to-br from-[#238636] to-[#1f6feb] flex items-center justify-center text-white font-bold text-sm shadow-sm">
-              <Eye className="w-4 h-4 text-white" />
-            </div>
+            <OctoMascot size={34} variant="badge" />
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-sm font-bold tracking-tight text-[#f0f6fc] sm:text-base">
-                  OcuLAN
+                  OctoLAN
                 </h1>
                 <span className="text-xs text-[#8b949e] font-mono">
                   v2.0-telemetry

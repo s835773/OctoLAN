@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="octoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#58a6ff" />
+      <stop offset="50%" stop-color="#238636" />
+      <stop offset="100%" stop-color="#1f6feb" />
+    </linearGradient>
+    <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7ee787" />
+      <stop offset="100%" stop-color="#58a6ff" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Cyber Shield Circle -->
+  <circle cx="200" cy="200" r="185" fill="#0d1117" stroke="#30363d" stroke-width="6" />
+  <circle cx="200" cy="200" r="170" fill="#161b22" stroke="#238636" stroke-width="2" stroke-dasharray="8 6" opacity="0.6" />
+
+  <!-- Network Circuit Lines Connecting to Tentacles -->
+  <g stroke="#58a6ff" stroke-width="2" opacity="0.4" fill="none">
+    <path d="M 200 40 L 200 80" />
+    <path d="M 80 120 L 120 150" />
+    <path d="M 320 120 L 280 150" />
+    <path d="M 40 240 L 90 230" />
+    <path d="M 360 240 L 310 230" />
+    <path d="M 100 340 L 140 310" />
+    <path d="M 300 340 L 260 310" />
+  </g>
+
+  <!-- Packet Dots on Circuit Lines -->
+  <circle cx="200" cy="40" r="5" fill="#7ee787" filter="url(#glow)" />
+  <circle cx="80" cy="120" r="5" fill="#58a6ff" />
+  <circle cx="320" cy="120" r="5" fill="#58a6ff" />
+  <circle cx="40" cy="240" r="5" fill="#7ee787" />
+  <circle cx="360" cy="240" r="5" fill="#7ee787" />
+  <circle cx="100" cy="340" r="5" fill="#58a6ff" />
+  <circle cx="300" cy="340" r="5" fill="#58a6ff" />
+
+  <!-- Cartoon Octopus Mascot Silhouette Body & Tentacles -->
+  <!-- 8 Stylized Tentacles -->
+  <g fill="url(#octoGradient)" stroke="#0d1117" stroke-width="3">
+    <!-- Tentacle 1 (Far Left Top) -->
+    <path d="M 150 220 C 110 210, 60 180, 50 140 C 45 120, 65 110, 80 125 C 95 140, 115 175, 155 210 Z" />
+    <!-- Tentacle 2 (Left Mid) -->
+    <path d="M 140 240 C 90 240, 40 220, 30 250 C 25 270, 50 280, 75 275 C 105 270, 130 255, 150 248 Z" />
+    <!-- Tentacle 3 (Left Bottom Curl) -->
+    <path d="M 155 265 C 120 285, 75 320, 85 345 C 95 365, 120 350, 130 330 C 145 305, 160 285, 170 275 Z" />
+    <!-- Tentacle 4 (Center-Left Bottom) -->
+    <path d="M 175 278 C 160 310, 150 350, 170 365 C 185 375, 195 355, 195 330 C 195 305, 190 285, 188 280 Z" />
+
+    <!-- Tentacle 5 (Center-Right Bottom) -->
+    <path d="M 212 280 C 210 285, 205 305, 205 330 C 205 355, 215 375, 230 365 C 250 350, 240 310, 225 278 Z" />
+    <!-- Tentacle 6 (Right Bottom Curl) -->
+    <path d="M 230 275 C 240 285, 255 305, 270 330 C 280 350, 305 365, 315 345 C 325 320, 280 285, 245 265 Z" />
+    <!-- Tentacle 7 (Right Mid) -->
+    <path d="M 250 248 C 270 255, 295 270, 325 275 C 350 280, 375 270, 370 250 C 360 220, 310 240, 260 240 Z" />
+    <!-- Tentacle 8 (Far Right Top) -->
+    <path d="M 245 210 C 285 175, 305 140, 320 125 C 335 110, 355 120, 350 140 C 340 180, 290 210, 250 220 Z" />
+
+    <!-- Main Head / Mantle Dome -->
+    <path d="M 130 210 C 120 150, 140 85, 200 85 C 260 85, 280 150, 270 210 C 265 245, 245 275, 200 275 C 155 275, 135 245, 130 210 Z" />
+  </g>
+
+  <!-- Suction Cups / RJ-45 Connector Port Accents -->
+  <g fill="#7ee787" opacity="0.85">
+    <circle cx="70" cy="135" r="5" />
+    <circle cx="95" cy="160" r="4.5" />
+    <circle cx="55" cy="260" r="5" />
+    <circle cx="85" cy="268" r="4.5" />
+    <circle cx="105" cy="335" r="5" />
+    <circle cx="175" cy="350" r="4.5" />
+    <circle cx="225" cy="350" r="4.5" />
+    <circle cx="295" cy="335" r="5" />
+    <circle cx="345" cy="260" r="5" />
+    <circle cx="315" cy="268" r="4.5" />
+    <circle cx="330" cy="135" r="5" />
+    <circle cx="305" cy="160" r="4.5" />
+  </g>
+
+  <!-- Cartoon Headgear / Antennas & Eyes -->
+  <!-- Cute Expressive Eyes -->
+  <ellipse cx="170" cy="175" rx="18" ry="22" fill="#ffffff" stroke="#0d1117" stroke-width="2" />
+  <ellipse cx="230" cy="175" rx="18" ry="22" fill="#ffffff" stroke="#0d1117" stroke-width="2" />
+  
+  <!-- Pupils with cyber teal catchlight -->
+  <ellipse cx="174" cy="177" rx="10" ry="13" fill="#0d1117" />
+  <ellipse cx="226" cy="177" rx="10" ry="13" fill="#0d1117" />
+  
+  <circle cx="170" cy="170" r="4" fill="#58a6ff" />
+  <circle cx="222" cy="170" r="4" fill="#58a6ff" />
+  <circle cx="178" cy="182" r="2" fill="#ffffff" />
+  <circle cx="230" cy="182" r="2" fill="#ffffff" />
+
+  <!-- Cute Smile with Network Packet Bite -->
+  <path d="M 188 215 Q 200 225 212 215" fill="none" stroke="#0d1117" stroke-width="4" stroke-linecap="round" />
+
+  <!-- High-Tech Headband with Ethernet RJ45 Icon -->
+  <rect x="150" y="105" width="100" height="18" rx="6" fill="#010409" stroke="#58a6ff" stroke-width="2" />
+  <circle cx="165" cy="114" r="3" fill="#7ee787" />
+  <circle cx="180" cy="114" r="3" fill="#58a6ff" />
+  <circle cx="200" cy="114" r="4" fill="#d29922" />
+  <circle cx="220" cy="114" r="3" fill="#58a6ff" />
+  <circle cx="235" cy="114" r="3" fill="#7ee787" />
+
+  <!-- Mascot Name Tag -->
+  <g transform="translate(135, 292)">
+    <rect width="130" height="26" rx="6" fill="#010409" stroke="#30363d" stroke-width="2" />
+    <text x="65" y="17" fill="#7ee787" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle" letter-spacing="1.5">OctoLAN</text>
+  </g>
+</svg>

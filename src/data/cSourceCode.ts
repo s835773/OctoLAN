@@ -956,7 +956,7 @@ int main(int argc, char *argv[]) {
     uint8_t buffer[MAX_BUFFER];
 
     printf("========================================================\\n");
-    printf(" OcuLAN - High-Performance NetFlow v5 Flow Collector     \\n");
+    printf(" OctoLAN - High-Performance NetFlow v5 Flow Collector   \\n");
     printf("========================================================\\n");
     printf("[+] Initializing UDP Listener on port: %d\\n", port);
 
@@ -1080,7 +1080,7 @@ int main(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
     if (argc < 2) {
         fprintf(stderr, "========================================================\\n");
-        fprintf(stderr, " OcuLAN - Layer 2 Broadcast Storm & Loop Watchdog        \\n");
+        fprintf(stderr, " OctoLAN - Layer 2 Broadcast Storm & Loop Watchdog      \\n");
         fprintf(stderr, "========================================================\\n");
         fprintf(stderr, "Usage: %s <interface> [pps_threshold]\\n", argv[0]);
         fprintf(stderr, "Example: sudo %s eth0 250\\n", argv[0]);
@@ -1116,7 +1116,7 @@ int main(int argc, char *argv[]) {
     }
 
     printf("========================================================\\n");
-    printf(" OcuLAN - Broadcast Storm & Layer 2 Watchdog Active     \\n");
+    printf(" OctoLAN - Broadcast Storm & Layer 2 Watchdog Active    \\n");
     printf("========================================================\\n");
     printf("[+] Interface: %s | Threshold: %d PPS\\n", iface, threshold);
     printf("[+] Promiscuous packet capture started. Monitoring for storms...\\n\\n");
@@ -1180,7 +1180,7 @@ int main(int argc, char *argv[]) {
     compilationCmd: 'make\nmake static\nmake arm',
     requirements: 'make, gcc or musl-gcc or arm-linux-gnueabihf-gcc',
     capabilities: ['Static Binary Linkage', 'Cross-compilation for ARM/MIPS', 'Zero-dependency Deployment'],
-    code: `# Makefile for OcuLAN Network Reconnaissance & Telemetry Suite
+    code: `# Makefile for OctoLAN Network Reconnaissance & Telemetry Suite
 CC ?= gcc
 CFLAGS ?= -O2 -Wall -Wextra -pedantic
 LDFLAGS ?=

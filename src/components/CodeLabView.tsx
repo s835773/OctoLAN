@@ -147,7 +147,7 @@ export const CodeLabView: React.FC = () => {
         setTerminalOutput(prev => [
           ...prev,
           `========================================================`,
-          ` OcuLAN - High-Performance NetFlow v5 Flow Collector     `,
+          ` OctoLAN - High-Performance NetFlow v5 Flow Collector   `,
           `========================================================`,
           `[+] Initializing UDP Listener on port: ${customArgs || '2055'}`,
           `[✓] Flow collector running. Waiting for NetFlow v5 export datagrams...`,
