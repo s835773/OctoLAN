@@ -333,6 +333,42 @@ echo "[+] To run: sudo ./target/release/octolan-rs --interface eth0 --port 3000"
         </div>
       </div>
 
+      {/* Quick One-Line Curl Install Banner */}
+      <div className="bg-[#0d1117] border border-[#30363d] rounded-lg p-3 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-sm">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded bg-[#f0883e]/20 border border-[#f0883e]/40 flex items-center justify-center flex-shrink-0">
+            <Terminal className="w-4 h-4 text-[#f0883e]" />
+          </div>
+          <div>
+            <div className="text-xs font-bold text-[#f0f6fc] flex items-center gap-1.5">
+              <span>One-Line Curl Installer</span>
+              <span className="text-[10px] px-1.5 py-0.2 bg-[#238636]/20 text-[#7ee787] border border-[#238636]/40 rounded font-mono">
+                Auto-Toolchain Detect
+              </span>
+            </div>
+            <p className="text-[11px] text-[#8b949e]">
+              Instant curl command to bootstrap the Rust daemon, POSIX C suite, and launcher scripts on any Linux box.
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 w-full md:w-auto">
+          <div className="bg-[#161b22] border border-[#30363d] px-3 py-1.5 rounded font-mono text-xs text-[#79c0ff] select-all flex-1 md:flex-initial overflow-x-auto whitespace-nowrap">
+            curl -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh | bash
+          </div>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText('curl -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh | bash');
+              setCopied(true);
+              setTimeout(() => setCopied(false), 2000);
+            }}
+            className="p-1.5 rounded bg-[#21262d] hover:bg-[#30363d] text-[#c9d1d9] border border-[#30363d] transition flex-shrink-0"
+            title="Copy one-line installer"
+          >
+            {copied ? <Check className="w-4 h-4 text-[#7ee787]" /> : <Copy className="w-4 h-4" />}
+          </button>
+        </div>
+      </div>
+
       {/* Main Layout: Sidebar File List + Code/Terminal Viewer */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* Left Sidebar: Source Files */}

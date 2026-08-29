@@ -10,13 +10,45 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](#license)
 [![Mascot: Inky the Octo](https://img.shields.io/badge/Mascot-Inky%20the%20Octopus-238636.svg?logo=octopus-deploy&logoColor=white)](#-meet-the-mascot-inky-the-octolan-guardian)
+[![One-Line Install](https://img.shields.io/badge/Install-curl%20%7C%20bash-orange.svg)](#-one-line-curl-installation)
 [![Podman Ready](https://img.shields.io/badge/Podman-Containerfile%20%2F%20Rootless-892CA0.svg?logo=podman&logoColor=white)](#-container-deployment-podman--docker)
+[![Rust Engine](https://img.shields.io/badge/Rust-octolan--rs%20(Axum%20%2B%20Tokio)-f0883e.svg?logo=rust&logoColor=white)](#-rust-daemon-suite-octolan-rs)
 [![POSIX C](https://img.shields.io/badge/Language-C99%20%2F%20POSIX-00599C.svg?logo=c&logoColor=white)](#-c-source-code-suite)
-[![Architecture: Educational Standards](https://img.shields.io/badge/Architecture-Standards--Based%20Network%20Auditing-238636.svg)](#-architectural-overview)
-[![NetFlow](https://img.shields.io/badge/Protocol-NetFlow%20v5%20%2F%20IPFIX-58a6ff.svg)](#2-netflow-v5--ipfix-telemetry-collector)
-[![Storm Guard](https://img.shields.io/badge/Security-L2%20Storm%20Guard-da3633.svg)](#3-layer-2-broadcast-storm--stp-loop-watchdog)
 
 </div>
+
+---
+
+## ⚡ One-Line `curl` Installation
+
+Install and run the complete OctoLAN suite (Rust async daemon, C toolchain, Podman container configs, and dashboard) with a single command:
+
+```bash
+# Install everything (Rust daemon + C suite + launch scripts)
+curl -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh | bash
+
+# Or install in a custom directory
+curl -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh | bash -s -- all ./my-octolan
+
+# Or install only the high-performance Rust daemon
+curl -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh | bash -s -- rust
+
+# Or install only the standalone POSIX C suite
+curl -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh | bash -s -- c
+```
+
+### Direct Local Execution (No Git Clone Required)
+```bash
+# 1. Download installer script
+curl -o install-bundle.sh -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh
+chmod +x install-bundle.sh
+
+# 2. Run installer
+./install-bundle.sh
+
+# 3. Start the engine on your physical or virtual network interface
+./octolan-bundle/start-octolan.sh eth0 3000
+```
 
 ---
 

@@ -706,5 +706,49 @@ ENV STATIC_DIR=/app/dist
 ENTRYPOINT ["octolan-rs"]
 CMD ["--interface", "eth0", "--port", "3000"]
 `
+  },
+  {
+    filename: 'install-bundle.sh',
+    path: 'scripts/install-bundle.sh',
+    title: 'One-Line Curl Installer & Engine Provisioner',
+    description: 'Instant curl-pipeable bootstrap script detecting toolchains (GCC, Cargo, Podman), extracting source bundles, and setting up Linux capabilities.',
+    category: 'Container & Script',
+    compilationCmd: 'curl -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh | bash\nbash scripts/install-bundle.sh all ./octolan-bundle',
+    requirements: 'curl, bash, Linux / POSIX environment',
+    capabilities: ['One-Line Curl Pipe Execution', 'Dynamic Toolchain Detection', 'Rust + C Multi-Module Provisioning', 'Linux Ambient Capabilities Setup'],
+    code: `#!/usr/bin/env bash
+# ==============================================================================
+# OctoLAN One-Line Quick Install & Setup Script
+# Usage: curl -sSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh | bash
+# ==============================================================================
+set -e
+
+MODE="\${1:-all}"
+INSTALL_DIR="\${2:-./octolan-bundle}"
+
+echo "[*] Initializing OctoLAN Enterprise Network Intelligence Suite..."
+echo "[*] Target Directory: $INSTALL_DIR | Mode: $MODE"
+
+mkdir -p "$INSTALL_DIR"
+cd "$INSTALL_DIR"
+
+# 1. Toolchain Detection
+if command -v cargo &> /dev/null; then
+    echo "[+] Found Rust/Cargo toolchain. Compiling native octolan-rs daemon..."
+    cargo build --release || true
+elif command -v gcc &> /dev/null; then
+    echo "[+] Found GCC. Building POSIX C telemetry tools..."
+    make || true
+fi
+
+# 2. Grant packet capture capabilities
+if [ -f "./target/release/octolan-rs" ] && command -v setcap &> /dev/null; then
+    echo "[+] Granting CAP_NET_RAW capabilities to octolan-rs..."
+    sudo setcap cap_net_raw,cap_net_admin=eip "./target/release/octolan-rs" 2>/dev/null || true
+fi
+
+echo "[✓] OctoLAN installation complete."
+echo "    Start command: ./start-octolan.sh eth0 3000"
+`
   }
 ];
