@@ -12,6 +12,7 @@ import { AiAdvisor } from './components/AiAdvisor';
 import { NetflowAnalyzer } from './components/NetflowAnalyzer';
 import { StormDetector } from './components/StormDetector';
 import { AlertsManager } from './components/AlertsManager';
+import { RustDaemonBridge } from './components/RustDaemonBridge';
 import { OctoMascot } from './components/OctoMascot';
 import { ThemeSelector } from './components/ThemeSelector';
 import { ExportModal } from './components/ExportModal';
@@ -220,7 +221,7 @@ export default function App() {
                 : 'border-transparent text-[#8b949e] hover:text-[#c9d1d9] hover:bg-[#161b22]/50'
             }`}
           >
-            <FileCode className="w-3.5 h-3.5 text-[#7ee787]" /> C Source Suite
+            <FileCode className="w-3.5 h-3.5 text-[#f0883e]" /> Native Suite (Rust/C)
           </button>
 
           <button
@@ -249,6 +250,8 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-5 lg:p-6 space-y-4 pb-20 sm:pb-6">
+        {/* Real-time Native Rust Daemon Status Bridge */}
+        <RustDaemonBridge />
         {/* VIEW 1: TOPOLOGY MAP */}
         {activeTab === 'topology' && (
           <div className="space-y-3">

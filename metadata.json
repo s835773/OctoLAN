@@ -1,6 +1,6 @@
 {
   "name": "OctoLAN - On-Premise Network Intelligence & Auditing Console",
-  "description": "Enterprise LAN topology mapping, NetFlow telemetry, broadcast storm detection, continuous presence alerting, 802.1Q VLAN audit, and portable POSIX C toolkit.",
+  "description": "Enterprise LAN topology mapping, NetFlow telemetry, broadcast storm detection, continuous presence alerting, 802.1Q VLAN audit, and high-performance Rust async daemon (octolan-rs).",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

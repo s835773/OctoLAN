@@ -1,0 +1,40 @@
+# Stage 1: Build React Frontend
+FROM node:20-bookworm-slim AS frontend-builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Stage 2: Build Rust Native Daemon
+FROM rust:1.80-bookworm AS rust-builder
+WORKDIR /usr/src/octolan-rs
+COPY octolan-rs/Cargo.toml octolan-rs/Cargo.lock* ./
+RUN mkdir src && echo "fn main() {}" > src/main.rs
+RUN cargo build --release || true
+COPY octolan-rs/src ./src
+RUN cargo build --release
+
+# Stage 3: Lightweight Runtime
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpcap0.8 \
+    libcap2-bin \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY --from=rust-builder /usr/src/octolan-rs/target/release/octolan-rs /usr/local/bin/octolan-rs
+COPY --from=frontend-builder /app/dist /app/dist
+
+# Set Linux capabilities for packet sniffing without full root
+RUN setcap cap_net_raw,cap_net_admin=eip /usr/local/bin/octolan-rs
+
+EXPOSE 3000
+EXPOSE 2055/udp
+
+ENV RUST_LOG=info
+ENV STATIC_DIR=/app/dist
+
+ENTRYPOINT ["octolan-rs"]
+CMD ["--interface", "eth0", "--port", "3000"]

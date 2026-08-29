@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SAMPLE_NETFLOW_RECORDS, SAMPLE_TOP_TALKERS } from '../data/telemetryData';
 import { NetflowRecord } from '../types';
 import { PpsSpikeVisualizer } from './PpsSpikeVisualizer';
+import { TrafficDensityHeatmap } from './TrafficDensityHeatmap';
 import { 
   Activity, ArrowDownLeft, ArrowUpRight, ArrowLeftRight, 
   Search, ShieldAlert, Cpu, HardDrive, Download, RefreshCw,
@@ -155,6 +156,9 @@ export const NetflowAnalyzer: React.FC = () => {
 
       {/* Real-time PPS Counter & Traffic Spike Visualizer */}
       <PpsSpikeVisualizer />
+
+      {/* 24-Hour Traffic Density Heatmap & Peak Period Analysis */}
+      <TrafficDensityHeatmap />
 
       {/* Top Talkers & Application Breakdown Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
