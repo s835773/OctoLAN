@@ -256,7 +256,7 @@ func (b *builder) deviceChecks(d *model.Device) {
 	if d.RTTMicro > 50_000 && d.Alive && !d.IsGateway {
 		b.add("high-latency", model.SevLow, "Performance", "High LAN latency (>50 ms)",
 			"These local devices responded slowly, which can indicate congestion, Wi-Fi issues or an overloaded device.",
-			"Check interface errors and utilisation along the path; review Wi-Fi channel plan.", d.ID)
+			"Check interface errors and utilization along the path; review Wi-Fi channel plan.", d.ID)
 	}
 	for _, ifc := range d.Interfaces {
 		if ifc.InErrors+ifc.OutErrors > 1000 && ifc.OperUp {
@@ -422,7 +422,7 @@ func (b *builder) networkChecks() {
 		}
 		b.add("rogue-dhcp", model.SevHigh, "Network", "Multiple DHCP servers on one segment",
 			"More than one DHCP server answered: "+strings.Join(ips, ", ")+". A rogue DHCP server can redirect clients' gateway/DNS (man-in-the-middle) or cause outages.",
-			"Identify the unauthorised server; enable DHCP snooping on access switches.", "")
+			"Identify the unauthorized server; enable DHCP snooping on access switches.", "")
 	}
 	for ip, macs := range in.DuplicateIP {
 		b.add("duplicate-ip", model.SevHigh, "Network", "Duplicate IP addresses",

@@ -124,7 +124,7 @@ func Classify(d *model.Device) {
 		}
 	}
 
-	// --- Neighbours that advertise capabilities about themselves are
+	// --- Neighbors that advertise capabilities about themselves are
 	// handled by topology; here use ports, banners, mDNS, vendor. ---
 	switch {
 	case has(9100) || has(515) || has(631) && !has(22) || hasAny(svc, "_ipp._tcp", "_pdl-datastream", "_printer._tcp") || hasAny(banners, "laserjet", "officejet", "printer", "epson", "brother", "kyocera", "ricoh", "xerox", "lexmark", "canon"):

@@ -3602,7 +3602,7 @@
       "severity": "high",
       "category": "Network",
       "detail": "More than one DHCP server answered: 10.20.0.10, 192.168.0.1. A rogue DHCP server can redirect clients' gateway/DNS (man-in-the-middle) or cause outages.",
-      "remediation": "Identify the unauthorised server; enable DHCP snooping on access switches."
+      "remediation": "Identify the unauthorized server; enable DHCP snooping on access switches."
     },
     {
       "id": "http-mgmt",

@@ -269,8 +269,8 @@ All files are in [`docs/brand/`](docs/brand/):
 
 | File | Use |
 |---|---|
-| `octolan-mark.svg` | Mark alone, takes the surrounding text colour (`currentColor`) |
-| `octolan-mark-black.svg`, `octolan-mark-white.svg` | Mark alone, fixed colour |
+| `octolan-mark.svg` | Mark alone, takes the surrounding text color (`currentColor`) |
+| `octolan-mark-black.svg`, `octolan-mark-white.svg` | Mark alone, fixed color |
 | `octolan-logo-horizontal.svg` (`-black`, `-white`) | Mark with the name beside it |
 | `octolan-logo-stacked.svg` | Mark with the name underneath |
 | `favicon.svg` | Browser icon with heavier arms for 16px; turns white in dark browser themes |

@@ -92,7 +92,7 @@ func Build(devs []*model.Device, subnets []model.Subnet) []model.Link {
 	}
 
 	// 1. LLDP / CDP adjacencies (strongest evidence).
-	uplinkPorts := map[string]map[string]bool{} // device -> ports with a neighbour
+	uplinkPorts := map[string]map[string]bool{} // device -> ports with a neighbor
 	for _, d := range devs {
 		for _, n := range d.Neighbors {
 			rid := resolve(n)

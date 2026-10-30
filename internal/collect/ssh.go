@@ -241,7 +241,7 @@ func CollectSSH(ctx context.Context, ip netip.Addr, d *model.Device, c vault.Cre
 		res.ConfigCmd = "/export hide-sensitive"
 		res.Config, _ = execCmd(client, res.ConfigCmd)
 	default:
-		return res, errors.New("logged in, but the device type wasn't recognised; no data collected")
+		return res, errors.New("logged in, but the device type wasn't recognized; no data collected")
 	}
 	if res.Config != "" && !looksLikeConfig(res.Config) {
 		res.Config = "" // error text, not a config (e.g. insufficient privilege)

@@ -287,7 +287,7 @@ func bytesOf(v any) []byte {
 
 func toInt(v any) int64 { return gosnmp.ToBigInt(v).Int64() }
 
-// SNMPPoll gathers interfaces, neighbours, forwarding tables, VLANs and
+// SNMPPoll gathers interfaces, neighbors, forwarding tables, VLANs and
 // ARP caches from a connected agent. Each table is bounded so a huge
 // core switch can't stall the assessment.
 func SNMPPoll(ctx context.Context, g *gosnmp.GoSNMP, info *model.SNMPInfo) *SNMPResult {

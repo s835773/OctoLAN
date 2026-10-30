@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"net"
 	"net/http"
+	"net/netip"
 	"strconv"
 	"strings"
 	"time"
@@ -90,6 +91,12 @@ func (s *Server) auth(h http.Handler) http.Handler {
 			}
 		}
 		if s.Token == "" {
+			// Loopback-only dashboard: refuse other Host names so a web page
+			// can't reach it through DNS rebinding.
+			if !loopbackHost(r.Host) {
+				http.Error(w, "unexpected host name", http.StatusForbidden)
+				return
+			}
 			h.ServeHTTP(w, r)
 			return
 		}
@@ -106,6 +113,21 @@ func (s *Server) auth(h http.Handler) http.Handler {
 		w.WriteHeader(http.StatusUnauthorized)
 		fmt.Fprintln(w, "OctoLAN: open the URL printed in the terminal (it includes the access token).")
 	})
+}
+
+// loopbackHost reports whether a Host header names this machine's
+// loopback interface (localhost, 127.0.0.0/8 or ::1, any port).
+func loopbackHost(hostport string) bool {
+	host := hostport
+	if h, _, err := net.SplitHostPort(hostport); err == nil {
+		host = h
+	}
+	host = strings.TrimSuffix(strings.Trim(host, "[]"), ".")
+	if strings.EqualFold(host, "localhost") {
+		return true
+	}
+	ip, err := netip.ParseAddr(host)
+	return err == nil && ip.IsLoopback()
 }
 
 // ListenAndServe starts serving on addr until ctx is done.

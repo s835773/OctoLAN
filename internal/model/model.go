@@ -75,7 +75,7 @@ type Device struct {
 	SNMP       *SNMPInfo   `json:"snmp,omitempty"`
 	Interfaces []Interface `json:"interfaces,omitempty"`
 	VLANs      []VLAN      `json:"vlans,omitempty"`
-	Neighbors  []Neighbor  `json:"neighbors,omitempty"` // LLDP/CDP neighbours reported by this device
+	Neighbors  []Neighbor  `json:"neighbors,omitempty"` // LLDP/CDP neighbors reported by this device
 	FDB        []FDBEntry  `json:"fdb,omitempty"`       // switch MAC address table
 	TLS        []TLSInfo   `json:"tls,omitempty"`
 	SMB        *SMBInfo    `json:"smb,omitempty"`

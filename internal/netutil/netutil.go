@@ -295,7 +295,7 @@ func parseWindowsRoute(out []byte) (netip.Addr, error) {
 
 // ---- ARP cache ----
 
-// ARPEntry is one row of the OS neighbour table.
+// ARPEntry is one row of the OS neighbor table.
 type ARPEntry struct {
 	IP    netip.Addr
 	MAC   net.HardwareAddr

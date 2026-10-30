@@ -1003,13 +1003,13 @@ func (e *Engine) snmpCrawl(ctx context.Context, t *tracker, hosts []netip.Addr, 
 			}
 		}
 		if len(queue) > 0 {
-			e.St.Logf("snmp", "Following %d LLDP/CDP neighbour management addresses", len(queue))
+			e.St.Logf("snmp", "Following %d LLDP/CDP neighbor management addresses", len(queue))
 		}
 	}
 	return polled
 }
 
-// pollOne returns neighbour management IPs when the agent answered, nil
+// pollOne returns neighbor management IPs when the agent answered, nil
 // otherwise.
 func (e *Engine) pollOne(ctx context.Context, ip netip.Addr, creds discovery.SNMPCreds, timeout time.Duration) []netip.Addr {
 	g, info := discovery.SNMPConnect(ctx, ip, creds, timeout)
