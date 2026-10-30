@@ -44,7 +44,9 @@
     return new Date(t).toLocaleDateString();
   }
   function hhmmss(t) { return new Date(t).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
-  function title(s) { s = String(s || '').replace(/-/g, ' '); return s.charAt(0).toUpperCase() + s.slice(1); }
+  var TYPE_LABELS = { 'voip-phone': 'VoIP phone', nas: 'NAS', ups: 'UPS', iot: 'IoT', 'access-point': 'Access point' };
+  function title(s) { if (TYPE_LABELS[s]) return TYPE_LABELS[s]; s = String(s || '').replace(/-/g, ' '); return s.charAt(0).toUpperCase() + s.slice(1); }
+  function md(s) { return esc(s).replace(/`([^`]+)`/g, '<code>$1</code>'); }
   function label(d) {
     if (d.hostname) { var h = d.hostname; var i = h.indexOf('.'); return (i > 0 && !/^\d+\.\d+\.\d+\.\d+$/.test(h)) ? h.slice(0, i) : h; }
     if (d.snmp && d.snmp.sysName) return d.snmp.sysName;
@@ -162,8 +164,8 @@
         '<dt>VLANs</dt><dd>' + (s.vlanCount || '<span class="muted">none seen</span>') + '</dd></dl></div>' +
         '<div class="card"><h3>Monitors</h3><dl class="kv">' +
         '<dt>Passive listener</dt><dd>' + (ps.running ? '<span class="status ok">' + esc(ps.mode) + ' on ' + esc(ps.iface) + '</span><div class="sub">' + fmtNum(ps.packets) + ' packets · ' + Object.keys(pkts).sort().map(function (k) { return k + ' ' + fmtNum(pkts[k]); }).join(', ') + '</div>' : '<span class="status">off</span>') + '</dd>' +
-        '<dt>Storm Guard</dt><dd>' + (s.storm.running ? '<span class="status ' + (s.storm.state === 'ok' ? 'ok' : s.storm.state === 'warning' ? 'warn' : 'bad') + '">' + esc(s.storm.state) + '</span> <span class="muted">' + fmtNum(s.storm.bcast) + ' bcast+mcast pps</span>' : '<span class="status warn">unavailable</span><div class="sub">' + esc(s.storm.error || '') + '</div>') + '</dd>' +
-        '<dt>NetFlow</dt><dd>' + (s.netflow.listening ? '<span class="status ok">listening ' + esc(s.netflow.addr) + '</span><div class="sub">' + s.netflow.exporters + ' exporter(s), ' + fmtNum(s.netflow.flows) + ' flows</div>' : '<span class="status">off</span> <a href="#/traffic">enable</a>') + '</dd>' +
+        '<dt>Storm Guard</dt><dd>' + (!s.storm.running && s.storm.state && s.storm.state !== 'off' && s.storm.state !== 'unavailable' ? '<span class="status">saved session</span> <span class="muted">state ' + esc(s.storm.state) + '</span> <a href="#/storm">view</a>' : s.storm.running ? '<span class="status ' + (s.storm.state === 'ok' ? 'ok' : s.storm.state === 'warning' ? 'warn' : 'bad') + '">' + esc(s.storm.state) + '</span> <span class="muted">' + fmtNum(s.storm.bcast) + ' bcast+mcast pps</span>' : '<span class="status warn">unavailable</span><div class="sub">' + esc(s.storm.error || '') + '</div>') + '</dd>' +
+        '<dt>NetFlow</dt><dd>' + (!s.netflow.listening && s.netflow.flows ? '<span class="status">saved session</span><div class="sub">' + fmtNum(s.netflow.flows) + ' flows · <a href="#/traffic">view</a></div>' : s.netflow.listening ? '<span class="status ok">listening ' + esc(s.netflow.addr) + '</span><div class="sub">' + s.netflow.exporters + ' exporter(s), ' + fmtNum(s.netflow.flows) + ' flows</div>' : '<span class="status">off</span> <a href="#/traffic">enable</a>') + '</dd>' +
         '</dl></div>' +
         '<div class="card"><h3>Recent activity <a class="right" href="#/activity">All →</a></h3><ul class="list">' + S.events.slice(-8).reverse().map(evRow).join('') + '</ul></div>' +
         '</div>' +
@@ -222,7 +224,7 @@
         '<div id="mapsvg"></div><div class="legend">' + Object.keys(types).sort().map(function (k) {
           return '<span><span class="tdot" style="background:' + (TYPE_COLORS[k] || '#999') + '"></span>' + esc(title(k)) + '</span>';
         }).join('') + '<span>━ LLDP/CDP</span><span>╍ MAC table</span><span>┈ inferred</span></div></div>';
-      var opts = Object.assign({}, mapOpts, { onSelect: openDevice, positions: (mapInst && mapInst.positions) || savedPositions() });
+      var opts = Object.assign({ scale: 1.25, bottomPad: 70 }, mapOpts, { onSelect: openDevice, positions: (mapInst && mapInst.positions) || savedPositions() });
       mapInst = OctoMap.render($('#mapsvg'), t, opts);
       $('#map-q').oninput = function () { mapInst.search(this.value); };
       $('#map-fit').onclick = function () { mapInst.fit(); };
@@ -423,7 +425,7 @@
     S.devices.forEach(function (d) { byId[d.id] = d; });
     return '<div class="finding ' + f.severity + '"><div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap"><h4>' + esc(f.title) + '</h4>' +
       '<span class="muted small">' + esc(f.category) + '</span><span class="sev ' + f.severity + '" style="margin-left:auto">' + f.severity + '</span></div>' +
-      '<div style="margin-top:6px">' + esc(f.detail) + '</div><div class="fix"><b>Fix:</b> ' + esc(f.remediation) + '</div>' +
+      '<div style="margin-top:6px">' + md(f.detail) + '</div><div class="fix"><b>Fix:</b> ' + md(f.remediation) + '</div>' +
       (f.devices && f.devices.length ? '<div class="devs">' + f.devices.map(function (id) {
         var d = byId[id];
         return '<a href="#" data-dev="' + esc(id) + '">' + esc(d ? label(d) + (d.ips && d.ips[0] && label(d) !== d.ips[0] ? ' · ' + d.ips[0] : '') : id) + '</a>';
@@ -470,14 +472,18 @@
 
   // ---------- Traffic ----------
   views.traffic = function () {
-    loadFlows().then(function (f) {
+    Promise.all([loadFlows(), S.devices.length ? null : loadDevices()]).then(function (r) {
+      var f = r[0];
       var v = $('#view');
+      if (f) ['series', 'topTalkers', 'topApps', 'conversations'].forEach(function (k) { f[k] = f[k] || []; });
+      if (f) { f.exporters = f.exporters || {}; f.versions = f.versions || {}; }
       var listening = f && f.listening;
       var head = '<div class="card" style="margin-bottom:16px"><h3>NetFlow / IPFIX collector</h3><div class="toolbar" style="margin:0">' +
         (listening ? '<span class="status ok">Listening on UDP ' + esc(f.listenAddr) + '</span><button class="ghost small" id="nf-stop">Stop</button>' :
+          (f && f.totalFlows ? '<span class="status">Showing saved session data</span>' : '') +
           '<span class="status">Off</span><input id="nf-addr" value=":2055" style="width:110px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 8px"><button class="primary small" id="nf-start">Start collector</button>') +
         '<span class="muted small">Point the customer\'s router/firewall flow export (v5, v9 or IPFIX) at this laptop: ' + esc(collectorIPs()) + '</span></div></div>';
-      if (!listening || !f.totalFlows) {
+      if (!f || !f.totalFlows) {
         v.innerHTML = head + '<div class="empty"><h2>' + (listening ? 'Waiting for flow exports…' : 'Traffic analysis is off') + '</h2><p>Most firewalls (FortiGate, SonicWall, Meraki, pfSense, UniFi, MikroTik, Cisco) can export NetFlow or IPFIX. OctoLAN aggregates top talkers, applications and conversations.</p>' +
           (f && f.errors && Object.keys(f.errors).length ? '<p class="small">Parser notes: ' + esc(Object.keys(f.errors).join('; ')) + '</p>' : '') + '</div>';
         bindNF();

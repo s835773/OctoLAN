@@ -355,22 +355,33 @@ func (b *builder) networkChecks() {
 }
 
 var weights = map[model.Severity]float64{
-	model.SevCritical: 15, model.SevHigh: 8, model.SevMedium: 4, model.SevLow: 1.5, model.SevInfo: 0,
+	model.SevCritical: 25, model.SevHigh: 15, model.SevMedium: 4, model.SevLow: 1.5, model.SevInfo: 0,
 }
 
+// score turns findings into 0-100. Penalties compound with diminishing
+// returns (so a bad network lands around 30-50, not 0, and remains
+// comparable after fixes), and the worst severity caps the result: any
+// critical issue means at most a D, any high issue at most a C.
 func score(fs []model.Finding, alive int) int {
-	s := 100.0
+	penalty := 0.0
+	worst := model.SevInfo
+	rank := map[model.Severity]int{model.SevCritical: 4, model.SevHigh: 3, model.SevMedium: 2, model.SevLow: 1, model.SevInfo: 0}
 	for _, f := range fs {
-		n := len(f.Devices)
 		mult := 1.0
-		if n > 1 {
-			// More affected devices cost more, with diminishing returns.
+		if n := len(f.Devices); n > 1 {
 			mult = 1 + math.Log2(float64(n))*0.5
 		}
-		s -= weights[f.Severity] * mult
+		penalty += weights[f.Severity] * mult
+		if rank[f.Severity] > rank[worst] {
+			worst = f.Severity
+		}
 	}
-	if s < 0 {
-		s = 0
+	s := 100 * math.Exp(-penalty/150)
+	switch worst {
+	case model.SevCritical:
+		s = math.Min(s, 69)
+	case model.SevHigh:
+		s = math.Min(s, 79)
 	}
 	_ = alive
 	return int(math.Round(s))

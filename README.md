@@ -11,6 +11,53 @@ octolan scan       # or run the whole assessment from the terminal
 
 One self-contained binary per platform: Windows, macOS and Linux (x86-64 and ARM), plus OpenWrt/embedded Linux (MIPS, ARM). Nothing else to install.
 
+![OctoLAN dashboard overview](docs/images/dashboard-overview.png)
+
+**📄 [Download an example report (PDF)](docs/sample-report.pdf)**, the deliverable you hand the customer at the end of a visit.
+
+> The dashboard and report screenshots use **Riverside Dental Group**, a fictional sample site (see [Sample data](#sample-data)). The terminal screenshots are real runs, with hostnames and IP addresses replaced by generic ones.
+
+---
+
+## Screenshots
+
+### In the terminal
+
+`octolan scan` runs the full assessment without a browser and writes the report and session file at the end. (This run was unprivileged, so it used ping, TCP, DNS and mDNS. MAC addresses fill in when it runs with `sudo` or Npcap.)
+
+![octolan scan in a terminal](docs/images/terminal-scan.png)
+
+<details>
+<summary>More terminal screenshots: <code>octolan help</code> and the NetFlow collector</summary>
+
+![octolan help](docs/images/terminal-help.png)
+
+`octolan netflow` collects NetFlow v5/v9/IPFIX and prints top talkers and applications every few seconds:
+
+![octolan netflow collector](docs/images/terminal-netflow.png)
+
+</details>
+
+### The dashboard
+
+| Network map | Device inventory |
+|---|---|
+| ![Network map](docs/images/dashboard-map.png) | ![Devices](docs/images/dashboard-devices.png) |
+| **Findings with remediation** | **Storm Guard** |
+| ![Findings](docs/images/dashboard-findings.png) | ![Storm Guard](docs/images/dashboard-storm-guard.png) |
+| **Traffic (NetFlow / IPFIX)** | |
+| ![Traffic](docs/images/dashboard-traffic.png) | |
+
+### The customer report
+
+**Export → Open report** produces one self-contained HTML file. Print it to PDF from any browser. [See the full example PDF](docs/sample-report.pdf) (11 pages).
+
+| Executive summary | Topology |
+|---|---|
+| [![Report page 1](docs/images/report-page1.png)](docs/sample-report.pdf) | [![Report topology page](docs/images/report-map.png)](docs/sample-report.pdf) |
+
+The report covers: posture score and grade, an executive summary, priority actions, network overview (subnets, DHCP servers, VLANs, spanning tree, broadcast levels), an interactive topology map, every finding with its remediation and affected devices, the full device inventory, NetFlow top talkers and applications, and the methodology (what ran and what was skipped).
+
 ---
 
 ## What it does
@@ -34,6 +81,7 @@ Plus the inventory and mapping you'd expect from a network management platform:
 - **Name resolution**: reverse DNS, NetBIOS node status, unicast mDNS, SMB/NTLM computer and domain names.
 - **Security posture checks**, scored 0–100 with a letter grade:
   Telnet/FTP, Cisco Smart Install, unauthenticated Docker/Redis/Elasticsearch/MongoDB, VNC, RDP on workstations, TR-069, PPTP, plain-HTTP management UIs, default SNMP communities, SNMPv1/v2c, SMBv1, SMB signing not required, end-of-life OS, old OpenSSH, expired/expiring/self-signed certificates, legacy TLS, UPnP on the gateway, rogue DHCP, duplicate IPs, broadcast storms, STP instability/root changes/default priority, flat networks, IoT not segmented, interface errors, high latency, long uptime (unpatched).
+  *Scoring:* each finding costs points by severity, more affected devices cost more, and penalties have diminishing returns (a very neglected network lands around 30–50, not 0, so progress after remediation stays visible). The worst issue caps the grade: any critical finding means a D at best, any high finding a C at best.
 - **Reports**: a single self-contained HTML report (interactive map, executive summary, priority actions, findings with remediation, full inventory, methodology). Print to PDF straight from the browser. Also CSV (devices, findings) and JSON session files.
 
 ## Quick start
@@ -71,6 +119,8 @@ octolan [serve]          Live dashboard (default)
   -netflow :2055          start the NetFlow collector too
   -load session.json      reopen a saved assessment
   -scan                   start an assessment immediately
+  -collector tech-laptop  name shown for this computer in the dashboard and reports
+                          (default: its hostname; use it to keep a personal machine name private)
 
 octolan scan             Full assessment in the terminal; writes report + session
   -t 10.0.0.0/24 -t 10.0.5.1-50   targets (default: local subnet)
@@ -81,6 +131,7 @@ octolan scan             Full assessment in the terminal; writes report + sessio
   -zero-footprint                 listen only; never transmit
   -rate 400                       sweep packets/second
   -out ./reports
+  -collector tech-laptop          name shown for this computer in the report
 
 octolan report session.json      Rebuild the HTML report from a saved session
 octolan storm [-warn 1000 -crit 5000]   Live broadcast-storm / STP meter
@@ -90,6 +141,8 @@ octolan interfaces               Interfaces and what this host can do
 ```
 
 Sessions and reports are saved under `~/OctoLAN/<site>/`. SNMP communities and v3 passwords are held in memory only and are never written to session files or reports.
+
+Reopening a saved session (`octolan -load session.json`) shows it exactly as it was captured. Live monitoring of the network you're on now only starts when you run a new assessment, so reviewing a customer's results back at the office won't mix in the office network.
 
 ## Using it on site: tips
 
@@ -111,6 +164,18 @@ go build ./cmd/octolan        # this machine
 ./scripts/build.sh           # all platforms → ./dist (with SHA256SUMS)
 go test -race ./...
 ```
+
+### Sample data
+
+The screenshots and [example report](docs/sample-report.pdf) come from a fictional dental practice generated by `tools/docsdemo`. The devices are invented, but they go through OctoLAN's real classifier, topology builder and posture checks. To regenerate:
+
+```
+go run ./tools/docsdemo docs/sample/session.json
+go run ./cmd/octolan report docs/sample/session.json -o docs/sample/report.html
+go run ./cmd/octolan -load docs/sample/session.json   # browse it in the dashboard
+```
+
+Print `docs/sample/report.html` to PDF from any Chromium browser to rebuild `docs/sample-report.pdf`.
 
 To refresh the embedded MAC-vendor table:
 
@@ -134,4 +199,7 @@ internal/engine     scan pipeline and monitors
 internal/report     HTML/CSV reports
 internal/web        dashboard API (JSON + server-sent events)
 internal/ui/static  dashboard front end (vanilla JS, embedded)
+tools/genoui        rebuilds the embedded MAC-vendor table
+tools/docsdemo      generates the fictional sample site used in docs/
+docs/               screenshots, example report (PDF) and sample session
 ```

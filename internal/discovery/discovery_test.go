@@ -144,3 +144,16 @@ func TestClassify(t *testing.T) {
 		t.Errorf("win7: %s %+v", win.Type, win.OS)
 	}
 }
+
+func TestServerName(t *testing.T) {
+	for _, h := range []string{"RDG-FS01", "dc02.contoso.local", "sql-prod", "SRV-APP1", "hv3", "acme_veeam01"} {
+		if !serverName(h) {
+			t.Errorf("%s should look like a server", h)
+		}
+	}
+	for _, h := range []string{"RDG-WS04", "Dr-Patel-MacBook", "desktop-7h2k", "printer-front", "fsmith-laptop", ""} {
+		if serverName(h) {
+			t.Errorf("%s should not look like a server", h)
+		}
+	}
+}

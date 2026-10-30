@@ -50,6 +50,7 @@
 
   function render(container, data, opts) {
     opts = opts || {};
+    var S = opts.scale || 1; // node/label size multiplier (report uses >1)
     container.innerHTML = '';
     var w = container.clientWidth || 900, h = container.clientHeight || 600;
     var svg = el('svg', { width: '100%', height: '100%', viewBox: '0 0 ' + w + ' ' + h, 'class': 'octomap' }, container);
@@ -101,7 +102,7 @@
         if (p) { nd.x = p.x; nd.y = p.y; } else { fresh++; }
       });
       var idx = {};
-      var rowH = Math.max(110, h / 4.2);
+      var rowH = Math.max(110 * S, h / 4.2);
       nodes.forEach(function (nd) {
         if (nd.x !== undefined) return;
         var t = tier(nd); idx[t] = (idx[t] || 0) + 1;
@@ -113,7 +114,7 @@
       var iters = Math.max(60, 320 - Math.floor(n / 2));
       var adj = links.map(function (l) {
         var infra = INFRA[l.s.type] && INFRA[l.t.type];
-        return { s: l.s, t: l.t, len: infra ? 170 : (l.s.kind === 'cloud' || l.t.kind === 'cloud' ? 80 : 95) };
+        return { s: l.s, t: l.t, len: (infra ? 170 : (l.s.kind === 'cloud' || l.t.kind === 'cloud' ? 80 : 95)) * S };
       });
       for (var it = 0; it < iters; it++) {
         var alpha = 1 - it / iters;
@@ -122,8 +123,8 @@
           var a = nodes[i];
           for (var j = i + 1; j < n; j++) {
             var b = nodes[j], dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy + .01;
-            if (d2 > 160000) continue;
-            var f = 1800 / d2;
+            if (d2 > 160000 * S * S) continue;
+            var f = 1400 * S * S / d2;
             a.vx += dx * f; a.vy += dy * f; b.vx -= dx * f; b.vy -= dy * f;
           }
         }
@@ -134,8 +135,10 @@
         });
         nodes.forEach(function (nd) {
           if (positions[nd.id]) return; // keep user-placed / previous nodes still
-          nd.vy += (60 + tier(nd) * rowH - nd.y) * 0.06;
-          nd.vx += (w / 2 - nd.x) * 0.002;
+          // Infrastructure keeps its tier; endpoints only lean below it so they
+          // fan out around their switch instead of forming one wide row.
+          nd.vy += (60 + tier(nd) * rowH - nd.y) * (tier(nd) >= 3 ? 0.008 : 0.06);
+          nd.vx += (w / 2 - nd.x) * 0.012;
           var lim = 30 * alpha + 2;
           nd.x += Math.max(-lim, Math.min(lim, nd.vx));
           nd.y += Math.max(-lim, Math.min(lim, nd.vy));
@@ -158,7 +161,7 @@
       nodes.forEach(function (nd) {
         var g = el('g', { transform: 'translate(' + nd.x + ',' + nd.y + ')', 'class': 'octonode' }, gn);
         g.style.cursor = 'pointer';
-        var r = nd.kind === 'cloud' ? 15 : (INFRA[nd.type] || nd.gateway ? 19 : 14);
+        var r = (nd.kind === 'cloud' ? 15 : (INFRA[nd.type] || nd.gateway ? 19 : 14)) * S;
         var match = !q || (nd.label + ' ' + (nd.ip || '') + ' ' + (nd.vendor || '')).toLowerCase().indexOf(q) >= 0;
         g.setAttribute('opacity', match ? (nd.alive === false ? .45 : 1) : .12);
         if (nd.self) el('circle', { r: r + 5, fill: 'none', stroke: COLORS.router, 'stroke-width': 2, 'stroke-dasharray': '3 3' }, g);
@@ -168,9 +171,9 @@
         el('path', { d: ICONS[nd.type] || ICONS.unknown, transform: 'translate(' + (-12 * s) + ',' + (-12 * s) + ') scale(' + s + ')',
           fill: 'none', stroke: '#fff', 'stroke-width': 1.9, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
         if (nd.worst && SEV[nd.worst] && nd.worst !== 'info') {
-          el('circle', { cx: r * .75, cy: -r * .75, r: 6, fill: SEV[nd.worst], stroke: opts.light ? '#fff' : '#0f172a', 'stroke-width': 1.5 }, g);
+          el('circle', { cx: r * .75, cy: -r * .75, r: 6 * S, fill: SEV[nd.worst], stroke: opts.light ? '#fff' : '#0f172a', 'stroke-width': 1.5 }, g);
         }
-        var t = el('text', { y: r + 14, 'text-anchor': 'middle', 'font-size': INFRA[nd.type] || nd.gateway ? 12 : 10.5,
+        var t = el('text', { y: r + 14 * S, 'text-anchor': 'middle', 'font-size': (INFRA[nd.type] || nd.gateway ? 12 : 10.5) * S,
           fill: textColor, 'font-weight': INFRA[nd.type] || nd.gateway ? 600 : 400, 'pointer-events': 'none' }, g);
         t.textContent = (nd.label || '').length > 22 ? nd.label.slice(0, 21) + '…' : nd.label;
         el('title', {}, g).textContent = nd.label + (nd.ip ? '\n' + nd.ip : '') + (nd.vendor ? '\n' + nd.vendor : '') + '\n' + nd.type +
@@ -226,9 +229,9 @@
       if (!nodes.length) return;
       var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
       nodes.forEach(function (n) { x0 = Math.min(x0, n.x); y0 = Math.min(y0, n.y); x1 = Math.max(x1, n.x); y1 = Math.max(y1, n.y); });
-      var pad = 60, bw = x1 - x0 + pad * 2, bh = y1 - y0 + pad * 2;
+      var pad = 60, bw = x1 - x0 + pad * 2, bh = y1 - y0 + pad * 2 + (opts.bottomPad || 0);
       view.k = Math.max(0.15, Math.min(1.6, Math.min(w / bw, h / bh)));
-      view.x = (w - (x1 + x0) * view.k) / 2; view.y = (h - (y1 + y0) * view.k) / 2;
+      view.x = (w - (x1 + x0) * view.k) / 2; view.y = (h - (opts.bottomPad || 0) - (y1 + y0) * view.k) / 2;
       applyView();
     }
 

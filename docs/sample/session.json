@@ -1,0 +1,7356 @@
+{
+  "version": "v2.0.0",
+  "site": "Riverside Dental Group (sample data)",
+  "generated": "2026-10-30T07:58:42.599503-04:00",
+  "collector": "TECH-LAPTOP-07",
+  "capabilities": {
+    "os": "windows",
+    "arch": "amd64",
+    "privileged": false,
+    "rawCapture": true,
+    "icmpMode": "windows-api",
+    "interfaces": [
+      {
+        "name": "Ethernet",
+        "display": "",
+        "addrs": [
+          "10.20.0.57/24"
+        ],
+        "up": true,
+        "gateway": "10.20.0.1"
+      }
+    ],
+    "defaultIface": "Ethernet",
+    "hostname": "TECH-LAPTOP-07"
+  },
+  "subnets": [
+    {
+      "cidr": "10.20.0.0/24",
+      "gateway": "10.20.0.1",
+      "interface": "Ethernet",
+      "local": true,
+      "hosts": 254
+    },
+    {
+      "cidr": "10.20.10.0/24",
+      "gateway": "10.20.10.1",
+      "local": false,
+      "hosts": 254
+    }
+  ],
+  "devices": [
+    {
+      "id": "00:09:0f:aa:10:01",
+      "ips": [
+        "10.20.0.1"
+      ],
+      "mac": "00:09:0f:aa:10:01",
+      "vendor": "Fortinet, Inc.",
+      "hostname": "rdg-fw01",
+      "names": [
+        "rdg-fw01"
+      ],
+      "type": "firewall",
+      "model": "FortiGate-60F",
+      "serial": "FGT60FTK2209XXXX",
+      "firmware": "v7.2.8",
+      "os": {
+        "family": "FortiOS",
+        "name": "FortiGate-60F v7.2.8,build1639",
+        "confidence": 90,
+        "evidence": [
+          "SNMP sysDescr",
+          "type: SNMP sysDescr names a firewall"
+        ],
+        "initialTtl": 255
+      },
+      "rttMicro": 410,
+      "ttl": 255,
+      "ports": [
+        {
+          "port": 443,
+          "proto": "tcp",
+          "service": "https",
+          "banner": "HTTP/1.1 200 OK | Title: FortiGate"
+        },
+        {
+          "port": 8443,
+          "proto": "tcp",
+          "service": "https-alt"
+        },
+        {
+          "port": 22,
+          "proto": "tcp",
+          "service": "ssh"
+        }
+      ],
+      "services": [
+        {
+          "type": "ssdp",
+          "name": "device:InternetGatewayDevice:1",
+          "detail": "FortiOS UPnP/1.0"
+        }
+      ],
+      "snmp": {
+        "version": "v2c",
+        "sysDescr": "FortiGate-60F v7.2.8,build1639",
+        "sysObjectId": "1.3.6.1.4.1.12356.101.1.1",
+        "sysName": "rdg-fw01",
+        "sysUpTimeSec": 3542400,
+        "sysServices": 78
+      },
+      "tls": [
+        {
+          "port": 443,
+          "subject": "rdg-fw01",
+          "issuer": "rdg-fw01",
+          "notAfter": "2026-10-18T07:58:42.580167-04:00",
+          "selfSigned": true,
+          "version": "TLS 1.2"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp",
+        "snmp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.580239-04:00",
+      "lastSeen": "2026-10-30T07:58:42.580239-04:00",
+      "alive": true,
+      "isGateway": true
+    },
+    {
+      "id": "00:00:0c:4a:21:10",
+      "ips": [
+        "10.20.0.2"
+      ],
+      "mac": "00:00:0c:4a:21:10",
+      "vendor": "Cisco Systems, Inc",
+      "hostname": "rdg-core-sw01",
+      "names": [
+        "rdg-core-sw01"
+      ],
+      "type": "switch",
+      "model": "WS-C2960X-48FPD-L",
+      "serial": "FOC2138XXXX",
+      "firmware": "15.2(7)E4",
+      "location": "Server closet, rack 1",
+      "os": {
+        "family": "Cisco IOS",
+        "name": "Cisco IOS Software, C2960X Software (C2960X-UNIVERSALK9-M), Version 15.2(7)E4",
+        "confidence": 90,
+        "evidence": [
+          "SNMP sysDescr",
+          "type: SNMP sysServices/bridge table: layer 2 forwarding"
+        ],
+        "initialTtl": 255
+      },
+      "rttMicro": 417,
+      "ttl": 255,
+      "ports": [
+        {
+          "port": 22,
+          "proto": "tcp",
+          "service": "ssh"
+        },
+        {
+          "port": 23,
+          "proto": "tcp",
+          "service": "telnet"
+        },
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http"
+        },
+        {
+          "port": 443,
+          "proto": "tcp",
+          "service": "https"
+        }
+      ],
+      "snmp": {
+        "version": "v2c",
+        "defaultCommunity": true,
+        "sysDescr": "Cisco IOS Software, C2960X Software (C2960X-UNIVERSALK9-M), Version 15.2(7)E4",
+        "sysObjectId": "1.3.6.1.4.1.9.1.1208",
+        "sysName": "rdg-core-sw01",
+        "sysUpTimeSec": 44236800,
+        "sysServices": 2
+      },
+      "interfaces": [
+        {
+          "index": 10101,
+          "name": "Gi1/0/1",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 9000000000,
+          "outOctets": 4000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10102,
+          "name": "Gi1/0/2",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 18000000000,
+          "outOctets": 8000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10103,
+          "name": "Gi1/0/3",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 27000000000,
+          "outOctets": 12000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10104,
+          "name": "Gi1/0/4",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": false,
+          "inOctets": 36000000000,
+          "outOctets": 16000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10105,
+          "name": "Gi1/0/5",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 45000000000,
+          "outOctets": 20000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10106,
+          "name": "Gi1/0/6",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 54000000000,
+          "outOctets": 24000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10107,
+          "name": "Gi1/0/7",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 63000000000,
+          "outOctets": 28000000000,
+          "inErrors": 48211,
+          "pvid": 1
+        },
+        {
+          "index": 10108,
+          "name": "Gi1/0/8",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": false,
+          "inOctets": 72000000000,
+          "outOctets": 32000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10109,
+          "name": "Gi1/0/9",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 81000000000,
+          "outOctets": 36000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10110,
+          "name": "Gi1/0/10",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 90000000000,
+          "outOctets": 40000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10111,
+          "name": "Gi1/0/11",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 99000000000,
+          "outOctets": 44000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10112,
+          "name": "Gi1/0/12",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": false,
+          "inOctets": 108000000000,
+          "outOctets": 48000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10113,
+          "name": "Gi1/0/13",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 117000000000,
+          "outOctets": 52000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10114,
+          "name": "Gi1/0/14",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 126000000000,
+          "outOctets": 56000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10115,
+          "name": "Gi1/0/15",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 135000000000,
+          "outOctets": 60000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10116,
+          "name": "Gi1/0/16",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": false,
+          "inOctets": 144000000000,
+          "outOctets": 64000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10117,
+          "name": "Gi1/0/17",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 153000000000,
+          "outOctets": 68000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10118,
+          "name": "Gi1/0/18",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 162000000000,
+          "outOctets": 72000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10119,
+          "name": "Gi1/0/19",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": true,
+          "inOctets": 171000000000,
+          "outOctets": 76000000000,
+          "pvid": 1
+        },
+        {
+          "index": 10120,
+          "name": "Gi1/0/20",
+          "speedMbps": 1000,
+          "adminUp": true,
+          "operUp": false,
+          "inOctets": 180000000000,
+          "outOctets": 80000000000,
+          "pvid": 1
+        }
+      ],
+      "vlans": [
+        {
+          "id": 1,
+          "name": "default",
+          "source": ""
+        },
+        {
+          "id": 10,
+          "name": "VOICE",
+          "source": ""
+        },
+        {
+          "id": 20,
+          "name": "CAMERAS",
+          "source": ""
+        }
+      ],
+      "neighbors": [
+        {
+          "protocol": "cdp",
+          "localPort": "Gi1/0/48",
+          "remoteName": "rdg-fw01",
+          "remotePort": "port1",
+          "remoteChassis": "00:09:0f:aa:10:01",
+          "remoteIp": "10.20.0.1"
+        },
+        {
+          "protocol": "lldp",
+          "localPort": "Gi1/0/47",
+          "remoteName": "rdg-sw02",
+          "remotePort": "Gi0/10",
+          "remoteChassis": "00:00:0c:4a:21:20",
+          "remoteIp": "10.20.0.3"
+        },
+        {
+          "protocol": "lldp",
+          "localPort": "Gi1/0/40",
+          "remoteName": "AP-Front-Desk",
+          "remotePort": "eth0",
+          "remoteChassis": "00:15:6d:31:00:01",
+          "remoteIp": "10.20.0.11",
+          "remoteCaps": "wlan-ap"
+        }
+      ],
+      "fdb": [
+        {
+          "mac": "00:15:6d:31:00:02",
+          "port": "Gi1/0/1",
+          "vlan": 1
+        },
+        {
+          "mac": "00:06:5b:10:00:10",
+          "port": "Gi1/0/2",
+          "vlan": 1
+        },
+        {
+          "mac": "00:06:5b:10:00:15",
+          "port": "Gi1/0/3",
+          "vlan": 1
+        },
+        {
+          "mac": "00:11:32:aa:bb:20",
+          "port": "Gi1/0/4",
+          "vlan": 1
+        },
+        {
+          "mac": "00:c0:b7:55:00:25",
+          "port": "Gi1/0/5",
+          "vlan": 1
+        },
+        {
+          "mac": "00:01:e6:30:00:30",
+          "port": "Gi1/0/6",
+          "vlan": 1
+        },
+        {
+          "mac": "00:01:e6:30:00:31",
+          "port": "Gi1/0/7",
+          "vlan": 1
+        },
+        {
+          "mac": "00:bc:99:40:00:40",
+          "port": "Gi1/0/8",
+          "vlan": 1
+        },
+        {
+          "mac": "00:bc:99:40:00:41",
+          "port": "Gi1/0/9",
+          "vlan": 1
+        },
+        {
+          "mac": "00:bc:99:40:00:42",
+          "port": "Gi1/0/10",
+          "vlan": 1
+        },
+        {
+          "mac": "00:bc:99:40:00:43",
+          "port": "Gi1/0/11",
+          "vlan": 1
+        },
+        {
+          "mac": "24:9a:d8:00:00:60",
+          "port": "Gi1/0/12",
+          "vlan": 1
+        },
+        {
+          "mac": "24:9a:d8:00:00:61",
+          "port": "Gi1/0/13",
+          "vlan": 1
+        },
+        {
+          "mac": "24:9a:d8:00:00:62",
+          "port": "Gi1/0/14",
+          "vlan": 1
+        },
+        {
+          "mac": "24:9a:d8:00:00:63",
+          "port": "Gi1/0/15",
+          "vlan": 1
+        },
+        {
+          "mac": "00:12:fe:00:01:00",
+          "port": "Gi1/0/16",
+          "vlan": 1
+        },
+        {
+          "mac": "00:12:fe:00:01:01",
+          "port": "Gi1/0/17",
+          "vlan": 1
+        },
+        {
+          "mac": "00:12:fe:00:01:02",
+          "port": "Gi1/0/18",
+          "vlan": 1
+        },
+        {
+          "mac": "00:12:fe:00:01:03",
+          "port": "Gi1/0/19",
+          "vlan": 1
+        },
+        {
+          "mac": "00:12:fe:00:01:04",
+          "port": "Gi1/0/20",
+          "vlan": 1
+        },
+        {
+          "mac": "00:12:fe:00:01:05",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "00:12:fe:00:01:06",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "00:12:fe:00:01:07",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "00:12:fe:00:01:08",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "00:03:93:00:01:20",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "00:0e:58:00:01:30",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "00:4b:12:00:01:40",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "da:a1:19:00:01:50",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "02:00:00:00:47:00",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "02:00:00:00:47:01",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "02:00:00:00:47:02",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "02:00:00:00:47:03",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "02:00:00:00:47:04",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "02:00:00:00:47:05",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "02:00:00:00:47:06",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        },
+        {
+          "mac": "02:00:00:00:47:07",
+          "port": "Gi1/0/47",
+          "vlan": 1
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp",
+        "snmp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598006-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598006-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:00:0c:4a:21:20",
+      "ips": [
+        "10.20.0.3"
+      ],
+      "mac": "00:00:0c:4a:21:20",
+      "vendor": "Cisco Systems, Inc",
+      "hostname": "rdg-sw02",
+      "names": [
+        "rdg-sw02"
+      ],
+      "type": "switch",
+      "model": "C1000-24P-4G-L",
+      "os": {
+        "family": "Cisco IOS",
+        "name": "Cisco IOS Software, C1000 Software (C1000-UNIVERSALK9-M), Version 15.2(7)E8",
+        "confidence": 90,
+        "evidence": [
+          "SNMP sysDescr",
+          "type: SNMP sysServices/bridge table: layer 2 forwarding"
+        ],
+        "initialTtl": 255
+      },
+      "rttMicro": 594,
+      "ttl": 255,
+      "ports": [
+        {
+          "port": 22,
+          "proto": "tcp",
+          "service": "ssh"
+        }
+      ],
+      "snmp": {
+        "version": "v2c",
+        "sysDescr": "Cisco IOS Software, C1000 Software (C1000-UNIVERSALK9-M), Version 15.2(7)E8",
+        "sysName": "rdg-sw02",
+        "sysUpTimeSec": 7603200,
+        "sysServices": 2
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp",
+        "snmp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598015-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598015-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:06:5b:10:00:10",
+      "ips": [
+        "10.20.0.10"
+      ],
+      "mac": "00:06:5b:10:00:10",
+      "vendor": "Dell Inc.",
+      "hostname": "RDG-DC01",
+      "names": [
+        "RDG-DC01"
+      ],
+      "type": "server",
+      "os": {
+        "family": "Windows",
+        "name": "Windows Server 2022 (build 20348)",
+        "confidence": 95,
+        "evidence": [
+          "SMB NTLM version 10.0.20348",
+          "type: Kerberos + LDAP: domain controller"
+        ],
+        "initialTtl": 128
+      },
+      "rttMicro": 475,
+      "ttl": 128,
+      "ports": [
+        {
+          "port": 53,
+          "proto": "tcp",
+          "service": "dns"
+        },
+        {
+          "port": 88,
+          "proto": "tcp",
+          "service": "kerberos"
+        },
+        {
+          "port": 135,
+          "proto": "tcp",
+          "service": "msrpc"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 389,
+          "proto": "tcp",
+          "service": "ldap"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 3389,
+          "proto": "tcp",
+          "service": "rdp"
+        }
+      ],
+      "smb": {
+        "smb1": false,
+        "dialect": "SMB 3.0.2",
+        "signingRequired": false,
+        "osBuild": "20348",
+        "osVersion": "10.0"
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598018-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598018-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:15:6d:31:00:01",
+      "ips": [
+        "10.20.0.11"
+      ],
+      "mac": "00:15:6d:31:00:01",
+      "vendor": "Ubiquiti Inc",
+      "hostname": "AP-Front-Desk",
+      "names": [
+        "AP-Front-Desk"
+      ],
+      "type": "access-point",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: wireless vendor with AP naming"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1311,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 22,
+          "proto": "tcp",
+          "service": "ssh"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598017-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598017-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:15:6d:31:00:02",
+      "ips": [
+        "10.20.0.12"
+      ],
+      "mac": "00:15:6d:31:00:02",
+      "vendor": "Ubiquiti Inc",
+      "hostname": "AP-Operatory",
+      "names": [
+        "AP-Operatory"
+      ],
+      "type": "access-point",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: wireless vendor with AP naming"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1498,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 22,
+          "proto": "tcp",
+          "service": "ssh"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598018-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598018-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:06:5b:10:00:15",
+      "ips": [
+        "10.20.0.15"
+      ],
+      "mac": "00:06:5b:10:00:15",
+      "vendor": "Dell Inc.",
+      "hostname": "RDG-FS01",
+      "names": [
+        "RDG-FS01"
+      ],
+      "type": "server",
+      "os": {
+        "family": "Windows",
+        "name": "Windows Server 2012 R2 (build 9600)",
+        "confidence": 95,
+        "evidence": [
+          "SMB NTLM version 6.3.9600",
+          "type: server naming convention (RDG-FS01)"
+        ],
+        "eol": true,
+        "initialTtl": 128
+      },
+      "rttMicro": 552,
+      "ttl": 128,
+      "ports": [
+        {
+          "port": 135,
+          "proto": "tcp",
+          "service": "msrpc"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 3389,
+          "proto": "tcp",
+          "service": "rdp"
+        },
+        {
+          "port": 21,
+          "proto": "tcp",
+          "service": "ftp",
+          "banner": "220 Microsoft FTP Service"
+        }
+      ],
+      "smb": {
+        "smb1": true,
+        "dialect": "SMB 3.0.2",
+        "signingRequired": false,
+        "netbiosDomain": "RIVERSIDE",
+        "osBuild": "9600",
+        "osVersion": "6.3"
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.59802-04:00",
+      "lastSeen": "2026-10-30T07:58:42.59802-04:00",
+      "alive": true,
+      "notes": "Dentrix database server"
+    },
+    {
+      "id": "00:11:32:aa:bb:20",
+      "ips": [
+        "10.20.0.20"
+      ],
+      "mac": "00:11:32:aa:bb:20",
+      "vendor": "Synology Incorporated",
+      "hostname": "rdg-nas01",
+      "names": [
+        "rdg-nas01"
+      ],
+      "type": "nas",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: storage appliance vendor/banner"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 869,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 22,
+          "proto": "tcp",
+          "service": "ssh"
+        },
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 5000,
+          "proto": "tcp",
+          "service": "upnp/synology",
+          "banner": "HTTP/1.1 200 OK | Server: nginx | Title: Synology DiskStation"
+        },
+        {
+          "port": 5001,
+          "proto": "tcp",
+          "service": "synology-https"
+        }
+      ],
+      "tls": [
+        {
+          "port": 5001,
+          "subject": "synology",
+          "issuer": "synology",
+          "notAfter": "2026-11-18T06:58:42.580167-05:00",
+          "selfSigned": true,
+          "version": "TLS 1.2"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598022-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598022-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:c0:b7:55:00:25",
+      "ips": [
+        "10.20.0.25"
+      ],
+      "mac": "00:c0:b7:55:00:25",
+      "vendor": "American Power Conversion Corp",
+      "hostname": "ups-closet",
+      "names": [
+        "ups-closet"
+      ],
+      "type": "ups",
+      "os": {
+        "family": "Embedded",
+        "name": "APC Web/SNMP Management Card (MB:v4.1.0 PF:v6.4.6 PN:apc_hw05_aos_646.bin)",
+        "confidence": 60,
+        "evidence": [
+          "SNMP sysDescr",
+          "type: power-protection vendor"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1196,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http"
+        }
+      ],
+      "snmp": {
+        "version": "v1",
+        "defaultCommunity": true,
+        "sysDescr": "APC Web/SNMP Management Card (MB:v4.1.0 PF:v6.4.6 PN:apc_hw05_aos_646.bin)",
+        "sysName": "ups-closet"
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp",
+        "snmp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598023-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598023-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:01:e6:30:00:30",
+      "ips": [
+        "10.20.0.30"
+      ],
+      "mac": "00:01:e6:30:00:30",
+      "vendor": "Hewlett Packard",
+      "hostname": "HP-Front-Office",
+      "names": [
+        "HP-Front-Office"
+      ],
+      "type": "printer",
+      "model": "HP LaserJet Pro M404dn",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: printer ports/services (9100/IPP/LPD)"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 2133,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http",
+          "banner": "HTTP/1.1 200 OK | Title: HP LaserJet Pro M404dn"
+        },
+        {
+          "port": 443,
+          "proto": "tcp",
+          "service": "https"
+        },
+        {
+          "port": 631,
+          "proto": "tcp",
+          "service": "ipp"
+        },
+        {
+          "port": 9100,
+          "proto": "tcp",
+          "service": "jetdirect"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598026-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598026-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:01:e6:30:00:31",
+      "ips": [
+        "10.20.0.31"
+      ],
+      "mac": "00:01:e6:30:00:31",
+      "vendor": "Hewlett Packard",
+      "hostname": "HP-Xray-Room",
+      "names": [
+        "HP-Xray-Room"
+      ],
+      "type": "printer",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: printer ports/services (9100/IPP/LPD)"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 2470,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http"
+        },
+        {
+          "port": 9100,
+          "proto": "tcp",
+          "service": "jetdirect"
+        },
+        {
+          "port": 23,
+          "proto": "tcp",
+          "service": "telnet"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598027-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598027-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:bc:99:40:00:40",
+      "ips": [
+        "10.20.0.40"
+      ],
+      "mac": "00:bc:99:40:00:40",
+      "vendor": "Hangzhou Hikvision Digital Technology Co.,Ltd.",
+      "hostname": "NVR-01",
+      "names": [
+        "NVR-01"
+      ],
+      "type": "camera",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: RTSP plus a surveillance vendor/banner"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1147,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http",
+          "banner": "HTTP/1.1 200 OK | Server: webserver | Title: NVR"
+        },
+        {
+          "port": 554,
+          "proto": "tcp",
+          "service": "rtsp"
+        },
+        {
+          "port": 8000,
+          "proto": "tcp",
+          "service": "http-alt"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598028-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598028-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:bc:99:40:00:41",
+      "ips": [
+        "10.20.0.41"
+      ],
+      "mac": "00:bc:99:40:00:41",
+      "vendor": "Hangzhou Hikvision Digital Technology Co.,Ltd.",
+      "hostname": "cam-lobby",
+      "names": [
+        "cam-lobby"
+      ],
+      "type": "camera",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: RTSP plus a surveillance vendor/banner"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1264,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http"
+        },
+        {
+          "port": 554,
+          "proto": "tcp",
+          "service": "rtsp"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598031-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598031-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:bc:99:40:00:42",
+      "ips": [
+        "10.20.0.42"
+      ],
+      "mac": "00:bc:99:40:00:42",
+      "vendor": "Hangzhou Hikvision Digital Technology Co.,Ltd.",
+      "hostname": "cam-parking",
+      "names": [
+        "cam-parking"
+      ],
+      "type": "camera",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: RTSP plus a surveillance vendor/banner"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1271,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http"
+        },
+        {
+          "port": 554,
+          "proto": "tcp",
+          "service": "rtsp"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598032-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598032-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:bc:99:40:00:43",
+      "ips": [
+        "10.20.0.43"
+      ],
+      "mac": "00:bc:99:40:00:43",
+      "vendor": "Hangzhou Hikvision Digital Technology Co.,Ltd.",
+      "hostname": "cam-rear-door",
+      "names": [
+        "cam-rear-door"
+      ],
+      "type": "camera",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: RTSP plus a surveillance vendor/banner"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1378,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http"
+        },
+        {
+          "port": 554,
+          "proto": "tcp",
+          "service": "rtsp"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598033-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598033-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:12:fe:99:00:57",
+      "ips": [
+        "10.20.0.57"
+      ],
+      "mac": "00:12:fe:99:00:57",
+      "vendor": "Lenovo Mobile Communication Technology Ltd.",
+      "hostname": "TECH-LAPTOP-07",
+      "names": [
+        "TECH-LAPTOP-07"
+      ],
+      "type": "workstation",
+      "os": {
+        "family": "Windows",
+        "name": "Windows 11 24H2",
+        "confidence": 100,
+        "evidence": [
+          "type: PC hardware vendor"
+        ]
+      },
+      "neighbors": [
+        {
+          "protocol": "cdp",
+          "localPort": "Ethernet",
+          "remoteName": "rdg-core-sw01",
+          "remotePort": "GigabitEthernet1/0/24",
+          "remoteChassis": "00:00:0c:4a:21:10",
+          "nativeVlan": 1
+        }
+      ],
+      "sources": [
+        "self"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598062-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598062-04:00",
+      "alive": true,
+      "isSelf": true
+    },
+    {
+      "id": "24:9a:d8:00:00:60",
+      "ips": [
+        "10.20.0.60"
+      ],
+      "mac": "24:9a:d8:00:00:60",
+      "vendor": "Yealink(Xiamen) Network Technology Co.,Ltd.",
+      "hostname": "SIP-T54W-1",
+      "names": [
+        "SIP-T54W-1"
+      ],
+      "type": "voip-phone",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: SIP port or VoIP phone vendor"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 965,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http"
+        },
+        {
+          "port": 443,
+          "proto": "tcp",
+          "service": "https"
+        },
+        {
+          "port": 5060,
+          "proto": "tcp",
+          "service": "sip"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598035-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598035-04:00",
+      "alive": true
+    },
+    {
+      "id": "24:9a:d8:00:00:61",
+      "ips": [
+        "10.20.0.61"
+      ],
+      "mac": "24:9a:d8:00:00:61",
+      "vendor": "Yealink(Xiamen) Network Technology Co.,Ltd.",
+      "hostname": "SIP-T54W-2",
+      "names": [
+        "SIP-T54W-2"
+      ],
+      "type": "voip-phone",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: SIP port or VoIP phone vendor"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 972,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http"
+        },
+        {
+          "port": 443,
+          "proto": "tcp",
+          "service": "https"
+        },
+        {
+          "port": 5060,
+          "proto": "tcp",
+          "service": "sip"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598036-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598036-04:00",
+      "alive": true
+    },
+    {
+      "id": "24:9a:d8:00:00:62",
+      "ips": [
+        "10.20.0.62"
+      ],
+      "mac": "24:9a:d8:00:00:62",
+      "vendor": "Yealink(Xiamen) Network Technology Co.,Ltd.",
+      "hostname": "SIP-T54W-3",
+      "names": [
+        "SIP-T54W-3"
+      ],
+      "type": "voip-phone",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: SIP port or VoIP phone vendor"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1149,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http"
+        },
+        {
+          "port": 443,
+          "proto": "tcp",
+          "service": "https"
+        },
+        {
+          "port": 5060,
+          "proto": "tcp",
+          "service": "sip"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598037-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598037-04:00",
+      "alive": true
+    },
+    {
+      "id": "24:9a:d8:00:00:63",
+      "ips": [
+        "10.20.0.63"
+      ],
+      "mac": "24:9a:d8:00:00:63",
+      "vendor": "Yealink(Xiamen) Network Technology Co.,Ltd.",
+      "hostname": "SIP-T54W-4",
+      "names": [
+        "SIP-T54W-4"
+      ],
+      "type": "voip-phone",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: SIP port or VoIP phone vendor"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1866,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http"
+        },
+        {
+          "port": 443,
+          "proto": "tcp",
+          "service": "https"
+        },
+        {
+          "port": 5060,
+          "proto": "tcp",
+          "service": "sip"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598038-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598038-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:12:fe:00:01:00",
+      "ips": [
+        "10.20.0.100"
+      ],
+      "mac": "00:12:fe:00:01:00",
+      "vendor": "Lenovo Mobile Communication Technology Ltd.",
+      "hostname": "RDG-WS01",
+      "names": [
+        "RDG-WS01"
+      ],
+      "type": "workstation",
+      "os": {
+        "family": "Windows",
+        "name": "Windows 11 24H2 (build 26100)",
+        "confidence": 95,
+        "evidence": [
+          "SMB NTLM version 10.0.26100",
+          "type: Windows RDP/SMB endpoint"
+        ],
+        "initialTtl": 128
+      },
+      "rttMicro": 2053,
+      "ttl": 128,
+      "ports": [
+        {
+          "port": 135,
+          "proto": "tcp",
+          "service": "msrpc"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 3389,
+          "proto": "tcp",
+          "service": "rdp"
+        }
+      ],
+      "smb": {
+        "smb1": false,
+        "dialect": "SMB 3.0.2",
+        "signingRequired": false,
+        "osBuild": "26100",
+        "osVersion": "10.0"
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598039-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598039-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:12:fe:00:01:01",
+      "ips": [
+        "10.20.0.101"
+      ],
+      "mac": "00:12:fe:00:01:01",
+      "vendor": "Lenovo Mobile Communication Technology Ltd.",
+      "hostname": "RDG-WS02",
+      "names": [
+        "RDG-WS02"
+      ],
+      "type": "workstation",
+      "os": {
+        "family": "Windows",
+        "name": "Windows 11 24H2 (build 26100)",
+        "confidence": 95,
+        "evidence": [
+          "SMB NTLM version 10.0.26100",
+          "type: Windows RDP/SMB endpoint"
+        ],
+        "initialTtl": 128
+      },
+      "rttMicro": 1030,
+      "ttl": 128,
+      "ports": [
+        {
+          "port": 135,
+          "proto": "tcp",
+          "service": "msrpc"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 3389,
+          "proto": "tcp",
+          "service": "rdp"
+        }
+      ],
+      "smb": {
+        "smb1": false,
+        "dialect": "SMB 3.0.2",
+        "signingRequired": false,
+        "osBuild": "26100",
+        "osVersion": "10.0"
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.59804-04:00",
+      "lastSeen": "2026-10-30T07:58:42.59804-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:12:fe:00:01:02",
+      "ips": [
+        "10.20.0.102"
+      ],
+      "mac": "00:12:fe:00:01:02",
+      "vendor": "Lenovo Mobile Communication Technology Ltd.",
+      "hostname": "RDG-WS03",
+      "names": [
+        "RDG-WS03"
+      ],
+      "type": "workstation",
+      "os": {
+        "family": "Windows",
+        "name": "Windows 11 23H2 (build 22631)",
+        "confidence": 95,
+        "evidence": [
+          "SMB NTLM version 10.0.22631",
+          "type: Windows RDP/SMB endpoint"
+        ],
+        "initialTtl": 128
+      },
+      "rttMicro": 1107,
+      "ttl": 128,
+      "ports": [
+        {
+          "port": 135,
+          "proto": "tcp",
+          "service": "msrpc"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 3389,
+          "proto": "tcp",
+          "service": "rdp"
+        }
+      ],
+      "smb": {
+        "smb1": false,
+        "dialect": "SMB 3.0.2",
+        "signingRequired": false,
+        "osBuild": "22631",
+        "osVersion": "10.0"
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598041-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598041-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:12:fe:00:01:03",
+      "ips": [
+        "10.20.0.103"
+      ],
+      "mac": "00:12:fe:00:01:03",
+      "vendor": "Lenovo Mobile Communication Technology Ltd.",
+      "hostname": "RDG-WS04",
+      "names": [
+        "RDG-WS04"
+      ],
+      "type": "workstation",
+      "os": {
+        "family": "Windows",
+        "name": "Windows 11 24H2 (build 26100)",
+        "confidence": 95,
+        "evidence": [
+          "SMB NTLM version 10.0.26100",
+          "type: Windows RDP/SMB endpoint"
+        ],
+        "initialTtl": 128
+      },
+      "rttMicro": 1424,
+      "ttl": 128,
+      "ports": [
+        {
+          "port": 135,
+          "proto": "tcp",
+          "service": "msrpc"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 3389,
+          "proto": "tcp",
+          "service": "rdp"
+        }
+      ],
+      "smb": {
+        "smb1": false,
+        "dialect": "SMB 3.0.2",
+        "signingRequired": false,
+        "osBuild": "26100",
+        "osVersion": "10.0"
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598041-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598041-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:12:fe:00:01:04",
+      "ips": [
+        "10.20.0.104"
+      ],
+      "mac": "00:12:fe:00:01:04",
+      "vendor": "Lenovo Mobile Communication Technology Ltd.",
+      "hostname": "RDG-WS05",
+      "names": [
+        "RDG-WS05"
+      ],
+      "type": "workstation",
+      "os": {
+        "family": "Windows",
+        "name": "Windows 10 22H2 (build 19045)",
+        "confidence": 95,
+        "evidence": [
+          "SMB NTLM version 10.0.19045",
+          "type: Windows RDP/SMB endpoint"
+        ],
+        "eol": true,
+        "initialTtl": 128
+      },
+      "rttMicro": 1751,
+      "ttl": 128,
+      "ports": [
+        {
+          "port": 135,
+          "proto": "tcp",
+          "service": "msrpc"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 3389,
+          "proto": "tcp",
+          "service": "rdp"
+        }
+      ],
+      "smb": {
+        "smb1": false,
+        "dialect": "SMB 3.0.2",
+        "signingRequired": false,
+        "osBuild": "19045",
+        "osVersion": "10.0"
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598042-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598042-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:12:fe:00:01:05",
+      "ips": [
+        "10.20.0.105"
+      ],
+      "mac": "00:12:fe:00:01:05",
+      "vendor": "Lenovo Mobile Communication Technology Ltd.",
+      "hostname": "RDG-WS06",
+      "names": [
+        "RDG-WS06"
+      ],
+      "type": "workstation",
+      "os": {
+        "family": "Windows",
+        "name": "Windows 11 24H2 (build 26100)",
+        "confidence": 95,
+        "evidence": [
+          "SMB NTLM version 10.0.26100",
+          "type: Windows RDP/SMB endpoint"
+        ],
+        "initialTtl": 128
+      },
+      "rttMicro": 2688,
+      "ttl": 128,
+      "ports": [
+        {
+          "port": 135,
+          "proto": "tcp",
+          "service": "msrpc"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 3389,
+          "proto": "tcp",
+          "service": "rdp"
+        }
+      ],
+      "smb": {
+        "smb1": false,
+        "dialect": "SMB 3.0.2",
+        "signingRequired": false,
+        "osBuild": "26100",
+        "osVersion": "10.0"
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598044-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598044-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:12:fe:00:01:06",
+      "ips": [
+        "10.20.0.106"
+      ],
+      "mac": "00:12:fe:00:01:06",
+      "vendor": "Lenovo Mobile Communication Technology Ltd.",
+      "hostname": "RDG-WS07",
+      "names": [
+        "RDG-WS07"
+      ],
+      "type": "workstation",
+      "os": {
+        "family": "Windows",
+        "name": "Windows 11 23H2 (build 22631)",
+        "confidence": 95,
+        "evidence": [
+          "SMB NTLM version 10.0.22631",
+          "type: Windows RDP/SMB endpoint"
+        ],
+        "initialTtl": 128
+      },
+      "rttMicro": 3025,
+      "ttl": 128,
+      "ports": [
+        {
+          "port": 135,
+          "proto": "tcp",
+          "service": "msrpc"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 3389,
+          "proto": "tcp",
+          "service": "rdp"
+        }
+      ],
+      "smb": {
+        "smb1": false,
+        "dialect": "SMB 3.0.2",
+        "signingRequired": false,
+        "osBuild": "22631",
+        "osVersion": "10.0"
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598045-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598045-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:12:fe:00:01:07",
+      "ips": [
+        "10.20.0.107"
+      ],
+      "mac": "00:12:fe:00:01:07",
+      "vendor": "Lenovo Mobile Communication Technology Ltd.",
+      "hostname": "RDG-WS08",
+      "names": [
+        "RDG-WS08"
+      ],
+      "type": "workstation",
+      "os": {
+        "family": "Windows",
+        "name": "Windows 11 24H2 (build 26100)",
+        "confidence": 95,
+        "evidence": [
+          "SMB NTLM version 10.0.26100",
+          "type: Windows RDP/SMB endpoint"
+        ],
+        "initialTtl": 128
+      },
+      "rttMicro": 1702,
+      "ttl": 128,
+      "ports": [
+        {
+          "port": 135,
+          "proto": "tcp",
+          "service": "msrpc"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 3389,
+          "proto": "tcp",
+          "service": "rdp"
+        }
+      ],
+      "smb": {
+        "smb1": false,
+        "dialect": "SMB 3.0.2",
+        "signingRequired": false,
+        "osBuild": "26100",
+        "osVersion": "10.0"
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598045-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598045-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:12:fe:00:01:08",
+      "ips": [
+        "10.20.0.108"
+      ],
+      "mac": "00:12:fe:00:01:08",
+      "vendor": "Lenovo Mobile Communication Technology Ltd.",
+      "hostname": "RDG-WS09",
+      "names": [
+        "RDG-WS09"
+      ],
+      "type": "workstation",
+      "os": {
+        "family": "Windows",
+        "name": "Windows 10 22H2 (build 19045)",
+        "confidence": 95,
+        "evidence": [
+          "SMB NTLM version 10.0.19045",
+          "type: Windows RDP/SMB endpoint"
+        ],
+        "eol": true,
+        "initialTtl": 128
+      },
+      "rttMicro": 1819,
+      "ttl": 128,
+      "ports": [
+        {
+          "port": 135,
+          "proto": "tcp",
+          "service": "msrpc"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 3389,
+          "proto": "tcp",
+          "service": "rdp"
+        }
+      ],
+      "smb": {
+        "smb1": false,
+        "dialect": "SMB 3.0.2",
+        "signingRequired": false,
+        "osBuild": "19045",
+        "osVersion": "10.0"
+      },
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598046-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598046-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:03:93:00:01:20",
+      "ips": [
+        "10.20.0.120"
+      ],
+      "mac": "00:03:93:00:01:20",
+      "vendor": "Apple, Inc.",
+      "hostname": "Dr-Patel-MacBook",
+      "names": [
+        "Dr-Patel-MacBook"
+      ],
+      "type": "workstation",
+      "model": "Mac15,6",
+      "os": {
+        "family": "macOS",
+        "name": "macOS (Mac15,6)",
+        "confidence": 75,
+        "evidence": [
+          "Bonjour model Mac15,6",
+          "type: Bonjour model Mac15,6 (Mac)"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1826,
+      "ttl": 64,
+      "sources": [
+        "arp",
+        "icmp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598047-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598047-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:0e:58:00:01:30",
+      "ips": [
+        "10.20.0.130"
+      ],
+      "mac": "00:0e:58:00:01:30",
+      "vendor": "Sonos, Inc.",
+      "hostname": "Sonos-Waiting-Room",
+      "names": [
+        "Sonos-Waiting-Room"
+      ],
+      "type": "media",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: media/casting service or vendor"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1933,
+      "ttl": 64,
+      "services": [
+        {
+          "type": "_sonos._tcp",
+          "name": "Waiting Room"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.59805-04:00",
+      "lastSeen": "2026-10-30T07:58:42.59805-04:00",
+      "alive": true
+    },
+    {
+      "id": "00:4b:12:00:01:40",
+      "ips": [
+        "10.20.0.140"
+      ],
+      "mac": "00:4b:12:00:01:40",
+      "vendor": "Espressif Inc.",
+      "type": "iot",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64",
+          "type: IoT hardware vendor"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1520,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.59805-04:00",
+      "lastSeen": "2026-10-30T07:58:42.59805-04:00",
+      "alive": true
+    },
+    {
+      "id": "da:a1:19:00:01:50",
+      "ips": [
+        "10.20.0.150"
+      ],
+      "mac": "da:a1:19:00:01:50",
+      "randomMac": true,
+      "hostname": "iPhone",
+      "names": [
+        "iPhone"
+      ],
+      "type": "mobile",
+      "os": {
+        "family": "iOS",
+        "name": "Apple iOS/iPadOS",
+        "confidence": 70,
+        "evidence": [
+          "iPhone sync port 62078",
+          "type: iOS sync port or phone hostname"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1527,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 62078,
+          "proto": "tcp"
+        }
+      ],
+      "sources": [
+        "arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598051-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598051-04:00",
+      "alive": true
+    },
+    {
+      "id": "ip-10.20.0.199",
+      "ips": [
+        "10.20.0.199"
+      ],
+      "type": "unknown",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 1704,
+      "ttl": 64,
+      "sources": [
+        "snmp-arp",
+        "icmp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598052-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598052-04:00",
+      "alive": true
+    },
+    {
+      "id": "ip-10.20.10.21",
+      "ips": [
+        "10.20.10.21"
+      ],
+      "hostname": "RDG-XRAY-ACQ",
+      "names": [
+        "RDG-XRAY-ACQ"
+      ],
+      "type": "workstation",
+      "os": {
+        "family": "Windows",
+        "name": "Windows 7 (build 7601)",
+        "confidence": 95,
+        "evidence": [
+          "SMB NTLM version 6.1.7601",
+          "type: Windows RDP/SMB endpoint"
+        ],
+        "eol": true,
+        "initialTtl": 128
+      },
+      "rttMicro": 2421,
+      "ttl": 128,
+      "ports": [
+        {
+          "port": 135,
+          "proto": "tcp",
+          "service": "msrpc"
+        },
+        {
+          "port": 139,
+          "proto": "tcp",
+          "service": "netbios-ssn"
+        },
+        {
+          "port": 445,
+          "proto": "tcp",
+          "service": "smb"
+        },
+        {
+          "port": 3389,
+          "proto": "tcp",
+          "service": "rdp"
+        }
+      ],
+      "smb": {
+        "smb1": false,
+        "dialect": "SMB 3.0.2",
+        "signingRequired": false,
+        "osBuild": "7601",
+        "osVersion": "6.1"
+      },
+      "sources": [
+        "snmp-arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598052-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598052-04:00",
+      "alive": true
+    },
+    {
+      "id": "ip-10.20.10.22",
+      "ips": [
+        "10.20.10.22"
+      ],
+      "type": "unknown",
+      "os": {
+        "family": "Linux/Unix",
+        "confidence": 35,
+        "evidence": [
+          "initial TTL 64"
+        ],
+        "initialTtl": 64
+      },
+      "rttMicro": 2608,
+      "ttl": 64,
+      "ports": [
+        {
+          "port": 104,
+          "proto": "tcp"
+        },
+        {
+          "port": 80,
+          "proto": "tcp",
+          "service": "http",
+          "banner": "HTTP/1.1 200 OK | Title: Imaging Device"
+        }
+      ],
+      "sources": [
+        "snmp-arp",
+        "icmp",
+        "tcp"
+      ],
+      "firstSeen": "2026-10-30T07:58:42.598054-04:00",
+      "lastSeen": "2026-10-30T07:58:42.598054-04:00",
+      "alive": true
+    }
+  ],
+  "links": [
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:00:0c:4a:21:20",
+      "aPort": "Gi1/0/47",
+      "bPort": "Gi0/10",
+      "kind": "lldp",
+      "weight": 3
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:01:e6:30:00:30",
+      "aPort": "Gi1/0/6",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:01:e6:30:00:31",
+      "aPort": "Gi1/0/7",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:06:5b:10:00:10",
+      "aPort": "Gi1/0/2",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:06:5b:10:00:15",
+      "aPort": "Gi1/0/3",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:09:0f:aa:10:01",
+      "aPort": "Gi1/0/48",
+      "bPort": "port1",
+      "kind": "cdp",
+      "weight": 3
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:11:32:aa:bb:20",
+      "aPort": "Gi1/0/4",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:12:fe:00:01:00",
+      "aPort": "Gi1/0/16",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:12:fe:00:01:01",
+      "aPort": "Gi1/0/17",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:12:fe:00:01:02",
+      "aPort": "Gi1/0/18",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:12:fe:00:01:03",
+      "aPort": "Gi1/0/19",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:12:fe:00:01:04",
+      "aPort": "Gi1/0/20",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:12:fe:99:00:57",
+      "aPort": "GigabitEthernet1/0/24",
+      "bPort": "Ethernet",
+      "kind": "cdp",
+      "weight": 3
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:15:6d:31:00:01",
+      "aPort": "Gi1/0/40",
+      "bPort": "eth0",
+      "kind": "lldp",
+      "weight": 3
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:15:6d:31:00:02",
+      "aPort": "Gi1/0/1",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:bc:99:40:00:40",
+      "aPort": "Gi1/0/8",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:bc:99:40:00:41",
+      "aPort": "Gi1/0/9",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:bc:99:40:00:42",
+      "aPort": "Gi1/0/10",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:bc:99:40:00:43",
+      "aPort": "Gi1/0/11",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "00:c0:b7:55:00:25",
+      "aPort": "Gi1/0/5",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "24:9a:d8:00:00:60",
+      "aPort": "Gi1/0/12",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "24:9a:d8:00:00:61",
+      "aPort": "Gi1/0/13",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "24:9a:d8:00:00:62",
+      "aPort": "Gi1/0/14",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "24:9a:d8:00:00:63",
+      "aPort": "Gi1/0/15",
+      "kind": "fdb",
+      "weight": 2
+    },
+    {
+      "a": "00:00:0c:4a:21:10",
+      "b": "net:10.20.10.0/24",
+      "kind": "gateway"
+    },
+    {
+      "a": "00:03:93:00:01:20",
+      "b": "net:10.20.0.0/24",
+      "kind": "inferred"
+    },
+    {
+      "a": "00:09:0f:aa:10:01",
+      "b": "net:10.20.0.0/24",
+      "kind": "gateway"
+    },
+    {
+      "a": "00:0e:58:00:01:30",
+      "b": "net:10.20.0.0/24",
+      "kind": "inferred"
+    },
+    {
+      "a": "00:12:fe:00:01:05",
+      "b": "net:10.20.0.0/24",
+      "kind": "inferred"
+    },
+    {
+      "a": "00:12:fe:00:01:06",
+      "b": "net:10.20.0.0/24",
+      "kind": "inferred"
+    },
+    {
+      "a": "00:12:fe:00:01:07",
+      "b": "net:10.20.0.0/24",
+      "kind": "inferred"
+    },
+    {
+      "a": "00:12:fe:00:01:08",
+      "b": "net:10.20.0.0/24",
+      "kind": "inferred"
+    },
+    {
+      "a": "00:4b:12:00:01:40",
+      "b": "net:10.20.0.0/24",
+      "kind": "inferred"
+    },
+    {
+      "a": "da:a1:19:00:01:50",
+      "b": "net:10.20.0.0/24",
+      "kind": "inferred"
+    },
+    {
+      "a": "ip-10.20.0.199",
+      "b": "net:10.20.0.0/24",
+      "kind": "inferred"
+    },
+    {
+      "a": "ip-10.20.10.21",
+      "b": "net:10.20.10.0/24",
+      "kind": "inferred"
+    },
+    {
+      "a": "ip-10.20.10.22",
+      "b": "net:10.20.10.0/24",
+      "kind": "inferred"
+    }
+  ],
+  "findings": [
+    {
+      "id": "eol-os",
+      "check": "eol-os",
+      "title": "End-of-life operating system",
+      "severity": "high",
+      "category": "Lifecycle",
+      "detail": "These devices run an OS or firmware past vendor end of support and no longer receive security patches.",
+      "remediation": "Plan upgrade or replacement; isolate on a restricted VLAN in the meantime.",
+      "devices": [
+        "00:06:5b:10:00:15",
+        "00:12:fe:00:01:04",
+        "00:12:fe:00:01:08",
+        "ip-10.20.10.21"
+      ]
+    },
+    {
+      "id": "snmp-default-community",
+      "check": "snmp-default-community",
+      "title": "SNMP responds to a default community string",
+      "severity": "high",
+      "category": "Credentials",
+      "detail": "The device answers SNMP with 'public' or 'private'. Anyone on the LAN can read its configuration details; 'private' may allow writes.",
+      "remediation": "Change community strings to long random values, restrict SNMP by ACL to the monitoring host, or move to SNMPv3 authPriv.",
+      "devices": [
+        "00:00:0c:4a:21:10",
+        "00:c0:b7:55:00:25"
+      ]
+    },
+    {
+      "id": "telnet",
+      "check": "telnet",
+      "title": "Telnet enabled",
+      "severity": "high",
+      "category": "Insecure protocols",
+      "detail": "Telnet sends credentials and sessions in cleartext. Anyone on the network path can capture admin passwords.",
+      "remediation": "Disable Telnet and use SSH. On Cisco: `line vty 0 15` → `transport input ssh`.",
+      "devices": [
+        "00:00:0c:4a:21:10",
+        "00:01:e6:30:00:31"
+      ]
+    },
+    {
+      "id": "smbv1",
+      "check": "smbv1",
+      "title": "SMBv1 enabled",
+      "severity": "high",
+      "category": "Vulnerable services",
+      "detail": "SMBv1 is the protocol abused by WannaCry/NotPetya (EternalBlue) and is deprecated by Microsoft.",
+      "remediation": "Disable SMB1: `Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol`; on NAS devices set minimum protocol to SMB2.",
+      "devices": [
+        "00:06:5b:10:00:15"
+      ]
+    },
+    {
+      "id": "rogue-dhcp",
+      "check": "rogue-dhcp",
+      "title": "Multiple DHCP servers on one segment",
+      "severity": "high",
+      "category": "Network",
+      "detail": "More than one DHCP server answered: 10.20.0.10, 192.168.0.1. A rogue DHCP server can redirect clients' gateway/DNS (man-in-the-middle) or cause outages.",
+      "remediation": "Identify the unauthorised server; enable DHCP snooping on access switches."
+    },
+    {
+      "id": "http-mgmt",
+      "check": "http-mgmt",
+      "title": "Management web UI over plain HTTP",
+      "severity": "medium",
+      "category": "Insecure protocols",
+      "detail": "Infrastructure devices offer their admin page without HTTPS, exposing admin credentials on the wire.",
+      "remediation": "Enable HTTPS-only management and disable the HTTP listener.",
+      "devices": [
+        "00:11:32:aa:bb:20",
+        "00:c0:b7:55:00:25",
+        "00:01:e6:30:00:31",
+        "00:bc:99:40:00:40",
+        "00:bc:99:40:00:41",
+        "00:bc:99:40:00:42",
+        "00:bc:99:40:00:43"
+      ]
+    },
+    {
+      "id": "smb-signing",
+      "check": "smb-signing",
+      "title": "SMB signing not required on servers",
+      "severity": "medium",
+      "category": "Hardening",
+      "detail": "Without required signing, SMB relay attacks (e.g. NTLM relay) can impersonate users against these servers.",
+      "remediation": "Set 'Microsoft network server: Digitally sign communications (always)' via GPO.",
+      "devices": [
+        "00:06:5b:10:00:10",
+        "00:06:5b:10:00:15"
+      ]
+    },
+    {
+      "id": "tls-expired",
+      "check": "tls-expired",
+      "title": "Expired TLS certificates",
+      "severity": "medium",
+      "category": "Certificates",
+      "detail": "Services are presenting certificates that have already expired; users learn to click through warnings.",
+      "remediation": "Renew the certificates (or automate with ACME/internal CA).",
+      "devices": [
+        "00:09:0f:aa:10:01"
+      ]
+    },
+    {
+      "id": "ftp",
+      "check": "ftp",
+      "title": "FTP service exposed",
+      "severity": "medium",
+      "category": "Insecure protocols",
+      "detail": "FTP transfers credentials and files unencrypted.",
+      "remediation": "Replace with SFTP/FTPS, or disable the service if it is not needed.",
+      "devices": [
+        "00:06:5b:10:00:15"
+      ]
+    },
+    {
+      "id": "interface-errors",
+      "check": "interface-errors",
+      "title": "Switch/router interfaces with errors",
+      "severity": "medium",
+      "category": "Performance",
+      "detail": "Interfaces report a high error count (CRC/frame errors), commonly a bad cable, duplex mismatch or failing optic.",
+      "remediation": "Check cabling and duplex settings on the listed devices' ports.",
+      "devices": [
+        "00:00:0c:4a:21:10"
+      ]
+    },
+    {
+      "id": "upnp-gateway",
+      "check": "upnp-gateway",
+      "title": "UPnP enabled on the gateway",
+      "severity": "medium",
+      "category": "Hardening",
+      "detail": "UPnP lets any internal device open inbound ports on the firewall without admin approval.",
+      "remediation": "Disable UPnP/NAT-PMP on the edge device.",
+      "devices": [
+        "00:09:0f:aa:10:01"
+      ]
+    },
+    {
+      "id": "rdp-workstations",
+      "check": "rdp-workstations",
+      "title": "RDP enabled on workstations",
+      "severity": "low",
+      "category": "Remote access",
+      "detail": "Remote Desktop listening on endpoints widens the lateral-movement surface for ransomware.",
+      "remediation": "Disable RDP on workstations or restrict it by firewall to admin jump hosts; require NLA.",
+      "devices": [
+        "00:12:fe:00:01:00",
+        "00:12:fe:00:01:01",
+        "00:12:fe:00:01:02",
+        "00:12:fe:00:01:03",
+        "00:12:fe:00:01:04",
+        "00:12:fe:00:01:05",
+        "00:12:fe:00:01:06",
+        "00:12:fe:00:01:07",
+        "00:12:fe:00:01:08",
+        "ip-10.20.10.21"
+      ]
+    },
+    {
+      "id": "snmp-v2",
+      "check": "snmp-v2",
+      "title": "SNMP v1/v2c in use",
+      "severity": "low",
+      "category": "Insecure protocols",
+      "detail": "Community strings travel in cleartext.",
+      "remediation": "Migrate monitoring to SNMPv3 with authentication and privacy (SHA/AES).",
+      "devices": [
+        "00:09:0f:aa:10:01",
+        "00:00:0c:4a:21:10",
+        "00:00:0c:4a:21:20",
+        "00:c0:b7:55:00:25"
+      ]
+    },
+    {
+      "id": "long-uptime",
+      "check": "long-uptime",
+      "title": "Infrastructure not rebooted in over a year",
+      "severity": "low",
+      "category": "Lifecycle",
+      "detail": "Uptime over a year usually means firmware has not been patched.",
+      "remediation": "Schedule firmware updates in a maintenance window.",
+      "devices": [
+        "00:00:0c:4a:21:10"
+      ]
+    },
+    {
+      "id": "tls-expiring",
+      "check": "tls-expiring",
+      "title": "TLS certificates expiring within 30 days",
+      "severity": "low",
+      "category": "Certificates",
+      "detail": "Certificates will expire soon and cause outages or browser warnings.",
+      "remediation": "Renew before expiry.",
+      "devices": [
+        "00:11:32:aa:bb:20"
+      ]
+    },
+    {
+      "id": "tls-self-signed",
+      "check": "tls-self-signed",
+      "title": "Self-signed certificates on management interfaces",
+      "severity": "info",
+      "category": "Certificates",
+      "detail": "Self-signed certificates can't be distinguished from an attacker's certificate by users.",
+      "remediation": "Issue certificates from an internal CA and distribute the root via GPO/MDM.",
+      "devices": [
+        "00:09:0f:aa:10:01",
+        "00:11:32:aa:bb:20"
+      ]
+    },
+    {
+      "id": "unidentified-devices",
+      "check": "unidentified-devices",
+      "title": "Unidentified devices",
+      "severity": "info",
+      "category": "Inventory",
+      "detail": "These devices answered on the network but OctoLAN could not determine what they are (no hostname, open services, SNMP or vendor match).",
+      "remediation": "Identify and label each device. Unknown devices are a common source of shadow IT and unmanaged risk.",
+      "devices": [
+        "ip-10.20.0.199",
+        "ip-10.20.10.22"
+      ]
+    }
+  ],
+  "score": 38,
+  "grade": "F",
+  "events": [
+    {
+      "time": "2026-10-30T07:58:42.599494-04:00",
+      "severity": "info",
+      "source": "cdp",
+      "message": "CDP: connected to rdg-core-sw01 port GigabitEthernet1/0/24 (native VLAN 1)"
+    },
+    {
+      "time": "2026-10-30T07:58:42.599494-04:00",
+      "severity": "info",
+      "source": "dhcp",
+      "message": "DHCP server 10.20.0.10 answering (router 10.20.0.1, DNS 10.20.0.10)"
+    },
+    {
+      "time": "2026-10-30T07:58:42.599494-04:00",
+      "severity": "high",
+      "source": "dhcp",
+      "message": "2 different DHCP servers are answering on this segment: possible rogue DHCP server"
+    },
+    {
+      "time": "2026-10-30T07:58:42.599494-04:00",
+      "severity": "high",
+      "source": "snmp",
+      "message": "10.20.0.2 (rdg-core-sw01) answers SNMP community \"public\""
+    },
+    {
+      "time": "2026-10-30T07:58:42.599495-04:00",
+      "severity": "medium",
+      "source": "storm",
+      "message": "Elevated broadcast/multicast: 2750 pps (warn ≥ 1000), 31 repeated frames"
+    },
+    {
+      "time": "2026-10-30T07:58:42.599496-04:00",
+      "severity": "medium",
+      "source": "stp",
+      "message": "Spanning-tree topology change #4 (a port went up/down or a loop is re-converging)"
+    }
+  ],
+  "dhcpServers": [
+    {
+      "ip": "10.20.0.10",
+      "router": "10.20.0.1",
+      "dns": [
+        "10.20.0.10"
+      ],
+      "domain": "riverside.local",
+      "offers": 1,
+      "lastSeen": "2026-10-30T07:58:42.598064-04:00"
+    },
+    {
+      "ip": "192.168.0.1",
+      "mac": "00:15:6d:ff:00:01",
+      "router": "192.168.0.1",
+      "dns": [
+        "192.168.0.1"
+      ],
+      "offers": 1,
+      "lastSeen": "2026-10-30T07:58:42.598065-04:00"
+    }
+  ],
+  "vlans": [
+    {
+      "id": 1,
+      "name": "default",
+      "source": "snmp"
+    },
+    {
+      "id": 10,
+      "name": "VOICE",
+      "source": "snmp"
+    },
+    {
+      "id": 20,
+      "name": "CAMERAS",
+      "source": "snmp"
+    }
+  ],
+  "flows": {
+    "listening": true,
+    "listenAddr": ":2055",
+    "exporters": {
+      "10.20.0.1": 4120
+    },
+    "totalBytes": 61200000000,
+    "totalPackets": 58000000,
+    "totalFlows": 182340,
+    "protocols": {
+      "TCP": 52000000000,
+      "UDP": 9000000000
+    },
+    "topTalkers": [
+      {
+        "key": "10.20.0.15",
+        "bytes": 18000000000,
+        "packets": 0
+      },
+      {
+        "key": "10.20.0.40",
+        "bytes": 14000000000,
+        "packets": 0
+      },
+      {
+        "key": "10.20.0.20",
+        "bytes": 9100000000,
+        "packets": 0
+      },
+      {
+        "key": "10.20.0.105",
+        "bytes": 3200000000,
+        "packets": 0
+      },
+      {
+        "key": "52.96.164.18",
+        "bytes": 2900000000,
+        "packets": 0
+      }
+    ],
+    "topApps": [
+      {
+        "key": "SMB",
+        "bytes": 21000000000,
+        "packets": 0
+      },
+      {
+        "key": "HTTPS",
+        "bytes": 17000000000,
+        "packets": 0
+      },
+      {
+        "key": "RTSP",
+        "bytes": 12000000000,
+        "packets": 0
+      },
+      {
+        "key": "RDP",
+        "bytes": 2100000000,
+        "packets": 0
+      },
+      {
+        "key": "DNS",
+        "bytes": 400000000,
+        "packets": 0
+      }
+    ],
+    "conversations": [
+      {
+        "src": "10.20.0.15",
+        "dst": "10.20.0.20",
+        "srcPort": 49822,
+        "dstPort": 445,
+        "proto": 6,
+        "bytes": 9400000000,
+        "packets": 7100000,
+        "exporter": "10.20.0.1",
+        "lastSeen": "2026-10-30T07:58:42.580167-04:00"
+      },
+      {
+        "src": "10.20.0.41",
+        "dst": "10.20.0.40",
+        "srcPort": 554,
+        "dstPort": 51200,
+        "proto": 6,
+        "bytes": 4200000000,
+        "packets": 3300000,
+        "exporter": "10.20.0.1",
+        "lastSeen": "2026-10-30T07:58:42.580167-04:00"
+      },
+      {
+        "src": "10.20.0.105",
+        "dst": "52.96.164.18",
+        "srcPort": 52011,
+        "dstPort": 443,
+        "proto": 6,
+        "bytes": 2900000000,
+        "packets": 2200000,
+        "exporter": "10.20.0.1",
+        "lastSeen": "2026-10-30T07:58:42.580167-04:00"
+      },
+      {
+        "src": "10.20.0.101",
+        "dst": "10.20.0.15",
+        "srcPort": 50133,
+        "dstPort": 3389,
+        "proto": 6,
+        "bytes": 1100000000,
+        "packets": 1400000,
+        "exporter": "10.20.0.1",
+        "lastSeen": "2026-10-30T07:58:42.580167-04:00"
+      }
+    ],
+    "series": [
+      {
+        "t": 1793360022580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360027580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360032580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360037580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360042580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360047580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360052580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360057580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360062580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360067580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360072580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360077580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360082580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360087580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360092580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360097580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360102580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360107580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360112580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360117580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360122580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360127580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360132580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360137580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360142580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360147580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360152580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360157580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360162580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360167580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360172580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360177580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360182580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360187580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360192580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360197580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360202580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360207580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360212580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360217580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360222580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360227580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360232580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360237580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360242580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360247580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360252580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360257580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360262580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360267580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360272580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360277580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360282580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360287580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360292580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360297580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360302580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360307580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360312580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360317580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360322580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360327580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360332580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360337580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360342580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360347580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360352580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360357580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360362580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360367580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360372580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360377580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360382580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360387580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360392580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360397580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360402580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360407580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360412580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360417580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360422580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360427580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360432580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360437580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360442580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360447580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360452580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360457580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360462580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360467580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360472580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360477580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360482580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360487580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360492580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360497580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360502580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360507580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360512580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360517580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360522580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360527580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360532580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360537580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360542580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360547580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360552580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360557580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360562580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360567580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360572580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360577580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360582580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360587580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360592580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360597580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360602580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360607580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360612580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360617580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360622580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360627580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360632580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360637580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360642580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360647580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360652580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360657580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360662580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360667580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360672580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360677580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360682580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360687580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360692580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360697580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360702580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360707580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360712580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360717580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360722580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360727580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360732580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360737580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360742580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360747580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360752580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360757580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360762580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360767580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360772580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360777580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360782580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360787580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360792580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360797580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360802580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360807580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360812580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360817580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360822580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360827580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360832580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360837580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360842580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360847580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360852580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360857580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360862580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360867580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360872580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360877580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360882580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360887580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360892580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360897580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360902580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360907580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360912580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360917580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360922580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360927580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360932580,
+        "v": 38000000
+      },
+      {
+        "t": 1793360937580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793360942580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793360947580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793360952580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793360957580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793360962580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793360967580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793360972580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793360977580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793360982580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793360987580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793360992580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793360997580,
+        "v": 38000000
+      },
+      {
+        "t": 1793361002580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793361007580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793361012580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793361017580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793361022580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793361027580,
+        "v": 203076923.07692307
+      },
+      {
+        "t": 1793361032580,
+        "v": 214923076.92307693
+      },
+      {
+        "t": 1793361037580,
+        "v": 204769230.76923078
+      },
+      {
+        "t": 1793361042580,
+        "v": 216615384.6153846
+      },
+      {
+        "t": 1793361047580,
+        "v": 206461538.46153846
+      },
+      {
+        "t": 1793361052580,
+        "v": 218307692.3076923
+      },
+      {
+        "t": 1793361057580,
+        "v": 208153846.15384614
+      },
+      {
+        "t": 1793361062580,
+        "v": 198000000
+      },
+      {
+        "t": 1793361067580,
+        "v": 209846153.84615386
+      },
+      {
+        "t": 1793361072580,
+        "v": 199692307.6923077
+      },
+      {
+        "t": 1793361077580,
+        "v": 211538461.53846154
+      },
+      {
+        "t": 1793361082580,
+        "v": 201384615.3846154
+      },
+      {
+        "t": 1793361087580,
+        "v": 213230769.23076922
+      },
+      {
+        "t": 1793361092580,
+        "v": 203076923.07692307
+      },
+      {
+        "t": 1793361097580,
+        "v": 214923076.92307693
+      },
+      {
+        "t": 1793361102580,
+        "v": 204769230.76923078
+      },
+      {
+        "t": 1793361107580,
+        "v": 216615384.6153846
+      },
+      {
+        "t": 1793361112580,
+        "v": 206461538.46153846
+      },
+      {
+        "t": 1793361117580,
+        "v": 218307692.3076923
+      },
+      {
+        "t": 1793361122580,
+        "v": 208153846.15384614
+      },
+      {
+        "t": 1793361127580,
+        "v": 198000000
+      },
+      {
+        "t": 1793361132580,
+        "v": 209846153.84615386
+      },
+      {
+        "t": 1793361137580,
+        "v": 199692307.6923077
+      },
+      {
+        "t": 1793361142580,
+        "v": 211538461.53846154
+      },
+      {
+        "t": 1793361147580,
+        "v": 201384615.3846154
+      },
+      {
+        "t": 1793361152580,
+        "v": 213230769.23076922
+      },
+      {
+        "t": 1793361157580,
+        "v": 203076923.07692307
+      },
+      {
+        "t": 1793361162580,
+        "v": 214923076.92307693
+      },
+      {
+        "t": 1793361167580,
+        "v": 204769230.76923078
+      },
+      {
+        "t": 1793361172580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793361177580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793361182580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793361187580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793361192580,
+        "v": 38000000
+      },
+      {
+        "t": 1793361197580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793361202580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793361207580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793361212580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793361217580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793361222580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793361227580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793361232580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793361237580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793361242580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793361247580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793361252580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793361257580,
+        "v": 38000000
+      },
+      {
+        "t": 1793361262580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793361267580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793361272580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793361277580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793361282580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793361287580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793361292580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793361297580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793361302580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793361307580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793361312580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793361317580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793361322580,
+        "v": 38000000
+      },
+      {
+        "t": 1793361327580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793361332580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793361337580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793361342580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793361347580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793361352580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793361357580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793361362580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793361367580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793361372580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793361377580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793361382580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793361387580,
+        "v": 38000000
+      },
+      {
+        "t": 1793361392580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793361397580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793361402580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793361407580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793361412580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793361417580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793361422580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793361427580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793361432580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793361437580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793361442580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793361447580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793361452580,
+        "v": 38000000
+      },
+      {
+        "t": 1793361457580,
+        "v": 49846153.84615385
+      },
+      {
+        "t": 1793361462580,
+        "v": 39692307.692307696
+      },
+      {
+        "t": 1793361467580,
+        "v": 51538461.538461536
+      },
+      {
+        "t": 1793361472580,
+        "v": 41384615.384615384
+      },
+      {
+        "t": 1793361477580,
+        "v": 53230769.23076923
+      },
+      {
+        "t": 1793361482580,
+        "v": 43076923.07692308
+      },
+      {
+        "t": 1793361487580,
+        "v": 54923076.92307693
+      },
+      {
+        "t": 1793361492580,
+        "v": 44769230.76923077
+      },
+      {
+        "t": 1793361497580,
+        "v": 56615384.615384616
+      },
+      {
+        "t": 1793361502580,
+        "v": 46461538.461538464
+      },
+      {
+        "t": 1793361507580,
+        "v": 58307692.307692304
+      },
+      {
+        "t": 1793361512580,
+        "v": 48153846.15384615
+      },
+      {
+        "t": 1793361517580,
+        "v": 38000000
+      }
+    ],
+    "versions": {
+      "IPFIX": 4120
+    }
+  },
+  "storm": {
+    "running": true,
+    "interface": "Ethernet",
+    "current": {
+      "t": 1793361521580,
+      "total": 2763,
+      "broadcast": 163,
+      "multicast": 319,
+      "unicast": 2200,
+      "arp": 30,
+      "bytes": 1914670,
+      "dups": 0
+    },
+    "series": [
+      {
+        "t": 1793361222580,
+        "total": 2740,
+        "broadcast": 140,
+        "multicast": 310,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912600,
+        "dups": 0
+      },
+      {
+        "t": 1793361223580,
+        "total": 2777,
+        "broadcast": 177,
+        "multicast": 321,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915930,
+        "dups": 0
+      },
+      {
+        "t": 1793361224580,
+        "total": 2754,
+        "broadcast": 154,
+        "multicast": 332,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913860,
+        "dups": 0
+      },
+      {
+        "t": 1793361225580,
+        "total": 2791,
+        "broadcast": 191,
+        "multicast": 343,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917190,
+        "dups": 0
+      },
+      {
+        "t": 1793361226580,
+        "total": 2768,
+        "broadcast": 168,
+        "multicast": 314,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915120,
+        "dups": 0
+      },
+      {
+        "t": 1793361227580,
+        "total": 2745,
+        "broadcast": 145,
+        "multicast": 325,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913050,
+        "dups": 0
+      },
+      {
+        "t": 1793361228580,
+        "total": 2782,
+        "broadcast": 182,
+        "multicast": 336,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916380,
+        "dups": 0
+      },
+      {
+        "t": 1793361229580,
+        "total": 2759,
+        "broadcast": 159,
+        "multicast": 347,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914310,
+        "dups": 0
+      },
+      {
+        "t": 1793361230580,
+        "total": 2796,
+        "broadcast": 196,
+        "multicast": 318,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917640,
+        "dups": 0
+      },
+      {
+        "t": 1793361231580,
+        "total": 2773,
+        "broadcast": 173,
+        "multicast": 329,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915570,
+        "dups": 0
+      },
+      {
+        "t": 1793361232580,
+        "total": 2750,
+        "broadcast": 150,
+        "multicast": 340,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913500,
+        "dups": 0
+      },
+      {
+        "t": 1793361233580,
+        "total": 2787,
+        "broadcast": 187,
+        "multicast": 311,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916830,
+        "dups": 0
+      },
+      {
+        "t": 1793361234580,
+        "total": 2764,
+        "broadcast": 164,
+        "multicast": 322,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914760,
+        "dups": 0
+      },
+      {
+        "t": 1793361235580,
+        "total": 2741,
+        "broadcast": 141,
+        "multicast": 333,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912690,
+        "dups": 0
+      },
+      {
+        "t": 1793361236580,
+        "total": 2778,
+        "broadcast": 178,
+        "multicast": 344,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916020,
+        "dups": 0
+      },
+      {
+        "t": 1793361237580,
+        "total": 2755,
+        "broadcast": 155,
+        "multicast": 315,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913950,
+        "dups": 0
+      },
+      {
+        "t": 1793361238580,
+        "total": 2792,
+        "broadcast": 192,
+        "multicast": 326,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917280,
+        "dups": 0
+      },
+      {
+        "t": 1793361239580,
+        "total": 2769,
+        "broadcast": 169,
+        "multicast": 337,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915210,
+        "dups": 0
+      },
+      {
+        "t": 1793361240580,
+        "total": 2746,
+        "broadcast": 146,
+        "multicast": 348,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913140,
+        "dups": 0
+      },
+      {
+        "t": 1793361241580,
+        "total": 2783,
+        "broadcast": 183,
+        "multicast": 319,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916470,
+        "dups": 0
+      },
+      {
+        "t": 1793361242580,
+        "total": 2760,
+        "broadcast": 160,
+        "multicast": 330,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914400,
+        "dups": 0
+      },
+      {
+        "t": 1793361243580,
+        "total": 2797,
+        "broadcast": 197,
+        "multicast": 341,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917730,
+        "dups": 0
+      },
+      {
+        "t": 1793361244580,
+        "total": 2774,
+        "broadcast": 174,
+        "multicast": 312,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915660,
+        "dups": 0
+      },
+      {
+        "t": 1793361245580,
+        "total": 2751,
+        "broadcast": 151,
+        "multicast": 323,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913590,
+        "dups": 0
+      },
+      {
+        "t": 1793361246580,
+        "total": 2788,
+        "broadcast": 188,
+        "multicast": 334,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916920,
+        "dups": 0
+      },
+      {
+        "t": 1793361247580,
+        "total": 2765,
+        "broadcast": 165,
+        "multicast": 345,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914850,
+        "dups": 0
+      },
+      {
+        "t": 1793361248580,
+        "total": 2742,
+        "broadcast": 142,
+        "multicast": 316,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912780,
+        "dups": 0
+      },
+      {
+        "t": 1793361249580,
+        "total": 2779,
+        "broadcast": 179,
+        "multicast": 327,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916110,
+        "dups": 0
+      },
+      {
+        "t": 1793361250580,
+        "total": 2756,
+        "broadcast": 156,
+        "multicast": 338,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914040,
+        "dups": 0
+      },
+      {
+        "t": 1793361251580,
+        "total": 2793,
+        "broadcast": 193,
+        "multicast": 349,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917370,
+        "dups": 0
+      },
+      {
+        "t": 1793361252580,
+        "total": 2770,
+        "broadcast": 170,
+        "multicast": 320,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915300,
+        "dups": 0
+      },
+      {
+        "t": 1793361253580,
+        "total": 2747,
+        "broadcast": 147,
+        "multicast": 331,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913230,
+        "dups": 0
+      },
+      {
+        "t": 1793361254580,
+        "total": 2784,
+        "broadcast": 184,
+        "multicast": 342,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916560,
+        "dups": 0
+      },
+      {
+        "t": 1793361255580,
+        "total": 2761,
+        "broadcast": 161,
+        "multicast": 313,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914490,
+        "dups": 0
+      },
+      {
+        "t": 1793361256580,
+        "total": 2798,
+        "broadcast": 198,
+        "multicast": 324,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917820,
+        "dups": 0
+      },
+      {
+        "t": 1793361257580,
+        "total": 2775,
+        "broadcast": 175,
+        "multicast": 335,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915750,
+        "dups": 0
+      },
+      {
+        "t": 1793361258580,
+        "total": 2752,
+        "broadcast": 152,
+        "multicast": 346,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913680,
+        "dups": 0
+      },
+      {
+        "t": 1793361259580,
+        "total": 2789,
+        "broadcast": 189,
+        "multicast": 317,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917010,
+        "dups": 0
+      },
+      {
+        "t": 1793361260580,
+        "total": 2766,
+        "broadcast": 166,
+        "multicast": 328,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914940,
+        "dups": 0
+      },
+      {
+        "t": 1793361261580,
+        "total": 2743,
+        "broadcast": 143,
+        "multicast": 339,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912870,
+        "dups": 0
+      },
+      {
+        "t": 1793361262580,
+        "total": 2780,
+        "broadcast": 180,
+        "multicast": 310,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916200,
+        "dups": 0
+      },
+      {
+        "t": 1793361263580,
+        "total": 2757,
+        "broadcast": 157,
+        "multicast": 321,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914130,
+        "dups": 0
+      },
+      {
+        "t": 1793361264580,
+        "total": 2794,
+        "broadcast": 194,
+        "multicast": 332,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917460,
+        "dups": 0
+      },
+      {
+        "t": 1793361265580,
+        "total": 2771,
+        "broadcast": 171,
+        "multicast": 343,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915390,
+        "dups": 0
+      },
+      {
+        "t": 1793361266580,
+        "total": 2748,
+        "broadcast": 148,
+        "multicast": 314,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913320,
+        "dups": 0
+      },
+      {
+        "t": 1793361267580,
+        "total": 2785,
+        "broadcast": 185,
+        "multicast": 325,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916650,
+        "dups": 0
+      },
+      {
+        "t": 1793361268580,
+        "total": 2762,
+        "broadcast": 162,
+        "multicast": 336,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914580,
+        "dups": 0
+      },
+      {
+        "t": 1793361269580,
+        "total": 2799,
+        "broadcast": 199,
+        "multicast": 347,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917910,
+        "dups": 0
+      },
+      {
+        "t": 1793361270580,
+        "total": 2776,
+        "broadcast": 176,
+        "multicast": 318,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915840,
+        "dups": 0
+      },
+      {
+        "t": 1793361271580,
+        "total": 2753,
+        "broadcast": 153,
+        "multicast": 329,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913770,
+        "dups": 0
+      },
+      {
+        "t": 1793361272580,
+        "total": 2790,
+        "broadcast": 190,
+        "multicast": 340,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917100,
+        "dups": 0
+      },
+      {
+        "t": 1793361273580,
+        "total": 2767,
+        "broadcast": 167,
+        "multicast": 311,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915030,
+        "dups": 0
+      },
+      {
+        "t": 1793361274580,
+        "total": 2744,
+        "broadcast": 144,
+        "multicast": 322,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912960,
+        "dups": 0
+      },
+      {
+        "t": 1793361275580,
+        "total": 2781,
+        "broadcast": 181,
+        "multicast": 333,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916290,
+        "dups": 0
+      },
+      {
+        "t": 1793361276580,
+        "total": 2758,
+        "broadcast": 158,
+        "multicast": 344,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914220,
+        "dups": 0
+      },
+      {
+        "t": 1793361277580,
+        "total": 2795,
+        "broadcast": 195,
+        "multicast": 315,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917550,
+        "dups": 0
+      },
+      {
+        "t": 1793361278580,
+        "total": 2772,
+        "broadcast": 172,
+        "multicast": 326,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915480,
+        "dups": 0
+      },
+      {
+        "t": 1793361279580,
+        "total": 2749,
+        "broadcast": 149,
+        "multicast": 337,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913410,
+        "dups": 0
+      },
+      {
+        "t": 1793361280580,
+        "total": 2786,
+        "broadcast": 186,
+        "multicast": 348,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916740,
+        "dups": 0
+      },
+      {
+        "t": 1793361281580,
+        "total": 2763,
+        "broadcast": 163,
+        "multicast": 319,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914670,
+        "dups": 0
+      },
+      {
+        "t": 1793361282580,
+        "total": 2740,
+        "broadcast": 140,
+        "multicast": 330,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912600,
+        "dups": 0
+      },
+      {
+        "t": 1793361283580,
+        "total": 2777,
+        "broadcast": 177,
+        "multicast": 341,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915930,
+        "dups": 0
+      },
+      {
+        "t": 1793361284580,
+        "total": 2754,
+        "broadcast": 154,
+        "multicast": 312,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913860,
+        "dups": 0
+      },
+      {
+        "t": 1793361285580,
+        "total": 2791,
+        "broadcast": 191,
+        "multicast": 323,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917190,
+        "dups": 0
+      },
+      {
+        "t": 1793361286580,
+        "total": 2768,
+        "broadcast": 168,
+        "multicast": 334,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915120,
+        "dups": 0
+      },
+      {
+        "t": 1793361287580,
+        "total": 2745,
+        "broadcast": 145,
+        "multicast": 345,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913050,
+        "dups": 0
+      },
+      {
+        "t": 1793361288580,
+        "total": 2782,
+        "broadcast": 182,
+        "multicast": 316,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916380,
+        "dups": 0
+      },
+      {
+        "t": 1793361289580,
+        "total": 2759,
+        "broadcast": 159,
+        "multicast": 327,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914310,
+        "dups": 0
+      },
+      {
+        "t": 1793361290580,
+        "total": 2796,
+        "broadcast": 196,
+        "multicast": 338,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917640,
+        "dups": 0
+      },
+      {
+        "t": 1793361291580,
+        "total": 2773,
+        "broadcast": 173,
+        "multicast": 349,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915570,
+        "dups": 0
+      },
+      {
+        "t": 1793361292580,
+        "total": 2750,
+        "broadcast": 150,
+        "multicast": 320,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913500,
+        "dups": 0
+      },
+      {
+        "t": 1793361293580,
+        "total": 2787,
+        "broadcast": 187,
+        "multicast": 331,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916830,
+        "dups": 0
+      },
+      {
+        "t": 1793361294580,
+        "total": 2764,
+        "broadcast": 164,
+        "multicast": 342,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914760,
+        "dups": 0
+      },
+      {
+        "t": 1793361295580,
+        "total": 2741,
+        "broadcast": 141,
+        "multicast": 313,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912690,
+        "dups": 0
+      },
+      {
+        "t": 1793361296580,
+        "total": 2778,
+        "broadcast": 178,
+        "multicast": 324,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916020,
+        "dups": 0
+      },
+      {
+        "t": 1793361297580,
+        "total": 2755,
+        "broadcast": 155,
+        "multicast": 335,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913950,
+        "dups": 0
+      },
+      {
+        "t": 1793361298580,
+        "total": 2792,
+        "broadcast": 192,
+        "multicast": 346,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917280,
+        "dups": 0
+      },
+      {
+        "t": 1793361299580,
+        "total": 2769,
+        "broadcast": 169,
+        "multicast": 317,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915210,
+        "dups": 0
+      },
+      {
+        "t": 1793361300580,
+        "total": 2746,
+        "broadcast": 146,
+        "multicast": 328,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913140,
+        "dups": 0
+      },
+      {
+        "t": 1793361301580,
+        "total": 2783,
+        "broadcast": 183,
+        "multicast": 339,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916470,
+        "dups": 0
+      },
+      {
+        "t": 1793361302580,
+        "total": 2760,
+        "broadcast": 160,
+        "multicast": 310,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914400,
+        "dups": 0
+      },
+      {
+        "t": 1793361303580,
+        "total": 2797,
+        "broadcast": 197,
+        "multicast": 321,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917730,
+        "dups": 0
+      },
+      {
+        "t": 1793361304580,
+        "total": 2774,
+        "broadcast": 174,
+        "multicast": 332,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915660,
+        "dups": 0
+      },
+      {
+        "t": 1793361305580,
+        "total": 2751,
+        "broadcast": 151,
+        "multicast": 343,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913590,
+        "dups": 0
+      },
+      {
+        "t": 1793361306580,
+        "total": 2788,
+        "broadcast": 188,
+        "multicast": 314,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916920,
+        "dups": 0
+      },
+      {
+        "t": 1793361307580,
+        "total": 2765,
+        "broadcast": 165,
+        "multicast": 325,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914850,
+        "dups": 0
+      },
+      {
+        "t": 1793361308580,
+        "total": 2742,
+        "broadcast": 142,
+        "multicast": 336,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912780,
+        "dups": 0
+      },
+      {
+        "t": 1793361309580,
+        "total": 2779,
+        "broadcast": 179,
+        "multicast": 347,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916110,
+        "dups": 0
+      },
+      {
+        "t": 1793361310580,
+        "total": 2756,
+        "broadcast": 156,
+        "multicast": 318,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914040,
+        "dups": 0
+      },
+      {
+        "t": 1793361311580,
+        "total": 2793,
+        "broadcast": 193,
+        "multicast": 329,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917370,
+        "dups": 0
+      },
+      {
+        "t": 1793361312580,
+        "total": 2770,
+        "broadcast": 170,
+        "multicast": 340,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915300,
+        "dups": 0
+      },
+      {
+        "t": 1793361313580,
+        "total": 2747,
+        "broadcast": 147,
+        "multicast": 311,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913230,
+        "dups": 0
+      },
+      {
+        "t": 1793361314580,
+        "total": 2784,
+        "broadcast": 184,
+        "multicast": 322,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916560,
+        "dups": 0
+      },
+      {
+        "t": 1793361315580,
+        "total": 2761,
+        "broadcast": 161,
+        "multicast": 333,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914490,
+        "dups": 0
+      },
+      {
+        "t": 1793361316580,
+        "total": 2798,
+        "broadcast": 198,
+        "multicast": 344,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917820,
+        "dups": 0
+      },
+      {
+        "t": 1793361317580,
+        "total": 2775,
+        "broadcast": 175,
+        "multicast": 315,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915750,
+        "dups": 0
+      },
+      {
+        "t": 1793361318580,
+        "total": 2752,
+        "broadcast": 152,
+        "multicast": 326,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913680,
+        "dups": 0
+      },
+      {
+        "t": 1793361319580,
+        "total": 2789,
+        "broadcast": 189,
+        "multicast": 337,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917010,
+        "dups": 0
+      },
+      {
+        "t": 1793361320580,
+        "total": 2766,
+        "broadcast": 166,
+        "multicast": 348,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914940,
+        "dups": 0
+      },
+      {
+        "t": 1793361321580,
+        "total": 2743,
+        "broadcast": 143,
+        "multicast": 319,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912870,
+        "dups": 0
+      },
+      {
+        "t": 1793361322580,
+        "total": 2780,
+        "broadcast": 180,
+        "multicast": 330,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916200,
+        "dups": 0
+      },
+      {
+        "t": 1793361323580,
+        "total": 2757,
+        "broadcast": 157,
+        "multicast": 341,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914130,
+        "dups": 0
+      },
+      {
+        "t": 1793361324580,
+        "total": 2794,
+        "broadcast": 194,
+        "multicast": 312,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917460,
+        "dups": 0
+      },
+      {
+        "t": 1793361325580,
+        "total": 2771,
+        "broadcast": 171,
+        "multicast": 323,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915390,
+        "dups": 0
+      },
+      {
+        "t": 1793361326580,
+        "total": 2748,
+        "broadcast": 148,
+        "multicast": 334,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913320,
+        "dups": 0
+      },
+      {
+        "t": 1793361327580,
+        "total": 2785,
+        "broadcast": 185,
+        "multicast": 345,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916650,
+        "dups": 0
+      },
+      {
+        "t": 1793361328580,
+        "total": 2762,
+        "broadcast": 162,
+        "multicast": 316,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914580,
+        "dups": 0
+      },
+      {
+        "t": 1793361329580,
+        "total": 2799,
+        "broadcast": 199,
+        "multicast": 327,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917910,
+        "dups": 0
+      },
+      {
+        "t": 1793361330580,
+        "total": 2776,
+        "broadcast": 176,
+        "multicast": 338,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915840,
+        "dups": 0
+      },
+      {
+        "t": 1793361331580,
+        "total": 2753,
+        "broadcast": 153,
+        "multicast": 349,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913770,
+        "dups": 0
+      },
+      {
+        "t": 1793361332580,
+        "total": 2790,
+        "broadcast": 190,
+        "multicast": 320,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917100,
+        "dups": 0
+      },
+      {
+        "t": 1793361333580,
+        "total": 2767,
+        "broadcast": 167,
+        "multicast": 331,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915030,
+        "dups": 0
+      },
+      {
+        "t": 1793361334580,
+        "total": 2744,
+        "broadcast": 144,
+        "multicast": 342,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912960,
+        "dups": 0
+      },
+      {
+        "t": 1793361335580,
+        "total": 2781,
+        "broadcast": 181,
+        "multicast": 313,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916290,
+        "dups": 0
+      },
+      {
+        "t": 1793361336580,
+        "total": 2758,
+        "broadcast": 158,
+        "multicast": 324,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914220,
+        "dups": 0
+      },
+      {
+        "t": 1793361337580,
+        "total": 2795,
+        "broadcast": 195,
+        "multicast": 335,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917550,
+        "dups": 0
+      },
+      {
+        "t": 1793361338580,
+        "total": 2772,
+        "broadcast": 172,
+        "multicast": 346,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915480,
+        "dups": 0
+      },
+      {
+        "t": 1793361339580,
+        "total": 2749,
+        "broadcast": 149,
+        "multicast": 317,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913410,
+        "dups": 0
+      },
+      {
+        "t": 1793361340580,
+        "total": 2786,
+        "broadcast": 186,
+        "multicast": 328,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916740,
+        "dups": 0
+      },
+      {
+        "t": 1793361341580,
+        "total": 2763,
+        "broadcast": 163,
+        "multicast": 339,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914670,
+        "dups": 0
+      },
+      {
+        "t": 1793361342580,
+        "total": 2740,
+        "broadcast": 140,
+        "multicast": 310,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912600,
+        "dups": 0
+      },
+      {
+        "t": 1793361343580,
+        "total": 2777,
+        "broadcast": 177,
+        "multicast": 321,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915930,
+        "dups": 0
+      },
+      {
+        "t": 1793361344580,
+        "total": 2754,
+        "broadcast": 154,
+        "multicast": 332,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913860,
+        "dups": 0
+      },
+      {
+        "t": 1793361345580,
+        "total": 2791,
+        "broadcast": 191,
+        "multicast": 343,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917190,
+        "dups": 0
+      },
+      {
+        "t": 1793361346580,
+        "total": 2768,
+        "broadcast": 168,
+        "multicast": 314,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915120,
+        "dups": 0
+      },
+      {
+        "t": 1793361347580,
+        "total": 2745,
+        "broadcast": 145,
+        "multicast": 325,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913050,
+        "dups": 0
+      },
+      {
+        "t": 1793361348580,
+        "total": 2782,
+        "broadcast": 182,
+        "multicast": 336,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916380,
+        "dups": 0
+      },
+      {
+        "t": 1793361349580,
+        "total": 2759,
+        "broadcast": 159,
+        "multicast": 347,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914310,
+        "dups": 0
+      },
+      {
+        "t": 1793361350580,
+        "total": 2796,
+        "broadcast": 196,
+        "multicast": 318,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917640,
+        "dups": 0
+      },
+      {
+        "t": 1793361351580,
+        "total": 2773,
+        "broadcast": 173,
+        "multicast": 329,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915570,
+        "dups": 0
+      },
+      {
+        "t": 1793361352580,
+        "total": 2750,
+        "broadcast": 150,
+        "multicast": 340,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913500,
+        "dups": 0
+      },
+      {
+        "t": 1793361353580,
+        "total": 2787,
+        "broadcast": 187,
+        "multicast": 311,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916830,
+        "dups": 0
+      },
+      {
+        "t": 1793361354580,
+        "total": 2764,
+        "broadcast": 164,
+        "multicast": 322,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914760,
+        "dups": 0
+      },
+      {
+        "t": 1793361355580,
+        "total": 2741,
+        "broadcast": 141,
+        "multicast": 333,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912690,
+        "dups": 0
+      },
+      {
+        "t": 1793361356580,
+        "total": 2778,
+        "broadcast": 178,
+        "multicast": 344,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916020,
+        "dups": 0
+      },
+      {
+        "t": 1793361357580,
+        "total": 2755,
+        "broadcast": 155,
+        "multicast": 315,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913950,
+        "dups": 0
+      },
+      {
+        "t": 1793361358580,
+        "total": 2792,
+        "broadcast": 192,
+        "multicast": 326,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917280,
+        "dups": 0
+      },
+      {
+        "t": 1793361359580,
+        "total": 2769,
+        "broadcast": 169,
+        "multicast": 337,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915210,
+        "dups": 0
+      },
+      {
+        "t": 1793361360580,
+        "total": 2746,
+        "broadcast": 146,
+        "multicast": 348,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913140,
+        "dups": 0
+      },
+      {
+        "t": 1793361361580,
+        "total": 2783,
+        "broadcast": 183,
+        "multicast": 319,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916470,
+        "dups": 0
+      },
+      {
+        "t": 1793361362580,
+        "total": 2760,
+        "broadcast": 160,
+        "multicast": 330,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914400,
+        "dups": 0
+      },
+      {
+        "t": 1793361363580,
+        "total": 2797,
+        "broadcast": 197,
+        "multicast": 341,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917730,
+        "dups": 0
+      },
+      {
+        "t": 1793361364580,
+        "total": 2774,
+        "broadcast": 174,
+        "multicast": 312,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915660,
+        "dups": 0
+      },
+      {
+        "t": 1793361365580,
+        "total": 2751,
+        "broadcast": 151,
+        "multicast": 323,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913590,
+        "dups": 0
+      },
+      {
+        "t": 1793361366580,
+        "total": 2788,
+        "broadcast": 188,
+        "multicast": 334,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916920,
+        "dups": 0
+      },
+      {
+        "t": 1793361367580,
+        "total": 2765,
+        "broadcast": 165,
+        "multicast": 345,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914850,
+        "dups": 0
+      },
+      {
+        "t": 1793361368580,
+        "total": 2742,
+        "broadcast": 142,
+        "multicast": 316,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912780,
+        "dups": 0
+      },
+      {
+        "t": 1793361369580,
+        "total": 2779,
+        "broadcast": 179,
+        "multicast": 327,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916110,
+        "dups": 0
+      },
+      {
+        "t": 1793361370580,
+        "total": 2756,
+        "broadcast": 156,
+        "multicast": 338,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914040,
+        "dups": 0
+      },
+      {
+        "t": 1793361371580,
+        "total": 2793,
+        "broadcast": 193,
+        "multicast": 349,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917370,
+        "dups": 0
+      },
+      {
+        "t": 1793361372580,
+        "total": 2770,
+        "broadcast": 170,
+        "multicast": 320,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915300,
+        "dups": 0
+      },
+      {
+        "t": 1793361373580,
+        "total": 2747,
+        "broadcast": 147,
+        "multicast": 331,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913230,
+        "dups": 0
+      },
+      {
+        "t": 1793361374580,
+        "total": 2784,
+        "broadcast": 184,
+        "multicast": 342,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916560,
+        "dups": 0
+      },
+      {
+        "t": 1793361375580,
+        "total": 2761,
+        "broadcast": 161,
+        "multicast": 313,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914490,
+        "dups": 0
+      },
+      {
+        "t": 1793361376580,
+        "total": 2798,
+        "broadcast": 198,
+        "multicast": 324,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917820,
+        "dups": 0
+      },
+      {
+        "t": 1793361377580,
+        "total": 2775,
+        "broadcast": 175,
+        "multicast": 335,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915750,
+        "dups": 0
+      },
+      {
+        "t": 1793361378580,
+        "total": 2752,
+        "broadcast": 152,
+        "multicast": 346,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913680,
+        "dups": 0
+      },
+      {
+        "t": 1793361379580,
+        "total": 2789,
+        "broadcast": 189,
+        "multicast": 317,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917010,
+        "dups": 0
+      },
+      {
+        "t": 1793361380580,
+        "total": 2766,
+        "broadcast": 166,
+        "multicast": 328,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914940,
+        "dups": 0
+      },
+      {
+        "t": 1793361381580,
+        "total": 2743,
+        "broadcast": 143,
+        "multicast": 339,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912870,
+        "dups": 0
+      },
+      {
+        "t": 1793361382580,
+        "total": 2780,
+        "broadcast": 180,
+        "multicast": 310,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916200,
+        "dups": 0
+      },
+      {
+        "t": 1793361383580,
+        "total": 2757,
+        "broadcast": 157,
+        "multicast": 321,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914130,
+        "dups": 0
+      },
+      {
+        "t": 1793361384580,
+        "total": 2794,
+        "broadcast": 194,
+        "multicast": 332,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917460,
+        "dups": 0
+      },
+      {
+        "t": 1793361385580,
+        "total": 2771,
+        "broadcast": 171,
+        "multicast": 343,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915390,
+        "dups": 0
+      },
+      {
+        "t": 1793361386580,
+        "total": 2748,
+        "broadcast": 148,
+        "multicast": 314,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913320,
+        "dups": 0
+      },
+      {
+        "t": 1793361387580,
+        "total": 2785,
+        "broadcast": 185,
+        "multicast": 325,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916650,
+        "dups": 0
+      },
+      {
+        "t": 1793361388580,
+        "total": 2762,
+        "broadcast": 162,
+        "multicast": 336,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914580,
+        "dups": 0
+      },
+      {
+        "t": 1793361389580,
+        "total": 2799,
+        "broadcast": 199,
+        "multicast": 347,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917910,
+        "dups": 0
+      },
+      {
+        "t": 1793361390580,
+        "total": 2776,
+        "broadcast": 176,
+        "multicast": 318,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915840,
+        "dups": 0
+      },
+      {
+        "t": 1793361391580,
+        "total": 2753,
+        "broadcast": 153,
+        "multicast": 329,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913770,
+        "dups": 0
+      },
+      {
+        "t": 1793361392580,
+        "total": 2790,
+        "broadcast": 190,
+        "multicast": 340,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917100,
+        "dups": 0
+      },
+      {
+        "t": 1793361393580,
+        "total": 2767,
+        "broadcast": 167,
+        "multicast": 311,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915030,
+        "dups": 0
+      },
+      {
+        "t": 1793361394580,
+        "total": 2744,
+        "broadcast": 144,
+        "multicast": 322,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912960,
+        "dups": 0
+      },
+      {
+        "t": 1793361395580,
+        "total": 2781,
+        "broadcast": 181,
+        "multicast": 333,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916290,
+        "dups": 0
+      },
+      {
+        "t": 1793361396580,
+        "total": 2758,
+        "broadcast": 158,
+        "multicast": 344,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914220,
+        "dups": 0
+      },
+      {
+        "t": 1793361397580,
+        "total": 2795,
+        "broadcast": 195,
+        "multicast": 315,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917550,
+        "dups": 0
+      },
+      {
+        "t": 1793361398580,
+        "total": 2772,
+        "broadcast": 172,
+        "multicast": 326,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915480,
+        "dups": 0
+      },
+      {
+        "t": 1793361399580,
+        "total": 2749,
+        "broadcast": 149,
+        "multicast": 337,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913410,
+        "dups": 0
+      },
+      {
+        "t": 1793361400580,
+        "total": 2786,
+        "broadcast": 186,
+        "multicast": 348,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916740,
+        "dups": 0
+      },
+      {
+        "t": 1793361401580,
+        "total": 2763,
+        "broadcast": 163,
+        "multicast": 319,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914670,
+        "dups": 0
+      },
+      {
+        "t": 1793361402580,
+        "total": 2740,
+        "broadcast": 140,
+        "multicast": 330,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912600,
+        "dups": 0
+      },
+      {
+        "t": 1793361403580,
+        "total": 4090,
+        "broadcast": 1490,
+        "multicast": 341,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2034100,
+        "dups": 0
+      },
+      {
+        "t": 1793361404580,
+        "total": 4180,
+        "broadcast": 1580,
+        "multicast": 312,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2042200,
+        "dups": 0
+      },
+      {
+        "t": 1793361405580,
+        "total": 4270,
+        "broadcast": 1670,
+        "multicast": 323,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2050300,
+        "dups": 0
+      },
+      {
+        "t": 1793361406580,
+        "total": 4360,
+        "broadcast": 1760,
+        "multicast": 334,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2058400,
+        "dups": 0
+      },
+      {
+        "t": 1793361407580,
+        "total": 4450,
+        "broadcast": 1850,
+        "multicast": 345,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2066500,
+        "dups": 0
+      },
+      {
+        "t": 1793361408580,
+        "total": 4540,
+        "broadcast": 1940,
+        "multicast": 316,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2074600,
+        "dups": 0
+      },
+      {
+        "t": 1793361409580,
+        "total": 4630,
+        "broadcast": 2030,
+        "multicast": 327,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2082700,
+        "dups": 0
+      },
+      {
+        "t": 1793361410580,
+        "total": 4720,
+        "broadcast": 2120,
+        "multicast": 338,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2090800,
+        "dups": 0
+      },
+      {
+        "t": 1793361411580,
+        "total": 4810,
+        "broadcast": 2210,
+        "multicast": 349,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2098900,
+        "dups": 0
+      },
+      {
+        "t": 1793361412580,
+        "total": 4900,
+        "broadcast": 2300,
+        "multicast": 320,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2107000,
+        "dups": 0
+      },
+      {
+        "t": 1793361413580,
+        "total": 4990,
+        "broadcast": 2390,
+        "multicast": 331,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2115100,
+        "dups": 0
+      },
+      {
+        "t": 1793361414580,
+        "total": 5080,
+        "broadcast": 2480,
+        "multicast": 342,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2123200,
+        "dups": 0
+      },
+      {
+        "t": 1793361415580,
+        "total": 5170,
+        "broadcast": 2570,
+        "multicast": 313,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2131300,
+        "dups": 0
+      },
+      {
+        "t": 1793361416580,
+        "total": 5260,
+        "broadcast": 2660,
+        "multicast": 324,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2139400,
+        "dups": 0
+      },
+      {
+        "t": 1793361417580,
+        "total": 5350,
+        "broadcast": 2750,
+        "multicast": 335,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 2147500,
+        "dups": 0
+      },
+      {
+        "t": 1793361418580,
+        "total": 2792,
+        "broadcast": 192,
+        "multicast": 346,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917280,
+        "dups": 0
+      },
+      {
+        "t": 1793361419580,
+        "total": 2769,
+        "broadcast": 169,
+        "multicast": 317,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915210,
+        "dups": 0
+      },
+      {
+        "t": 1793361420580,
+        "total": 2746,
+        "broadcast": 146,
+        "multicast": 328,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913140,
+        "dups": 0
+      },
+      {
+        "t": 1793361421580,
+        "total": 2783,
+        "broadcast": 183,
+        "multicast": 339,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916470,
+        "dups": 0
+      },
+      {
+        "t": 1793361422580,
+        "total": 2760,
+        "broadcast": 160,
+        "multicast": 310,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914400,
+        "dups": 0
+      },
+      {
+        "t": 1793361423580,
+        "total": 2797,
+        "broadcast": 197,
+        "multicast": 321,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917730,
+        "dups": 0
+      },
+      {
+        "t": 1793361424580,
+        "total": 2774,
+        "broadcast": 174,
+        "multicast": 332,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915660,
+        "dups": 0
+      },
+      {
+        "t": 1793361425580,
+        "total": 2751,
+        "broadcast": 151,
+        "multicast": 343,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913590,
+        "dups": 0
+      },
+      {
+        "t": 1793361426580,
+        "total": 2788,
+        "broadcast": 188,
+        "multicast": 314,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916920,
+        "dups": 0
+      },
+      {
+        "t": 1793361427580,
+        "total": 2765,
+        "broadcast": 165,
+        "multicast": 325,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914850,
+        "dups": 0
+      },
+      {
+        "t": 1793361428580,
+        "total": 2742,
+        "broadcast": 142,
+        "multicast": 336,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912780,
+        "dups": 0
+      },
+      {
+        "t": 1793361429580,
+        "total": 2779,
+        "broadcast": 179,
+        "multicast": 347,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916110,
+        "dups": 0
+      },
+      {
+        "t": 1793361430580,
+        "total": 2756,
+        "broadcast": 156,
+        "multicast": 318,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914040,
+        "dups": 0
+      },
+      {
+        "t": 1793361431580,
+        "total": 2793,
+        "broadcast": 193,
+        "multicast": 329,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917370,
+        "dups": 0
+      },
+      {
+        "t": 1793361432580,
+        "total": 2770,
+        "broadcast": 170,
+        "multicast": 340,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915300,
+        "dups": 0
+      },
+      {
+        "t": 1793361433580,
+        "total": 2747,
+        "broadcast": 147,
+        "multicast": 311,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913230,
+        "dups": 0
+      },
+      {
+        "t": 1793361434580,
+        "total": 2784,
+        "broadcast": 184,
+        "multicast": 322,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916560,
+        "dups": 0
+      },
+      {
+        "t": 1793361435580,
+        "total": 2761,
+        "broadcast": 161,
+        "multicast": 333,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914490,
+        "dups": 0
+      },
+      {
+        "t": 1793361436580,
+        "total": 2798,
+        "broadcast": 198,
+        "multicast": 344,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917820,
+        "dups": 0
+      },
+      {
+        "t": 1793361437580,
+        "total": 2775,
+        "broadcast": 175,
+        "multicast": 315,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915750,
+        "dups": 0
+      },
+      {
+        "t": 1793361438580,
+        "total": 2752,
+        "broadcast": 152,
+        "multicast": 326,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913680,
+        "dups": 0
+      },
+      {
+        "t": 1793361439580,
+        "total": 2789,
+        "broadcast": 189,
+        "multicast": 337,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917010,
+        "dups": 0
+      },
+      {
+        "t": 1793361440580,
+        "total": 2766,
+        "broadcast": 166,
+        "multicast": 348,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914940,
+        "dups": 0
+      },
+      {
+        "t": 1793361441580,
+        "total": 2743,
+        "broadcast": 143,
+        "multicast": 319,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912870,
+        "dups": 0
+      },
+      {
+        "t": 1793361442580,
+        "total": 2780,
+        "broadcast": 180,
+        "multicast": 330,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916200,
+        "dups": 0
+      },
+      {
+        "t": 1793361443580,
+        "total": 2757,
+        "broadcast": 157,
+        "multicast": 341,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914130,
+        "dups": 0
+      },
+      {
+        "t": 1793361444580,
+        "total": 2794,
+        "broadcast": 194,
+        "multicast": 312,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917460,
+        "dups": 0
+      },
+      {
+        "t": 1793361445580,
+        "total": 2771,
+        "broadcast": 171,
+        "multicast": 323,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915390,
+        "dups": 0
+      },
+      {
+        "t": 1793361446580,
+        "total": 2748,
+        "broadcast": 148,
+        "multicast": 334,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913320,
+        "dups": 0
+      },
+      {
+        "t": 1793361447580,
+        "total": 2785,
+        "broadcast": 185,
+        "multicast": 345,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916650,
+        "dups": 0
+      },
+      {
+        "t": 1793361448580,
+        "total": 2762,
+        "broadcast": 162,
+        "multicast": 316,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914580,
+        "dups": 0
+      },
+      {
+        "t": 1793361449580,
+        "total": 2799,
+        "broadcast": 199,
+        "multicast": 327,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917910,
+        "dups": 0
+      },
+      {
+        "t": 1793361450580,
+        "total": 2776,
+        "broadcast": 176,
+        "multicast": 338,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915840,
+        "dups": 0
+      },
+      {
+        "t": 1793361451580,
+        "total": 2753,
+        "broadcast": 153,
+        "multicast": 349,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913770,
+        "dups": 0
+      },
+      {
+        "t": 1793361452580,
+        "total": 2790,
+        "broadcast": 190,
+        "multicast": 320,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917100,
+        "dups": 0
+      },
+      {
+        "t": 1793361453580,
+        "total": 2767,
+        "broadcast": 167,
+        "multicast": 331,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915030,
+        "dups": 0
+      },
+      {
+        "t": 1793361454580,
+        "total": 2744,
+        "broadcast": 144,
+        "multicast": 342,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912960,
+        "dups": 0
+      },
+      {
+        "t": 1793361455580,
+        "total": 2781,
+        "broadcast": 181,
+        "multicast": 313,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916290,
+        "dups": 0
+      },
+      {
+        "t": 1793361456580,
+        "total": 2758,
+        "broadcast": 158,
+        "multicast": 324,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914220,
+        "dups": 0
+      },
+      {
+        "t": 1793361457580,
+        "total": 2795,
+        "broadcast": 195,
+        "multicast": 335,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917550,
+        "dups": 0
+      },
+      {
+        "t": 1793361458580,
+        "total": 2772,
+        "broadcast": 172,
+        "multicast": 346,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915480,
+        "dups": 0
+      },
+      {
+        "t": 1793361459580,
+        "total": 2749,
+        "broadcast": 149,
+        "multicast": 317,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913410,
+        "dups": 0
+      },
+      {
+        "t": 1793361460580,
+        "total": 2786,
+        "broadcast": 186,
+        "multicast": 328,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916740,
+        "dups": 0
+      },
+      {
+        "t": 1793361461580,
+        "total": 2763,
+        "broadcast": 163,
+        "multicast": 339,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914670,
+        "dups": 0
+      },
+      {
+        "t": 1793361462580,
+        "total": 2740,
+        "broadcast": 140,
+        "multicast": 310,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912600,
+        "dups": 0
+      },
+      {
+        "t": 1793361463580,
+        "total": 2777,
+        "broadcast": 177,
+        "multicast": 321,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915930,
+        "dups": 0
+      },
+      {
+        "t": 1793361464580,
+        "total": 2754,
+        "broadcast": 154,
+        "multicast": 332,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913860,
+        "dups": 0
+      },
+      {
+        "t": 1793361465580,
+        "total": 2791,
+        "broadcast": 191,
+        "multicast": 343,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917190,
+        "dups": 0
+      },
+      {
+        "t": 1793361466580,
+        "total": 2768,
+        "broadcast": 168,
+        "multicast": 314,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915120,
+        "dups": 0
+      },
+      {
+        "t": 1793361467580,
+        "total": 2745,
+        "broadcast": 145,
+        "multicast": 325,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913050,
+        "dups": 0
+      },
+      {
+        "t": 1793361468580,
+        "total": 2782,
+        "broadcast": 182,
+        "multicast": 336,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916380,
+        "dups": 0
+      },
+      {
+        "t": 1793361469580,
+        "total": 2759,
+        "broadcast": 159,
+        "multicast": 347,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914310,
+        "dups": 0
+      },
+      {
+        "t": 1793361470580,
+        "total": 2796,
+        "broadcast": 196,
+        "multicast": 318,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917640,
+        "dups": 0
+      },
+      {
+        "t": 1793361471580,
+        "total": 2773,
+        "broadcast": 173,
+        "multicast": 329,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915570,
+        "dups": 0
+      },
+      {
+        "t": 1793361472580,
+        "total": 2750,
+        "broadcast": 150,
+        "multicast": 340,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913500,
+        "dups": 0
+      },
+      {
+        "t": 1793361473580,
+        "total": 2787,
+        "broadcast": 187,
+        "multicast": 311,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916830,
+        "dups": 0
+      },
+      {
+        "t": 1793361474580,
+        "total": 2764,
+        "broadcast": 164,
+        "multicast": 322,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914760,
+        "dups": 0
+      },
+      {
+        "t": 1793361475580,
+        "total": 2741,
+        "broadcast": 141,
+        "multicast": 333,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912690,
+        "dups": 0
+      },
+      {
+        "t": 1793361476580,
+        "total": 2778,
+        "broadcast": 178,
+        "multicast": 344,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916020,
+        "dups": 0
+      },
+      {
+        "t": 1793361477580,
+        "total": 2755,
+        "broadcast": 155,
+        "multicast": 315,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913950,
+        "dups": 0
+      },
+      {
+        "t": 1793361478580,
+        "total": 2792,
+        "broadcast": 192,
+        "multicast": 326,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917280,
+        "dups": 0
+      },
+      {
+        "t": 1793361479580,
+        "total": 2769,
+        "broadcast": 169,
+        "multicast": 337,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915210,
+        "dups": 0
+      },
+      {
+        "t": 1793361480580,
+        "total": 2746,
+        "broadcast": 146,
+        "multicast": 348,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913140,
+        "dups": 0
+      },
+      {
+        "t": 1793361481580,
+        "total": 2783,
+        "broadcast": 183,
+        "multicast": 319,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916470,
+        "dups": 0
+      },
+      {
+        "t": 1793361482580,
+        "total": 2760,
+        "broadcast": 160,
+        "multicast": 330,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914400,
+        "dups": 0
+      },
+      {
+        "t": 1793361483580,
+        "total": 2797,
+        "broadcast": 197,
+        "multicast": 341,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917730,
+        "dups": 0
+      },
+      {
+        "t": 1793361484580,
+        "total": 2774,
+        "broadcast": 174,
+        "multicast": 312,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915660,
+        "dups": 0
+      },
+      {
+        "t": 1793361485580,
+        "total": 2751,
+        "broadcast": 151,
+        "multicast": 323,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913590,
+        "dups": 0
+      },
+      {
+        "t": 1793361486580,
+        "total": 2788,
+        "broadcast": 188,
+        "multicast": 334,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916920,
+        "dups": 0
+      },
+      {
+        "t": 1793361487580,
+        "total": 2765,
+        "broadcast": 165,
+        "multicast": 345,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914850,
+        "dups": 0
+      },
+      {
+        "t": 1793361488580,
+        "total": 2742,
+        "broadcast": 142,
+        "multicast": 316,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912780,
+        "dups": 0
+      },
+      {
+        "t": 1793361489580,
+        "total": 2779,
+        "broadcast": 179,
+        "multicast": 327,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916110,
+        "dups": 0
+      },
+      {
+        "t": 1793361490580,
+        "total": 2756,
+        "broadcast": 156,
+        "multicast": 338,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914040,
+        "dups": 0
+      },
+      {
+        "t": 1793361491580,
+        "total": 2793,
+        "broadcast": 193,
+        "multicast": 349,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917370,
+        "dups": 0
+      },
+      {
+        "t": 1793361492580,
+        "total": 2770,
+        "broadcast": 170,
+        "multicast": 320,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915300,
+        "dups": 0
+      },
+      {
+        "t": 1793361493580,
+        "total": 2747,
+        "broadcast": 147,
+        "multicast": 331,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913230,
+        "dups": 0
+      },
+      {
+        "t": 1793361494580,
+        "total": 2784,
+        "broadcast": 184,
+        "multicast": 342,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916560,
+        "dups": 0
+      },
+      {
+        "t": 1793361495580,
+        "total": 2761,
+        "broadcast": 161,
+        "multicast": 313,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914490,
+        "dups": 0
+      },
+      {
+        "t": 1793361496580,
+        "total": 2798,
+        "broadcast": 198,
+        "multicast": 324,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917820,
+        "dups": 0
+      },
+      {
+        "t": 1793361497580,
+        "total": 2775,
+        "broadcast": 175,
+        "multicast": 335,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915750,
+        "dups": 0
+      },
+      {
+        "t": 1793361498580,
+        "total": 2752,
+        "broadcast": 152,
+        "multicast": 346,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913680,
+        "dups": 0
+      },
+      {
+        "t": 1793361499580,
+        "total": 2789,
+        "broadcast": 189,
+        "multicast": 317,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917010,
+        "dups": 0
+      },
+      {
+        "t": 1793361500580,
+        "total": 2766,
+        "broadcast": 166,
+        "multicast": 328,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914940,
+        "dups": 0
+      },
+      {
+        "t": 1793361501580,
+        "total": 2743,
+        "broadcast": 143,
+        "multicast": 339,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912870,
+        "dups": 0
+      },
+      {
+        "t": 1793361502580,
+        "total": 2780,
+        "broadcast": 180,
+        "multicast": 310,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916200,
+        "dups": 0
+      },
+      {
+        "t": 1793361503580,
+        "total": 2757,
+        "broadcast": 157,
+        "multicast": 321,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914130,
+        "dups": 0
+      },
+      {
+        "t": 1793361504580,
+        "total": 2794,
+        "broadcast": 194,
+        "multicast": 332,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917460,
+        "dups": 0
+      },
+      {
+        "t": 1793361505580,
+        "total": 2771,
+        "broadcast": 171,
+        "multicast": 343,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915390,
+        "dups": 0
+      },
+      {
+        "t": 1793361506580,
+        "total": 2748,
+        "broadcast": 148,
+        "multicast": 314,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913320,
+        "dups": 0
+      },
+      {
+        "t": 1793361507580,
+        "total": 2785,
+        "broadcast": 185,
+        "multicast": 325,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916650,
+        "dups": 0
+      },
+      {
+        "t": 1793361508580,
+        "total": 2762,
+        "broadcast": 162,
+        "multicast": 336,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914580,
+        "dups": 0
+      },
+      {
+        "t": 1793361509580,
+        "total": 2799,
+        "broadcast": 199,
+        "multicast": 347,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917910,
+        "dups": 0
+      },
+      {
+        "t": 1793361510580,
+        "total": 2776,
+        "broadcast": 176,
+        "multicast": 318,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915840,
+        "dups": 0
+      },
+      {
+        "t": 1793361511580,
+        "total": 2753,
+        "broadcast": 153,
+        "multicast": 329,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913770,
+        "dups": 0
+      },
+      {
+        "t": 1793361512580,
+        "total": 2790,
+        "broadcast": 190,
+        "multicast": 340,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917100,
+        "dups": 0
+      },
+      {
+        "t": 1793361513580,
+        "total": 2767,
+        "broadcast": 167,
+        "multicast": 311,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915030,
+        "dups": 0
+      },
+      {
+        "t": 1793361514580,
+        "total": 2744,
+        "broadcast": 144,
+        "multicast": 322,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1912960,
+        "dups": 0
+      },
+      {
+        "t": 1793361515580,
+        "total": 2781,
+        "broadcast": 181,
+        "multicast": 333,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916290,
+        "dups": 0
+      },
+      {
+        "t": 1793361516580,
+        "total": 2758,
+        "broadcast": 158,
+        "multicast": 344,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914220,
+        "dups": 0
+      },
+      {
+        "t": 1793361517580,
+        "total": 2795,
+        "broadcast": 195,
+        "multicast": 315,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1917550,
+        "dups": 0
+      },
+      {
+        "t": 1793361518580,
+        "total": 2772,
+        "broadcast": 172,
+        "multicast": 326,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1915480,
+        "dups": 0
+      },
+      {
+        "t": 1793361519580,
+        "total": 2749,
+        "broadcast": 149,
+        "multicast": 337,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1913410,
+        "dups": 0
+      },
+      {
+        "t": 1793361520580,
+        "total": 2786,
+        "broadcast": 186,
+        "multicast": 348,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1916740,
+        "dups": 0
+      },
+      {
+        "t": 1793361521580,
+        "total": 2763,
+        "broadcast": 163,
+        "multicast": 319,
+        "unicast": 2200,
+        "arp": 30,
+        "bytes": 1914670,
+        "dups": 0
+      }
+    ],
+    "peak": {
+      "t": 0,
+      "total": 0,
+      "broadcast": 2750,
+      "multicast": 340,
+      "unicast": 0,
+      "arp": 0,
+      "bytes": 0,
+      "dups": 31
+    },
+    "topBroadcasters": [
+      {
+        "key": "00:bc:99:40:00:40",
+        "label": "Hangzhou Hikvision",
+        "bytes": 0,
+        "packets": 18211
+      },
+      {
+        "key": "00:06:5b:10:00:10",
+        "label": "Dell Inc.",
+        "bytes": 0,
+        "packets": 6033
+      }
+    ],
+    "stp": {
+      "seen": true,
+      "protocol": "RSTP (802.1w)",
+      "rootBridge": "32769.00:00:0c:4a:21:20",
+      "rootPriority": 32768,
+      "rootCost": 4,
+      "topologyChanges": 4,
+      "lastTc": "0001-01-01T00:00:00Z",
+      "rootChanges": 0,
+      "bpdus": 1310
+    },
+    "state": "ok",
+    "warnPps": 1000,
+    "critPps": 5000,
+    "duplicateRate": 0
+  },
+  "scan": {
+    "running": false,
+    "phase": "Analysis",
+    "progress": 1,
+    "started": "2026-10-30T07:32:42.580167-04:00",
+    "finished": "2026-10-30T07:58:42.580167-04:00",
+    "message": "Assessment complete",
+    "phases": [
+      {
+        "name": "Prepare",
+        "state": "done",
+        "detail": "Ethernet (10.20.0.57) · 508 targets (254 local, 254 routed)",
+        "durationMs": 40
+      },
+      {
+        "name": "ARP sweep",
+        "state": "done",
+        "detail": "38 hosts via raw ARP frames",
+        "durationMs": 3900
+      },
+      {
+        "name": "Ping sweep",
+        "state": "done",
+        "detail": "31 replies (windows-api ICMP)",
+        "durationMs": 4100
+      },
+      {
+        "name": "TCP discovery",
+        "state": "done",
+        "detail": "4 additional hosts found",
+        "durationMs": 21000
+      },
+      {
+        "name": "Service scan",
+        "state": "done",
+        "detail": "141 open ports on 39 hosts",
+        "durationMs": 48000
+      },
+      {
+        "name": "Name resolution",
+        "state": "done",
+        "detail": "Named 41/41 hosts",
+        "durationMs": 6200
+      },
+      {
+        "name": "SNMP polling",
+        "state": "done",
+        "detail": "5 SNMP agents polled",
+        "durationMs": 31000
+      },
+      {
+        "name": "Service discovery",
+        "state": "done",
+        "detail": "Queried mDNS/Bonjour and SSDP/UPnP",
+        "durationMs": 4300
+      },
+      {
+        "name": "Passive listening",
+        "state": "done",
+        "detail": "Listened for DHCP, LLDP/CDP, STP",
+        "durationMs": 1260000
+      },
+      {
+        "name": "Analysis",
+        "state": "done",
+        "durationMs": 300
+      }
+    ]
+  }
+}

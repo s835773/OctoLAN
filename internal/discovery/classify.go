@@ -2,6 +2,7 @@ package discovery
 
 import (
 	"fmt"
+	"regexp"
 	"slices"
 	"strings"
 
@@ -156,6 +157,8 @@ func Classify(d *model.Device) {
 		set(model.TypeServer, "Windows Server via SMB")
 	case has(1433) || has(3306) || has(5432) || has(1521) || has(27017) || has(88) || has(389) || has(25) || has(2049) || has(3260):
 		set(model.TypeServer, "server service listening (DB/LDAP/mail/storage)")
+	case serverName(host) && (has(445) || has(3389) || has(22)):
+		set(model.TypeServer, "server naming convention ("+d.Hostname+")")
 	case has(3389) || has(445) && has(135):
 		set(model.TypeWorkstation, "Windows RDP/SMB endpoint")
 	case hasAny(vendor, "espressif", "tuya", "shelly", "nest", "ecobee", "ring", "wyze", "philips lighting", "signify", "lifx", "sonoff", "particle", "raspberry"):
@@ -308,6 +311,16 @@ func inferOS(d *model.Device, descr, entVendor, banners string) {
 	if os.Window != 0 {
 		os.Evidence = appendUnique(os.Evidence, fmt.Sprintf("SYN-ACK window %d, DF=%v, MSS %d", os.Window, os.DF, os.MSS))
 	}
+}
+
+// serverName matches common MSP naming: ACME-FS01, dc02, sql-prod, SRV-APP1, HV3.
+var serverNameRe = regexp.MustCompile(`(^|[-_.])(srv|svr|server|dc|fs|file|sql|db|app|rds|rdsh|exch|mail|hv|hyperv|esx|vm|veeam|backup|print|ps)[-_]?\d*([-_.]|$)`)
+
+func serverName(h string) bool {
+	if i := strings.IndexByte(h, '.'); i > 0 {
+		h = h[:i]
+	}
+	return h != "" && serverNameRe.MatchString(strings.ToLower(h))
 }
 
 func appleMacModel(m string) bool {

@@ -9,6 +9,7 @@ import (
 	"html/template"
 	"io"
 	"net"
+	"regexp"
 	"sort"
 	"strings"
 	"time"
@@ -116,7 +117,7 @@ var funcs = template.FuncMap{
 		for _, x := range d.Ports {
 			p = append(p, fmt.Sprint(x.Port))
 		}
-		return strings.Join(p, ", ")
+		return strings.Join(p, " ")
 	},
 	"rtt": func(us int64) string {
 		if us == 0 {
@@ -127,13 +128,9 @@ var funcs = template.FuncMap{
 		}
 		return fmt.Sprintf("%.1f ms", float64(us)/1000)
 	},
-	"title": func(s string) string {
-		if s == "" {
-			return s
-		}
-		s = strings.ReplaceAll(s, "-", " ")
-		return strings.ToUpper(s[:1]) + s[1:]
-	},
+	"title":  TypeLabel,
+	"md":     inlineCode,
+	"vendor": ShortVendor,
 	"date": func(t time.Time) string {
 		if t.IsZero() {
 			return ""
@@ -219,6 +216,53 @@ func Write(w io.Writer, s *model.Snapshot) error {
 	return tmpl.Execute(w, v)
 }
 
+var typeLabels = map[string]string{"voip-phone": "VoIP phone", "nas": "NAS", "ups": "UPS", "iot": "IoT",
+	"access-point": "Access point"}
+
+// TypeLabel is the display name for a device type.
+func TypeLabel(s string) string {
+	if l, ok := typeLabels[s]; ok {
+		return l
+	}
+	if s == "" {
+		return s
+	}
+	s = strings.ReplaceAll(s, "-", " ")
+	return strings.ToUpper(s[:1]) + s[1:]
+}
+
+var vendorNoise = regexp.MustCompile(`(?i)[,.]?\s*\b(co\.?,?\s*ltd|corporation|corp|incorporated|inc|ltd|llc|gmbh|limited|technologies|technology|communications?|electronics|systems|network|networks|international|company|mobile)\b\.?`)
+
+// ShortVendor trims registry boilerplate: "Yealink(Xiamen) Network
+// Technology Co.,Ltd." -> "Yealink".
+func ShortVendor(v string) string {
+	if i := strings.IndexAny(v, "(（"); i > 0 {
+		v = v[:i]
+	}
+	for i := 0; i < 3; i++ {
+		v = vendorNoise.ReplaceAllString(v, "")
+	}
+	return strings.Trim(strings.TrimSpace(v), ",.")
+}
+
+// inlineCode escapes s and renders `backtick` spans as <code>.
+func inlineCode(s string) template.HTML {
+	parts := strings.Split(s, "`")
+	var b strings.Builder
+	for i, p := range parts {
+		e := template.HTMLEscapeString(p)
+		if i%2 == 1 && i < len(parts)-1 {
+			b.WriteString("<code>" + e + "</code>")
+		} else {
+			if i%2 == 1 {
+				b.WriteString("`")
+			}
+			b.WriteString(e)
+		}
+	}
+	return template.HTML(b.String())
+}
+
 func summary(s *model.Snapshot, v view) string {
 	var parts []string
 	parts = append(parts, fmt.Sprintf("OctoLAN identified %d devices (%d responding during the assessment) across %d subnet(s)", len(s.Devices), v.Alive, len(s.Subnets)))
@@ -240,6 +284,9 @@ func summary(s *model.Snapshot, v view) string {
 	}
 	return strings.Join(parts, " ")
 }
+
+// HumanBytes formats a byte count (1.5 GiB).
+func HumanBytes(b uint64) string { return humanBytes(b) }
 
 func humanBytes(b uint64) string {
 	const unit = 1024

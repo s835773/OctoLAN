@@ -34,6 +34,9 @@ type Engine struct {
 	St      *store.Store
 	Version string
 	DataDir string
+	// CollectorName replaces this computer's hostname in the dashboard,
+	// sessions and reports (keeps a tech's personal machine name private).
+	CollectorName string
 
 	mu       sync.Mutex
 	cancel   context.CancelFunc
@@ -65,7 +68,7 @@ func (e *Engine) SetStormThresholds(warn, crit int) {
 
 // DetectCaps inspects interfaces and privileges.
 func (e *Engine) DetectCaps() model.Capabilities {
-	host, _ := os.Hostname()
+	host := e.hostname()
 	c := model.Capabilities{OS: runtime.GOOS, Arch: runtime.GOARCH, Hostname: host, ICMPMode: discovery.ICMPMode()}
 	gw, _ := netutil.DefaultGateway()
 	for _, l := range netutil.LocalIPv4() {
@@ -169,6 +172,9 @@ func (e *Engine) StormStatus() model.StormStatus {
 	s := e.storm
 	e.mu.Unlock()
 	if s == nil {
+		if saved := e.St.SavedStorm(); saved != nil {
+			return *saved
+		}
 		return model.StormStatus{State: "off"}
 	}
 	return s.Status()
@@ -205,11 +211,24 @@ func (e *Engine) FlowSummary() model.FlowSummary {
 	e.mu.Lock()
 	c := e.flow
 	e.mu.Unlock()
+	if c == nil {
+		if saved := e.St.SavedFlows(); saved != nil {
+			return *saved
+		}
+	}
 	return c.Summary()
 }
 
+func (e *Engine) hostname() string {
+	if e.CollectorName != "" {
+		return e.CollectorName
+	}
+	h, _ := os.Hostname()
+	return h
+}
+
 func (e *Engine) observeSelf(local netutil.LocalIface) string {
-	host, _ := os.Hostname()
+	host := e.hostname()
 	return e.St.Observe(local.Addr.String(), local.Iface.HardwareAddr.String(), model.SrcLocalHost, func(d *model.Device) {
 		d.IsSelf = true
 		store.AddName(d, host)

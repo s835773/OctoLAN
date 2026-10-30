@@ -124,12 +124,14 @@ func cmdServe(args []string) error {
 	data := fs.String("data", defaultDataDir(), "where sessions are saved")
 	load := fs.String("load", "", "reopen a saved session JSON")
 	autoscan := fs.Bool("scan", false, "start an assessment immediately with default settings")
+	collector := fs.String("collector", "", "name shown for this computer in the dashboard and reports (default: its hostname)")
 	_ = fs.Parse(args)
 
 	fmt.Printf(banner, Version)
 	st := store.New()
 	st.SetSite(*site)
 	e := engine.New(st, Version, *data)
+	e.CollectorName = *collector
 	if *load != "" {
 		snap, err := store.LoadSnapshot(*load)
 		if err != nil {
@@ -143,8 +145,14 @@ func cmdServe(args []string) error {
 	}
 	caps := e.DetectCaps()
 	printCaps(caps)
-	if err := e.StartMonitoring(*iface); err != nil {
-		fmt.Println("  monitoring:", err)
+	if *load == "" {
+		if err := e.StartMonitoring(*iface); err != nil {
+			fmt.Println("  monitoring:", err)
+		}
+	} else {
+		// Reviewing a saved site: don't mix in devices from the network
+		// this laptop is on now. A new assessment starts monitoring.
+		fmt.Println("  Viewing a saved session: live monitoring starts when you run a new assessment.")
 	}
 	if *nf != "" {
 		if err := e.StartNetFlow(*nf); err != nil {
@@ -277,6 +285,7 @@ func cmdScan(args []string) error {
 	rate := fs.Int("rate", 400, "packets per second for ARP/ICMP sweeps")
 	out := fs.String("out", "", "output directory (default: ~/OctoLAN/<site>)")
 	nf := fs.String("netflow", "", "also collect NetFlow on this address during the scan (e.g. :2055)")
+	collector := fs.String("collector", "", "name shown for this computer in reports (default: its hostname)")
 	_ = fs.Parse(args)
 
 	fmt.Printf(banner, Version)
@@ -287,7 +296,9 @@ func cmdScan(args []string) error {
 		data = *out
 	}
 	e := engine.New(st, Version, data)
+	e.CollectorName = *collector
 	printCaps(e.DetectCaps())
+	fmt.Println()
 	if *nf != "" {
 		if err := e.StartNetFlow(*nf); err != nil {
 			fmt.Println("  netflow:", err)
@@ -528,12 +539,22 @@ func cmdNetflow(args []string) error {
 			return nil
 		case <-t.C:
 			s := e.FlowSummary()
-			fmt.Printf("\n%s  flows %d  bytes %d  exporters %d\n", time.Now().Format("15:04:05"), s.TotalFlows, s.TotalBytes, len(s.Exporters))
+			fmt.Printf("\n%s  %d flows · %s · %d exporter(s)\n", time.Now().Format("15:04:05"), s.TotalFlows, report.HumanBytes(s.TotalBytes), len(s.Exporters))
 			for i, tk := range s.TopTalkers {
-				if i >= 10 {
+				if i >= 8 {
 					break
 				}
-				fmt.Printf("  %-40s %12d bytes\n", tk.Key, tk.Bytes)
+				fmt.Printf("  %-18s %10s\n", tk.Key, report.HumanBytes(tk.Bytes))
+			}
+			var apps []string
+			for i, a := range s.TopApps {
+				if i >= 5 {
+					break
+				}
+				apps = append(apps, fmt.Sprintf("%s %s", a.Key, report.HumanBytes(a.Bytes)))
+			}
+			if len(apps) > 0 {
+				fmt.Printf("  apps: %s\n", strings.Join(apps, " · "))
 			}
 		}
 	}

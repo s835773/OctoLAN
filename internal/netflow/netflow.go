@@ -416,7 +416,7 @@ var appPorts = map[uint16]string{
 	20: "FTP-data", 21: "FTP", 22: "SSH", 23: "Telnet", 25: "SMTP", 53: "DNS", 67: "DHCP", 68: "DHCP",
 	80: "HTTP", 88: "Kerberos", 110: "POP3", 123: "NTP", 137: "NetBIOS", 138: "NetBIOS", 139: "NetBIOS",
 	143: "IMAP", 161: "SNMP", 162: "SNMP-trap", 389: "LDAP", 443: "HTTPS", 445: "SMB", 465: "SMTPS",
-	500: "IKE", 514: "Syslog", 587: "SMTP", 636: "LDAPS", 853: "DNS-over-TLS", 993: "IMAPS", 995: "POP3S",
+	104: "DICOM", 500: "IKE", 514: "Syslog", 554: "RTSP", 587: "SMTP", 636: "LDAPS", 853: "DNS-over-TLS", 993: "IMAPS", 995: "POP3S",
 	1194: "OpenVPN", 1433: "MSSQL", 1723: "PPTP", 1812: "RADIUS", 1900: "SSDP", 2049: "NFS",
 	3306: "MySQL", 3389: "RDP", 3478: "STUN/Teams", 4500: "IPsec-NAT", 5060: "SIP", 5061: "SIP-TLS",
 	5222: "XMPP", 5353: "mDNS", 5432: "Postgres", 5900: "VNC", 8080: "HTTP-alt", 8443: "HTTPS-alt",

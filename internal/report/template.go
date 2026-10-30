@@ -20,7 +20,7 @@ h3{font-size:15px;margin:0 0 4px}
 .muted{color:var(--muted)}
 .gauge{flex:none;text-align:center}
 .gauge .g{font-size:34px;font-weight:800}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
 .kpi{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
 .kpi b{display:block;font-size:24px}
 .kpi span{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
@@ -36,13 +36,14 @@ th{background:var(--soft);font-weight:600;position:sticky;top:0}
 td.mono,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .card{border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-#map{height:620px;border:1px solid var(--line);border-radius:10px;background:var(--soft);overflow:hidden}
+#map{height:740px;border:1px solid var(--line);border-radius:10px;background:var(--soft);overflow:hidden}
 .bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--accent)}
 .eol{color:var(--high);font-weight:600}
 footer{margin-top:40px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-@media (max-width:760px){header.cover{flex-direction:column;align-items:flex-start}.grid2{grid-template-columns:1fr}.finding ul{columns:1}}
-@media print{.page{padding:0}h2{break-after:avoid}#map{height:520px}.noprint{display:none}a{color:inherit;text-decoration:none}}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;background:#e2e8f0;border-radius:4px;padding:0 4px}
+@media screen and (max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}header.cover{flex-direction:column;align-items:flex-start}.grid2{grid-template-columns:1fr}.finding ul{columns:1}}
+@media print{.page{padding:0}h2{break-after:avoid}h2.maph{break-before:page}#map{height:740px;break-inside:avoid}.noprint{display:none}a{color:inherit;text-decoration:none}}
 </style>
 </head>
 <body>
@@ -81,7 +82,7 @@ footer{margin-top:40px;color:var(--muted);font-size:12px;border-top:1px solid va
 <h2>Priority actions</h2>
 <table>
 <tr><th style="width:90px">Severity</th><th>Issue</th><th style="width:90px">Affected</th></tr>
-{{range .Top}}<tr><td><span class="sev {{.Severity}}">{{.Severity}}</span></td><td><b>{{.Title}}</b><br><span class="muted">{{.Remediation}}</span></td><td>{{if .Devices}}{{len .Devices}} device(s){{else}}network{{end}}</td></tr>{{end}}
+{{range .Top}}<tr><td><span class="sev {{.Severity}}">{{.Severity}}</span></td><td><b>{{.Title}}</b><br><span class="muted">{{md .Remediation}}</span></td><td>{{if .Devices}}{{len .Devices}} device(s){{else}}network{{end}}</td></tr>{{end}}
 </table>
 {{end}}
 
@@ -102,7 +103,7 @@ footer{margin-top:40px;color:var(--muted);font-size:12px;border-top:1px solid va
   </div>
 </div>
 
-<h2>Topology</h2>
+<h2 class="maph">Topology</h2>
 <p class="muted">Solid lines are LLDP/CDP adjacencies, dashed lines come from switch MAC tables, dotted lines are inferred from subnet membership. Drag to pan, scroll to zoom.</p>
 <div id="map"></div>
 
@@ -110,8 +111,8 @@ footer{margin-top:40px;color:var(--muted);font-size:12px;border-top:1px solid va
 {{range .S.Findings}}
 <div class="finding {{.Severity}}">
   <div style="display:flex;justify-content:space-between;gap:12px"><h3>{{.Title}}</h3><span><span class="muted" style="font-size:12px;margin-right:8px">{{.Category}}</span><span class="sev {{.Severity}}">{{.Severity}}</span></span></div>
-  <div>{{.Detail}}</div>
-  <div class="fix"><b>Recommendation:</b> {{.Remediation}}</div>
+  <div>{{md .Detail}}</div>
+  <div class="fix"><b>Recommendation:</b> {{md .Remediation}}</div>
   {{if .Devices}}<ul>{{range .Devices}}<li>{{devname $.ByID .}}</li>{{end}}</ul>{{end}}
 </div>
 {{else}}<p>No findings.</p>{{end}}
@@ -122,7 +123,7 @@ footer{margin-top:40px;color:var(--muted);font-size:12px;border-top:1px solid va
 {{range .S.Devices}}<tr>
 <td><b>{{label .}}</b>{{if .Model}}<br><span class="muted">{{.Model}}</span>{{end}}{{if .Serial}}<br><span class="muted mono">S/N {{.Serial}}</span>{{end}}</td>
 <td class="mono">{{range $i, $ip := .IPs}}{{if $i}}<br>{{end}}{{$ip}}{{end}}</td>
-<td class="mono">{{.MAC}}<br><span class="muted" style="font-family:inherit">{{.Vendor}}</span></td>
+<td><span class="mono">{{.MAC}}</span>{{if .Vendor}}<br><span class="muted">{{vendor .Vendor}}</span>{{else if .RandomMAC}}<br><span class="muted">private MAC</span>{{end}}</td>
 <td>{{title (printf "%s" .Type)}}</td>
 <td>{{if .OS.Name}}{{.OS.Name}}{{else}}{{.OS.Family}}{{end}}{{if .OS.EOL}} <span class="eol">EOL</span>{{end}}</td>
 <td class="mono">{{ports .}}</td>
@@ -150,7 +151,7 @@ footer{margin-top:40px;color:var(--muted);font-size:12px;border-top:1px solid va
 </div>
 <script>{{.MapJS}}</script>
 <script>
-(function(){var data={{.MapJSON}};var el=document.getElementById('map');if(window.OctoMap&&el){OctoMap.render(el,data,{static:false,light:true});}})();
+(function(){var data={{.MapJSON}};var el=document.getElementById('map');if(window.OctoMap&&el){OctoMap.render(el,data,{static:false,light:true,scale:1.8});}})();
 </script>
 </body>
 </html>`

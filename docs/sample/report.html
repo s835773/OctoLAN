@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riverside Dental Group (sample data) · Network Assessment</title>
+<style>
+:root{--ink:#0f172a;--muted:#475569;--line:#e2e8f0;--bg:#fff;--soft:#f8fafc;--accent:#0f766e;
+--critical:#b91c1c;--high:#dc2626;--medium:#d97706;--low:#2563eb;--info:#64748b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.page{max-width:1080px;margin:0 auto;padding:40px 32px}
+header.cover{display:flex;gap:32px;align-items:center;border-bottom:3px solid var(--accent);padding-bottom:28px;margin-bottom:28px}
+.brand{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+h1{font-size:30px;margin:6px 0 4px;line-height:1.2}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:0 0 4px}
+.muted{color:var(--muted)}
+.gauge{flex:none;text-align:center}
+.gauge .g{font-size:34px;font-weight:800}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
+.kpi{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi b{display:block;font-size:24px}
+.kpi span{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.sev{display:inline-block;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#fff}
+.sev.critical{background:var(--critical)}.sev.high{background:var(--high)}.sev.medium{background:var(--medium)}.sev.low{background:var(--low)}.sev.info{background:var(--info)}
+.finding{border:1px solid var(--line);border-left:5px solid var(--info);border-radius:8px;padding:14px 16px;margin:12px 0;break-inside:avoid}
+.finding.critical{border-left-color:var(--critical)}.finding.high{border-left-color:var(--high)}.finding.medium{border-left-color:var(--medium)}.finding.low{border-left-color:var(--low)}
+.finding .fix{background:#f0fdfa;border-radius:6px;padding:8px 10px;margin-top:8px}
+.finding ul{margin:6px 0 0;padding-left:18px;columns:2;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--soft);font-weight:600;position:sticky;top:0}
+td.mono,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+#map{height:740px;border:1px solid var(--line);border-radius:10px;background:var(--soft);overflow:hidden}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.eol{color:var(--high);font-weight:600}
+footer{margin-top:40px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;background:#e2e8f0;border-radius:4px;padding:0 4px}
+@media screen and (max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}header.cover{flex-direction:column;align-items:flex-start}.grid2{grid-template-columns:1fr}.finding ul{columns:1}}
+@media print{.page{padding:0}h2{break-after:avoid}h2.maph{break-before:page}#map{height:740px;break-inside:avoid}.noprint{display:none}a{color:inherit;text-decoration:none}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="cover">
+  <div class="gauge">
+    <svg width="132" height="132" viewBox="0 0 132 132" role="img" aria-label="Score 38">
+      <circle cx="66" cy="66" r="52" fill="none" stroke="#e2e8f0" stroke-width="14"/>
+      <circle cx="66" cy="66" r="52" fill="none" stroke="#dc2626" stroke-width="14" stroke-linecap="round"
+        stroke-dasharray="124.2 326.7" transform="rotate(-90 66 66)"/>
+      <text x="66" y="72" text-anchor="middle" font-size="30" font-weight="800" fill="#0f172a">38</text>
+      <text x="66" y="94" text-anchor="middle" font-size="12" fill="#475569">out of 100</text>
+    </svg>
+    <div class="g" style="color:#dc2626">Grade F</div>
+  </div>
+  <div>
+    <div class="brand">OctoLAN network assessment</div>
+    <h1>Riverside Dental Group (sample data)</h1>
+    <div class="muted">Friday 30 October 2026, 07:58 · scan time 26m0s · collector TECH-LAPTOP-07 (windows/amd64)</div>
+    <p style="margin:12px 0 0;max-width:640px">OctoLAN identified 36 devices (36 responding during the assessment) across 2 subnet(s), including 5 network infrastructure devices. No critical issues were found, but 5 high-severity issues should be remediated promptly. 4 device(s) run software past end of support.</p>
+  </div>
+</header>
+
+<div class="kpis">
+  <div class="kpi"><b>36</b><span>Devices</span></div>
+  <div class="kpi"><b>5</b><span>Infrastructure</span></div>
+  <div class="kpi"><b>2</b><span>Subnets</span></div>
+  <div class="kpi"><b>3</b><span>VLANs</span></div>
+  <div class="kpi"><b style="color:var(--critical)">0</b><span>Critical</span></div>
+  <div class="kpi"><b style="color:var(--high)">5</b><span>High</span></div>
+  <div class="kpi"><b style="color:var(--medium)">6</b><span>Medium</span></div>
+  <div class="kpi"><b class="eol">4</b><span>End-of-life</span></div>
+</div>
+
+
+<h2>Priority actions</h2>
+<table>
+<tr><th style="width:90px">Severity</th><th>Issue</th><th style="width:90px">Affected</th></tr>
+<tr><td><span class="sev high">high</span></td><td><b>End-of-life operating system</b><br><span class="muted">Plan upgrade or replacement; isolate on a restricted VLAN in the meantime.</span></td><td>4 device(s)</td></tr><tr><td><span class="sev high">high</span></td><td><b>SNMP responds to a default community string</b><br><span class="muted">Change community strings to long random values, restrict SNMP by ACL to the monitoring host, or move to SNMPv3 authPriv.</span></td><td>2 device(s)</td></tr><tr><td><span class="sev high">high</span></td><td><b>Telnet enabled</b><br><span class="muted">Disable Telnet and use SSH. On Cisco: <code>line vty 0 15</code> → <code>transport input ssh</code>.</span></td><td>2 device(s)</td></tr><tr><td><span class="sev high">high</span></td><td><b>SMBv1 enabled</b><br><span class="muted">Disable SMB1: <code>Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol</code>; on NAS devices set minimum protocol to SMB2.</span></td><td>1 device(s)</td></tr><tr><td><span class="sev high">high</span></td><td><b>Multiple DHCP servers on one segment</b><br><span class="muted">Identify the unauthorised server; enable DHCP snooping on access switches.</span></td><td>network</td></tr><tr><td><span class="sev medium">medium</span></td><td><b>Management web UI over plain HTTP</b><br><span class="muted">Enable HTTPS-only management and disable the HTTP listener.</span></td><td>7 device(s)</td></tr>
+</table>
+
+
+<h2>Network overview</h2>
+<div class="grid2">
+  <div class="card">
+    <h3>Subnets</h3>
+    <table><tr><td class="mono">10.20.0.0/24</td><td>collector segment · gateway 10.20.0.1</td></tr><tr><td class="mono">10.20.10.0/24</td><td>scanned · gateway 10.20.10.1</td></tr></table>
+    <h3 style="margin-top:14px">DHCP servers</h3>
+    <table><tr><td class="mono">10.20.0.10</td><td>router 10.20.0.1 · DNS 10.20.0.10 · riverside.local</td></tr><tr><td class="mono">192.168.0.1</td><td>router 192.168.0.1 · DNS 192.168.0.1</td></tr></table>
+  </div>
+  <div class="card">
+    <h3>Device mix</h3>
+    <div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">Workstation</span><div class="bar" style="flex:1"><i style="width:33%;min-width:4px"></i></div><b style="width:32px;text-align:right">12</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">Camera</span><div class="bar" style="flex:1"><i style="width:11%;min-width:4px"></i></div><b style="width:32px;text-align:right">4</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">VoIP phone</span><div class="bar" style="flex:1"><i style="width:11%;min-width:4px"></i></div><b style="width:32px;text-align:right">4</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">Printer</span><div class="bar" style="flex:1"><i style="width:5%;min-width:4px"></i></div><b style="width:32px;text-align:right">2</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">Server</span><div class="bar" style="flex:1"><i style="width:5%;min-width:4px"></i></div><b style="width:32px;text-align:right">2</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">Switch</span><div class="bar" style="flex:1"><i style="width:5%;min-width:4px"></i></div><b style="width:32px;text-align:right">2</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">Access point</span><div class="bar" style="flex:1"><i style="width:5%;min-width:4px"></i></div><b style="width:32px;text-align:right">2</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">Unknown</span><div class="bar" style="flex:1"><i style="width:5%;min-width:4px"></i></div><b style="width:32px;text-align:right">2</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">Mobile</span><div class="bar" style="flex:1"><i style="width:2%;min-width:4px"></i></div><b style="width:32px;text-align:right">1</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">Media</span><div class="bar" style="flex:1"><i style="width:2%;min-width:4px"></i></div><b style="width:32px;text-align:right">1</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">IoT</span><div class="bar" style="flex:1"><i style="width:2%;min-width:4px"></i></div><b style="width:32px;text-align:right">1</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">NAS</span><div class="bar" style="flex:1"><i style="width:2%;min-width:4px"></i></div><b style="width:32px;text-align:right">1</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">Firewall</span><div class="bar" style="flex:1"><i style="width:2%;min-width:4px"></i></div><b style="width:32px;text-align:right">1</b></div><div style="display:flex;gap:10px;align-items:center;margin:5px 0"><span style="width:110px">UPS</span><div class="bar" style="flex:1"><i style="width:2%;min-width:4px"></i></div><b style="width:32px;text-align:right">1</b></div>
+    <h3 style="margin-top:14px">Layer 2</h3>
+    <div>RSTP (802.1w) root bridge <span class="mono">32769.00:00:0c:4a:21:20</span>, 4 topology change(s) observed.</div>
+    <div>Peak broadcast+multicast: <b>2750</b> bcast / <b>340</b> mcast pps.</div>
+  </div>
+</div>
+
+<h2 class="maph">Topology</h2>
+<p class="muted">Solid lines are LLDP/CDP adjacencies, dashed lines come from switch MAC tables, dotted lines are inferred from subnet membership. Drag to pan, scroll to zoom.</p>
+<div id="map"></div>
+
+<h2>Findings</h2>
+
+<div class="finding high">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>End-of-life operating system</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Lifecycle</span><span class="sev high">high</span></span></div>
+  <div>These devices run an OS or firmware past vendor end of support and no longer receive security patches.</div>
+  <div class="fix"><b>Recommendation:</b> Plan upgrade or replacement; isolate on a restricted VLAN in the meantime.</div>
+  <ul><li>RDG-FS01 (10.20.0.15)</li><li>RDG-WS05 (10.20.0.104)</li><li>RDG-WS09 (10.20.0.108)</li><li>RDG-XRAY-ACQ (10.20.10.21)</li></ul>
+</div>
+
+<div class="finding high">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>SNMP responds to a default community string</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Credentials</span><span class="sev high">high</span></span></div>
+  <div>The device answers SNMP with &#39;public&#39; or &#39;private&#39;. Anyone on the LAN can read its configuration details; &#39;private&#39; may allow writes.</div>
+  <div class="fix"><b>Recommendation:</b> Change community strings to long random values, restrict SNMP by ACL to the monitoring host, or move to SNMPv3 authPriv.</div>
+  <ul><li>rdg-core-sw01 (10.20.0.2)</li><li>ups-closet (10.20.0.25)</li></ul>
+</div>
+
+<div class="finding high">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>Telnet enabled</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Insecure protocols</span><span class="sev high">high</span></span></div>
+  <div>Telnet sends credentials and sessions in cleartext. Anyone on the network path can capture admin passwords.</div>
+  <div class="fix"><b>Recommendation:</b> Disable Telnet and use SSH. On Cisco: <code>line vty 0 15</code> → <code>transport input ssh</code>.</div>
+  <ul><li>rdg-core-sw01 (10.20.0.2)</li><li>HP-Xray-Room (10.20.0.31)</li></ul>
+</div>
+
+<div class="finding high">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>SMBv1 enabled</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Vulnerable services</span><span class="sev high">high</span></span></div>
+  <div>SMBv1 is the protocol abused by WannaCry/NotPetya (EternalBlue) and is deprecated by Microsoft.</div>
+  <div class="fix"><b>Recommendation:</b> Disable SMB1: <code>Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol</code>; on NAS devices set minimum protocol to SMB2.</div>
+  <ul><li>RDG-FS01 (10.20.0.15)</li></ul>
+</div>
+
+<div class="finding high">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>Multiple DHCP servers on one segment</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Network</span><span class="sev high">high</span></span></div>
+  <div>More than one DHCP server answered: 10.20.0.10, 192.168.0.1. A rogue DHCP server can redirect clients&#39; gateway/DNS (man-in-the-middle) or cause outages.</div>
+  <div class="fix"><b>Recommendation:</b> Identify the unauthorised server; enable DHCP snooping on access switches.</div>
+  
+</div>
+
+<div class="finding medium">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>Management web UI over plain HTTP</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Insecure protocols</span><span class="sev medium">medium</span></span></div>
+  <div>Infrastructure devices offer their admin page without HTTPS, exposing admin credentials on the wire.</div>
+  <div class="fix"><b>Recommendation:</b> Enable HTTPS-only management and disable the HTTP listener.</div>
+  <ul><li>rdg-nas01 (10.20.0.20)</li><li>ups-closet (10.20.0.25)</li><li>HP-Xray-Room (10.20.0.31)</li><li>NVR-01 (10.20.0.40)</li><li>cam-lobby (10.20.0.41)</li><li>cam-parking (10.20.0.42)</li><li>cam-rear-door (10.20.0.43)</li></ul>
+</div>
+
+<div class="finding medium">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>SMB signing not required on servers</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Hardening</span><span class="sev medium">medium</span></span></div>
+  <div>Without required signing, SMB relay attacks (e.g. NTLM relay) can impersonate users against these servers.</div>
+  <div class="fix"><b>Recommendation:</b> Set &#39;Microsoft network server: Digitally sign communications (always)&#39; via GPO.</div>
+  <ul><li>RDG-DC01 (10.20.0.10)</li><li>RDG-FS01 (10.20.0.15)</li></ul>
+</div>
+
+<div class="finding medium">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>Expired TLS certificates</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Certificates</span><span class="sev medium">medium</span></span></div>
+  <div>Services are presenting certificates that have already expired; users learn to click through warnings.</div>
+  <div class="fix"><b>Recommendation:</b> Renew the certificates (or automate with ACME/internal CA).</div>
+  <ul><li>rdg-fw01 (10.20.0.1)</li></ul>
+</div>
+
+<div class="finding medium">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>FTP service exposed</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Insecure protocols</span><span class="sev medium">medium</span></span></div>
+  <div>FTP transfers credentials and files unencrypted.</div>
+  <div class="fix"><b>Recommendation:</b> Replace with SFTP/FTPS, or disable the service if it is not needed.</div>
+  <ul><li>RDG-FS01 (10.20.0.15)</li></ul>
+</div>
+
+<div class="finding medium">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>Switch/router interfaces with errors</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Performance</span><span class="sev medium">medium</span></span></div>
+  <div>Interfaces report a high error count (CRC/frame errors), commonly a bad cable, duplex mismatch or failing optic.</div>
+  <div class="fix"><b>Recommendation:</b> Check cabling and duplex settings on the listed devices&#39; ports.</div>
+  <ul><li>rdg-core-sw01 (10.20.0.2)</li></ul>
+</div>
+
+<div class="finding medium">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>UPnP enabled on the gateway</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Hardening</span><span class="sev medium">medium</span></span></div>
+  <div>UPnP lets any internal device open inbound ports on the firewall without admin approval.</div>
+  <div class="fix"><b>Recommendation:</b> Disable UPnP/NAT-PMP on the edge device.</div>
+  <ul><li>rdg-fw01 (10.20.0.1)</li></ul>
+</div>
+
+<div class="finding low">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>RDP enabled on workstations</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Remote access</span><span class="sev low">low</span></span></div>
+  <div>Remote Desktop listening on endpoints widens the lateral-movement surface for ransomware.</div>
+  <div class="fix"><b>Recommendation:</b> Disable RDP on workstations or restrict it by firewall to admin jump hosts; require NLA.</div>
+  <ul><li>RDG-WS01 (10.20.0.100)</li><li>RDG-WS02 (10.20.0.101)</li><li>RDG-WS03 (10.20.0.102)</li><li>RDG-WS04 (10.20.0.103)</li><li>RDG-WS05 (10.20.0.104)</li><li>RDG-WS06 (10.20.0.105)</li><li>RDG-WS07 (10.20.0.106)</li><li>RDG-WS08 (10.20.0.107)</li><li>RDG-WS09 (10.20.0.108)</li><li>RDG-XRAY-ACQ (10.20.10.21)</li></ul>
+</div>
+
+<div class="finding low">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>SNMP v1/v2c in use</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Insecure protocols</span><span class="sev low">low</span></span></div>
+  <div>Community strings travel in cleartext.</div>
+  <div class="fix"><b>Recommendation:</b> Migrate monitoring to SNMPv3 with authentication and privacy (SHA/AES).</div>
+  <ul><li>rdg-fw01 (10.20.0.1)</li><li>rdg-core-sw01 (10.20.0.2)</li><li>rdg-sw02 (10.20.0.3)</li><li>ups-closet (10.20.0.25)</li></ul>
+</div>
+
+<div class="finding low">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>Infrastructure not rebooted in over a year</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Lifecycle</span><span class="sev low">low</span></span></div>
+  <div>Uptime over a year usually means firmware has not been patched.</div>
+  <div class="fix"><b>Recommendation:</b> Schedule firmware updates in a maintenance window.</div>
+  <ul><li>rdg-core-sw01 (10.20.0.2)</li></ul>
+</div>
+
+<div class="finding low">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>TLS certificates expiring within 30 days</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Certificates</span><span class="sev low">low</span></span></div>
+  <div>Certificates will expire soon and cause outages or browser warnings.</div>
+  <div class="fix"><b>Recommendation:</b> Renew before expiry.</div>
+  <ul><li>rdg-nas01 (10.20.0.20)</li></ul>
+</div>
+
+<div class="finding info">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>Self-signed certificates on management interfaces</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Certificates</span><span class="sev info">info</span></span></div>
+  <div>Self-signed certificates can&#39;t be distinguished from an attacker&#39;s certificate by users.</div>
+  <div class="fix"><b>Recommendation:</b> Issue certificates from an internal CA and distribute the root via GPO/MDM.</div>
+  <ul><li>rdg-fw01 (10.20.0.1)</li><li>rdg-nas01 (10.20.0.20)</li></ul>
+</div>
+
+<div class="finding info">
+  <div style="display:flex;justify-content:space-between;gap:12px"><h3>Unidentified devices</h3><span><span class="muted" style="font-size:12px;margin-right:8px">Inventory</span><span class="sev info">info</span></span></div>
+  <div>These devices answered on the network but OctoLAN could not determine what they are (no hostname, open services, SNMP or vendor match).</div>
+  <div class="fix"><b>Recommendation:</b> Identify and label each device. Unknown devices are a common source of shadow IT and unmanaged risk.</div>
+  <ul><li>10.20.0.199</li><li>10.20.10.22</li></ul>
+</div>
+
+
+<h2>Device inventory</h2>
+<table>
+<tr><th>Name</th><th>IP</th><th>MAC / vendor</th><th>Type</th><th>Operating system</th><th>Open TCP ports</th><th>Latency</th></tr>
+<tr>
+<td><b>rdg-fw01</b><br><span class="muted">FortiGate-60F</span><br><span class="muted mono">S/N FGT60FTK2209XXXX</span></td>
+<td class="mono">10.20.0.1</td>
+<td><span class="mono">00:09:0f:aa:10:01</span><br><span class="muted">Fortinet</span></td>
+<td>Firewall</td>
+<td>FortiGate-60F v7.2.8,build1639</td>
+<td class="mono">443 8443 22</td>
+<td>410 µs</td>
+</tr><tr>
+<td><b>rdg-core-sw01</b><br><span class="muted">WS-C2960X-48FPD-L</span><br><span class="muted mono">S/N FOC2138XXXX</span></td>
+<td class="mono">10.20.0.2</td>
+<td><span class="mono">00:00:0c:4a:21:10</span><br><span class="muted">Cisco</span></td>
+<td>Switch</td>
+<td>Cisco IOS Software, C2960X Software (C2960X-UNIVERSALK9-M), Version 15.2(7)E4</td>
+<td class="mono">22 23 80 443</td>
+<td>417 µs</td>
+</tr><tr>
+<td><b>rdg-sw02</b><br><span class="muted">C1000-24P-4G-L</span></td>
+<td class="mono">10.20.0.3</td>
+<td><span class="mono">00:00:0c:4a:21:20</span><br><span class="muted">Cisco</span></td>
+<td>Switch</td>
+<td>Cisco IOS Software, C1000 Software (C1000-UNIVERSALK9-M), Version 15.2(7)E8</td>
+<td class="mono">22</td>
+<td>594 µs</td>
+</tr><tr>
+<td><b>RDG-DC01</b></td>
+<td class="mono">10.20.0.10</td>
+<td><span class="mono">00:06:5b:10:00:10</span><br><span class="muted">Dell</span></td>
+<td>Server</td>
+<td>Windows Server 2022 (build 20348)</td>
+<td class="mono">53 88 135 139 389 445 3389</td>
+<td>475 µs</td>
+</tr><tr>
+<td><b>AP-Front-Desk</b></td>
+<td class="mono">10.20.0.11</td>
+<td><span class="mono">00:15:6d:31:00:01</span><br><span class="muted">Ubiquiti</span></td>
+<td>Access point</td>
+<td>Linux/Unix</td>
+<td class="mono">22</td>
+<td>1.3 ms</td>
+</tr><tr>
+<td><b>AP-Operatory</b></td>
+<td class="mono">10.20.0.12</td>
+<td><span class="mono">00:15:6d:31:00:02</span><br><span class="muted">Ubiquiti</span></td>
+<td>Access point</td>
+<td>Linux/Unix</td>
+<td class="mono">22</td>
+<td>1.5 ms</td>
+</tr><tr>
+<td><b>RDG-FS01</b></td>
+<td class="mono">10.20.0.15</td>
+<td><span class="mono">00:06:5b:10:00:15</span><br><span class="muted">Dell</span></td>
+<td>Server</td>
+<td>Windows Server 2012 R2 (build 9600) <span class="eol">EOL</span></td>
+<td class="mono">135 139 445 3389 21</td>
+<td>552 µs</td>
+</tr><tr>
+<td><b>rdg-nas01</b></td>
+<td class="mono">10.20.0.20</td>
+<td><span class="mono">00:11:32:aa:bb:20</span><br><span class="muted">Synology</span></td>
+<td>NAS</td>
+<td>Linux/Unix</td>
+<td class="mono">22 80 139 445 5000 5001</td>
+<td>869 µs</td>
+</tr><tr>
+<td><b>ups-closet</b></td>
+<td class="mono">10.20.0.25</td>
+<td><span class="mono">00:c0:b7:55:00:25</span><br><span class="muted">American Power Conversion</span></td>
+<td>UPS</td>
+<td>APC Web/SNMP Management Card (MB:v4.1.0 PF:v6.4.6 PN:apc_hw05_aos_646.bin)</td>
+<td class="mono">80</td>
+<td>1.2 ms</td>
+</tr><tr>
+<td><b>HP-Front-Office</b><br><span class="muted">HP LaserJet Pro M404dn</span></td>
+<td class="mono">10.20.0.30</td>
+<td><span class="mono">00:01:e6:30:00:30</span><br><span class="muted">Hewlett Packard</span></td>
+<td>Printer</td>
+<td>Linux/Unix</td>
+<td class="mono">80 443 631 9100</td>
+<td>2.1 ms</td>
+</tr><tr>
+<td><b>HP-Xray-Room</b></td>
+<td class="mono">10.20.0.31</td>
+<td><span class="mono">00:01:e6:30:00:31</span><br><span class="muted">Hewlett Packard</span></td>
+<td>Printer</td>
+<td>Linux/Unix</td>
+<td class="mono">80 9100 23</td>
+<td>2.5 ms</td>
+</tr><tr>
+<td><b>NVR-01</b></td>
+<td class="mono">10.20.0.40</td>
+<td><span class="mono">00:bc:99:40:00:40</span><br><span class="muted">Hangzhou Hikvision Digital</span></td>
+<td>Camera</td>
+<td>Linux/Unix</td>
+<td class="mono">80 554 8000</td>
+<td>1.1 ms</td>
+</tr><tr>
+<td><b>cam-lobby</b></td>
+<td class="mono">10.20.0.41</td>
+<td><span class="mono">00:bc:99:40:00:41</span><br><span class="muted">Hangzhou Hikvision Digital</span></td>
+<td>Camera</td>
+<td>Linux/Unix</td>
+<td class="mono">80 554</td>
+<td>1.3 ms</td>
+</tr><tr>
+<td><b>cam-parking</b></td>
+<td class="mono">10.20.0.42</td>
+<td><span class="mono">00:bc:99:40:00:42</span><br><span class="muted">Hangzhou Hikvision Digital</span></td>
+<td>Camera</td>
+<td>Linux/Unix</td>
+<td class="mono">80 554</td>
+<td>1.3 ms</td>
+</tr><tr>
+<td><b>cam-rear-door</b></td>
+<td class="mono">10.20.0.43</td>
+<td><span class="mono">00:bc:99:40:00:43</span><br><span class="muted">Hangzhou Hikvision Digital</span></td>
+<td>Camera</td>
+<td>Linux/Unix</td>
+<td class="mono">80 554</td>
+<td>1.4 ms</td>
+</tr><tr>
+<td><b>TECH-LAPTOP-07</b></td>
+<td class="mono">10.20.0.57</td>
+<td><span class="mono">00:12:fe:99:00:57</span><br><span class="muted">Lenovo</span></td>
+<td>Workstation</td>
+<td>Windows 11 24H2</td>
+<td class="mono"></td>
+<td></td>
+</tr><tr>
+<td><b>SIP-T54W-1</b></td>
+<td class="mono">10.20.0.60</td>
+<td><span class="mono">24:9a:d8:00:00:60</span><br><span class="muted">Yealink</span></td>
+<td>VoIP phone</td>
+<td>Linux/Unix</td>
+<td class="mono">80 443 5060</td>
+<td>965 µs</td>
+</tr><tr>
+<td><b>SIP-T54W-2</b></td>
+<td class="mono">10.20.0.61</td>
+<td><span class="mono">24:9a:d8:00:00:61</span><br><span class="muted">Yealink</span></td>
+<td>VoIP phone</td>
+<td>Linux/Unix</td>
+<td class="mono">80 443 5060</td>
+<td>972 µs</td>
+</tr><tr>
+<td><b>SIP-T54W-3</b></td>
+<td class="mono">10.20.0.62</td>
+<td><span class="mono">24:9a:d8:00:00:62</span><br><span class="muted">Yealink</span></td>
+<td>VoIP phone</td>
+<td>Linux/Unix</td>
+<td class="mono">80 443 5060</td>
+<td>1.1 ms</td>
+</tr><tr>
+<td><b>SIP-T54W-4</b></td>
+<td class="mono">10.20.0.63</td>
+<td><span class="mono">24:9a:d8:00:00:63</span><br><span class="muted">Yealink</span></td>
+<td>VoIP phone</td>
+<td>Linux/Unix</td>
+<td class="mono">80 443 5060</td>
+<td>1.9 ms</td>
+</tr><tr>
+<td><b>RDG-WS01</b></td>
+<td class="mono">10.20.0.100</td>
+<td><span class="mono">00:12:fe:00:01:00</span><br><span class="muted">Lenovo</span></td>
+<td>Workstation</td>
+<td>Windows 11 24H2 (build 26100)</td>
+<td class="mono">135 139 445 3389</td>
+<td>2.1 ms</td>
+</tr><tr>
+<td><b>RDG-WS02</b></td>
+<td class="mono">10.20.0.101</td>
+<td><span class="mono">00:12:fe:00:01:01</span><br><span class="muted">Lenovo</span></td>
+<td>Workstation</td>
+<td>Windows 11 24H2 (build 26100)</td>
+<td class="mono">135 139 445 3389</td>
+<td>1.0 ms</td>
+</tr><tr>
+<td><b>RDG-WS03</b></td>
+<td class="mono">10.20.0.102</td>
+<td><span class="mono">00:12:fe:00:01:02</span><br><span class="muted">Lenovo</span></td>
+<td>Workstation</td>
+<td>Windows 11 23H2 (build 22631)</td>
+<td class="mono">135 139 445 3389</td>
+<td>1.1 ms</td>
+</tr><tr>
+<td><b>RDG-WS04</b></td>
+<td class="mono">10.20.0.103</td>
+<td><span class="mono">00:12:fe:00:01:03</span><br><span class="muted">Lenovo</span></td>
+<td>Workstation</td>
+<td>Windows 11 24H2 (build 26100)</td>
+<td class="mono">135 139 445 3389</td>
+<td>1.4 ms</td>
+</tr><tr>
+<td><b>RDG-WS05</b></td>
+<td class="mono">10.20.0.104</td>
+<td><span class="mono">00:12:fe:00:01:04</span><br><span class="muted">Lenovo</span></td>
+<td>Workstation</td>
+<td>Windows 10 22H2 (build 19045) <span class="eol">EOL</span></td>
+<td class="mono">135 139 445 3389</td>
+<td>1.8 ms</td>
+</tr><tr>
+<td><b>RDG-WS06</b></td>
+<td class="mono">10.20.0.105</td>
+<td><span class="mono">00:12:fe:00:01:05</span><br><span class="muted">Lenovo</span></td>
+<td>Workstation</td>
+<td>Windows 11 24H2 (build 26100)</td>
+<td class="mono">135 139 445 3389</td>
+<td>2.7 ms</td>
+</tr><tr>
+<td><b>RDG-WS07</b></td>
+<td class="mono">10.20.0.106</td>
+<td><span class="mono">00:12:fe:00:01:06</span><br><span class="muted">Lenovo</span></td>
+<td>Workstation</td>
+<td>Windows 11 23H2 (build 22631)</td>
+<td class="mono">135 139 445 3389</td>
+<td>3.0 ms</td>
+</tr><tr>
+<td><b>RDG-WS08</b></td>
+<td class="mono">10.20.0.107</td>
+<td><span class="mono">00:12:fe:00:01:07</span><br><span class="muted">Lenovo</span></td>
+<td>Workstation</td>
+<td>Windows 11 24H2 (build 26100)</td>
+<td class="mono">135 139 445 3389</td>
+<td>1.7 ms</td>
+</tr><tr>
+<td><b>RDG-WS09</b></td>
+<td class="mono">10.20.0.108</td>
+<td><span class="mono">00:12:fe:00:01:08</span><br><span class="muted">Lenovo</span></td>
+<td>Workstation</td>
+<td>Windows 10 22H2 (build 19045) <span class="eol">EOL</span></td>
+<td class="mono">135 139 445 3389</td>
+<td>1.8 ms</td>
+</tr><tr>
+<td><b>Dr-Patel-MacBook</b><br><span class="muted">Mac15,6</span></td>
+<td class="mono">10.20.0.120</td>
+<td><span class="mono">00:03:93:00:01:20</span><br><span class="muted">Apple</span></td>
+<td>Workstation</td>
+<td>macOS (Mac15,6)</td>
+<td class="mono"></td>
+<td>1.8 ms</td>
+</tr><tr>
+<td><b>Sonos-Waiting-Room</b></td>
+<td class="mono">10.20.0.130</td>
+<td><span class="mono">00:0e:58:00:01:30</span><br><span class="muted">Sonos</span></td>
+<td>Media</td>
+<td>Linux/Unix</td>
+<td class="mono"></td>
+<td>1.9 ms</td>
+</tr><tr>
+<td><b>10.20.0.140</b></td>
+<td class="mono">10.20.0.140</td>
+<td><span class="mono">00:4b:12:00:01:40</span><br><span class="muted">Espressif</span></td>
+<td>IoT</td>
+<td>Linux/Unix</td>
+<td class="mono">80</td>
+<td>1.5 ms</td>
+</tr><tr>
+<td><b>iPhone</b></td>
+<td class="mono">10.20.0.150</td>
+<td><span class="mono">da:a1:19:00:01:50</span><br><span class="muted">private MAC</span></td>
+<td>Mobile</td>
+<td>Apple iOS/iPadOS</td>
+<td class="mono">62078</td>
+<td>1.5 ms</td>
+</tr><tr>
+<td><b>10.20.0.199</b></td>
+<td class="mono">10.20.0.199</td>
+<td><span class="mono"></span></td>
+<td>Unknown</td>
+<td>Linux/Unix</td>
+<td class="mono"></td>
+<td>1.7 ms</td>
+</tr><tr>
+<td><b>RDG-XRAY-ACQ</b></td>
+<td class="mono">10.20.10.21</td>
+<td><span class="mono"></span></td>
+<td>Workstation</td>
+<td>Windows 7 (build 7601) <span class="eol">EOL</span></td>
+<td class="mono">135 139 445 3389</td>
+<td>2.4 ms</td>
+</tr><tr>
+<td><b>10.20.10.22</b></td>
+<td class="mono">10.20.10.22</td>
+<td><span class="mono"></span></td>
+<td>Unknown</td>
+<td>Linux/Unix</td>
+<td class="mono">104 80</td>
+<td>2.6 ms</td>
+</tr>
+</table>
+
+
+<h2>Traffic (NetFlow / IPFIX)</h2>
+<div class="grid2">
+<div class="card"><h3>Top talkers</h3><table><tr><td class="mono">10.20.0.15</td><td style="text-align:right">16.8 GiB</td></tr><tr><td class="mono">10.20.0.40</td><td style="text-align:right">13.0 GiB</td></tr><tr><td class="mono">10.20.0.20</td><td style="text-align:right">8.5 GiB</td></tr><tr><td class="mono">10.20.0.105</td><td style="text-align:right">3.0 GiB</td></tr><tr><td class="mono">52.96.164.18</td><td style="text-align:right">2.7 GiB</td></tr></table></div>
+<div class="card"><h3>Top applications</h3><table><tr><td>SMB</td><td style="text-align:right">19.6 GiB</td></tr><tr><td>HTTPS</td><td style="text-align:right">15.8 GiB</td></tr><tr><td>RTSP</td><td style="text-align:right">11.2 GiB</td></tr><tr><td>RDP</td><td style="text-align:right">2.0 GiB</td></tr><tr><td>DNS</td><td style="text-align:right">381.5 MiB</td></tr></table></div>
+</div>
+
+
+<h2>Methodology</h2>
+<p>The assessment combined active discovery (ARP and ICMP sweeps, TCP service checks, SNMP polling, SMB/NTLM and TLS inspection, reverse DNS, NetBIOS and mDNS) with passive listening (DHCP, LLDP/CDP, mDNS/SSDP, spanning tree and broadcast metering). No credentials were used other than the SNMP communities supplied, and no exploits or intrusive tests were run.</p>
+<table>
+<tr><th>Phase</th><th>Result</th><th>Detail</th></tr>
+<tr><td>Prepare</td><td>done</td><td>Ethernet (10.20.0.57) · 508 targets (254 local, 254 routed)</td></tr><tr><td>ARP sweep</td><td>done</td><td>38 hosts via raw ARP frames</td></tr><tr><td>Ping sweep</td><td>done</td><td>31 replies (windows-api ICMP)</td></tr><tr><td>TCP discovery</td><td>done</td><td>4 additional hosts found</td></tr><tr><td>Service scan</td><td>done</td><td>141 open ports on 39 hosts</td></tr><tr><td>Name resolution</td><td>done</td><td>Named 41/41 hosts</td></tr><tr><td>SNMP polling</td><td>done</td><td>5 SNMP agents polled</td></tr><tr><td>Service discovery</td><td>done</td><td>Queried mDNS/Bonjour and SSDP/UPnP</td></tr><tr><td>Passive listening</td><td>done</td><td>Listened for DHCP, LLDP/CDP, STP</td></tr><tr><td>Analysis</td><td>done</td><td></td></tr>
+</table>
+<p class="muted">Collector capabilities: raw capture available; ICMP mode windows-api.</p>
+
+<footer>Generated by OctoLAN v2.0.0 · Friday 30 October 2026, 07:58 · This report reflects the network as observed from the collector's position during the assessment window.</footer>
+</div>
+<script>/* OctoMap: dependency-free topology renderer shared by the dashboard and
+ * the HTML report. Tiered force layout (gateway → switches → APs →
+ * endpoints), pan/zoom, node drag, severity badges. */
+(function (global) {
+  'use strict';
+  var NS = 'http://www.w3.org/2000/svg';
+
+  var ICONS = {
+    router: 'M4 12h16M12 4v16M8 8l-4 4 4 4M16 8l4 4-4 4',
+    firewall: 'M3 6h18v12H3zM3 10h18M3 14h18M9 6v4M15 10v4M9 14v4',
+    switch: 'M4 9h14l-3-3M20 15H6l3 3',
+    'access-point': 'M5 10a10 10 0 0 1 14 0M8 13a6 6 0 0 1 8 0M12 17v.5',
+    server: 'M5 4h14v6H5zM5 14h14v6H5zM8 7h.5M8 17h.5',
+    workstation: 'M4 5h16v11H4zM9 20h6M12 16v4',
+    hypervisor: 'M12 3l9 5-9 5-9-5zM3 13l9 5 9-5',
+    nas: 'M5 4h14v16H5zM5 9.3h14M5 14.6h14M8 6.6h.5M8 12h.5M8 17.3h.5',
+    printer: 'M7 9V4h10v5M6 18H4v-7h16v7h-2M7 14h10v6H7z',
+    'voip-phone': 'M7 4h3l1.5 4.5-2 1.2a11 11 0 0 0 4.8 4.8l1.2-2L20 14v3a2 2 0 0 1-2 2A15 15 0 0 1 5 6a2 2 0 0 1 2-2',
+    camera: 'M3 8h12v8H3zM15 11l6-3v8l-6-3',
+    mobile: 'M8 3h8v18H8zM11 18h2',
+    media: 'M3 6h18v11H3zM8 20h8',
+    iot: 'M7 7h10v10H7zM10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4',
+    ups: 'M6 7h11v10H6zM17 10h2v4h-2M12.5 9l-2 3h3l-2 3',
+    cloud: 'M7 18h10a4 4 0 0 0 .4-8A6 6 0 0 0 6 11.2 3.5 3.5 0 0 0 7 18z',
+    unknown: 'M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.5'
+  };
+  var COLORS = {
+    router: '#0ea5e9', firewall: '#ef4444', switch: '#14b8a6', 'access-point': '#8b5cf6',
+    server: '#f59e0b', hypervisor: '#f97316', nas: '#eab308', workstation: '#3b82f6',
+    printer: '#64748b', 'voip-phone': '#10b981', camera: '#ec4899', mobile: '#6366f1',
+    media: '#a855f7', iot: '#84cc16', ups: '#78716c', cloud: '#94a3b8', unknown: '#9ca3af'
+  };
+  var SEV = { critical: '#b91c1c', high: '#ef4444', medium: '#f59e0b', low: '#3b82f6', info: '#94a3b8' };
+  var INFRA = { router: 1, firewall: 1, switch: 1, 'access-point': 1 };
+
+  function tier(n) {
+    if (n.kind === 'cloud') return 1.6;
+    if (n.gateway || n.type === 'firewall' || n.type === 'router') return 0;
+    if (n.type === 'switch') return 1;
+    if (n.type === 'access-point') return 2.2;
+    return 3;
+  }
+
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) if (attrs[k] !== undefined && attrs[k] !== null) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  function render(container, data, opts) {
+    opts = opts || {};
+    var S = opts.scale || 1; // node/label size multiplier (report uses >1)
+    container.innerHTML = '';
+    var w = container.clientWidth || 900, h = container.clientHeight || 600;
+    var svg = el('svg', { width: '100%', height: '100%', viewBox: '0 0 ' + w + ' ' + h, 'class': 'octomap' }, container);
+    svg.style.display = 'block';
+    svg.style.cursor = 'grab';
+    svg.style.userSelect = 'none';
+    var vp = el('g', {}, svg);
+    var gl = el('g', {}, vp), gn = el('g', {}, vp);
+    var view = { k: 1, x: 0, y: 0 };
+    var positions = opts.positions || {};
+    var nodes = [], links = [], byId = {}, sel = null, filter = '';
+    var textColor = opts.light ? '#0f172a' : 'var(--map-text, #cbd5e1)';
+    var lineColor = opts.light ? '#94a3b8' : 'var(--map-line, #475569)';
+
+    function applyView() { vp.setAttribute('transform', 'translate(' + view.x + ',' + view.y + ') scale(' + view.k + ')'); }
+
+    function build(d) {
+      nodes = []; links = []; byId = {};
+      var hide = {};
+      (d.nodes || []).forEach(function (n) {
+        var x = Object.assign({}, n);
+        if (opts.infraOnly && !INFRA[x.type] && !x.gateway && !x.self) { hide[x.id] = 1; return; }
+        nodes.push(x); byId[x.id] = x;
+      });
+      (d.links || []).forEach(function (l) {
+        [l.a, l.b].forEach(function (id) {
+          if (!byId[id] && !hide[id] && id.indexOf('net:') === 0) {
+            var c = { id: id, label: id.slice(4) === 'other' ? 'other' : id.slice(4), type: 'cloud', kind: 'cloud', alive: true };
+            nodes.push(c); byId[id] = c;
+          }
+        });
+        if (byId[l.a] && byId[l.b]) links.push({ s: byId[l.a], t: byId[l.b], kind: l.kind, aPort: l.aPort, bPort: l.bPort });
+      });
+      // Drop clouds with nothing attached after filtering.
+      var deg = {};
+      links.forEach(function (l) { deg[l.s.id] = (deg[l.s.id] || 0) + 1; deg[l.t.id] = (deg[l.t.id] || 0) + 1; });
+      nodes = nodes.filter(function (n) { return n.kind !== 'cloud' || deg[n.id] > 1 || opts.infraOnly; });
+      layout();
+    }
+
+    function layout() {
+      var n = nodes.length;
+      if (!n) return;
+      var tiers = {}, fresh = 0;
+      nodes.forEach(function (nd) {
+        var t = tier(nd);
+        tiers[t] = (tiers[t] || 0) + 1;
+        var p = positions[nd.id];
+        if (p) { nd.x = p.x; nd.y = p.y; } else { fresh++; }
+      });
+      var idx = {};
+      var rowH = Math.max(110 * S, h / 4.2);
+      nodes.forEach(function (nd) {
+        if (nd.x !== undefined) return;
+        var t = tier(nd); idx[t] = (idx[t] || 0) + 1;
+        var count = tiers[t];
+        nd.x = w / 2 + (idx[t] - (count + 1) / 2) * Math.min(90, (w * 1.5) / count) + (Math.random() - .5) * 10;
+        nd.y = 60 + t * rowH + (Math.random() - .5) * 20;
+      });
+      if (!fresh) return;
+      var iters = Math.max(60, 320 - Math.floor(n / 2));
+      var adj = links.map(function (l) {
+        var infra = INFRA[l.s.type] && INFRA[l.t.type];
+        return { s: l.s, t: l.t, len: (infra ? 170 : (l.s.kind === 'cloud' || l.t.kind === 'cloud' ? 80 : 95)) * S };
+      });
+      for (var it = 0; it < iters; it++) {
+        var alpha = 1 - it / iters;
+        for (var i = 0; i < n; i++) { nodes[i].vx = 0; nodes[i].vy = 0; }
+        for (i = 0; i < n; i++) {
+          var a = nodes[i];
+          for (var j = i + 1; j < n; j++) {
+            var b = nodes[j], dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy + .01;
+            if (d2 > 160000 * S * S) continue;
+            var f = 1400 * S * S / d2;
+            a.vx += dx * f; a.vy += dy * f; b.vx -= dx * f; b.vy -= dy * f;
+          }
+        }
+        adj.forEach(function (l) {
+          var dx = l.t.x - l.s.x, dy = l.t.y - l.s.y, d = Math.sqrt(dx * dx + dy * dy) || 1;
+          var f = (d - l.len) * 0.04;
+          l.s.vx += dx / d * f; l.s.vy += dy / d * f; l.t.vx -= dx / d * f; l.t.vy -= dy / d * f;
+        });
+        nodes.forEach(function (nd) {
+          if (positions[nd.id]) return; // keep user-placed / previous nodes still
+          // Infrastructure keeps its tier; endpoints only lean below it so they
+          // fan out around their switch instead of forming one wide row.
+          nd.vy += (60 + tier(nd) * rowH - nd.y) * (tier(nd) >= 3 ? 0.008 : 0.06);
+          nd.vx += (w / 2 - nd.x) * 0.012;
+          var lim = 30 * alpha + 2;
+          nd.x += Math.max(-lim, Math.min(lim, nd.vx));
+          nd.y += Math.max(-lim, Math.min(lim, nd.vy));
+        });
+      }
+      nodes.forEach(function (nd) { positions[nd.id] = { x: nd.x, y: nd.y }; });
+    }
+
+    function draw() {
+      gl.innerHTML = ''; gn.innerHTML = '';
+      var q = filter.toLowerCase();
+      links.forEach(function (l) {
+        var dash = l.kind === 'fdb' ? '6 4' : (l.kind === 'inferred' || l.kind === 'gateway') ? '2 4' : null;
+        var ln = el('line', { x1: l.s.x, y1: l.s.y, x2: l.t.x, y2: l.t.y, stroke: lineColor,
+          'stroke-width': (l.kind === 'lldp' || l.kind === 'cdp') ? 2.2 : 1.3, 'stroke-dasharray': dash, opacity: .85 }, gl);
+        var tip = (l.aPort || '') + (l.bPort ? ' ↔ ' + l.bPort : '');
+        if (tip) el('title', {}, ln).textContent = l.kind.toUpperCase() + ': ' + tip;
+        l.el = ln;
+      });
+      nodes.forEach(function (nd) {
+        var g = el('g', { transform: 'translate(' + nd.x + ',' + nd.y + ')', 'class': 'octonode' }, gn);
+        g.style.cursor = 'pointer';
+        var r = (nd.kind === 'cloud' ? 15 : (INFRA[nd.type] || nd.gateway ? 19 : 14)) * S;
+        var match = !q || (nd.label + ' ' + (nd.ip || '') + ' ' + (nd.vendor || '')).toLowerCase().indexOf(q) >= 0;
+        g.setAttribute('opacity', match ? (nd.alive === false ? .45 : 1) : .12);
+        if (nd.self) el('circle', { r: r + 5, fill: 'none', stroke: COLORS.router, 'stroke-width': 2, 'stroke-dasharray': '3 3' }, g);
+        if (sel === nd.id) el('circle', { r: r + 6, fill: 'none', stroke: '#fbbf24', 'stroke-width': 3 }, g);
+        el('circle', { r: r, fill: COLORS[nd.type] || COLORS.unknown, stroke: opts.light ? '#fff' : 'rgba(15,23,42,.9)', 'stroke-width': 2 }, g);
+        var s = r / 13;
+        el('path', { d: ICONS[nd.type] || ICONS.unknown, transform: 'translate(' + (-12 * s) + ',' + (-12 * s) + ') scale(' + s + ')',
+          fill: 'none', stroke: '#fff', 'stroke-width': 1.9, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
+        if (nd.worst && SEV[nd.worst] && nd.worst !== 'info') {
+          el('circle', { cx: r * .75, cy: -r * .75, r: 6 * S, fill: SEV[nd.worst], stroke: opts.light ? '#fff' : '#0f172a', 'stroke-width': 1.5 }, g);
+        }
+        var t = el('text', { y: r + 14 * S, 'text-anchor': 'middle', 'font-size': (INFRA[nd.type] || nd.gateway ? 12 : 10.5) * S,
+          fill: textColor, 'font-weight': INFRA[nd.type] || nd.gateway ? 600 : 400, 'pointer-events': 'none' }, g);
+        t.textContent = (nd.label || '').length > 22 ? nd.label.slice(0, 21) + '…' : nd.label;
+        el('title', {}, g).textContent = nd.label + (nd.ip ? '\n' + nd.ip : '') + (nd.vendor ? '\n' + nd.vendor : '') + '\n' + nd.type +
+          (nd.findings ? '\n' + nd.findings + ' finding(s)' : '');
+        nd.el = g;
+        g.addEventListener('mousedown', function (ev) { startDrag(ev, nd); });
+        g.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          if (moved) return;
+          sel = nd.id; draw();
+          if (opts.onSelect && nd.kind !== 'cloud') opts.onSelect(nd.id);
+        });
+      });
+    }
+
+    // --- interaction ---
+    var drag = null, pan = null, moved = false;
+    function pt(ev) {
+      var r = svg.getBoundingClientRect();
+      return { x: (ev.clientX - r.left) * (w / r.width), y: (ev.clientY - r.top) * (h / r.height) };
+    }
+    function startDrag(ev, nd) { ev.stopPropagation(); drag = { nd: nd, p: pt(ev) }; moved = false; }
+    svg.addEventListener('mousedown', function (ev) { pan = { p: pt(ev), x: view.x, y: view.y }; moved = false; svg.style.cursor = 'grabbing'; });
+    function onMove(ev) {
+      if (drag) {
+        var p = pt(ev);
+        drag.nd.x += (p.x - drag.p.x) / view.k; drag.nd.y += (p.y - drag.p.y) / view.k; drag.p = p; moved = true;
+        positions[drag.nd.id] = { x: drag.nd.x, y: drag.nd.y };
+        drag.nd.el.setAttribute('transform', 'translate(' + drag.nd.x + ',' + drag.nd.y + ')');
+        links.forEach(function (l) {
+          if (l.s === drag.nd || l.t === drag.nd) { l.el.setAttribute('x1', l.s.x); l.el.setAttribute('y1', l.s.y); l.el.setAttribute('x2', l.t.x); l.el.setAttribute('y2', l.t.y); }
+        });
+      } else if (pan) {
+        var q = pt(ev); view.x = pan.x + q.x - pan.p.x; view.y = pan.y + q.y - pan.p.y;
+        if (Math.abs(q.x - pan.p.x) + Math.abs(q.y - pan.p.y) > 3) moved = true;
+        applyView();
+      }
+    }
+    function onUp() { drag = null; pan = null; svg.style.cursor = 'grab'; setTimeout(function () { moved = false; }, 0); }
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    svg.addEventListener('wheel', function (ev) {
+      ev.preventDefault();
+      var p = pt(ev), k = Math.max(0.15, Math.min(4, view.k * (ev.deltaY < 0 ? 1.12 : 1 / 1.12)));
+      view.x = p.x - (p.x - view.x) * (k / view.k); view.y = p.y - (p.y - view.y) * (k / view.k); view.k = k; applyView();
+    }, { passive: false });
+    // Touch: one-finger pan.
+    svg.addEventListener('touchstart', function (ev) { if (ev.touches.length === 1) { var t = ev.touches[0]; pan = { p: pt(t), x: view.x, y: view.y }; } }, { passive: true });
+    svg.addEventListener('touchmove', function (ev) { if (pan && ev.touches.length === 1) { var q = pt(ev.touches[0]); view.x = pan.x + q.x - pan.p.x; view.y = pan.y + q.y - pan.p.y; applyView(); } }, { passive: true });
+    svg.addEventListener('touchend', function () { pan = null; });
+
+    function fit() {
+      if (!nodes.length) return;
+      var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      nodes.forEach(function (n) { x0 = Math.min(x0, n.x); y0 = Math.min(y0, n.y); x1 = Math.max(x1, n.x); y1 = Math.max(y1, n.y); });
+      var pad = 60, bw = x1 - x0 + pad * 2, bh = y1 - y0 + pad * 2 + (opts.bottomPad || 0);
+      view.k = Math.max(0.15, Math.min(1.6, Math.min(w / bw, h / bh)));
+      view.x = (w - (x1 + x0) * view.k) / 2; view.y = (h - (opts.bottomPad || 0) - (y1 + y0) * view.k) / 2;
+      applyView();
+    }
+
+    build(data); draw(); fit();
+
+    if (!nodes.length) {
+      var t = el('text', { x: w / 2, y: h / 2, 'text-anchor': 'middle', fill: textColor, 'font-size': 14 }, svg);
+      t.textContent = 'No devices yet: run an assessment to build the map.';
+    }
+
+    return {
+      update: function (d, o) { if (o) Object.assign(opts, o); build(d); draw(); },
+      search: function (q) { filter = q || ''; draw(); },
+      select: function (id) { sel = id; draw(); var n = byId[id]; if (n) { view.x = w / 2 - n.x * view.k; view.y = h / 2 - n.y * view.k; applyView(); } },
+      fit: fit,
+      destroy: function () { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); container.innerHTML = ''; },
+      relayout: function () { for (var k in positions) delete positions[k]; nodes.forEach(function (n) { delete n.x; delete n.y; }); layout(); draw(); fit(); },
+      positions: positions
+    };
+  }
+
+  global.OctoMap = { render: render, colors: COLORS, icons: ICONS };
+})(window);
+</script>
+<script>
+(function(){var data={"links":[{"a":"00:00:0c:4a:21:10","b":"00:00:0c:4a:21:20","aPort":"Gi1/0/47","bPort":"Gi0/10","kind":"lldp","weight":3},{"a":"00:00:0c:4a:21:10","b":"00:01:e6:30:00:30","aPort":"Gi1/0/6","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:01:e6:30:00:31","aPort":"Gi1/0/7","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:06:5b:10:00:10","aPort":"Gi1/0/2","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:06:5b:10:00:15","aPort":"Gi1/0/3","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:09:0f:aa:10:01","aPort":"Gi1/0/48","bPort":"port1","kind":"cdp","weight":3},{"a":"00:00:0c:4a:21:10","b":"00:11:32:aa:bb:20","aPort":"Gi1/0/4","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:12:fe:00:01:00","aPort":"Gi1/0/16","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:12:fe:00:01:01","aPort":"Gi1/0/17","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:12:fe:00:01:02","aPort":"Gi1/0/18","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:12:fe:00:01:03","aPort":"Gi1/0/19","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:12:fe:00:01:04","aPort":"Gi1/0/20","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:12:fe:99:00:57","aPort":"GigabitEthernet1/0/24","bPort":"Ethernet","kind":"cdp","weight":3},{"a":"00:00:0c:4a:21:10","b":"00:15:6d:31:00:01","aPort":"Gi1/0/40","bPort":"eth0","kind":"lldp","weight":3},{"a":"00:00:0c:4a:21:10","b":"00:15:6d:31:00:02","aPort":"Gi1/0/1","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:bc:99:40:00:40","aPort":"Gi1/0/8","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:bc:99:40:00:41","aPort":"Gi1/0/9","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:bc:99:40:00:42","aPort":"Gi1/0/10","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:bc:99:40:00:43","aPort":"Gi1/0/11","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"00:c0:b7:55:00:25","aPort":"Gi1/0/5","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"24:9a:d8:00:00:60","aPort":"Gi1/0/12","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"24:9a:d8:00:00:61","aPort":"Gi1/0/13","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"24:9a:d8:00:00:62","aPort":"Gi1/0/14","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"24:9a:d8:00:00:63","aPort":"Gi1/0/15","kind":"fdb","weight":2},{"a":"00:00:0c:4a:21:10","b":"net:10.20.10.0/24","kind":"gateway"},{"a":"00:03:93:00:01:20","b":"net:10.20.0.0/24","kind":"inferred"},{"a":"00:09:0f:aa:10:01","b":"net:10.20.0.0/24","kind":"gateway"},{"a":"00:0e:58:00:01:30","b":"net:10.20.0.0/24","kind":"inferred"},{"a":"00:12:fe:00:01:05","b":"net:10.20.0.0/24","kind":"inferred"},{"a":"00:12:fe:00:01:06","b":"net:10.20.0.0/24","kind":"inferred"},{"a":"00:12:fe:00:01:07","b":"net:10.20.0.0/24","kind":"inferred"},{"a":"00:12:fe:00:01:08","b":"net:10.20.0.0/24","kind":"inferred"},{"a":"00:4b:12:00:01:40","b":"net:10.20.0.0/24","kind":"inferred"},{"a":"da:a1:19:00:01:50","b":"net:10.20.0.0/24","kind":"inferred"},{"a":"ip-10.20.0.199","b":"net:10.20.0.0/24","kind":"inferred"},{"a":"ip-10.20.10.21","b":"net:10.20.10.0/24","kind":"inferred"},{"a":"ip-10.20.10.22","b":"net:10.20.10.0/24","kind":"inferred"}],"nodes":[{"id":"00:09:0f:aa:10:01","label":"rdg-fw01","ip":"10.20.0.1","type":"firewall","vendor":"Fortinet, Inc.","alive":true,"gateway":true,"findings":4,"worst":"medium"},{"id":"00:00:0c:4a:21:10","label":"rdg-core-sw01","ip":"10.20.0.2","type":"switch","vendor":"Cisco Systems, Inc","alive":true,"findings":5,"worst":"high"},{"id":"00:00:0c:4a:21:20","label":"rdg-sw02","ip":"10.20.0.3","type":"switch","vendor":"Cisco Systems, Inc","alive":true,"findings":1,"worst":"low"},{"id":"00:06:5b:10:00:10","label":"RDG-DC01","ip":"10.20.0.10","type":"server","vendor":"Dell Inc.","alive":true,"findings":1,"worst":"medium"},{"id":"00:15:6d:31:00:01","label":"AP-Front-Desk","ip":"10.20.0.11","type":"access-point","vendor":"Ubiquiti Inc","alive":true},{"id":"00:15:6d:31:00:02","label":"AP-Operatory","ip":"10.20.0.12","type":"access-point","vendor":"Ubiquiti Inc","alive":true},{"id":"00:06:5b:10:00:15","label":"RDG-FS01","ip":"10.20.0.15","type":"server","vendor":"Dell Inc.","alive":true,"findings":4,"worst":"high"},{"id":"00:11:32:aa:bb:20","label":"rdg-nas01","ip":"10.20.0.20","type":"nas","vendor":"Synology Incorporated","alive":true,"findings":3,"worst":"medium"},{"id":"00:c0:b7:55:00:25","label":"ups-closet","ip":"10.20.0.25","type":"ups","vendor":"American Power Conversion Corp","alive":true,"findings":3,"worst":"high"},{"id":"00:01:e6:30:00:30","label":"HP-Front-Office","ip":"10.20.0.30","type":"printer","vendor":"Hewlett Packard","alive":true},{"id":"00:01:e6:30:00:31","label":"HP-Xray-Room","ip":"10.20.0.31","type":"printer","vendor":"Hewlett Packard","alive":true,"findings":2,"worst":"high"},{"id":"00:bc:99:40:00:40","label":"NVR-01","ip":"10.20.0.40","type":"camera","vendor":"Hangzhou Hikvision Digital Technology Co.,Ltd.","alive":true,"findings":1,"worst":"medium"},{"id":"00:bc:99:40:00:41","label":"cam-lobby","ip":"10.20.0.41","type":"camera","vendor":"Hangzhou Hikvision Digital Technology Co.,Ltd.","alive":true,"findings":1,"worst":"medium"},{"id":"00:bc:99:40:00:42","label":"cam-parking","ip":"10.20.0.42","type":"camera","vendor":"Hangzhou Hikvision Digital Technology Co.,Ltd.","alive":true,"findings":1,"worst":"medium"},{"id":"00:bc:99:40:00:43","label":"cam-rear-door","ip":"10.20.0.43","type":"camera","vendor":"Hangzhou Hikvision Digital Technology Co.,Ltd.","alive":true,"findings":1,"worst":"medium"},{"id":"00:12:fe:99:00:57","label":"TECH-LAPTOP-07","ip":"10.20.0.57","type":"workstation","vendor":"Lenovo Mobile Communication Technology Ltd.","alive":true,"self":true},{"id":"24:9a:d8:00:00:60","label":"SIP-T54W-1","ip":"10.20.0.60","type":"voip-phone","vendor":"Yealink(Xiamen) Network Technology Co.,Ltd.","alive":true},{"id":"24:9a:d8:00:00:61","label":"SIP-T54W-2","ip":"10.20.0.61","type":"voip-phone","vendor":"Yealink(Xiamen) Network Technology Co.,Ltd.","alive":true},{"id":"24:9a:d8:00:00:62","label":"SIP-T54W-3","ip":"10.20.0.62","type":"voip-phone","vendor":"Yealink(Xiamen) Network Technology Co.,Ltd.","alive":true},{"id":"24:9a:d8:00:00:63","label":"SIP-T54W-4","ip":"10.20.0.63","type":"voip-phone","vendor":"Yealink(Xiamen) Network Technology Co.,Ltd.","alive":true},{"id":"00:12:fe:00:01:00","label":"RDG-WS01","ip":"10.20.0.100","type":"workstation","vendor":"Lenovo Mobile Communication Technology Ltd.","alive":true,"findings":1,"worst":"low"},{"id":"00:12:fe:00:01:01","label":"RDG-WS02","ip":"10.20.0.101","type":"workstation","vendor":"Lenovo Mobile Communication Technology Ltd.","alive":true,"findings":1,"worst":"low"},{"id":"00:12:fe:00:01:02","label":"RDG-WS03","ip":"10.20.0.102","type":"workstation","vendor":"Lenovo Mobile Communication Technology Ltd.","alive":true,"findings":1,"worst":"low"},{"id":"00:12:fe:00:01:03","label":"RDG-WS04","ip":"10.20.0.103","type":"workstation","vendor":"Lenovo Mobile Communication Technology Ltd.","alive":true,"findings":1,"worst":"low"},{"id":"00:12:fe:00:01:04","label":"RDG-WS05","ip":"10.20.0.104","type":"workstation","vendor":"Lenovo Mobile Communication Technology Ltd.","alive":true,"findings":2,"worst":"high"},{"id":"00:12:fe:00:01:05","label":"RDG-WS06","ip":"10.20.0.105","type":"workstation","vendor":"Lenovo Mobile Communication Technology Ltd.","alive":true,"findings":1,"worst":"low"},{"id":"00:12:fe:00:01:06","label":"RDG-WS07","ip":"10.20.0.106","type":"workstation","vendor":"Lenovo Mobile Communication Technology Ltd.","alive":true,"findings":1,"worst":"low"},{"id":"00:12:fe:00:01:07","label":"RDG-WS08","ip":"10.20.0.107","type":"workstation","vendor":"Lenovo Mobile Communication Technology Ltd.","alive":true,"findings":1,"worst":"low"},{"id":"00:12:fe:00:01:08","label":"RDG-WS09","ip":"10.20.0.108","type":"workstation","vendor":"Lenovo Mobile Communication Technology Ltd.","alive":true,"findings":2,"worst":"high"},{"id":"00:03:93:00:01:20","label":"Dr-Patel-MacBook","ip":"10.20.0.120","type":"workstation","vendor":"Apple, Inc.","alive":true},{"id":"00:0e:58:00:01:30","label":"Sonos-Waiting-Room","ip":"10.20.0.130","type":"media","vendor":"Sonos, Inc.","alive":true},{"id":"00:4b:12:00:01:40","label":"10.20.0.140","ip":"10.20.0.140","type":"iot","vendor":"Espressif Inc.","alive":true},{"id":"da:a1:19:00:01:50","label":"iPhone","ip":"10.20.0.150","type":"mobile","alive":true},{"id":"ip-10.20.0.199","label":"10.20.0.199","ip":"10.20.0.199","type":"unknown","alive":true,"findings":1,"worst":"info"},{"id":"ip-10.20.10.21","label":"RDG-XRAY-ACQ","ip":"10.20.10.21","type":"workstation","alive":true,"findings":2,"worst":"high"},{"id":"ip-10.20.10.22","label":"10.20.10.22","ip":"10.20.10.22","type":"unknown","alive":true,"findings":1,"worst":"info"}]};var el=document.getElementById('map');if(window.OctoMap&&el){OctoMap.render(el,data,{static:false,light:true,scale:1.8});}})();
+</script>
+</body>
+</html>

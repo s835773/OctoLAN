@@ -49,6 +49,11 @@ type Store struct {
 	FlowProvider  func() model.FlowSummary
 	StormProvider func() model.StormStatus
 
+	// Storm/flow data from a reopened session, shown until live monitors
+	// replace them.
+	savedFlows *model.FlowSummary
+	savedStorm *model.StormStatus
+
 	subMu sync.Mutex
 	subs  map[chan Message]struct{}
 
@@ -180,8 +185,12 @@ func (s *Store) Observe(ip, mac, source string, fn func(d *model.Device)) string
 		d.MAC = mac
 		s.byMAC[mac] = d.ID
 		if hw, err := net.ParseMAC(mac); err == nil {
-			d.Vendor = oui.Lookup(hw)
+			// Randomized (private) MACs don't identify a manufacturer, even
+			// when the prefix happens to be registered.
 			d.RandomMAC = oui.IsLocallyAdministered(hw)
+			if !d.RandomMAC {
+				d.Vendor = oui.Lookup(hw)
+			}
 		}
 	}
 	if ip != "" {
@@ -660,6 +669,20 @@ func (s *Store) Scan() model.ScanStatus {
 
 // --- persistence ---
 
+// SavedFlows returns NetFlow data from a reopened session, if any.
+func (s *Store) SavedFlows() *model.FlowSummary {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return s.savedFlows
+}
+
+// SavedStorm returns Storm Guard data from a reopened session, if any.
+func (s *Store) SavedStorm() *model.StormStatus {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return s.savedStorm
+}
+
 // Snapshot captures the full current state.
 func (s *Store) Snapshot(version string) model.Snapshot {
 	finds, score, grade := s.Findings()
@@ -727,7 +750,6 @@ func (s *Store) Restore(snap *model.Snapshot) {
 	s.mu.Lock()
 	s.site = snap.Site
 	for _, d := range snap.Devices {
-		d.Alive = false
 		s.devices[d.ID] = d
 		if d.MAC != "" {
 			s.byMAC[d.MAC] = d.ID
@@ -752,6 +774,16 @@ func (s *Store) Restore(snap *model.Snapshot) {
 	s.events = snap.Events
 	s.scan = snap.Scan
 	s.scan.Running = false
+	if snap.Flows.TotalFlows > 0 {
+		f := snap.Flows
+		f.Listening = false
+		s.savedFlows = &f
+	}
+	if len(snap.Storm.Series) > 0 || snap.Storm.STP.Seen {
+		st := snap.Storm
+		st.Running = false
+		s.savedStorm = &st
+	}
 	s.mu.Unlock()
 	s.markDirty()
 }
