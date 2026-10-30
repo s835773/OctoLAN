@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/brand/octolan-logo-horizontal-white.svg">
+    <img src="docs/brand/octolan-logo-horizontal-black.svg" alt="OctoLAN" height="72">
+  </picture>
+</p>
+
 # OctoLAN
 
 **Portable network discovery, mapping and posture assessment for MSP field techs.**
@@ -253,3 +260,22 @@ tools/genoui        rebuilds the embedded MAC-vendor table
 tools/docsdemo      generates the fictional sample site used in docs/
 docs/               screenshots, example report (PDF) and sample session
 ```
+
+## Logo
+
+The OctoLAN mark is an octopus seen from above, its eight arms swirling out from one body like links off a core switch. It is a single solid black or white shape with the eyes cut out, so it works on any background. The dashboard uses it in the sidebar and as the browser tab icon.
+
+All files are in [`docs/brand/`](docs/brand/):
+
+| File | Use |
+|---|---|
+| `octolan-mark.svg` | Mark alone, takes the surrounding text colour (`currentColor`) |
+| `octolan-mark-black.svg`, `octolan-mark-white.svg` | Mark alone, fixed colour |
+| `octolan-logo-horizontal.svg` (`-black`, `-white`) | Mark with the name beside it |
+| `octolan-logo-stacked.svg` | Mark with the name underneath |
+| `favicon.svg` | Browser icon with heavier arms for 16px; turns white in dark browser themes |
+| `favicon.ico`, `favicon-16/32/48.png` | Icons for older browsers and tools |
+| `apple-touch-icon-180.png` | iOS home screen icon |
+| `octolan-mark-512.png` | Large transparent PNG |
+
+The name is set in IBM Plex Mono SemiBold and converted to outlines, so no font is needed.
