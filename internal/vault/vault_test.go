@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"testing"
 )
@@ -27,7 +28,9 @@ func TestRoundTrip(t *testing.T) {
 	if strings.Contains(string(raw), "S3cret") || strings.Contains(string(raw), "admin") {
 		t.Fatal("plaintext leaked into vault file")
 	}
-	if info, _ := os.Stat(path); info.Mode().Perm() != 0o600 {
+	// Unix permission bits only; Windows protects the file with the user
+	// profile's ACLs instead.
+	if info, _ := os.Stat(path); runtime.GOOS != "windows" && info.Mode().Perm() != 0o600 {
 		t.Fatalf("vault file mode %v", info.Mode().Perm())
 	}
 
