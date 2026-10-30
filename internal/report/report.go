@@ -100,6 +100,10 @@ type view struct {
 	Phases     []model.PhaseStatus
 	Talkers    []model.Talker
 	Apps       []model.Talker
+	CredWin    int
+	CredSSH    int
+	CredCfg    int
+	CredFailed int
 }
 
 type kv struct {
@@ -171,6 +175,21 @@ func Write(w io.Writer, s *model.Snapshot) error {
 		}
 		if d.SNMP != nil {
 			v.WithSNMP++
+		}
+		if d.Windows != nil {
+			v.CredWin++
+		}
+		if d.Linux != nil || d.NetOS != nil {
+			v.CredSSH++
+		}
+		if d.Config != nil {
+			v.CredCfg++
+		}
+		for _, t := range d.CredTries {
+			if !t.OK {
+				v.CredFailed++
+				break
+			}
 		}
 		tc[string(d.Type)]++
 	}

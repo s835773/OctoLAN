@@ -23,6 +23,7 @@
       <a href="#/l2" data-v="l2"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16M8 4v4M16 10v4M10 16v4"/></svg>VLANs &amp; L2</a>
       <a href="#/traffic" data-v="traffic"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 4 8-9M15 6h5v5"/></svg>Traffic</a>
       <a href="#/storm" data-v="storm"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Storm Guard<span class="dot" id="nav-storm"></span></a>
+      <a href="#/vault" data-v="vault"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg>Credentials<span class="dot" id="nav-vault"></span></a>
       <a href="#/activity" data-v="activity"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13"/></svg>Activity</a>
     </nav>
     <div class="side-foot">
@@ -112,6 +113,7 @@
         </label>
         <label>Sweep rate<select name="rate"><option value="200">Gentle (200 pps)</option><option value="400" selected>Normal (400 pps)</option><option value="1000">Fast (1000 pps)</option></select></label>
       </div>
+      <label class="check"><input type="checkbox" name="usevault" checked> <span><b>Use saved credentials</b> <span id="f-vault" class="muted"></span></span></label>
       <label class="check"><input type="checkbox" name="zero"> <span><b>Zero-footprint mode</b>: listen only, never transmit a packet (sensitive networks)</span></label>
       <div id="f-caps" class="note"></div>
     </div>

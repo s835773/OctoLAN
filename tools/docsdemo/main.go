@@ -5,17 +5,25 @@
 // assessment.
 //
 //	go run ./tools/docsdemo docs/sample/session.json
+//	go run ./tools/docsdemo -vault /tmp/demo-data docs/sample/session.json
+//
+// -vault also writes a matching fictional credential vault (passphrase
+// "sample passphrase") under DIR/<site>/ for screenshots of the
+// Credentials page.
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"strings"
 	"time"
 
+	"github.com/s835773/OctoLAN/internal/collect"
 	"github.com/s835773/OctoLAN/internal/engine"
 	"github.com/s835773/OctoLAN/internal/model"
 	"github.com/s835773/OctoLAN/internal/store"
+	"github.com/s835773/OctoLAN/internal/vault"
 )
 
 type dev struct {
@@ -45,9 +53,11 @@ func ttlFor(name string, ports []int) int {
 }
 
 func main() {
+	vaultDir := flag.String("vault", "", "also write a fictional sample vault under this data directory")
+	flag.Parse()
 	out := "docs/sample/session.json"
-	if len(os.Args) > 1 {
-		out = os.Args[1]
+	if flag.NArg() > 0 {
+		out = flag.Arg(0)
 	}
 	st := store.New()
 	st.SetSite("Riverside Dental Group (sample data)")
@@ -231,6 +241,56 @@ func main() {
 	st.StormProvider = func() model.StormStatus { return storm }
 	st.FlowProvider = func() model.FlowSummary { return flows }
 
+	// Credentialed results, as if the customer had shared a domain admin
+	// and the switch login (secrets live only in the vault).
+	b := func(v bool) *bool { return &v }
+	winInfo := func(osName, build string, ubr int, lastPatch time.Duration, rtp bool, bitlocker bool, admins int) *model.WindowsInfo {
+		w := &model.WindowsInfo{OS: osName, Build: build, UBR: ubr, Manufacturer: "Dell Inc.", Domain: "riverside.local", DomainJoined: true,
+			HotfixCount: 38, LastHotfix: now.Add(-lastPatch), LastHotfixID: "KB5044284", DefenderRTP: b(rtp), DefenderOn: b(true), SigAgeDays: 1,
+			Firewall: map[string]bool{"Domain": true, "Private": true, "Public": true}, RDPNLA: b(true), RAMGB: 16, CPU: "Intel Core i5-12500",
+			BitLocker: []model.DriveCrypt{{Drive: "C:", Protected: bitlocker}}, Disks: []model.Disk{{Drive: "C:", SizeGB: 476, FreeGB: 211}},
+			SoftwareCount: 64, Collected: now, InstallDate: now.Add(-700 * day), LastBoot: now.Add(-6 * day), Software: []model.Software{{Name: "Dentrix G7", Version: "7.3", Publisher: "Henry Schein One"},
+				{Name: "Google Chrome", Version: "130.0.6723.70", Publisher: "Google LLC"}, {Name: "Microsoft 365 Apps for business", Version: "16.0.18129", Publisher: "Microsoft Corporation"},
+				{Name: "Adobe Acrobat Reader", Version: "24.004.20219", Publisher: "Adobe"}, {Name: "ScreenConnect Client", Version: "24.3.7", Publisher: "ConnectWise"}}}
+		for i := 0; i < admins; i++ {
+			w.Admins = append(w.Admins, []string{`RIVERSIDE\Domain Admins`, `Administrator`, `RIVERSIDE\frontdesk`, `RIVERSIDE\drpatel`, `RIVERSIDE\hygiene1`, `RIVERSIDE\oldvendor`}[i])
+		}
+		return w
+	}
+	creds := func(id string, ok bool, method, name string) {
+		st.Update(id, func(d *model.Device) {
+			cr := model.CredResult{Method: method, CredID: "demo", CredName: name, OK: ok, At: now}
+			if !ok {
+				cr.Error = "credentials rejected"
+			}
+			d.CredTries = append(d.CredTries, cr)
+		})
+	}
+	setWin := func(ip string, w *model.WindowsInfo) {
+		id := st.FindByIP(ip)
+		st.Update(id, func(d *model.Device) { d.Windows = w })
+		creds(id, true, "winrm", "Domain admin (RIVERSIDE)")
+	}
+	setWin("10.20.0.10", winInfo("Microsoft Windows Server 2022 Standard", "20348", 2762, 9*day, true, true, 2))
+	fs := winInfo("Microsoft Windows Server 2012 R2 Standard", "9600", 21620, 410*day, true, false, 3)
+	fs.PendingReboot = true
+	setWin("10.20.0.15", fs)
+	for i, ip := range []string{"10.20.0.100", "10.20.0.101", "10.20.0.102", "10.20.0.103", "10.20.0.105", "10.20.0.106", "10.20.0.107"} {
+		setWin(ip, winInfo("Microsoft Windows 11 Pro", "26100", 2161, time.Duration(12+i)*day, true, i != 3, 3+i%2))
+	}
+	ws05 := winInfo("Microsoft Windows 10 Pro", "19045", 5011, 97*day, false, false, 6)
+	ws05.AutoLogon = true
+	setWin("10.20.0.104", ws05)
+	creds(st.FindByIP("10.20.0.108"), false, "winrm", "Domain admin (RIVERSIDE)")
+
+	coreCfg := "hostname rdg-core-sw01\nservice password-encryption\nenable password 7 0822455D0A16\nusername admin privilege 15 password 7 045802150C2E\nsnmp-server community public RO\nip http server\nline vty 0 4\n transport input telnet ssh\nend\n"
+	st.Update(coreID, func(d *model.Device) {
+		d.NetOS = &model.NetOSInfo{Platform: "cisco-ios", Version: "15.2(7)E4", Model: "WS-C2960X-48FPD-L", Serial: "FOC2138X0AB", Uptime: "1 year, 17 weeks, 3 days", Collected: now}
+		d.Config = &model.ConfigInfo{Platform: "cisco-ios", Lines: strings.Count(coreCfg, "\n") + 1, SHA256: collect.ConfigHash(coreCfg), Captured: now, Changed: true,
+			Issues: collect.AuditConfig(collect.PlatCiscoIOS, coreCfg)}
+	})
+	creds(coreID, true, "ssh", "Core switches (netadmin)")
+
 	// Analysis runs the real classifier, topology builder and posture checks.
 	e.Analyze()
 
@@ -263,6 +323,33 @@ func main() {
 		{model.SevMedium, "stp", "Spanning-tree topology change #4 (a port went up/down or a loop is re-converging)"},
 	} {
 		st.AddEvent(ev.sev, ev.src, ev.msg, "")
+	}
+
+	if *vaultDir != "" {
+		// Separate store: the sample session must not pick up vault events
+		// or lose its Storm Guard / NetFlow providers.
+		vst := store.New()
+		vst.SetSite(st.Site())
+		ve := engine.New(vst, "v2.0.0", *vaultDir)
+		_ = os.Remove(ve.VaultPath())
+		if err := ve.VaultCreate("sample passphrase"); err != nil {
+			panic(err)
+		}
+		v := ve.Vault()
+		for _, c := range []vault.Cred{
+			{Type: vault.TypeWindows, Name: "Domain admin (RIVERSIDE)", Domain: "RIVERSIDE", Username: "svc-octolan", Password: "example-only", Notes: "Provided by office manager; expires after visit"},
+			{Type: vault.TypeWindows, Name: "X-ray PC local admin", Username: "Administrator", Password: "example-only", Scope: []string{"10.20.10.21"}},
+			{Type: vault.TypeSSH, Name: "Core switches (netadmin)", Username: "netadmin", Password: "example-only", Enable: "example-only", Scope: []string{"10.20.0.2-3"}},
+			{Type: vault.TypeSNMP, Name: "SNMP read community", SNMPVersion: "v2c", Community: "example-only"},
+		} {
+			if _, err := v.Put(c); err != nil {
+				panic(err)
+			}
+		}
+		_, _ = v.AddConfig(vault.ConfigBackup{DeviceID: coreID, IP: "10.20.0.2", Name: "rdg-core-sw01", Platform: "cisco-ios",
+			Command: "show running-config", Text: coreCfg, SHA256: collect.ConfigHash(coreCfg), Captured: now})
+		ve.VaultLock()
+		fmt.Println("wrote sample vault", ve.VaultPath())
 	}
 
 	if err := os.MkdirAll("docs/sample", 0o755); err != nil {

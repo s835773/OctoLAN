@@ -27,6 +27,7 @@ import (
 	"github.com/s835773/OctoLAN/internal/store"
 	"github.com/s835773/OctoLAN/internal/storm"
 	"github.com/s835773/OctoLAN/internal/topology"
+	"github.com/s835773/OctoLAN/internal/vault"
 )
 
 // Engine is safe for concurrent use.
@@ -49,6 +50,8 @@ type Engine struct {
 	selfID   string
 	warnPPS  int
 	critPPS  int
+
+	vs vaultState
 }
 
 // New creates an engine around st.
@@ -243,8 +246,23 @@ func (e *Engine) observeSelf(local netutil.LocalIface) string {
 
 // ---- scan pipeline ----
 
+// Scan phases, in order.
+const (
+	phPrepare = iota
+	phARP
+	phPing
+	phTCP
+	phServices
+	phNames
+	phSNMP
+	phCreds
+	phServiceDisc
+	phPassive
+	phAnalysis
+)
+
 var phaseNames = []string{"Prepare", "ARP sweep", "Ping sweep", "TCP discovery", "Service scan",
-	"Name resolution", "SNMP polling", "Service discovery", "Passive listening", "Analysis"}
+	"Name resolution", "SNMP polling", "Credentialed checks", "Service discovery", "Passive listening", "Analysis"}
 
 // Running reports whether a scan is in progress.
 func (e *Engine) Running() bool {
@@ -382,7 +400,7 @@ func (e *Engine) RunScan(ctx context.Context, cfg model.ScanConfig) (err error) 
 		cfg.Timeout = 900 * time.Millisecond
 	}
 	if cfg.Site != "" {
-		e.St.SetSite(cfg.Site)
+		e.SetSite(cfg.Site)
 	}
 	phases := make([]model.PhaseStatus, len(phaseNames))
 	for i, n := range phaseNames {
@@ -395,7 +413,7 @@ func (e *Engine) RunScan(ctx context.Context, cfg model.ScanConfig) (err error) 
 	t := &tracker{e: e, start: time.Now()}
 
 	// ---- Prepare ----
-	t.begin(0, "Resolving interface and targets")
+	t.begin(phPrepare, "Resolving interface and targets")
 	local, err := e.resolveIface(cfg.Interface)
 	if err != nil {
 		t.end("error", err.Error())
@@ -462,16 +480,16 @@ func (e *Engine) RunScan(ctx context.Context, cfg model.ScanConfig) (err error) 
 	}
 
 	if cfg.ZeroFootprint {
-		for i := 1; i <= 7; i++ {
+		for i := phARP; i <= phServiceDisc; i++ {
 			t.skip(i, "zero-footprint mode (passive only)")
 		}
 		e.harvestARPTable(local)
 	} else {
 		// ---- ARP sweep ----
 		if cfg.SkipARP || len(localTargets) == 0 {
-			t.skip(1, "no local targets")
+			t.skip(phARP, "no local targets")
 		} else {
-			t.begin(1, fmt.Sprintf("Layer-2 sweep of %d local addresses", len(localTargets)))
+			t.begin(phARP, fmt.Sprintf("Layer-2 sweep of %d local addresses", len(localTargets)))
 			n := 0
 			var mu sync.Mutex
 			onReply := func(r discovery.ARPResult) {
@@ -507,7 +525,7 @@ func (e *Engine) RunScan(ctx context.Context, cfg model.ScanConfig) (err error) 
 		}
 
 		// ---- Ping sweep ----
-		t.begin(2, fmt.Sprintf("ICMP echo to %d addresses", len(targets)))
+		t.begin(phPing, fmt.Sprintf("ICMP echo to %d addresses", len(targets)))
 		pinged := 0
 		var pmu sync.Mutex
 		mode, perr := discovery.PingSweep(ctx, targets, cfg.Rate, cfg.Timeout, func(r discovery.PingResult) {
@@ -554,9 +572,9 @@ func (e *Engine) RunScan(ctx context.Context, cfg model.ScanConfig) (err error) 
 			}
 		}
 		if len(silent) == 0 {
-			t.skip(3, "every target already accounted for")
+			t.skip(phTCP, "every target already accounted for")
 		} else {
-			t.begin(3, fmt.Sprintf("TCP ping of %d silent addresses", len(silent)))
+			t.begin(phTCP, fmt.Sprintf("TCP ping of %d silent addresses", len(silent)))
 			found := 0
 			discovery.TCPPing(ctx, silent, 512, 700*time.Millisecond, func(ip netip.Addr, port int) {
 				found++
@@ -580,9 +598,9 @@ func (e *Engine) RunScan(ctx context.Context, cfg model.ScanConfig) (err error) 
 			if perr2 != nil {
 				why = perr2.Error()
 			}
-			t.skip(4, why)
+			t.skip(phServices, why)
 		} else {
-			t.begin(4, fmt.Sprintf("%d ports × %d hosts", len(ports), len(hosts)))
+			t.begin(phServices, fmt.Sprintf("%d ports × %d hosts", len(ports), len(hosts)))
 			e.serviceScan(ctx, t, hub, hosts, ports, cfg.Timeout)
 		}
 		if ctx.Err() != nil {
@@ -591,7 +609,7 @@ func (e *Engine) RunScan(ctx context.Context, cfg model.ScanConfig) (err error) 
 
 		// ---- Names ----
 		hosts = alive()
-		t.begin(5, fmt.Sprintf("Reverse DNS, NetBIOS and mDNS for %d hosts", len(hosts)))
+		t.begin(phNames, fmt.Sprintf("Reverse DNS, NetBIOS and mDNS for %d hosts", len(hosts)))
 		e.resolveNames(ctx, t, hosts)
 		t.end("done", "")
 		if ctx.Err() != nil {
@@ -599,15 +617,34 @@ func (e *Engine) RunScan(ctx context.Context, cfg model.ScanConfig) (err error) 
 		}
 
 		// ---- SNMP ----
+		vaultCreds := e.vaultCreds(cfg)
 		if cfg.SkipSNMP {
-			t.skip(6, "disabled")
+			t.skip(phSNMP, "disabled")
 		} else {
 			comms := cfg.Communities
+			v3 := cfg.SNMPv3
+			for _, c := range vaultCreds {
+				if c.Type != vault.TypeSNMP {
+					continue
+				}
+				if c.SNMPVersion == "v3" {
+					v3 = append(v3, model.SNMPv3Cred{User: c.Username, AuthProto: c.AuthProto, AuthPass: c.AuthPass, PrivProto: c.PrivProto, PrivPass: c.PrivPass})
+				} else if c.Community != "" && !slices.Contains(comms, c.Community) {
+					comms = append(comms, c.Community)
+				}
+			}
 			if len(comms) == 0 {
 				comms = discovery.DefaultCommunities
+			} else {
+				// Still check for defaults: finding them is the point.
+				for _, d := range discovery.DefaultCommunities {
+					if !slices.Contains(comms, d) {
+						comms = append(comms, d)
+					}
+				}
 			}
-			creds := discovery.SNMPCreds{Communities: comms, V3: cfg.SNMPv3}
-			t.begin(6, fmt.Sprintf("Polling %d hosts with %d credential set(s)", len(hosts), len(comms)+len(cfg.SNMPv3)))
+			creds := discovery.SNMPCreds{Communities: comms, V3: v3}
+			t.begin(phSNMP, fmt.Sprintf("Polling %d hosts with %d credential set(s)", len(hosts), len(comms)+len(v3)))
 			n := e.snmpCrawl(ctx, t, hosts, creds, cfg.Timeout)
 			t.end("done", fmt.Sprintf("%d SNMP agents polled", n))
 		}
@@ -615,8 +652,25 @@ func (e *Engine) RunScan(ctx context.Context, cfg model.ScanConfig) (err error) 
 			return ctx.Err()
 		}
 
+		// ---- Credentialed checks (vault) ----
+		if n := countHostCreds(vaultCreds); n == 0 {
+			why := "no Windows or SSH credentials in the vault"
+			if !cfg.UseVault {
+				why = "vault not used for this scan"
+			} else if !e.VaultUnlocked() {
+				why = "vault locked or not created for this site"
+			}
+			t.skip(phCreds, why)
+		} else {
+			t.begin(phCreds, fmt.Sprintf("Trying %d saved credential(s) on matching hosts", n))
+			e.credentialedChecks(ctx, t, targets, vaultCreds)
+		}
+		if ctx.Err() != nil {
+			return ctx.Err()
+		}
+
 		// ---- mDNS / SSDP ----
-		t.begin(7, "Querying mDNS/Bonjour and SSDP/UPnP")
+		t.begin(phServiceDisc, "Querying mDNS/Bonjour and SSDP/UPnP")
 		passive.ActiveServiceDiscovery(ctx, e.St, local, 4*time.Second)
 		e.enrichUPnP(ctx)
 		t.end("done", "")
@@ -626,7 +680,7 @@ func (e *Engine) RunScan(ctx context.Context, cfg model.ScanConfig) (err error) 
 	if cfg.PassiveSeconds > 0 {
 		remain := time.Duration(cfg.PassiveSeconds)*time.Second - time.Since(t.start)
 		if remain > 0 {
-			t.begin(8, fmt.Sprintf("Listening passively for %s more", remain.Round(time.Second)))
+			t.begin(phPassive, fmt.Sprintf("Listening passively for %s more", remain.Round(time.Second)))
 			end := time.Now().Add(remain)
 			for time.Now().Before(end) && ctx.Err() == nil {
 				sleepCtx(ctx, time.Second)
@@ -634,17 +688,17 @@ func (e *Engine) RunScan(ctx context.Context, cfg model.ScanConfig) (err error) 
 			}
 			t.end("done", "")
 		} else {
-			t.skip(8, "listening window already elapsed during active scan")
+			t.skip(phPassive, "listening window already elapsed during active scan")
 		}
 	} else {
-		t.skip(8, "passive window not requested (monitoring continues in the background)")
+		t.skip(phPassive, "passive window not requested (monitoring continues in the background)")
 	}
 	if ctx.Err() != nil {
 		return ctx.Err()
 	}
 
 	// ---- Analysis ----
-	t.begin(9, "Classifying devices, building topology, scoring posture")
+	t.begin(phAnalysis, "Classifying devices, building topology, scoring posture")
 	e.Analyze()
 	path, serr := e.AutoSave()
 	if serr != nil {

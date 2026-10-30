@@ -61,6 +61,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /api/export/session.json", s.exportJSON)
 	mux.HandleFunc("GET /api/export/devices.csv", s.exportCSV)
 	mux.HandleFunc("GET /api/export/findings.csv", s.exportFindingsCSV)
+	s.vaultRoutes(mux)
 	static := http.FileServerFS(ui.FS())
 	mux.Handle("GET /", static)
 	return s.auth(securityHeaders(mux))
@@ -333,6 +334,7 @@ type scanReq struct {
 	PassiveSeconds int                `json:"passiveSeconds"`
 	ZeroFootprint  bool               `json:"zeroFootprint"`
 	SkipSNMP       bool               `json:"skipSnmp"`
+	UseVault       *bool              `json:"useVault"`
 	Rate           int                `json:"rate"`
 }
 
@@ -345,6 +347,7 @@ func (s *Server) startScan(w http.ResponseWriter, r *http.Request) {
 	cfg := model.ScanConfig{
 		Site: strings.TrimSpace(req.Site), Interface: req.Interface, Ports: req.Ports,
 		PassiveSeconds: req.PassiveSeconds, ZeroFootprint: req.ZeroFootprint, SkipSNMP: req.SkipSNMP, Rate: req.Rate,
+		UseVault: req.UseVault == nil || *req.UseVault,
 	}
 	if t := strings.TrimSpace(req.Targets); t != "" {
 		cfg.Targets = []string{t}
@@ -420,7 +423,7 @@ func (s *Server) site(w http.ResponseWriter, r *http.Request) {
 		Name string `json:"name"`
 	}
 	_ = json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<16)).Decode(&body)
-	s.E.St.SetSite(strings.TrimSpace(body.Name))
+	s.E.SetSite(body.Name)
 	writeJSON(w, map[string]bool{"ok": true})
 }
 

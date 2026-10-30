@@ -65,6 +65,8 @@ func main() {
 		err = cmdNetflow(args)
 	case "passive":
 		err = cmdPassive(args)
+	case "vault", "creds", "credentials":
+		err = cmdVault(args)
 	case "interfaces", "ifaces", "caps":
 		err = cmdInterfaces()
 	case "version", "--version":
@@ -92,6 +94,7 @@ Usage:
   octolan storm          Live broadcast/multicast PPS meter and STP watch
   octolan netflow        NetFlow v5/v9/IPFIX collector with live top talkers
   octolan passive        Listen-only discovery: never transmits a packet
+  octolan vault         Manage a customer's encrypted credential vault
   octolan interfaces     List interfaces and this host's capabilities
   octolan version
 
@@ -286,6 +289,7 @@ func cmdScan(args []string) error {
 	out := fs.String("out", "", "output directory (default: ~/OctoLAN/<site>)")
 	nf := fs.String("netflow", "", "also collect NetFlow on this address during the scan (e.g. :2055)")
 	collector := fs.String("collector", "", "name shown for this computer in reports (default: its hostname)")
+	useVault := fs.Bool("vault", false, "use the site's credential vault (prompts for the passphrase)")
 	_ = fs.Parse(args)
 
 	fmt.Printf(banner, Version)
@@ -305,8 +309,22 @@ func cmdScan(args []string) error {
 		}
 	}
 
+	if *useVault {
+		if *site == "" {
+			return errors.New("-vault needs -site (each customer has their own vault)")
+		}
+		pass, err := readSecret("Vault passphrase for " + *site + ": ")
+		if err != nil {
+			return err
+		}
+		if err := e.VaultUnlock(pass); err != nil {
+			return fmt.Errorf("vault: %w", err)
+		}
+		defer e.VaultLock()
+		fmt.Printf("  ✓ vault unlocked: %d credential(s)\n", len(e.VaultStatus().Creds))
+	}
 	cfg := model.ScanConfig{Site: *site, Interface: *iface, Targets: targets, Communities: comms,
-		Ports: *ports, PassiveSeconds: *passiveSec, ZeroFootprint: *zero, SkipSNMP: *noSNMP, Rate: *rate}
+		Ports: *ports, PassiveSeconds: *passiveSec, ZeroFootprint: *zero, SkipSNMP: *noSNMP, Rate: *rate, UseVault: *useVault}
 	for _, s := range v3 {
 		p := strings.Split(s, ":")
 		c := model.SNMPv3Cred{User: p[0]}

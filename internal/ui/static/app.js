@@ -43,7 +43,13 @@
     if (s < 86400) return Math.floor(s / 3600) + 'h ago';
     return new Date(t).toLocaleDateString();
   }
+  // Go encodes "no date" as year 1; treat anything before 1971 as unknown.
+  function realDate(t) { if (!t) return null; var d = new Date(t); return isNaN(d) || d.getFullYear() < 1971 ? null : d; }
   function hhmmss(t) { return new Date(t).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
+  var CFG_ISSUES = { 'enable-password-plaintext': 'Weak enable password', 'no-service-password-encryption': 'No password encryption',
+    'vty-telnet': 'Telnet on VTY', 'http-server': 'HTTP server on', 'snmp-rw-community': 'SNMP RW community', 'no-remote-syslog': 'No remote syslog',
+    'no-ntp': 'No NTP', 'local-user-weak-hash': 'Weak local user hash', 'no-aaa': 'AAA off', 'smart-install': 'Smart Install on',
+    'forti-http-admin': 'HTTP admin access', 'routeros-insecure-services': 'Insecure services' };
   var TYPE_LABELS = { 'voip-phone': 'VoIP phone', nas: 'NAS', ups: 'UPS', iot: 'IoT', 'access-point': 'Access point' };
   function title(s) { if (TYPE_LABELS[s]) return TYPE_LABELS[s]; s = String(s || '').replace(/-/g, ' '); return s.charAt(0).toUpperCase() + s.slice(1); }
   function md(s) { return esc(s).replace(/`([^`]+)`/g, '<code>$1</code>'); }
@@ -123,6 +129,9 @@
     $$('#nav a').forEach(function (a) { a.classList.toggle('active', a.dataset.v === v); });
     $('#side').classList.remove('open');
     views[v](true);
+    // Deep link: #/devices?dev=<id>&tab=host opens a device's drawer.
+    var qs = (location.hash.split('?')[1] || '').split('&').reduce(function (o, kv) { var p = kv.split('='); if (p[0]) o[p[0]] = decodeURIComponent(p[1] || ''); return o; }, {});
+    if (qs.dev) { if (qs.tab) drawerTab = qs.tab; setTimeout(function () { openDevice(qs.dev); }, 300); }
   }
   function refreshCurrent() { if (views[current]) views[current](false); }
 
@@ -314,6 +323,7 @@
       $('#dr-title').textContent = label(d);
       $('#dr-sub').innerHTML = esc((d.ips || []).join(', ')) + (d.mac ? ' · <span class="mono">' + esc(d.mac) + '</span>' : '') + ' · ' + esc(title(d.type));
       var tabs = [['overview', 'Overview'], ['services', 'Services (' + ((d.ports || []).length + (d.services || []).length) + ')']];
+      if (d.windows || d.linux || d.netos || d.config || (d.credTries || []).length) tabs.splice(1, 0, ['host', 'Host details']);
       if ((d.interfaces || []).length) tabs.push(['interfaces', 'Interfaces (' + d.interfaces.length + ')']);
       if ((d.neighbors || []).length) tabs.push(['neighbors', 'Neighbors (' + d.neighbors.length + ')']);
       if ((d.fdb || []).length) tabs.push(['fdb', 'MAC table (' + d.fdb.length + ')']);
@@ -350,6 +360,56 @@
         ['Notes', d.notes],
         ['Evidence', (os.evidence || []).map(function (e) { return '<div class="small">• ' + esc(e) + '</div>'; }).join(''), true]
       ]);
+    }
+    if (tab === 'host') {
+      var h = '', w = d.windows;
+      if (w) {
+        var fw = Object.keys(w.firewall || {}).map(function (k) { return k + ' ' + (w.firewall[k] ? '✓' : '<span style="color:var(--high)">off</span>'); }).join(' · ');
+        var bl = (w.bitlocker || []).map(function (b) { return b.drive + ' ' + (b.protected ? '✓' : '<span style="color:var(--high)">off</span>'); }).join(' · ');
+        var lastFix = realDate(w.lastHotfix), inst = realDate(w.installDate), boot = realDate(w.lastBoot);
+        var days = lastFix ? Math.round((Date.now() - lastFix) / 864e5) : null;
+        h += '<h4>Windows (credentialed)</h4>' + kv([
+          ['OS', w.os + (w.displayVersion ? ' ' + w.displayVersion : '') + ' · build ' + w.build + (w.ubr ? '.' + w.ubr : '')],
+          ['Hardware', [w.manufacturer, w.model].filter(Boolean).join(' ') + (w.serial ? ' · S/N ' + w.serial : '')],
+          ['CPU / RAM', (w.cpu || '') + (w.ramGb ? ' · ' + w.ramGb + ' GB' : '')],
+          ['Domain', (w.domainJoined ? w.domain : 'not domain-joined')],
+          ['Last update', lastFix ? esc(lastFix.toLocaleDateString() + ' (' + w.lastHotfixId + ', ' + days + ' days ago)') + (days > 60 ? ' <span class="sev high">stale</span>' : '') : 'unknown', true],
+          ['Updates installed', w.hotfixCount], ['Pending reboot', w.pendingReboot ? 'yes' : 'no'],
+          ['Antivirus', (w.defenderRealtime === false ? '<span style="color:var(--high)">Defender real-time off</span>' : w.defenderRealtime ? 'Defender real-time on' : '') + ((w.avProducts || []).length ? ' · ' + esc(w.avProducts.join(', ')) : '') + (w.signatureAgeDays ? ' · signatures ' + w.signatureAgeDays + 'd old' : ''), true],
+          ['Firewall', fw, true], ['BitLocker', bl, true],
+          ['RDP NLA', w.rdpNla === false ? '<span style="color:var(--high)">off</span>' : w.rdpNla ? 'required' : '', true],
+          ['Auto-logon', w.autoLogon ? '<span style="color:var(--high)">enabled</span>' : 'off', true],
+          ['Disks', (w.disks || []).map(function (x) { return x.drive + ' ' + x.freeGb + '/' + x.sizeGb + ' GB free'; }).join(' · ')],
+          ['Local admins', (w.admins || []).map(function (a) { return '<div class="small">' + esc(a) + '</div>'; }).join(''), true],
+          ['Installed', inst || boot ? 'since ' + (inst ? inst.toLocaleDateString() : '?') + ' · last boot ' + (boot ? boot.toLocaleString() : '?') : '']
+        ]);
+        if ((w.software || []).length) {
+          h += '<h4>Installed software (' + w.softwareCount + ')</h4><input type="search" id="sw-q" placeholder="Filter…" style="width:100%;margin-bottom:8px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 10px">' +
+            '<div class="table-wrap" style="max-height:340px"><table id="sw-table"><tr><th>Name</th><th>Version</th><th>Publisher</th></tr>' +
+            w.software.map(function (s) { return '<tr><td>' + esc(s.name) + '</td><td class="small">' + esc(s.version || '') + '</td><td class="small muted">' + esc(s.publisher || '') + '</td></tr>'; }).join('') + '</table></div>';
+        }
+      }
+      if (d.linux) {
+        var l = d.linux;
+        h += '<h4>Linux (credentialed)</h4>' + kv([['Distribution', l.distro], ['Kernel', l.kernel], ['Uptime', l.uptime], ['CPUs', l.cpus], ['Memory', l.memMb ? l.memMb + ' MB' : ''], ['Root disk used', l.rootUsePct ? l.rootUsePct + '%' : '']]);
+      }
+      if (d.netos) {
+        var n = d.netos;
+        h += '<h4>Network OS (credentialed)</h4>' + kv([['Platform', n.platform], ['Version', n.version], ['Model', n.model], ['Serial', n.serial], ['Uptime', n.uptime]]);
+      }
+      if (d.config) {
+        var cf = d.config;
+        h += '<h4>Configuration backup</h4>' + kv([['Captured', new Date(cf.captured).toLocaleString() + (cf.changed ? ' <span class="tag">changed since last backup</span>' : ''), true],
+          ['Size', cf.lines + ' lines'], ['SHA-256', '<span class="mono small">' + esc(cf.sha256.slice(0, 16)) + '…</span>', true],
+          ['Issues', (cf.issues || []).length ? cf.issues.map(function (i) { return '<span class="tag">' + esc(CFG_ISSUES[i] || i) + '</span>'; }).join('') : 'none', true]]) +
+          '<p><a href="/api/vault/config/' + encodeURIComponent(d.id) + '">Download config</a> <span class="muted small">(requires the vault to be unlocked)</span></p>';
+      }
+      if ((d.credTries || []).length) {
+        h += '<h4>Credential attempts</h4><ul class="list">' + d.credTries.map(function (t) {
+          return '<li><span class="t">' + hhmmss(t.at) + '</span><span class="tag">' + esc(t.method) + '</span><span style="flex:1">' + esc(t.credName) + '</span>' + (t.ok ? '<span class="status ok">ok</span>' : '<span class="status bad">' + esc(t.error || 'failed') + '</span>') + '</li>';
+        }).join('') + '</ul>';
+      }
+      return h;
     }
     if (tab === 'services') {
       var p = d.ports || [], sv = d.services || [], tls = d.tls || [];
@@ -401,6 +461,11 @@
     return '';
   }
   function bindDrawer(d) {
+    var q = $('#sw-q');
+    if (q) q.oninput = function () {
+      var s = q.value.toLowerCase();
+      $$('#sw-table tr').forEach(function (tr, i) { if (i) tr.style.display = tr.textContent.toLowerCase().indexOf(s) >= 0 ? '' : 'none'; });
+    };
     var f = $('#dev-edit');
     if (f) f.onsubmit = function (ev) {
       ev.preventDefault();
@@ -568,6 +633,150 @@
     }).join('') + '</div>' : '<p class="muted">Quiet so far.</p>';
   }
 
+
+  // ---------- Credentials (vault) ----------
+  var V = null, vaultEdit = null;
+  var CRED_TYPES = { windows: 'Windows admin (WinRM)', ssh: 'SSH (switch / firewall / Linux)', snmp: 'SNMP' };
+  function loadVault() { return api('/api/vault').then(function (v) { V = v; vaultDot(); return v; }); }
+  function vaultDot() {
+    var d = $('#nav-vault'); if (!d || !V) return;
+    d.className = 'dot ' + (V.unlocked ? 'ok' : V.exists ? 'warning' : '');
+    d.title = V.unlocked ? 'Vault unlocked' : V.exists ? 'Vault locked' : '';
+  }
+  views.vault = function () {
+    loadVault().then(function (v) {
+      var view = $('#view');
+      if (!v.site) {
+        view.innerHTML = '<div class="empty"><h2>Name the site first</h2><p>Each customer gets their own encrypted vault. Enter the customer / site name at the top of the page.</p></div>';
+        return;
+      }
+      if (!v.exists || !v.unlocked) {
+        var create = !v.exists;
+        view.innerHTML = '<div class="card" style="max-width:560px;margin:4vh auto">' +
+          '<h3>' + (create ? 'Create credential vault' : 'Unlock credential vault') + '</h3>' +
+          '<p>' + (create ? 'Store the credentials <b>' + esc(v.site) + '</b> gave you. OctoLAN uses them during scans for patch levels, installed software, security settings and switch config backups.'
+            : 'The vault for <b>' + esc(v.site) + '</b> is locked.') + '</p>' +
+          '<form id="vault-form" class="modal-body" style="padding:0">' +
+          '<label>Passphrase<input type="password" name="p1" autocomplete="' + (create ? 'new-password' : 'current-password') + '" required minlength="10"></label>' +
+          (create ? '<label>Confirm passphrase<input type="password" name="p2" autocomplete="new-password" required></label>' : '') +
+          '<div><button class="primary" type="submit">' + (create ? 'Create vault' : 'Unlock') + '</button></div>' +
+          '<p class="muted small">Encrypted with XChaCha20-Poly1305; the key is derived from your passphrase with Argon2id. The passphrase is never stored: if it\'s lost, the vault can\'t be recovered.<br>File: <span class="mono">' + esc(v.path) + '</span></p>' +
+          '</form></div>';
+        $('#vault-form').onsubmit = function (ev) {
+          ev.preventDefault();
+          var f = ev.target;
+          if (create && f.p1.value !== f.p2.value) { toast('Passphrases don\'t match', 'high'); return; }
+          var btn = f.querySelector('button'); btn.disabled = true; btn.textContent = create ? 'Creating…' : 'Unlocking…';
+          api('/api/vault/' + (create ? 'create' : 'unlock'), { method: 'POST', body: { passphrase: f.p1.value } })
+            .then(function () { f.reset(); toast(create ? 'Vault created' : 'Vault unlocked'); views.vault(); })
+            .catch(function (e) { btn.disabled = false; btn.textContent = create ? 'Create vault' : 'Unlock'; toast(e.message, 'high'); });
+        };
+        setTimeout(function () { var i = $('#vault-form input'); if (i) i.focus(); }, 30);
+        return;
+      }
+      var rows = v.creds.map(function (c) {
+        var who = c.type === 'snmp' ? (c.snmpVersion === 'v3' ? 'v3 user ' + esc(c.username) : 'community ••••') : esc((c.domain ? c.domain + '\\' : '') + c.username);
+        return '<tr><td><b>' + esc(c.name) + '</b>' + (c.notes ? '<div class="sub">' + esc(c.notes) + '</div>' : '') + '</td><td>' + esc(CRED_TYPES[c.type] || c.type) + '</td><td class="mono">' + who + '</td>' +
+          '<td class="small">' + (c.scope && c.scope.length ? esc(c.scope.join(', ')) : '<span class="muted">scan targets</span>') + '</td>' +
+          '<td class="small">' + (c.hasPassword ? 'password ' : '') + (c.hasKey ? 'key ' : '') + (c.hasEnable ? 'enable' : '') + '</td>' +
+          '<td style="white-space:nowrap"><button class="ghost small" data-edit="' + c.id + '">Edit</button> ' + (c.type !== 'snmp' ? '<button class="ghost small" data-test="' + c.id + '">Test</button> ' : '') +
+          '<button class="ghost small" data-del="' + c.id + '">Delete</button></td></tr>';
+      }).join('');
+      view.innerHTML = '<div class="toolbar"><span class="status ok">Vault unlocked</span><span class="muted small">' + esc(v.site) + ' · auto-locks after 30 min idle</span>' +
+        '<span style="margin-left:auto"></span><button class="primary small" id="v-add">Add credential</button><button class="ghost small" id="v-pass">Change passphrase</button><button class="ghost small" id="v-lock">Lock</button></div>' +
+        '<div class="card"><h3>Credentials <span class="right muted">' + v.creds.length + '</span></h3>' + (v.creds.length ?
+          '<div class="table-wrap"><table><tr><th>Name</th><th>Type</th><th>Account</th><th>Scope</th><th>Stored</th><th></th></tr>' + rows + '</table></div>' :
+          '<p class="muted">No credentials yet. Add the admin, switch or SNMP credentials the customer gave you.</p>') + '</div>' +
+        '<div id="v-editor"></div>' +
+        '<div class="card" style="margin-top:16px"><h3>How credentials are used</h3><ul class="small" style="margin:0;padding-left:18px;line-height:1.7">' +
+        '<li>Each credential is only sent to hosts inside its <b>scope</b> (blank = the scan\'s targets), and only to matching devices: Windows credentials to Windows hosts with WinRM open, SSH credentials to hosts with SSH open.</li>' +
+        '<li>Domain credentials are only offered to hosts that report the <b>same domain</b>, so a rogue machine can\'t collect them.</li>' +
+        '<li>One attempt per credential per host; a credential rejected 3 times is <b>paused</b> for the rest of the scan to avoid locking the account.</li>' +
+        '<li>SSH host keys are remembered; if a device\'s key changes, the login is refused.</li>' +
+        '<li>Only read-only commands are run. Config backups are stored <b>inside this encrypted vault</b>, never in session files or reports.</li></ul></div>' +
+        (v.configs && v.configs.length ? '<div class="card" style="margin-top:16px"><h3>Config backups <span class="right muted">' + v.configs.length + '</span></h3><div class="table-wrap"><table><tr><th>Device</th><th>Platform</th><th>Lines</th><th>Captured</th><th>Versions</th><th></th></tr>' +
+          v.configs.map(function (c) { return '<tr><td><b>' + esc(c.name) + '</b><div class="sub mono">' + esc(c.ip) + '</div></td><td>' + esc(c.platform) + '</td><td>' + c.lines + '</td><td class="small">' + new Date(c.captured).toLocaleString() + '</td><td>' + c.versions + '</td><td><a href="/api/vault/config/' + encodeURIComponent(c.deviceId) + '">Download</a></td></tr>'; }).join('') +
+          '</table></div></div>' : '');
+      $('#v-add').onclick = function () { credEditor({ type: 'windows' }); };
+      $('#v-lock').onclick = function () { api('/api/vault/lock', { method: 'POST' }).then(function () { toast('Vault locked'); views.vault(); }); };
+      $('#v-pass').onclick = passEditor;
+      $$('[data-edit]').forEach(function (b) { b.onclick = function () { credEditor(v.creds.filter(function (c) { return c.id === b.dataset.edit; })[0]); }; });
+      $$('[data-del]').forEach(function (b) {
+        b.onclick = function () {
+          var c = v.creds.filter(function (x) { return x.id === b.dataset.del; })[0];
+          if (!confirm('Delete credential "' + c.name + '"?')) return;
+          api('/api/vault/creds/' + encodeURIComponent(c.id), { method: 'DELETE' }).then(function () { toast('Deleted'); views.vault(); }).catch(function (e) { toast(e.message, 'high'); });
+        };
+      });
+      $$('[data-test]').forEach(function (b) {
+        b.onclick = function () {
+          var ip = prompt('Test against which IP address?');
+          if (!ip) return;
+          b.disabled = true; b.textContent = 'Testing…';
+          api('/api/vault/test', { method: 'POST', body: { id: b.dataset.test, ip: ip } }).then(function (r) {
+            toast(r.message, r.ok ? '' : 'high');
+          }).catch(function (e) { toast(e.message, 'high'); }).then(function () { b.disabled = false; b.textContent = 'Test'; });
+        };
+      });
+    }).catch(function (e) { $('#view').innerHTML = '<div class="empty"><h2>Vault unavailable</h2><p>' + esc(e.message) + '</p></div>'; });
+  };
+  function credEditor(c) {
+    var isNew = !c.id;
+    var box = $('#v-editor');
+    var t = c.type || 'windows';
+    function field(name, labelText, value, type, extra) {
+      return '<label>' + labelText + '<input name="' + name + '" type="' + (type || 'text') + '" value="' + esc(value || '') + '" autocomplete="off"' + (extra || '') + '></label>';
+    }
+    function secretField(name, labelText, has) {
+      return field(name, labelText + (has && !isNew ? ' <span class="muted">(leave blank to keep)</span>' : ''), '', 'password', ' autocomplete="new-password"');
+    }
+    function typeFields(t) {
+      if (t === 'windows') return '<div class="grid2">' + field('domain', 'Domain <span class="muted">(blank = local account)</span>', c.domain) + field('username', 'Username', c.username) + '</div>' +
+        secretField('password', 'Password', c.hasPassword);
+      if (t === 'ssh') return '<div class="grid2">' + field('username', 'Username', c.username) + secretField('password', 'Password', c.hasPassword) + '</div>' +
+        '<label>Private key (PEM, optional)' + (c.hasKey && !isNew ? ' <span class="muted">(leave blank to keep)</span>' : '') + '<textarea name="privateKey" rows="3" placeholder="-----BEGIN OPENSSH PRIVATE KEY-----"></textarea></label>' +
+        '<div class="grid2">' + secretField('keyPassphrase', 'Key passphrase', false) + secretField('enable', 'Enable secret (Cisco)', c.hasEnable) + '</div>';
+      return '<div class="grid2"><label>Version<select name="snmpVersion"><option value="v2c"' + (c.snmpVersion !== 'v3' ? ' selected' : '') + '>v1 / v2c community</option><option value="v3"' + (c.snmpVersion === 'v3' ? ' selected' : '') + '>v3 user</option></select></label>' +
+        secretField('community', 'Community (v2c)', c.hasPassword && c.snmpVersion !== 'v3') + '</div>' +
+        '<div class="grid3">' + field('username', 'v3 user', c.username) +
+        '<label>Auth<select name="authProto">' + ['SHA', 'SHA256', 'SHA512', 'MD5'].map(function (p) { return '<option' + (c.authProto === p ? ' selected' : '') + '>' + p + '</option>'; }).join('') + '</select></label>' +
+        secretField('authPass', 'Auth password', c.hasPassword && c.snmpVersion === 'v3') +
+        '<label>Privacy<select name="privProto">' + ['AES', 'AES256', 'AES192', 'DES'].map(function (p) { return '<option' + (c.privProto === p ? ' selected' : '') + '>' + p + '</option>'; }).join('') + '</select></label>' +
+        secretField('privPass', 'Privacy password', false) + '</div>';
+    }
+    box.innerHTML = '<form class="card" id="cred-form" style="margin-top:16px" autocomplete="off"><h3>' + (isNew ? 'Add credential' : 'Edit ' + esc(c.name)) + '</h3><div class="modal-body" style="padding:0">' +
+      '<div class="grid2"><label>Type<select name="type"' + (isNew ? '' : ' disabled') + '>' + Object.keys(CRED_TYPES).map(function (k) { return '<option value="' + k + '"' + (k === t ? ' selected' : '') + '>' + CRED_TYPES[k] + '</option>'; }).join('') + '</select></label>' +
+      field('name', 'Name', c.name, 'text', ' placeholder="e.g. Domain admin, Core switches"') + '</div>' +
+      '<div id="cred-type-fields">' + typeFields(t) + '</div>' +
+      '<label>Scope <span class="muted">CIDRs, ranges or IPs this credential may be used on (blank = the scan\'s targets)</span><input name="scope" value="' + esc((c.scope || []).join(', ')) + '" placeholder="10.0.0.0/24, 10.0.5.10-20"></label>' +
+      field('notes', 'Notes', c.notes, 'text', ' placeholder="Who provided it, expiry…"') +
+      '<div><button class="primary" type="submit">Save</button> <button class="ghost" type="button" id="cred-cancel">Cancel</button></div></div></form>';
+    var f = $('#cred-form');
+    f.type.onchange = function () { t = f.type.value; $('#cred-type-fields').innerHTML = typeFields(t); };
+    $('#cred-cancel').onclick = function () { box.innerHTML = ''; };
+    f.onsubmit = function (ev) {
+      ev.preventDefault();
+      var body = { id: c.id || '', type: t, name: f.name.value, notes: f.notes.value, scope: [f.scope.value] };
+      ['domain', 'username', 'password', 'privateKey', 'keyPassphrase', 'enable', 'snmpVersion', 'community', 'authProto', 'authPass', 'privProto', 'privPass']
+        .forEach(function (k) { if (f[k]) body[k] = f[k].value; });
+      api('/api/vault/creds', { method: 'POST', body: body }).then(function () { toast('Credential saved'); views.vault(); })
+        .catch(function (e) { toast(e.message, 'high'); });
+    };
+    box.scrollIntoView({ behavior: 'smooth' });
+  }
+  function passEditor() {
+    var box = $('#v-editor');
+    box.innerHTML = '<form class="card" id="pass-form" style="margin-top:16px"><h3>Change passphrase</h3><div class="modal-body" style="padding:0">' +
+      '<label>Current passphrase<input type="password" name="cur" autocomplete="current-password"></label><div class="grid2"><label>New passphrase<input type="password" name="p1" autocomplete="new-password" minlength="10"></label>' +
+      '<label>Confirm<input type="password" name="p2" autocomplete="new-password"></label></div><div><button class="primary" type="submit">Change</button></div></div></form>';
+    $('#pass-form').onsubmit = function (ev) {
+      ev.preventDefault(); var f = ev.target;
+      if (f.p1.value !== f.p2.value) { toast('Passphrases don\'t match', 'high'); return; }
+      api('/api/vault/passphrase', { method: 'POST', body: { passphrase: f.cur.value, newPassphrase: f.p1.value } })
+        .then(function () { toast('Passphrase changed'); box.innerHTML = ''; }).catch(function (e) { toast(e.message, 'high'); });
+    };
+  }
+
   // ---------- Activity ----------
   var actFilter = '';
   views.activity = function () {
@@ -638,6 +847,12 @@
     note.className = 'note' + (c.rawCapture ? '' : ' warn');
     note.innerHTML = c.rawCapture ? '✓ Raw capture available: full layer-2 discovery, passive listening and Storm Guard.'
       : '⚠ <b>Limited mode</b>: ' + esc(c.captureNote) + '. Discovery continues using ping (' + esc(c.icmpMode) + '), the OS ARP cache, TCP, SNMP, SMB and name services.';
+    loadVault().then(function (v) {
+      var n = v.creds ? v.creds.length : 0;
+      $('#f-vault').innerHTML = v.unlocked ? '(' + n + ' saved for ' + esc(v.site) + ')' : v.exists ? '(vault locked: <a href="#/vault">unlock it</a> first)' : '(no vault for this site yet: <a href="#/vault">create one</a>)';
+      f.usevault.checked = !!v.unlocked;
+      f.usevault.disabled = !v.unlocked;
+    }).catch(function () {});
     $('#modal').hidden = false;
     setTimeout(function () { (f.site.value ? f.targets : f.site).focus(); }, 30);
   }
@@ -648,7 +863,8 @@
     var f = ev.target;
     var body = {
       site: f.site.value, interface: f.interface.value, targets: f.targets.value, communities: f.communities.value,
-      ports: f.ports.value, passiveSeconds: +f.passive.value, zeroFootprint: f.zero.checked, rate: +f.rate.value, snmpv3: []
+      ports: f.ports.value, passiveSeconds: +f.passive.value, zeroFootprint: f.zero.checked, rate: +f.rate.value, snmpv3: [],
+      useVault: f.usevault.checked
     };
     if (f.v3user.value.trim()) body.snmpv3.push({ user: f.v3user.value.trim(), authProto: f.v3auth.value, authPass: f.v3authpass.value, privProto: f.v3priv.value, privPass: f.v3privpass.value });
     api('/api/scan', { method: 'POST', body: body }).then(function () {
@@ -661,7 +877,9 @@
   $('#stop-btn').onclick = function () { api('/api/scan/stop', { method: 'POST' }).then(function () { toast('Stopping…'); }); };
 
   // ---------- misc chrome ----------
-  $('#site-name').onchange = function () { api('/api/site', { method: 'POST', body: { name: this.value } }).then(loadState); };
+  $('#site-name').onchange = function () {
+    api('/api/site', { method: 'POST', body: { name: this.value } }).then(loadState).then(function () { loadVault(); if (current === 'vault') views.vault(); });
+  };
   $('#export-btn').onclick = function (e) { e.stopPropagation(); $('#export-menu').hidden = !$('#export-menu').hidden; };
   document.addEventListener('click', function () { $('#export-menu').hidden = true; });
   $('#theme-btn').onclick = function () {
@@ -719,6 +937,6 @@
     es.onerror = function () { es.close(); setTimeout(connect, 3000); };
   }
 
-  loadState().then(function () { route(); connect(); });
+  loadState().then(function () { route(); connect(); loadVault().catch(function () {}); });
   setInterval(function () { if (current === 'traffic') views.traffic(); }, 10000);
 })();

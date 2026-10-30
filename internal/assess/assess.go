@@ -240,6 +240,8 @@ func (b *builder) deviceChecks(d *model.Device) {
 		}
 	}
 
+	b.credentialedChecks(d)
+
 	// --- UPnP ---
 	for _, s := range d.Services {
 		if s.Type == "ssdp" && (d.IsGateway || d.Type == model.TypeRouter || d.Type == model.TypeFirewall) {
@@ -273,6 +275,129 @@ func (b *builder) deviceChecks(d *model.Device) {
 		b.add("no-sysname", model.SevInfo, "Documentation", "Network devices without hostnames",
 			"Unnamed infrastructure makes troubleshooting and documentation harder.",
 			"Set a hostname and sysLocation on every network device.", d.ID)
+	}
+}
+
+// configIssues maps config-audit keys to findings.
+var configIssues = map[string]struct {
+	sev                model.Severity
+	title, detail, fix string
+}{
+	"enable-password-plaintext": {model.SevHigh, "Enable password stored with weak encryption",
+		"The switch uses `enable password` (reversible) instead of `enable secret`.", "Replace with `enable algorithm-type scrypt secret …` and remove `enable password`."},
+	"no-service-password-encryption": {model.SevLow, "Passwords shown in clear text in the config",
+		"`service password-encryption` is off, so line and user passwords appear in clear text in backups.", "Enable `service password-encryption` and move users to `secret` (type 8/9)."},
+	"vty-telnet": {model.SevHigh, "Telnet allowed on management lines (VTY)",
+		"The config permits Telnet logins to the device.", "Set `transport input ssh` on all `line vty` blocks."},
+	"http-server": {model.SevMedium, "Unencrypted HTTP management enabled in config",
+		"`ip http server` is enabled.", "Use `no ip http server` and `ip http secure-server` only if the web UI is needed."},
+	"snmp-rw-community": {model.SevCritical, "SNMP write (RW) community configured",
+		"A read-write SNMP community lets anyone who knows it reconfigure the device.", "Remove RW communities; use SNMPv3 with authPriv for any write access."},
+	"no-remote-syslog": {model.SevLow, "No remote syslog configured",
+		"Device logs stay local and are lost on reboot, so incidents can't be investigated.", "Send logs to the MSP's syslog/SIEM collector."},
+	"no-ntp": {model.SevLow, "No NTP server configured",
+		"Without NTP, log timestamps drift and certificate checks can fail.", "Point the device at internal or public NTP servers."},
+	"local-user-weak-hash": {model.SevMedium, "Local accounts with weak password storage",
+		"`username … password 0/7` stores passwords in clear text or a trivially reversible form.", "Use `username … secret` (type 8/9)."},
+	"no-aaa": {model.SevLow, "AAA not enabled",
+		"`aaa new-model` is off, so logins can't be centralised or audited.", "Enable AAA with RADIUS/TACACS+ and local fallback."},
+	"smart-install": {model.SevCritical, "Cisco Smart Install enabled in config",
+		"Smart Install allows unauthenticated reconfiguration (CVE-2018-0171).", "Run `no vstack`."},
+	"forti-http-admin": {model.SevMedium, "FortiGate admin access over HTTP",
+		"An interface allows administrative access over plain HTTP.", "Remove `http` from `set allowaccess` on all interfaces."},
+	"routeros-insecure-services": {model.SevMedium, "MikroTik insecure services enabled",
+		"Telnet, FTP, the HTTP web UI or the API service is enabled.", "Disable unused services under `/ip service` and restrict the rest by address."},
+}
+
+func (b *builder) credentialedChecks(d *model.Device) {
+	now := b.in.Now
+	if w := d.Windows; w != nil {
+		if !w.LastHotfix.IsZero() && now.Sub(w.LastHotfix) > 60*24*time.Hour {
+			b.add("win-patches-stale", model.SevHigh, "Patching", "Windows updates not installed in 60+ days",
+				"These hosts' most recent update is more than two months old, so recent security fixes are missing.",
+				"Check the RMM patch policy / WSUS approvals and remediate failing installs.", d.ID)
+		}
+		if w.DefenderRTP != nil && !*w.DefenderRTP && len(w.AVProducts) <= 1 {
+			b.add("win-av-off", model.SevHigh, "Endpoint protection", "Real-time antivirus protection is off",
+				"Microsoft Defender real-time protection is disabled and no other antivirus product is registered.",
+				"Re-enable Defender real-time protection or deploy the MSP's EDR agent.", d.ID)
+		}
+		if w.SigAgeDays > 7 {
+			b.add("win-av-stale", model.SevMedium, "Endpoint protection", "Antivirus signatures out of date",
+				"Defender signatures are more than a week old.", "Check update connectivity and the device's update policy.", d.ID)
+		}
+		for name, on := range w.Firewall {
+			if !on {
+				b.add("win-firewall-off", model.SevMedium, "Hardening", "Windows Firewall profile disabled",
+					"At least one Windows Firewall profile ("+name+") is turned off.", "Enable all firewall profiles via Group Policy.", d.ID)
+				break
+			}
+		}
+		if d.Type == model.TypeWorkstation {
+			for _, v := range w.BitLocker {
+				if strings.EqualFold(v.Drive, "C:") && !v.Protected {
+					b.add("win-bitlocker-off", model.SevMedium, "Data protection", "System drive not encrypted (BitLocker off)",
+						"Workstations' C: drive is unencrypted; a lost or stolen device exposes its data.",
+						"Enable BitLocker with TPM and escrow recovery keys to Entra ID / AD.", d.ID)
+				}
+			}
+		}
+		if w.AutoLogon {
+			b.add("win-autologon", model.SevHigh, "Credentials", "Automatic logon configured",
+				"Windows is set to log on automatically, which usually means a password is stored in the registry.",
+				"Remove AutoAdminLogon and DefaultPassword from the Winlogon registry key.", d.ID)
+		}
+		if n := len(w.Admins); n > 4 {
+			b.add("win-admin-sprawl", model.SevMedium, "Access control", "Too many local administrators",
+				fmt.Sprintf("Some hosts have more than four members in the local Administrators group (up to %d).", n),
+				"Limit local admin to a managed group (e.g. LAPS + a tier-1 admin group).", d.ID)
+		}
+		if w.RDPNLA != nil && !*w.RDPNLA {
+			b.add("win-rdp-nla-off", model.SevMedium, "Remote access", "RDP without Network Level Authentication",
+				"RDP accepts connections before authenticating, exposing the logon screen to brute force and pre-auth bugs.",
+				"Require NLA for Remote Desktop via Group Policy.", d.ID)
+		}
+		if w.PendingReboot {
+			b.add("win-pending-reboot", model.SevLow, "Patching", "Reboot pending to finish updates",
+				"Installed updates won't take effect until these hosts restart.", "Schedule a restart.", d.ID)
+		}
+		if w.SMB1Enabled != nil && *w.SMB1Enabled && (d.SMB == nil || !d.SMB.SMB1) {
+			b.add("smbv1", model.SevHigh, "Vulnerable services", "SMBv1 enabled",
+				"SMBv1 is the protocol abused by WannaCry/NotPetya (EternalBlue) and is deprecated by Microsoft.",
+				"Disable SMB1: `Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol`; on NAS devices set minimum protocol to SMB2.", d.ID)
+		}
+		for _, disk := range w.Disks {
+			if disk.SizeGB > 0 && disk.FreeGB/disk.SizeGB < 0.10 {
+				b.add("disk-low", model.SevLow, "Performance", "Disks with less than 10% free space",
+					"Low free space breaks updates and backups and slows systems down.", "Clean up or expand the volume.", d.ID)
+				break
+			}
+		}
+	}
+	if l := d.Linux; l != nil && l.RootUse >= 90 {
+		b.add("disk-low", model.SevLow, "Performance", "Disks with less than 10% free space",
+			"Low free space breaks updates and backups and slows systems down.", "Clean up or expand the volume.", d.ID)
+	}
+	if c := d.Config; c != nil {
+		for _, issue := range c.Issues {
+			if ci, ok := configIssues[issue]; ok {
+				b.add("cfg-"+issue, ci.sev, "Device configuration", ci.title, ci.detail, ci.fix, d.ID)
+			}
+		}
+	}
+	rejected := false
+	ok := false
+	for _, t := range d.CredTries {
+		if t.OK {
+			ok = true
+		} else if t.Error == "credentials rejected" {
+			rejected = true
+		}
+	}
+	if rejected && !ok {
+		b.add("cred-rejected", model.SevInfo, "Assessment coverage", "Saved credentials were rejected",
+			"The customer-provided credentials didn't work on these hosts, so they were assessed without logging in.",
+			"Confirm the account with the customer (expired password, missing admin rights, or a different domain).", d.ID)
 	}
 }
 

@@ -1,7 +1,7 @@
 {
   "version": "v2.0.0",
   "site": "Riverside Dental Group (sample data)",
-  "generated": "2026-10-30T07:58:42.599503-04:00",
+  "generated": "2026-10-30T09:07:48.02565-04:00",
   "collector": "TECH-LAPTOP-07",
   "capabilities": {
     "os": "windows",
@@ -104,7 +104,7 @@
           "port": 443,
           "subject": "rdg-fw01",
           "issuer": "rdg-fw01",
-          "notAfter": "2026-10-18T07:58:42.580167-04:00",
+          "notAfter": "2026-10-18T09:07:47.962036-04:00",
           "selfSigned": true,
           "version": "TLS 1.2"
         }
@@ -115,8 +115,8 @@
         "tcp",
         "snmp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.580239-04:00",
-      "lastSeen": "2026-10-30T07:58:42.580239-04:00",
+      "firstSeen": "2026-10-30T09:07:47.962121-04:00",
+      "lastSeen": "2026-10-30T09:07:47.962121-04:00",
       "alive": true,
       "isGateway": true
     },
@@ -608,14 +608,47 @@
           "vlan": 1
         }
       ],
+      "netos": {
+        "platform": "cisco-ios",
+        "version": "15.2(7)E4",
+        "model": "WS-C2960X-48FPD-L",
+        "serial": "FOC2138X0AB",
+        "uptime": "1 year, 17 weeks, 3 days",
+        "collected": "2026-10-30T09:07:47.962036-04:00"
+      },
+      "config": {
+        "platform": "cisco-ios",
+        "lines": 10,
+        "sha256": "9dc9621066c5d5dd9a1c5dd5c274557008ff1e78fb9eca432ce5f1317d047581",
+        "captured": "2026-10-30T09:07:47.962036-04:00",
+        "changed": true,
+        "issues": [
+          "enable-password-plaintext",
+          "vty-telnet",
+          "http-server",
+          "no-remote-syslog",
+          "no-ntp",
+          "local-user-weak-hash",
+          "no-aaa"
+        ]
+      },
+      "credTries": [
+        {
+          "method": "ssh",
+          "credId": "demo",
+          "credName": "Core switches (netadmin)",
+          "ok": true,
+          "at": "2026-10-30T09:07:47.962036-04:00"
+        }
+      ],
       "sources": [
         "arp",
         "icmp",
         "tcp",
         "snmp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598006-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598006-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982482-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982482-04:00",
       "alive": true
     },
     {
@@ -663,8 +696,8 @@
         "tcp",
         "snmp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598015-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598015-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982538-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982538-04:00",
       "alive": true
     },
     {
@@ -735,13 +768,95 @@
         "osBuild": "20348",
         "osVersion": "10.0"
       },
+      "windows": {
+        "os": "Microsoft Windows Server 2022 Standard",
+        "version": "",
+        "build": "20348",
+        "ubr": 2762,
+        "installDate": "2024-11-29T08:07:47.962036-05:00",
+        "lastBoot": "2026-10-24T09:07:47.962036-04:00",
+        "manufacturer": "Dell Inc.",
+        "cpu": "Intel Core i5-12500",
+        "ramGb": 16,
+        "domain": "riverside.local",
+        "domainJoined": true,
+        "hotfixCount": 38,
+        "lastHotfix": "2026-10-21T09:07:47.962036-04:00",
+        "lastHotfixId": "KB5044284",
+        "defenderRealtime": true,
+        "defenderEnabled": true,
+        "signatureAgeDays": 1,
+        "firewall": {
+          "Domain": true,
+          "Private": true,
+          "Public": true
+        },
+        "bitlocker": [
+          {
+            "drive": "C:",
+            "protected": true
+          }
+        ],
+        "disks": [
+          {
+            "drive": "C:",
+            "sizeGb": 476,
+            "freeGb": 211
+          }
+        ],
+        "pendingReboot": false,
+        "rdpNla": true,
+        "autoLogon": false,
+        "admins": [
+          "RIVERSIDE\\Domain Admins",
+          "Administrator"
+        ],
+        "softwareCount": 64,
+        "software": [
+          {
+            "name": "Dentrix G7",
+            "version": "7.3",
+            "publisher": "Henry Schein One"
+          },
+          {
+            "name": "Google Chrome",
+            "version": "130.0.6723.70",
+            "publisher": "Google LLC"
+          },
+          {
+            "name": "Microsoft 365 Apps for business",
+            "version": "16.0.18129",
+            "publisher": "Microsoft Corporation"
+          },
+          {
+            "name": "Adobe Acrobat Reader",
+            "version": "24.004.20219",
+            "publisher": "Adobe"
+          },
+          {
+            "name": "ScreenConnect Client",
+            "version": "24.3.7",
+            "publisher": "ConnectWise"
+          }
+        ],
+        "collected": "2026-10-30T09:07:47.962036-04:00"
+      },
+      "credTries": [
+        {
+          "method": "winrm",
+          "credId": "demo",
+          "credName": "Domain admin (RIVERSIDE)",
+          "ok": true,
+          "at": "2026-10-30T09:07:47.962036-04:00"
+        }
+      ],
       "sources": [
         "arp",
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598018-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598018-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982545-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982545-04:00",
       "alive": true
     },
     {
@@ -779,8 +894,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598017-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598017-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982541-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982541-04:00",
       "alive": true
     },
     {
@@ -818,8 +933,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598018-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598018-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982542-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982542-04:00",
       "alive": true
     },
     {
@@ -883,13 +998,96 @@
         "osBuild": "9600",
         "osVersion": "6.3"
       },
+      "windows": {
+        "os": "Microsoft Windows Server 2012 R2 Standard",
+        "version": "",
+        "build": "9600",
+        "ubr": 21620,
+        "installDate": "2024-11-29T08:07:47.962036-05:00",
+        "lastBoot": "2026-10-24T09:07:47.962036-04:00",
+        "manufacturer": "Dell Inc.",
+        "cpu": "Intel Core i5-12500",
+        "ramGb": 16,
+        "domain": "riverside.local",
+        "domainJoined": true,
+        "hotfixCount": 38,
+        "lastHotfix": "2025-09-15T09:07:47.962036-04:00",
+        "lastHotfixId": "KB5044284",
+        "defenderRealtime": true,
+        "defenderEnabled": true,
+        "signatureAgeDays": 1,
+        "firewall": {
+          "Domain": true,
+          "Private": true,
+          "Public": true
+        },
+        "bitlocker": [
+          {
+            "drive": "C:",
+            "protected": false
+          }
+        ],
+        "disks": [
+          {
+            "drive": "C:",
+            "sizeGb": 476,
+            "freeGb": 211
+          }
+        ],
+        "pendingReboot": true,
+        "rdpNla": true,
+        "autoLogon": false,
+        "admins": [
+          "RIVERSIDE\\Domain Admins",
+          "Administrator",
+          "RIVERSIDE\\frontdesk"
+        ],
+        "softwareCount": 64,
+        "software": [
+          {
+            "name": "Dentrix G7",
+            "version": "7.3",
+            "publisher": "Henry Schein One"
+          },
+          {
+            "name": "Google Chrome",
+            "version": "130.0.6723.70",
+            "publisher": "Google LLC"
+          },
+          {
+            "name": "Microsoft 365 Apps for business",
+            "version": "16.0.18129",
+            "publisher": "Microsoft Corporation"
+          },
+          {
+            "name": "Adobe Acrobat Reader",
+            "version": "24.004.20219",
+            "publisher": "Adobe"
+          },
+          {
+            "name": "ScreenConnect Client",
+            "version": "24.3.7",
+            "publisher": "ConnectWise"
+          }
+        ],
+        "collected": "2026-10-30T09:07:47.962036-04:00"
+      },
+      "credTries": [
+        {
+          "method": "winrm",
+          "credId": "demo",
+          "credName": "Domain admin (RIVERSIDE)",
+          "ok": true,
+          "at": "2026-10-30T09:07:47.962036-04:00"
+        }
+      ],
       "sources": [
         "arp",
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.59802-04:00",
-      "lastSeen": "2026-10-30T07:58:42.59802-04:00",
+      "firstSeen": "2026-10-30T09:07:47.98255-04:00",
+      "lastSeen": "2026-10-30T09:07:47.98255-04:00",
       "alive": true,
       "notes": "Dentrix database server"
     },
@@ -954,7 +1152,7 @@
           "port": 5001,
           "subject": "synology",
           "issuer": "synology",
-          "notAfter": "2026-11-18T06:58:42.580167-05:00",
+          "notAfter": "2026-11-18T08:07:47.962036-05:00",
           "selfSigned": true,
           "version": "TLS 1.2"
         }
@@ -964,8 +1162,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598022-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598022-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982552-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982552-04:00",
       "alive": true
     },
     {
@@ -1011,8 +1209,8 @@
         "tcp",
         "snmp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598023-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598023-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982553-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982553-04:00",
       "alive": true
     },
     {
@@ -1067,8 +1265,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598026-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598026-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982559-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982559-04:00",
       "alive": true
     },
     {
@@ -1116,8 +1314,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598027-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598027-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982561-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982561-04:00",
       "alive": true
     },
     {
@@ -1166,8 +1364,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598028-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598028-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982562-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982562-04:00",
       "alive": true
     },
     {
@@ -1210,8 +1408,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598031-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598031-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982563-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982563-04:00",
       "alive": true
     },
     {
@@ -1254,8 +1452,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598032-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598032-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982564-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982564-04:00",
       "alive": true
     },
     {
@@ -1298,8 +1496,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598033-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598033-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982566-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982566-04:00",
       "alive": true
     },
     {
@@ -1335,8 +1533,8 @@
       "sources": [
         "self"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598062-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598062-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982609-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982609-04:00",
       "alive": true,
       "isSelf": true
     },
@@ -1385,8 +1583,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598035-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598035-04:00",
+      "firstSeen": "2026-10-30T09:07:47.98257-04:00",
+      "lastSeen": "2026-10-30T09:07:47.98257-04:00",
       "alive": true
     },
     {
@@ -1434,8 +1632,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598036-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598036-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982571-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982571-04:00",
       "alive": true
     },
     {
@@ -1483,8 +1681,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598037-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598037-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982572-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982572-04:00",
       "alive": true
     },
     {
@@ -1532,8 +1730,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598038-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598038-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982573-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982573-04:00",
       "alive": true
     },
     {
@@ -1589,13 +1787,96 @@
         "osBuild": "26100",
         "osVersion": "10.0"
       },
+      "windows": {
+        "os": "Microsoft Windows 11 Pro",
+        "version": "",
+        "build": "26100",
+        "ubr": 2161,
+        "installDate": "2024-11-29T08:07:47.962036-05:00",
+        "lastBoot": "2026-10-24T09:07:47.962036-04:00",
+        "manufacturer": "Dell Inc.",
+        "cpu": "Intel Core i5-12500",
+        "ramGb": 16,
+        "domain": "riverside.local",
+        "domainJoined": true,
+        "hotfixCount": 38,
+        "lastHotfix": "2026-10-18T09:07:47.962036-04:00",
+        "lastHotfixId": "KB5044284",
+        "defenderRealtime": true,
+        "defenderEnabled": true,
+        "signatureAgeDays": 1,
+        "firewall": {
+          "Domain": true,
+          "Private": true,
+          "Public": true
+        },
+        "bitlocker": [
+          {
+            "drive": "C:",
+            "protected": true
+          }
+        ],
+        "disks": [
+          {
+            "drive": "C:",
+            "sizeGb": 476,
+            "freeGb": 211
+          }
+        ],
+        "pendingReboot": false,
+        "rdpNla": true,
+        "autoLogon": false,
+        "admins": [
+          "RIVERSIDE\\Domain Admins",
+          "Administrator",
+          "RIVERSIDE\\frontdesk"
+        ],
+        "softwareCount": 64,
+        "software": [
+          {
+            "name": "Dentrix G7",
+            "version": "7.3",
+            "publisher": "Henry Schein One"
+          },
+          {
+            "name": "Google Chrome",
+            "version": "130.0.6723.70",
+            "publisher": "Google LLC"
+          },
+          {
+            "name": "Microsoft 365 Apps for business",
+            "version": "16.0.18129",
+            "publisher": "Microsoft Corporation"
+          },
+          {
+            "name": "Adobe Acrobat Reader",
+            "version": "24.004.20219",
+            "publisher": "Adobe"
+          },
+          {
+            "name": "ScreenConnect Client",
+            "version": "24.3.7",
+            "publisher": "ConnectWise"
+          }
+        ],
+        "collected": "2026-10-30T09:07:47.962036-04:00"
+      },
+      "credTries": [
+        {
+          "method": "winrm",
+          "credId": "demo",
+          "credName": "Domain admin (RIVERSIDE)",
+          "ok": true,
+          "at": "2026-10-30T09:07:47.962036-04:00"
+        }
+      ],
       "sources": [
         "arp",
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598039-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598039-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982574-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982574-04:00",
       "alive": true
     },
     {
@@ -1651,13 +1932,97 @@
         "osBuild": "26100",
         "osVersion": "10.0"
       },
+      "windows": {
+        "os": "Microsoft Windows 11 Pro",
+        "version": "",
+        "build": "26100",
+        "ubr": 2161,
+        "installDate": "2024-11-29T08:07:47.962036-05:00",
+        "lastBoot": "2026-10-24T09:07:47.962036-04:00",
+        "manufacturer": "Dell Inc.",
+        "cpu": "Intel Core i5-12500",
+        "ramGb": 16,
+        "domain": "riverside.local",
+        "domainJoined": true,
+        "hotfixCount": 38,
+        "lastHotfix": "2026-10-17T09:07:47.962036-04:00",
+        "lastHotfixId": "KB5044284",
+        "defenderRealtime": true,
+        "defenderEnabled": true,
+        "signatureAgeDays": 1,
+        "firewall": {
+          "Domain": true,
+          "Private": true,
+          "Public": true
+        },
+        "bitlocker": [
+          {
+            "drive": "C:",
+            "protected": true
+          }
+        ],
+        "disks": [
+          {
+            "drive": "C:",
+            "sizeGb": 476,
+            "freeGb": 211
+          }
+        ],
+        "pendingReboot": false,
+        "rdpNla": true,
+        "autoLogon": false,
+        "admins": [
+          "RIVERSIDE\\Domain Admins",
+          "Administrator",
+          "RIVERSIDE\\frontdesk",
+          "RIVERSIDE\\drpatel"
+        ],
+        "softwareCount": 64,
+        "software": [
+          {
+            "name": "Dentrix G7",
+            "version": "7.3",
+            "publisher": "Henry Schein One"
+          },
+          {
+            "name": "Google Chrome",
+            "version": "130.0.6723.70",
+            "publisher": "Google LLC"
+          },
+          {
+            "name": "Microsoft 365 Apps for business",
+            "version": "16.0.18129",
+            "publisher": "Microsoft Corporation"
+          },
+          {
+            "name": "Adobe Acrobat Reader",
+            "version": "24.004.20219",
+            "publisher": "Adobe"
+          },
+          {
+            "name": "ScreenConnect Client",
+            "version": "24.3.7",
+            "publisher": "ConnectWise"
+          }
+        ],
+        "collected": "2026-10-30T09:07:47.962036-04:00"
+      },
+      "credTries": [
+        {
+          "method": "winrm",
+          "credId": "demo",
+          "credName": "Domain admin (RIVERSIDE)",
+          "ok": true,
+          "at": "2026-10-30T09:07:47.962036-04:00"
+        }
+      ],
       "sources": [
         "arp",
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.59804-04:00",
-      "lastSeen": "2026-10-30T07:58:42.59804-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982575-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982575-04:00",
       "alive": true
     },
     {
@@ -1713,13 +2078,96 @@
         "osBuild": "22631",
         "osVersion": "10.0"
       },
+      "windows": {
+        "os": "Microsoft Windows 11 Pro",
+        "version": "",
+        "build": "26100",
+        "ubr": 2161,
+        "installDate": "2024-11-29T08:07:47.962036-05:00",
+        "lastBoot": "2026-10-24T09:07:47.962036-04:00",
+        "manufacturer": "Dell Inc.",
+        "cpu": "Intel Core i5-12500",
+        "ramGb": 16,
+        "domain": "riverside.local",
+        "domainJoined": true,
+        "hotfixCount": 38,
+        "lastHotfix": "2026-10-16T09:07:47.962036-04:00",
+        "lastHotfixId": "KB5044284",
+        "defenderRealtime": true,
+        "defenderEnabled": true,
+        "signatureAgeDays": 1,
+        "firewall": {
+          "Domain": true,
+          "Private": true,
+          "Public": true
+        },
+        "bitlocker": [
+          {
+            "drive": "C:",
+            "protected": true
+          }
+        ],
+        "disks": [
+          {
+            "drive": "C:",
+            "sizeGb": 476,
+            "freeGb": 211
+          }
+        ],
+        "pendingReboot": false,
+        "rdpNla": true,
+        "autoLogon": false,
+        "admins": [
+          "RIVERSIDE\\Domain Admins",
+          "Administrator",
+          "RIVERSIDE\\frontdesk"
+        ],
+        "softwareCount": 64,
+        "software": [
+          {
+            "name": "Dentrix G7",
+            "version": "7.3",
+            "publisher": "Henry Schein One"
+          },
+          {
+            "name": "Google Chrome",
+            "version": "130.0.6723.70",
+            "publisher": "Google LLC"
+          },
+          {
+            "name": "Microsoft 365 Apps for business",
+            "version": "16.0.18129",
+            "publisher": "Microsoft Corporation"
+          },
+          {
+            "name": "Adobe Acrobat Reader",
+            "version": "24.004.20219",
+            "publisher": "Adobe"
+          },
+          {
+            "name": "ScreenConnect Client",
+            "version": "24.3.7",
+            "publisher": "ConnectWise"
+          }
+        ],
+        "collected": "2026-10-30T09:07:47.962036-04:00"
+      },
+      "credTries": [
+        {
+          "method": "winrm",
+          "credId": "demo",
+          "credName": "Domain admin (RIVERSIDE)",
+          "ok": true,
+          "at": "2026-10-30T09:07:47.962036-04:00"
+        }
+      ],
       "sources": [
         "arp",
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598041-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598041-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982577-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982577-04:00",
       "alive": true
     },
     {
@@ -1775,13 +2223,97 @@
         "osBuild": "26100",
         "osVersion": "10.0"
       },
+      "windows": {
+        "os": "Microsoft Windows 11 Pro",
+        "version": "",
+        "build": "26100",
+        "ubr": 2161,
+        "installDate": "2024-11-29T08:07:47.962036-05:00",
+        "lastBoot": "2026-10-24T09:07:47.962036-04:00",
+        "manufacturer": "Dell Inc.",
+        "cpu": "Intel Core i5-12500",
+        "ramGb": 16,
+        "domain": "riverside.local",
+        "domainJoined": true,
+        "hotfixCount": 38,
+        "lastHotfix": "2026-10-15T09:07:47.962036-04:00",
+        "lastHotfixId": "KB5044284",
+        "defenderRealtime": true,
+        "defenderEnabled": true,
+        "signatureAgeDays": 1,
+        "firewall": {
+          "Domain": true,
+          "Private": true,
+          "Public": true
+        },
+        "bitlocker": [
+          {
+            "drive": "C:",
+            "protected": false
+          }
+        ],
+        "disks": [
+          {
+            "drive": "C:",
+            "sizeGb": 476,
+            "freeGb": 211
+          }
+        ],
+        "pendingReboot": false,
+        "rdpNla": true,
+        "autoLogon": false,
+        "admins": [
+          "RIVERSIDE\\Domain Admins",
+          "Administrator",
+          "RIVERSIDE\\frontdesk",
+          "RIVERSIDE\\drpatel"
+        ],
+        "softwareCount": 64,
+        "software": [
+          {
+            "name": "Dentrix G7",
+            "version": "7.3",
+            "publisher": "Henry Schein One"
+          },
+          {
+            "name": "Google Chrome",
+            "version": "130.0.6723.70",
+            "publisher": "Google LLC"
+          },
+          {
+            "name": "Microsoft 365 Apps for business",
+            "version": "16.0.18129",
+            "publisher": "Microsoft Corporation"
+          },
+          {
+            "name": "Adobe Acrobat Reader",
+            "version": "24.004.20219",
+            "publisher": "Adobe"
+          },
+          {
+            "name": "ScreenConnect Client",
+            "version": "24.3.7",
+            "publisher": "ConnectWise"
+          }
+        ],
+        "collected": "2026-10-30T09:07:47.962036-04:00"
+      },
+      "credTries": [
+        {
+          "method": "winrm",
+          "credId": "demo",
+          "credName": "Domain admin (RIVERSIDE)",
+          "ok": true,
+          "at": "2026-10-30T09:07:47.962036-04:00"
+        }
+      ],
       "sources": [
         "arp",
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598041-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598041-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982578-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982578-04:00",
       "alive": true
     },
     {
@@ -1838,13 +2370,99 @@
         "osBuild": "19045",
         "osVersion": "10.0"
       },
+      "windows": {
+        "os": "Microsoft Windows 10 Pro",
+        "version": "",
+        "build": "19045",
+        "ubr": 5011,
+        "installDate": "2024-11-29T08:07:47.962036-05:00",
+        "lastBoot": "2026-10-24T09:07:47.962036-04:00",
+        "manufacturer": "Dell Inc.",
+        "cpu": "Intel Core i5-12500",
+        "ramGb": 16,
+        "domain": "riverside.local",
+        "domainJoined": true,
+        "hotfixCount": 38,
+        "lastHotfix": "2026-07-25T09:07:47.962036-04:00",
+        "lastHotfixId": "KB5044284",
+        "defenderRealtime": false,
+        "defenderEnabled": true,
+        "signatureAgeDays": 1,
+        "firewall": {
+          "Domain": true,
+          "Private": true,
+          "Public": true
+        },
+        "bitlocker": [
+          {
+            "drive": "C:",
+            "protected": false
+          }
+        ],
+        "disks": [
+          {
+            "drive": "C:",
+            "sizeGb": 476,
+            "freeGb": 211
+          }
+        ],
+        "pendingReboot": false,
+        "rdpNla": true,
+        "autoLogon": true,
+        "admins": [
+          "RIVERSIDE\\Domain Admins",
+          "Administrator",
+          "RIVERSIDE\\frontdesk",
+          "RIVERSIDE\\drpatel",
+          "RIVERSIDE\\hygiene1",
+          "RIVERSIDE\\oldvendor"
+        ],
+        "softwareCount": 64,
+        "software": [
+          {
+            "name": "Dentrix G7",
+            "version": "7.3",
+            "publisher": "Henry Schein One"
+          },
+          {
+            "name": "Google Chrome",
+            "version": "130.0.6723.70",
+            "publisher": "Google LLC"
+          },
+          {
+            "name": "Microsoft 365 Apps for business",
+            "version": "16.0.18129",
+            "publisher": "Microsoft Corporation"
+          },
+          {
+            "name": "Adobe Acrobat Reader",
+            "version": "24.004.20219",
+            "publisher": "Adobe"
+          },
+          {
+            "name": "ScreenConnect Client",
+            "version": "24.3.7",
+            "publisher": "ConnectWise"
+          }
+        ],
+        "collected": "2026-10-30T09:07:47.962036-04:00"
+      },
+      "credTries": [
+        {
+          "method": "winrm",
+          "credId": "demo",
+          "credName": "Domain admin (RIVERSIDE)",
+          "ok": true,
+          "at": "2026-10-30T09:07:47.962036-04:00"
+        }
+      ],
       "sources": [
         "arp",
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598042-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598042-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982579-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982579-04:00",
       "alive": true
     },
     {
@@ -1900,13 +2518,96 @@
         "osBuild": "26100",
         "osVersion": "10.0"
       },
+      "windows": {
+        "os": "Microsoft Windows 11 Pro",
+        "version": "",
+        "build": "26100",
+        "ubr": 2161,
+        "installDate": "2024-11-29T08:07:47.962036-05:00",
+        "lastBoot": "2026-10-24T09:07:47.962036-04:00",
+        "manufacturer": "Dell Inc.",
+        "cpu": "Intel Core i5-12500",
+        "ramGb": 16,
+        "domain": "riverside.local",
+        "domainJoined": true,
+        "hotfixCount": 38,
+        "lastHotfix": "2026-10-14T09:07:47.962036-04:00",
+        "lastHotfixId": "KB5044284",
+        "defenderRealtime": true,
+        "defenderEnabled": true,
+        "signatureAgeDays": 1,
+        "firewall": {
+          "Domain": true,
+          "Private": true,
+          "Public": true
+        },
+        "bitlocker": [
+          {
+            "drive": "C:",
+            "protected": true
+          }
+        ],
+        "disks": [
+          {
+            "drive": "C:",
+            "sizeGb": 476,
+            "freeGb": 211
+          }
+        ],
+        "pendingReboot": false,
+        "rdpNla": true,
+        "autoLogon": false,
+        "admins": [
+          "RIVERSIDE\\Domain Admins",
+          "Administrator",
+          "RIVERSIDE\\frontdesk"
+        ],
+        "softwareCount": 64,
+        "software": [
+          {
+            "name": "Dentrix G7",
+            "version": "7.3",
+            "publisher": "Henry Schein One"
+          },
+          {
+            "name": "Google Chrome",
+            "version": "130.0.6723.70",
+            "publisher": "Google LLC"
+          },
+          {
+            "name": "Microsoft 365 Apps for business",
+            "version": "16.0.18129",
+            "publisher": "Microsoft Corporation"
+          },
+          {
+            "name": "Adobe Acrobat Reader",
+            "version": "24.004.20219",
+            "publisher": "Adobe"
+          },
+          {
+            "name": "ScreenConnect Client",
+            "version": "24.3.7",
+            "publisher": "ConnectWise"
+          }
+        ],
+        "collected": "2026-10-30T09:07:47.962036-04:00"
+      },
+      "credTries": [
+        {
+          "method": "winrm",
+          "credId": "demo",
+          "credName": "Domain admin (RIVERSIDE)",
+          "ok": true,
+          "at": "2026-10-30T09:07:47.962036-04:00"
+        }
+      ],
       "sources": [
         "arp",
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598044-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598044-04:00",
+      "firstSeen": "2026-10-30T09:07:47.98258-04:00",
+      "lastSeen": "2026-10-30T09:07:47.98258-04:00",
       "alive": true
     },
     {
@@ -1962,13 +2663,97 @@
         "osBuild": "22631",
         "osVersion": "10.0"
       },
+      "windows": {
+        "os": "Microsoft Windows 11 Pro",
+        "version": "",
+        "build": "26100",
+        "ubr": 2161,
+        "installDate": "2024-11-29T08:07:47.962036-05:00",
+        "lastBoot": "2026-10-24T09:07:47.962036-04:00",
+        "manufacturer": "Dell Inc.",
+        "cpu": "Intel Core i5-12500",
+        "ramGb": 16,
+        "domain": "riverside.local",
+        "domainJoined": true,
+        "hotfixCount": 38,
+        "lastHotfix": "2026-10-13T09:07:47.962036-04:00",
+        "lastHotfixId": "KB5044284",
+        "defenderRealtime": true,
+        "defenderEnabled": true,
+        "signatureAgeDays": 1,
+        "firewall": {
+          "Domain": true,
+          "Private": true,
+          "Public": true
+        },
+        "bitlocker": [
+          {
+            "drive": "C:",
+            "protected": true
+          }
+        ],
+        "disks": [
+          {
+            "drive": "C:",
+            "sizeGb": 476,
+            "freeGb": 211
+          }
+        ],
+        "pendingReboot": false,
+        "rdpNla": true,
+        "autoLogon": false,
+        "admins": [
+          "RIVERSIDE\\Domain Admins",
+          "Administrator",
+          "RIVERSIDE\\frontdesk",
+          "RIVERSIDE\\drpatel"
+        ],
+        "softwareCount": 64,
+        "software": [
+          {
+            "name": "Dentrix G7",
+            "version": "7.3",
+            "publisher": "Henry Schein One"
+          },
+          {
+            "name": "Google Chrome",
+            "version": "130.0.6723.70",
+            "publisher": "Google LLC"
+          },
+          {
+            "name": "Microsoft 365 Apps for business",
+            "version": "16.0.18129",
+            "publisher": "Microsoft Corporation"
+          },
+          {
+            "name": "Adobe Acrobat Reader",
+            "version": "24.004.20219",
+            "publisher": "Adobe"
+          },
+          {
+            "name": "ScreenConnect Client",
+            "version": "24.3.7",
+            "publisher": "ConnectWise"
+          }
+        ],
+        "collected": "2026-10-30T09:07:47.962036-04:00"
+      },
+      "credTries": [
+        {
+          "method": "winrm",
+          "credId": "demo",
+          "credName": "Domain admin (RIVERSIDE)",
+          "ok": true,
+          "at": "2026-10-30T09:07:47.962036-04:00"
+        }
+      ],
       "sources": [
         "arp",
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598045-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598045-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982583-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982583-04:00",
       "alive": true
     },
     {
@@ -2024,13 +2809,96 @@
         "osBuild": "26100",
         "osVersion": "10.0"
       },
+      "windows": {
+        "os": "Microsoft Windows 11 Pro",
+        "version": "",
+        "build": "26100",
+        "ubr": 2161,
+        "installDate": "2024-11-29T08:07:47.962036-05:00",
+        "lastBoot": "2026-10-24T09:07:47.962036-04:00",
+        "manufacturer": "Dell Inc.",
+        "cpu": "Intel Core i5-12500",
+        "ramGb": 16,
+        "domain": "riverside.local",
+        "domainJoined": true,
+        "hotfixCount": 38,
+        "lastHotfix": "2026-10-12T09:07:47.962036-04:00",
+        "lastHotfixId": "KB5044284",
+        "defenderRealtime": true,
+        "defenderEnabled": true,
+        "signatureAgeDays": 1,
+        "firewall": {
+          "Domain": true,
+          "Private": true,
+          "Public": true
+        },
+        "bitlocker": [
+          {
+            "drive": "C:",
+            "protected": true
+          }
+        ],
+        "disks": [
+          {
+            "drive": "C:",
+            "sizeGb": 476,
+            "freeGb": 211
+          }
+        ],
+        "pendingReboot": false,
+        "rdpNla": true,
+        "autoLogon": false,
+        "admins": [
+          "RIVERSIDE\\Domain Admins",
+          "Administrator",
+          "RIVERSIDE\\frontdesk"
+        ],
+        "softwareCount": 64,
+        "software": [
+          {
+            "name": "Dentrix G7",
+            "version": "7.3",
+            "publisher": "Henry Schein One"
+          },
+          {
+            "name": "Google Chrome",
+            "version": "130.0.6723.70",
+            "publisher": "Google LLC"
+          },
+          {
+            "name": "Microsoft 365 Apps for business",
+            "version": "16.0.18129",
+            "publisher": "Microsoft Corporation"
+          },
+          {
+            "name": "Adobe Acrobat Reader",
+            "version": "24.004.20219",
+            "publisher": "Adobe"
+          },
+          {
+            "name": "ScreenConnect Client",
+            "version": "24.3.7",
+            "publisher": "ConnectWise"
+          }
+        ],
+        "collected": "2026-10-30T09:07:47.962036-04:00"
+      },
+      "credTries": [
+        {
+          "method": "winrm",
+          "credId": "demo",
+          "credName": "Domain admin (RIVERSIDE)",
+          "ok": true,
+          "at": "2026-10-30T09:07:47.962036-04:00"
+        }
+      ],
       "sources": [
         "arp",
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598045-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598045-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982584-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982584-04:00",
       "alive": true
     },
     {
@@ -2087,13 +2955,23 @@
         "osBuild": "19045",
         "osVersion": "10.0"
       },
+      "credTries": [
+        {
+          "method": "winrm",
+          "credId": "demo",
+          "credName": "Domain admin (RIVERSIDE)",
+          "ok": false,
+          "error": "credentials rejected",
+          "at": "2026-10-30T09:07:47.962036-04:00"
+        }
+      ],
       "sources": [
         "arp",
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598046-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598046-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982585-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982585-04:00",
       "alive": true
     },
     {
@@ -2125,8 +3003,8 @@
         "arp",
         "icmp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598047-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598047-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982586-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982586-04:00",
       "alive": true
     },
     {
@@ -2162,8 +3040,8 @@
         "arp",
         "icmp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.59805-04:00",
-      "lastSeen": "2026-10-30T07:58:42.59805-04:00",
+      "firstSeen": "2026-10-30T09:07:47.98259-04:00",
+      "lastSeen": "2026-10-30T09:07:47.98259-04:00",
       "alive": true
     },
     {
@@ -2197,8 +3075,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.59805-04:00",
-      "lastSeen": "2026-10-30T07:58:42.59805-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982592-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982592-04:00",
       "alive": true
     },
     {
@@ -2236,8 +3114,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598051-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598051-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982593-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982593-04:00",
       "alive": true
     },
     {
@@ -2260,8 +3138,8 @@
         "snmp-arp",
         "icmp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598052-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598052-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982593-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982593-04:00",
       "alive": true
     },
     {
@@ -2321,8 +3199,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598052-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598052-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982594-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982594-04:00",
       "alive": true
     },
     {
@@ -2358,8 +3236,8 @@
         "icmp",
         "tcp"
       ],
-      "firstSeen": "2026-10-30T07:58:42.598054-04:00",
-      "lastSeen": "2026-10-30T07:58:42.598054-04:00",
+      "firstSeen": "2026-10-30T09:07:47.982595-04:00",
+      "lastSeen": "2026-10-30T09:07:47.982595-04:00",
       "alive": true
     }
   ],
@@ -2645,6 +3523,55 @@
       ]
     },
     {
+      "id": "win-patches-stale",
+      "check": "win-patches-stale",
+      "title": "Windows updates not installed in 60+ days",
+      "severity": "high",
+      "category": "Patching",
+      "detail": "These hosts' most recent update is more than two months old, so recent security fixes are missing.",
+      "remediation": "Check the RMM patch policy / WSUS approvals and remediate failing installs.",
+      "devices": [
+        "00:06:5b:10:00:15",
+        "00:12:fe:00:01:04"
+      ]
+    },
+    {
+      "id": "win-autologon",
+      "check": "win-autologon",
+      "title": "Automatic logon configured",
+      "severity": "high",
+      "category": "Credentials",
+      "detail": "Windows is set to log on automatically, which usually means a password is stored in the registry.",
+      "remediation": "Remove AutoAdminLogon and DefaultPassword from the Winlogon registry key.",
+      "devices": [
+        "00:12:fe:00:01:04"
+      ]
+    },
+    {
+      "id": "cfg-enable-password-plaintext",
+      "check": "cfg-enable-password-plaintext",
+      "title": "Enable password stored with weak encryption",
+      "severity": "high",
+      "category": "Device configuration",
+      "detail": "The switch uses `enable password` (reversible) instead of `enable secret`.",
+      "remediation": "Replace with `enable algorithm-type scrypt secret …` and remove `enable password`.",
+      "devices": [
+        "00:00:0c:4a:21:10"
+      ]
+    },
+    {
+      "id": "win-av-off",
+      "check": "win-av-off",
+      "title": "Real-time antivirus protection is off",
+      "severity": "high",
+      "category": "Endpoint protection",
+      "detail": "Microsoft Defender real-time protection is disabled and no other antivirus product is registered.",
+      "remediation": "Re-enable Defender real-time protection or deploy the MSP's EDR agent.",
+      "devices": [
+        "00:12:fe:00:01:04"
+      ]
+    },
+    {
       "id": "smbv1",
       "check": "smbv1",
       "title": "SMBv1 enabled",
@@ -2654,6 +3581,18 @@
       "remediation": "Disable SMB1: `Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol`; on NAS devices set minimum protocol to SMB2.",
       "devices": [
         "00:06:5b:10:00:15"
+      ]
+    },
+    {
+      "id": "cfg-vty-telnet",
+      "check": "cfg-vty-telnet",
+      "title": "Telnet allowed on management lines (VTY)",
+      "severity": "high",
+      "category": "Device configuration",
+      "detail": "The config permits Telnet logins to the device.",
+      "remediation": "Set `transport input ssh` on all `line vty` blocks.",
+      "devices": [
+        "00:00:0c:4a:21:10"
       ]
     },
     {
@@ -2697,6 +3636,19 @@
       ]
     },
     {
+      "id": "win-bitlocker-off",
+      "check": "win-bitlocker-off",
+      "title": "System drive not encrypted (BitLocker off)",
+      "severity": "medium",
+      "category": "Data protection",
+      "detail": "Workstations' C: drive is unencrypted; a lost or stolen device exposes its data.",
+      "remediation": "Enable BitLocker with TPM and escrow recovery keys to Entra ID / AD.",
+      "devices": [
+        "00:12:fe:00:01:03",
+        "00:12:fe:00:01:04"
+      ]
+    },
+    {
       "id": "tls-expired",
       "check": "tls-expired",
       "title": "Expired TLS certificates",
@@ -2721,6 +3673,18 @@
       ]
     },
     {
+      "id": "cfg-local-user-weak-hash",
+      "check": "cfg-local-user-weak-hash",
+      "title": "Local accounts with weak password storage",
+      "severity": "medium",
+      "category": "Device configuration",
+      "detail": "`username … password 0/7` stores passwords in clear text or a trivially reversible form.",
+      "remediation": "Use `username … secret` (type 8/9).",
+      "devices": [
+        "00:00:0c:4a:21:10"
+      ]
+    },
+    {
       "id": "interface-errors",
       "check": "interface-errors",
       "title": "Switch/router interfaces with errors",
@@ -2733,6 +3697,18 @@
       ]
     },
     {
+      "id": "win-admin-sprawl",
+      "check": "win-admin-sprawl",
+      "title": "Too many local administrators",
+      "severity": "medium",
+      "category": "Access control",
+      "detail": "Some hosts have more than four members in the local Administrators group (up to 6).",
+      "remediation": "Limit local admin to a managed group (e.g. LAPS + a tier-1 admin group).",
+      "devices": [
+        "00:12:fe:00:01:04"
+      ]
+    },
+    {
       "id": "upnp-gateway",
       "check": "upnp-gateway",
       "title": "UPnP enabled on the gateway",
@@ -2742,6 +3718,18 @@
       "remediation": "Disable UPnP/NAT-PMP on the edge device.",
       "devices": [
         "00:09:0f:aa:10:01"
+      ]
+    },
+    {
+      "id": "cfg-http-server",
+      "check": "cfg-http-server",
+      "title": "Unencrypted HTTP management enabled in config",
+      "severity": "medium",
+      "category": "Device configuration",
+      "detail": "`ip http server` is enabled.",
+      "remediation": "Use `no ip http server` and `ip http secure-server` only if the web UI is needed.",
+      "devices": [
+        "00:00:0c:4a:21:10"
       ]
     },
     {
@@ -2781,6 +3769,18 @@
       ]
     },
     {
+      "id": "cfg-no-aaa",
+      "check": "cfg-no-aaa",
+      "title": "AAA not enabled",
+      "severity": "low",
+      "category": "Device configuration",
+      "detail": "`aaa new-model` is off, so logins can't be centralised or audited.",
+      "remediation": "Enable AAA with RADIUS/TACACS+ and local fallback.",
+      "devices": [
+        "00:00:0c:4a:21:10"
+      ]
+    },
+    {
       "id": "long-uptime",
       "check": "long-uptime",
       "title": "Infrastructure not rebooted in over a year",
@@ -2790,6 +3790,42 @@
       "remediation": "Schedule firmware updates in a maintenance window.",
       "devices": [
         "00:00:0c:4a:21:10"
+      ]
+    },
+    {
+      "id": "cfg-no-ntp",
+      "check": "cfg-no-ntp",
+      "title": "No NTP server configured",
+      "severity": "low",
+      "category": "Device configuration",
+      "detail": "Without NTP, log timestamps drift and certificate checks can fail.",
+      "remediation": "Point the device at internal or public NTP servers.",
+      "devices": [
+        "00:00:0c:4a:21:10"
+      ]
+    },
+    {
+      "id": "cfg-no-remote-syslog",
+      "check": "cfg-no-remote-syslog",
+      "title": "No remote syslog configured",
+      "severity": "low",
+      "category": "Device configuration",
+      "detail": "Device logs stay local and are lost on reboot, so incidents can't be investigated.",
+      "remediation": "Send logs to the MSP's syslog/SIEM collector.",
+      "devices": [
+        "00:00:0c:4a:21:10"
+      ]
+    },
+    {
+      "id": "win-pending-reboot",
+      "check": "win-pending-reboot",
+      "title": "Reboot pending to finish updates",
+      "severity": "low",
+      "category": "Patching",
+      "detail": "Installed updates won't take effect until these hosts restart.",
+      "remediation": "Schedule a restart.",
+      "devices": [
+        "00:06:5b:10:00:15"
       ]
     },
     {
@@ -2829,43 +3865,55 @@
         "ip-10.20.0.199",
         "ip-10.20.10.22"
       ]
+    },
+    {
+      "id": "cred-rejected",
+      "check": "cred-rejected",
+      "title": "Saved credentials were rejected",
+      "severity": "info",
+      "category": "Assessment coverage",
+      "detail": "The customer-provided credentials didn't work on these hosts, so they were assessed without logging in.",
+      "remediation": "Confirm the account with the customer (expired password, missing admin rights, or a different domain).",
+      "devices": [
+        "00:12:fe:00:01:08"
+      ]
     }
   ],
-  "score": 38,
+  "score": 19,
   "grade": "F",
   "events": [
     {
-      "time": "2026-10-30T07:58:42.599494-04:00",
+      "time": "2026-10-30T09:07:47.984752-04:00",
       "severity": "info",
       "source": "cdp",
       "message": "CDP: connected to rdg-core-sw01 port GigabitEthernet1/0/24 (native VLAN 1)"
     },
     {
-      "time": "2026-10-30T07:58:42.599494-04:00",
+      "time": "2026-10-30T09:07:47.984752-04:00",
       "severity": "info",
       "source": "dhcp",
       "message": "DHCP server 10.20.0.10 answering (router 10.20.0.1, DNS 10.20.0.10)"
     },
     {
-      "time": "2026-10-30T07:58:42.599494-04:00",
+      "time": "2026-10-30T09:07:47.984752-04:00",
       "severity": "high",
       "source": "dhcp",
       "message": "2 different DHCP servers are answering on this segment: possible rogue DHCP server"
     },
     {
-      "time": "2026-10-30T07:58:42.599494-04:00",
+      "time": "2026-10-30T09:07:47.984752-04:00",
       "severity": "high",
       "source": "snmp",
       "message": "10.20.0.2 (rdg-core-sw01) answers SNMP community \"public\""
     },
     {
-      "time": "2026-10-30T07:58:42.599495-04:00",
+      "time": "2026-10-30T09:07:47.984752-04:00",
       "severity": "medium",
       "source": "storm",
       "message": "Elevated broadcast/multicast: 2750 pps (warn ≥ 1000), 31 repeated frames"
     },
     {
-      "time": "2026-10-30T07:58:42.599496-04:00",
+      "time": "2026-10-30T09:07:47.984756-04:00",
       "severity": "medium",
       "source": "stp",
       "message": "Spanning-tree topology change #4 (a port went up/down or a loop is re-converging)"
@@ -2880,7 +3928,7 @@
       ],
       "domain": "riverside.local",
       "offers": 1,
-      "lastSeen": "2026-10-30T07:58:42.598064-04:00"
+      "lastSeen": "2026-10-30T09:07:47.982611-04:00"
     },
     {
       "ip": "192.168.0.1",
@@ -2890,7 +3938,7 @@
         "192.168.0.1"
       ],
       "offers": 1,
-      "lastSeen": "2026-10-30T07:58:42.598065-04:00"
+      "lastSeen": "2026-10-30T09:07:47.982612-04:00"
     }
   ],
   "vlans": [
@@ -2987,7 +4035,7 @@
         "bytes": 9400000000,
         "packets": 7100000,
         "exporter": "10.20.0.1",
-        "lastSeen": "2026-10-30T07:58:42.580167-04:00"
+        "lastSeen": "2026-10-30T09:07:47.962036-04:00"
       },
       {
         "src": "10.20.0.41",
@@ -2998,7 +4046,7 @@
         "bytes": 4200000000,
         "packets": 3300000,
         "exporter": "10.20.0.1",
-        "lastSeen": "2026-10-30T07:58:42.580167-04:00"
+        "lastSeen": "2026-10-30T09:07:47.962036-04:00"
       },
       {
         "src": "10.20.0.105",
@@ -3009,7 +4057,7 @@
         "bytes": 2900000000,
         "packets": 2200000,
         "exporter": "10.20.0.1",
-        "lastSeen": "2026-10-30T07:58:42.580167-04:00"
+        "lastSeen": "2026-10-30T09:07:47.962036-04:00"
       },
       {
         "src": "10.20.0.101",
@@ -3020,1208 +4068,1208 @@
         "bytes": 1100000000,
         "packets": 1400000,
         "exporter": "10.20.0.1",
-        "lastSeen": "2026-10-30T07:58:42.580167-04:00"
+        "lastSeen": "2026-10-30T09:07:47.962036-04:00"
       }
     ],
     "series": [
       {
-        "t": 1793360022580,
+        "t": 1793364167962,
         "v": 38000000
       },
       {
-        "t": 1793360027580,
+        "t": 1793364172962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360032580,
+        "t": 1793364177962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360037580,
+        "t": 1793364182962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360042580,
+        "t": 1793364187962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360047580,
+        "t": 1793364192962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360052580,
+        "t": 1793364197962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360057580,
+        "t": 1793364202962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360062580,
+        "t": 1793364207962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360067580,
+        "t": 1793364212962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360072580,
+        "t": 1793364217962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360077580,
+        "t": 1793364222962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360082580,
+        "t": 1793364227962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360087580,
+        "t": 1793364232962,
         "v": 38000000
       },
       {
-        "t": 1793360092580,
+        "t": 1793364237962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360097580,
+        "t": 1793364242962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360102580,
+        "t": 1793364247962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360107580,
+        "t": 1793364252962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360112580,
+        "t": 1793364257962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360117580,
+        "t": 1793364262962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360122580,
+        "t": 1793364267962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360127580,
+        "t": 1793364272962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360132580,
+        "t": 1793364277962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360137580,
+        "t": 1793364282962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360142580,
+        "t": 1793364287962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360147580,
+        "t": 1793364292962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360152580,
+        "t": 1793364297962,
         "v": 38000000
       },
       {
-        "t": 1793360157580,
+        "t": 1793364302962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360162580,
+        "t": 1793364307962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360167580,
+        "t": 1793364312962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360172580,
+        "t": 1793364317962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360177580,
+        "t": 1793364322962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360182580,
+        "t": 1793364327962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360187580,
+        "t": 1793364332962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360192580,
+        "t": 1793364337962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360197580,
+        "t": 1793364342962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360202580,
+        "t": 1793364347962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360207580,
+        "t": 1793364352962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360212580,
+        "t": 1793364357962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360217580,
+        "t": 1793364362962,
         "v": 38000000
       },
       {
-        "t": 1793360222580,
+        "t": 1793364367962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360227580,
+        "t": 1793364372962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360232580,
+        "t": 1793364377962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360237580,
+        "t": 1793364382962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360242580,
+        "t": 1793364387962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360247580,
+        "t": 1793364392962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360252580,
+        "t": 1793364397962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360257580,
+        "t": 1793364402962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360262580,
+        "t": 1793364407962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360267580,
+        "t": 1793364412962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360272580,
+        "t": 1793364417962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360277580,
+        "t": 1793364422962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360282580,
+        "t": 1793364427962,
         "v": 38000000
       },
       {
-        "t": 1793360287580,
+        "t": 1793364432962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360292580,
+        "t": 1793364437962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360297580,
+        "t": 1793364442962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360302580,
+        "t": 1793364447962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360307580,
+        "t": 1793364452962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360312580,
+        "t": 1793364457962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360317580,
+        "t": 1793364462962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360322580,
+        "t": 1793364467962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360327580,
+        "t": 1793364472962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360332580,
+        "t": 1793364477962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360337580,
+        "t": 1793364482962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360342580,
+        "t": 1793364487962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360347580,
+        "t": 1793364492962,
         "v": 38000000
       },
       {
-        "t": 1793360352580,
+        "t": 1793364497962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360357580,
+        "t": 1793364502962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360362580,
+        "t": 1793364507962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360367580,
+        "t": 1793364512962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360372580,
+        "t": 1793364517962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360377580,
+        "t": 1793364522962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360382580,
+        "t": 1793364527962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360387580,
+        "t": 1793364532962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360392580,
+        "t": 1793364537962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360397580,
+        "t": 1793364542962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360402580,
+        "t": 1793364547962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360407580,
+        "t": 1793364552962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360412580,
+        "t": 1793364557962,
         "v": 38000000
       },
       {
-        "t": 1793360417580,
+        "t": 1793364562962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360422580,
+        "t": 1793364567962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360427580,
+        "t": 1793364572962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360432580,
+        "t": 1793364577962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360437580,
+        "t": 1793364582962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360442580,
+        "t": 1793364587962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360447580,
+        "t": 1793364592962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360452580,
+        "t": 1793364597962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360457580,
+        "t": 1793364602962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360462580,
+        "t": 1793364607962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360467580,
+        "t": 1793364612962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360472580,
+        "t": 1793364617962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360477580,
+        "t": 1793364622962,
         "v": 38000000
       },
       {
-        "t": 1793360482580,
+        "t": 1793364627962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360487580,
+        "t": 1793364632962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360492580,
+        "t": 1793364637962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360497580,
+        "t": 1793364642962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360502580,
+        "t": 1793364647962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360507580,
+        "t": 1793364652962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360512580,
+        "t": 1793364657962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360517580,
+        "t": 1793364662962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360522580,
+        "t": 1793364667962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360527580,
+        "t": 1793364672962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360532580,
+        "t": 1793364677962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360537580,
+        "t": 1793364682962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360542580,
+        "t": 1793364687962,
         "v": 38000000
       },
       {
-        "t": 1793360547580,
+        "t": 1793364692962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360552580,
+        "t": 1793364697962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360557580,
+        "t": 1793364702962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360562580,
+        "t": 1793364707962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360567580,
+        "t": 1793364712962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360572580,
+        "t": 1793364717962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360577580,
+        "t": 1793364722962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360582580,
+        "t": 1793364727962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360587580,
+        "t": 1793364732962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360592580,
+        "t": 1793364737962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360597580,
+        "t": 1793364742962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360602580,
+        "t": 1793364747962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360607580,
+        "t": 1793364752962,
         "v": 38000000
       },
       {
-        "t": 1793360612580,
+        "t": 1793364757962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360617580,
+        "t": 1793364762962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360622580,
+        "t": 1793364767962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360627580,
+        "t": 1793364772962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360632580,
+        "t": 1793364777962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360637580,
+        "t": 1793364782962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360642580,
+        "t": 1793364787962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360647580,
+        "t": 1793364792962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360652580,
+        "t": 1793364797962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360657580,
+        "t": 1793364802962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360662580,
+        "t": 1793364807962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360667580,
+        "t": 1793364812962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360672580,
+        "t": 1793364817962,
         "v": 38000000
       },
       {
-        "t": 1793360677580,
+        "t": 1793364822962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360682580,
+        "t": 1793364827962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360687580,
+        "t": 1793364832962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360692580,
+        "t": 1793364837962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360697580,
+        "t": 1793364842962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360702580,
+        "t": 1793364847962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360707580,
+        "t": 1793364852962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360712580,
+        "t": 1793364857962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360717580,
+        "t": 1793364862962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360722580,
+        "t": 1793364867962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360727580,
+        "t": 1793364872962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360732580,
+        "t": 1793364877962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360737580,
+        "t": 1793364882962,
         "v": 38000000
       },
       {
-        "t": 1793360742580,
+        "t": 1793364887962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360747580,
+        "t": 1793364892962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360752580,
+        "t": 1793364897962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360757580,
+        "t": 1793364902962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360762580,
+        "t": 1793364907962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360767580,
+        "t": 1793364912962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360772580,
+        "t": 1793364917962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360777580,
+        "t": 1793364922962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360782580,
+        "t": 1793364927962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360787580,
+        "t": 1793364932962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360792580,
+        "t": 1793364937962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360797580,
+        "t": 1793364942962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360802580,
+        "t": 1793364947962,
         "v": 38000000
       },
       {
-        "t": 1793360807580,
+        "t": 1793364952962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360812580,
+        "t": 1793364957962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360817580,
+        "t": 1793364962962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360822580,
+        "t": 1793364967962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360827580,
+        "t": 1793364972962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360832580,
+        "t": 1793364977962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360837580,
+        "t": 1793364982962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360842580,
+        "t": 1793364987962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360847580,
+        "t": 1793364992962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360852580,
+        "t": 1793364997962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360857580,
+        "t": 1793365002962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360862580,
+        "t": 1793365007962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360867580,
+        "t": 1793365012962,
         "v": 38000000
       },
       {
-        "t": 1793360872580,
+        "t": 1793365017962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360877580,
+        "t": 1793365022962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360882580,
+        "t": 1793365027962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360887580,
+        "t": 1793365032962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360892580,
+        "t": 1793365037962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360897580,
+        "t": 1793365042962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360902580,
+        "t": 1793365047962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360907580,
+        "t": 1793365052962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360912580,
+        "t": 1793365057962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360917580,
+        "t": 1793365062962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360922580,
+        "t": 1793365067962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360927580,
+        "t": 1793365072962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360932580,
+        "t": 1793365077962,
         "v": 38000000
       },
       {
-        "t": 1793360937580,
+        "t": 1793365082962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793360942580,
+        "t": 1793365087962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793360947580,
+        "t": 1793365092962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793360952580,
+        "t": 1793365097962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793360957580,
+        "t": 1793365102962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793360962580,
+        "t": 1793365107962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793360967580,
+        "t": 1793365112962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793360972580,
+        "t": 1793365117962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793360977580,
+        "t": 1793365122962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793360982580,
+        "t": 1793365127962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793360987580,
+        "t": 1793365132962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793360992580,
+        "t": 1793365137962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793360997580,
+        "t": 1793365142962,
         "v": 38000000
       },
       {
-        "t": 1793361002580,
+        "t": 1793365147962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793361007580,
+        "t": 1793365152962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793361012580,
+        "t": 1793365157962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793361017580,
+        "t": 1793365162962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793361022580,
+        "t": 1793365167962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793361027580,
+        "t": 1793365172962,
         "v": 203076923.07692307
       },
       {
-        "t": 1793361032580,
+        "t": 1793365177962,
         "v": 214923076.92307693
       },
       {
-        "t": 1793361037580,
+        "t": 1793365182962,
         "v": 204769230.76923078
       },
       {
-        "t": 1793361042580,
+        "t": 1793365187962,
         "v": 216615384.6153846
       },
       {
-        "t": 1793361047580,
+        "t": 1793365192962,
         "v": 206461538.46153846
       },
       {
-        "t": 1793361052580,
+        "t": 1793365197962,
         "v": 218307692.3076923
       },
       {
-        "t": 1793361057580,
+        "t": 1793365202962,
         "v": 208153846.15384614
       },
       {
-        "t": 1793361062580,
+        "t": 1793365207962,
         "v": 198000000
       },
       {
-        "t": 1793361067580,
+        "t": 1793365212962,
         "v": 209846153.84615386
       },
       {
-        "t": 1793361072580,
+        "t": 1793365217962,
         "v": 199692307.6923077
       },
       {
-        "t": 1793361077580,
+        "t": 1793365222962,
         "v": 211538461.53846154
       },
       {
-        "t": 1793361082580,
+        "t": 1793365227962,
         "v": 201384615.3846154
       },
       {
-        "t": 1793361087580,
+        "t": 1793365232962,
         "v": 213230769.23076922
       },
       {
-        "t": 1793361092580,
+        "t": 1793365237962,
         "v": 203076923.07692307
       },
       {
-        "t": 1793361097580,
+        "t": 1793365242962,
         "v": 214923076.92307693
       },
       {
-        "t": 1793361102580,
+        "t": 1793365247962,
         "v": 204769230.76923078
       },
       {
-        "t": 1793361107580,
+        "t": 1793365252962,
         "v": 216615384.6153846
       },
       {
-        "t": 1793361112580,
+        "t": 1793365257962,
         "v": 206461538.46153846
       },
       {
-        "t": 1793361117580,
+        "t": 1793365262962,
         "v": 218307692.3076923
       },
       {
-        "t": 1793361122580,
+        "t": 1793365267962,
         "v": 208153846.15384614
       },
       {
-        "t": 1793361127580,
+        "t": 1793365272962,
         "v": 198000000
       },
       {
-        "t": 1793361132580,
+        "t": 1793365277962,
         "v": 209846153.84615386
       },
       {
-        "t": 1793361137580,
+        "t": 1793365282962,
         "v": 199692307.6923077
       },
       {
-        "t": 1793361142580,
+        "t": 1793365287962,
         "v": 211538461.53846154
       },
       {
-        "t": 1793361147580,
+        "t": 1793365292962,
         "v": 201384615.3846154
       },
       {
-        "t": 1793361152580,
+        "t": 1793365297962,
         "v": 213230769.23076922
       },
       {
-        "t": 1793361157580,
+        "t": 1793365302962,
         "v": 203076923.07692307
       },
       {
-        "t": 1793361162580,
+        "t": 1793365307962,
         "v": 214923076.92307693
       },
       {
-        "t": 1793361167580,
+        "t": 1793365312962,
         "v": 204769230.76923078
       },
       {
-        "t": 1793361172580,
+        "t": 1793365317962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793361177580,
+        "t": 1793365322962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793361182580,
+        "t": 1793365327962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793361187580,
+        "t": 1793365332962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793361192580,
+        "t": 1793365337962,
         "v": 38000000
       },
       {
-        "t": 1793361197580,
+        "t": 1793365342962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793361202580,
+        "t": 1793365347962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793361207580,
+        "t": 1793365352962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793361212580,
+        "t": 1793365357962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793361217580,
+        "t": 1793365362962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793361222580,
+        "t": 1793365367962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793361227580,
+        "t": 1793365372962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793361232580,
+        "t": 1793365377962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793361237580,
+        "t": 1793365382962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793361242580,
+        "t": 1793365387962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793361247580,
+        "t": 1793365392962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793361252580,
+        "t": 1793365397962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793361257580,
+        "t": 1793365402962,
         "v": 38000000
       },
       {
-        "t": 1793361262580,
+        "t": 1793365407962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793361267580,
+        "t": 1793365412962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793361272580,
+        "t": 1793365417962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793361277580,
+        "t": 1793365422962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793361282580,
+        "t": 1793365427962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793361287580,
+        "t": 1793365432962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793361292580,
+        "t": 1793365437962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793361297580,
+        "t": 1793365442962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793361302580,
+        "t": 1793365447962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793361307580,
+        "t": 1793365452962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793361312580,
+        "t": 1793365457962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793361317580,
+        "t": 1793365462962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793361322580,
+        "t": 1793365467962,
         "v": 38000000
       },
       {
-        "t": 1793361327580,
+        "t": 1793365472962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793361332580,
+        "t": 1793365477962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793361337580,
+        "t": 1793365482962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793361342580,
+        "t": 1793365487962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793361347580,
+        "t": 1793365492962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793361352580,
+        "t": 1793365497962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793361357580,
+        "t": 1793365502962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793361362580,
+        "t": 1793365507962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793361367580,
+        "t": 1793365512962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793361372580,
+        "t": 1793365517962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793361377580,
+        "t": 1793365522962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793361382580,
+        "t": 1793365527962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793361387580,
+        "t": 1793365532962,
         "v": 38000000
       },
       {
-        "t": 1793361392580,
+        "t": 1793365537962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793361397580,
+        "t": 1793365542962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793361402580,
+        "t": 1793365547962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793361407580,
+        "t": 1793365552962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793361412580,
+        "t": 1793365557962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793361417580,
+        "t": 1793365562962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793361422580,
+        "t": 1793365567962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793361427580,
+        "t": 1793365572962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793361432580,
+        "t": 1793365577962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793361437580,
+        "t": 1793365582962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793361442580,
+        "t": 1793365587962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793361447580,
+        "t": 1793365592962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793361452580,
+        "t": 1793365597962,
         "v": 38000000
       },
       {
-        "t": 1793361457580,
+        "t": 1793365602962,
         "v": 49846153.84615385
       },
       {
-        "t": 1793361462580,
+        "t": 1793365607962,
         "v": 39692307.692307696
       },
       {
-        "t": 1793361467580,
+        "t": 1793365612962,
         "v": 51538461.538461536
       },
       {
-        "t": 1793361472580,
+        "t": 1793365617962,
         "v": 41384615.384615384
       },
       {
-        "t": 1793361477580,
+        "t": 1793365622962,
         "v": 53230769.23076923
       },
       {
-        "t": 1793361482580,
+        "t": 1793365627962,
         "v": 43076923.07692308
       },
       {
-        "t": 1793361487580,
+        "t": 1793365632962,
         "v": 54923076.92307693
       },
       {
-        "t": 1793361492580,
+        "t": 1793365637962,
         "v": 44769230.76923077
       },
       {
-        "t": 1793361497580,
+        "t": 1793365642962,
         "v": 56615384.615384616
       },
       {
-        "t": 1793361502580,
+        "t": 1793365647962,
         "v": 46461538.461538464
       },
       {
-        "t": 1793361507580,
+        "t": 1793365652962,
         "v": 58307692.307692304
       },
       {
-        "t": 1793361512580,
+        "t": 1793365657962,
         "v": 48153846.15384615
       },
       {
-        "t": 1793361517580,
+        "t": 1793365662962,
         "v": 38000000
       }
     ],
@@ -4233,7 +5281,7 @@
     "running": true,
     "interface": "Ethernet",
     "current": {
-      "t": 1793361521580,
+      "t": 1793365666962,
       "total": 2763,
       "broadcast": 163,
       "multicast": 319,
@@ -4244,7 +5292,7 @@
     },
     "series": [
       {
-        "t": 1793361222580,
+        "t": 1793365367962,
         "total": 2740,
         "broadcast": 140,
         "multicast": 310,
@@ -4254,7 +5302,7 @@
         "dups": 0
       },
       {
-        "t": 1793361223580,
+        "t": 1793365368962,
         "total": 2777,
         "broadcast": 177,
         "multicast": 321,
@@ -4264,7 +5312,7 @@
         "dups": 0
       },
       {
-        "t": 1793361224580,
+        "t": 1793365369962,
         "total": 2754,
         "broadcast": 154,
         "multicast": 332,
@@ -4274,7 +5322,7 @@
         "dups": 0
       },
       {
-        "t": 1793361225580,
+        "t": 1793365370962,
         "total": 2791,
         "broadcast": 191,
         "multicast": 343,
@@ -4284,7 +5332,7 @@
         "dups": 0
       },
       {
-        "t": 1793361226580,
+        "t": 1793365371962,
         "total": 2768,
         "broadcast": 168,
         "multicast": 314,
@@ -4294,7 +5342,7 @@
         "dups": 0
       },
       {
-        "t": 1793361227580,
+        "t": 1793365372962,
         "total": 2745,
         "broadcast": 145,
         "multicast": 325,
@@ -4304,7 +5352,7 @@
         "dups": 0
       },
       {
-        "t": 1793361228580,
+        "t": 1793365373962,
         "total": 2782,
         "broadcast": 182,
         "multicast": 336,
@@ -4314,7 +5362,7 @@
         "dups": 0
       },
       {
-        "t": 1793361229580,
+        "t": 1793365374962,
         "total": 2759,
         "broadcast": 159,
         "multicast": 347,
@@ -4324,7 +5372,7 @@
         "dups": 0
       },
       {
-        "t": 1793361230580,
+        "t": 1793365375962,
         "total": 2796,
         "broadcast": 196,
         "multicast": 318,
@@ -4334,7 +5382,7 @@
         "dups": 0
       },
       {
-        "t": 1793361231580,
+        "t": 1793365376962,
         "total": 2773,
         "broadcast": 173,
         "multicast": 329,
@@ -4344,7 +5392,7 @@
         "dups": 0
       },
       {
-        "t": 1793361232580,
+        "t": 1793365377962,
         "total": 2750,
         "broadcast": 150,
         "multicast": 340,
@@ -4354,7 +5402,7 @@
         "dups": 0
       },
       {
-        "t": 1793361233580,
+        "t": 1793365378962,
         "total": 2787,
         "broadcast": 187,
         "multicast": 311,
@@ -4364,7 +5412,7 @@
         "dups": 0
       },
       {
-        "t": 1793361234580,
+        "t": 1793365379962,
         "total": 2764,
         "broadcast": 164,
         "multicast": 322,
@@ -4374,7 +5422,7 @@
         "dups": 0
       },
       {
-        "t": 1793361235580,
+        "t": 1793365380962,
         "total": 2741,
         "broadcast": 141,
         "multicast": 333,
@@ -4384,7 +5432,7 @@
         "dups": 0
       },
       {
-        "t": 1793361236580,
+        "t": 1793365381962,
         "total": 2778,
         "broadcast": 178,
         "multicast": 344,
@@ -4394,7 +5442,7 @@
         "dups": 0
       },
       {
-        "t": 1793361237580,
+        "t": 1793365382962,
         "total": 2755,
         "broadcast": 155,
         "multicast": 315,
@@ -4404,7 +5452,7 @@
         "dups": 0
       },
       {
-        "t": 1793361238580,
+        "t": 1793365383962,
         "total": 2792,
         "broadcast": 192,
         "multicast": 326,
@@ -4414,7 +5462,7 @@
         "dups": 0
       },
       {
-        "t": 1793361239580,
+        "t": 1793365384962,
         "total": 2769,
         "broadcast": 169,
         "multicast": 337,
@@ -4424,7 +5472,7 @@
         "dups": 0
       },
       {
-        "t": 1793361240580,
+        "t": 1793365385962,
         "total": 2746,
         "broadcast": 146,
         "multicast": 348,
@@ -4434,7 +5482,7 @@
         "dups": 0
       },
       {
-        "t": 1793361241580,
+        "t": 1793365386962,
         "total": 2783,
         "broadcast": 183,
         "multicast": 319,
@@ -4444,7 +5492,7 @@
         "dups": 0
       },
       {
-        "t": 1793361242580,
+        "t": 1793365387962,
         "total": 2760,
         "broadcast": 160,
         "multicast": 330,
@@ -4454,7 +5502,7 @@
         "dups": 0
       },
       {
-        "t": 1793361243580,
+        "t": 1793365388962,
         "total": 2797,
         "broadcast": 197,
         "multicast": 341,
@@ -4464,7 +5512,7 @@
         "dups": 0
       },
       {
-        "t": 1793361244580,
+        "t": 1793365389962,
         "total": 2774,
         "broadcast": 174,
         "multicast": 312,
@@ -4474,7 +5522,7 @@
         "dups": 0
       },
       {
-        "t": 1793361245580,
+        "t": 1793365390962,
         "total": 2751,
         "broadcast": 151,
         "multicast": 323,
@@ -4484,7 +5532,7 @@
         "dups": 0
       },
       {
-        "t": 1793361246580,
+        "t": 1793365391962,
         "total": 2788,
         "broadcast": 188,
         "multicast": 334,
@@ -4494,7 +5542,7 @@
         "dups": 0
       },
       {
-        "t": 1793361247580,
+        "t": 1793365392962,
         "total": 2765,
         "broadcast": 165,
         "multicast": 345,
@@ -4504,7 +5552,7 @@
         "dups": 0
       },
       {
-        "t": 1793361248580,
+        "t": 1793365393962,
         "total": 2742,
         "broadcast": 142,
         "multicast": 316,
@@ -4514,7 +5562,7 @@
         "dups": 0
       },
       {
-        "t": 1793361249580,
+        "t": 1793365394962,
         "total": 2779,
         "broadcast": 179,
         "multicast": 327,
@@ -4524,7 +5572,7 @@
         "dups": 0
       },
       {
-        "t": 1793361250580,
+        "t": 1793365395962,
         "total": 2756,
         "broadcast": 156,
         "multicast": 338,
@@ -4534,7 +5582,7 @@
         "dups": 0
       },
       {
-        "t": 1793361251580,
+        "t": 1793365396962,
         "total": 2793,
         "broadcast": 193,
         "multicast": 349,
@@ -4544,7 +5592,7 @@
         "dups": 0
       },
       {
-        "t": 1793361252580,
+        "t": 1793365397962,
         "total": 2770,
         "broadcast": 170,
         "multicast": 320,
@@ -4554,7 +5602,7 @@
         "dups": 0
       },
       {
-        "t": 1793361253580,
+        "t": 1793365398962,
         "total": 2747,
         "broadcast": 147,
         "multicast": 331,
@@ -4564,7 +5612,7 @@
         "dups": 0
       },
       {
-        "t": 1793361254580,
+        "t": 1793365399962,
         "total": 2784,
         "broadcast": 184,
         "multicast": 342,
@@ -4574,7 +5622,7 @@
         "dups": 0
       },
       {
-        "t": 1793361255580,
+        "t": 1793365400962,
         "total": 2761,
         "broadcast": 161,
         "multicast": 313,
@@ -4584,7 +5632,7 @@
         "dups": 0
       },
       {
-        "t": 1793361256580,
+        "t": 1793365401962,
         "total": 2798,
         "broadcast": 198,
         "multicast": 324,
@@ -4594,7 +5642,7 @@
         "dups": 0
       },
       {
-        "t": 1793361257580,
+        "t": 1793365402962,
         "total": 2775,
         "broadcast": 175,
         "multicast": 335,
@@ -4604,7 +5652,7 @@
         "dups": 0
       },
       {
-        "t": 1793361258580,
+        "t": 1793365403962,
         "total": 2752,
         "broadcast": 152,
         "multicast": 346,
@@ -4614,7 +5662,7 @@
         "dups": 0
       },
       {
-        "t": 1793361259580,
+        "t": 1793365404962,
         "total": 2789,
         "broadcast": 189,
         "multicast": 317,
@@ -4624,7 +5672,7 @@
         "dups": 0
       },
       {
-        "t": 1793361260580,
+        "t": 1793365405962,
         "total": 2766,
         "broadcast": 166,
         "multicast": 328,
@@ -4634,7 +5682,7 @@
         "dups": 0
       },
       {
-        "t": 1793361261580,
+        "t": 1793365406962,
         "total": 2743,
         "broadcast": 143,
         "multicast": 339,
@@ -4644,7 +5692,7 @@
         "dups": 0
       },
       {
-        "t": 1793361262580,
+        "t": 1793365407962,
         "total": 2780,
         "broadcast": 180,
         "multicast": 310,
@@ -4654,7 +5702,7 @@
         "dups": 0
       },
       {
-        "t": 1793361263580,
+        "t": 1793365408962,
         "total": 2757,
         "broadcast": 157,
         "multicast": 321,
@@ -4664,7 +5712,7 @@
         "dups": 0
       },
       {
-        "t": 1793361264580,
+        "t": 1793365409962,
         "total": 2794,
         "broadcast": 194,
         "multicast": 332,
@@ -4674,7 +5722,7 @@
         "dups": 0
       },
       {
-        "t": 1793361265580,
+        "t": 1793365410962,
         "total": 2771,
         "broadcast": 171,
         "multicast": 343,
@@ -4684,7 +5732,7 @@
         "dups": 0
       },
       {
-        "t": 1793361266580,
+        "t": 1793365411962,
         "total": 2748,
         "broadcast": 148,
         "multicast": 314,
@@ -4694,7 +5742,7 @@
         "dups": 0
       },
       {
-        "t": 1793361267580,
+        "t": 1793365412962,
         "total": 2785,
         "broadcast": 185,
         "multicast": 325,
@@ -4704,7 +5752,7 @@
         "dups": 0
       },
       {
-        "t": 1793361268580,
+        "t": 1793365413962,
         "total": 2762,
         "broadcast": 162,
         "multicast": 336,
@@ -4714,7 +5762,7 @@
         "dups": 0
       },
       {
-        "t": 1793361269580,
+        "t": 1793365414962,
         "total": 2799,
         "broadcast": 199,
         "multicast": 347,
@@ -4724,7 +5772,7 @@
         "dups": 0
       },
       {
-        "t": 1793361270580,
+        "t": 1793365415962,
         "total": 2776,
         "broadcast": 176,
         "multicast": 318,
@@ -4734,7 +5782,7 @@
         "dups": 0
       },
       {
-        "t": 1793361271580,
+        "t": 1793365416962,
         "total": 2753,
         "broadcast": 153,
         "multicast": 329,
@@ -4744,7 +5792,7 @@
         "dups": 0
       },
       {
-        "t": 1793361272580,
+        "t": 1793365417962,
         "total": 2790,
         "broadcast": 190,
         "multicast": 340,
@@ -4754,7 +5802,7 @@
         "dups": 0
       },
       {
-        "t": 1793361273580,
+        "t": 1793365418962,
         "total": 2767,
         "broadcast": 167,
         "multicast": 311,
@@ -4764,7 +5812,7 @@
         "dups": 0
       },
       {
-        "t": 1793361274580,
+        "t": 1793365419962,
         "total": 2744,
         "broadcast": 144,
         "multicast": 322,
@@ -4774,7 +5822,7 @@
         "dups": 0
       },
       {
-        "t": 1793361275580,
+        "t": 1793365420962,
         "total": 2781,
         "broadcast": 181,
         "multicast": 333,
@@ -4784,7 +5832,7 @@
         "dups": 0
       },
       {
-        "t": 1793361276580,
+        "t": 1793365421962,
         "total": 2758,
         "broadcast": 158,
         "multicast": 344,
@@ -4794,7 +5842,7 @@
         "dups": 0
       },
       {
-        "t": 1793361277580,
+        "t": 1793365422962,
         "total": 2795,
         "broadcast": 195,
         "multicast": 315,
@@ -4804,7 +5852,7 @@
         "dups": 0
       },
       {
-        "t": 1793361278580,
+        "t": 1793365423962,
         "total": 2772,
         "broadcast": 172,
         "multicast": 326,
@@ -4814,7 +5862,7 @@
         "dups": 0
       },
       {
-        "t": 1793361279580,
+        "t": 1793365424962,
         "total": 2749,
         "broadcast": 149,
         "multicast": 337,
@@ -4824,7 +5872,7 @@
         "dups": 0
       },
       {
-        "t": 1793361280580,
+        "t": 1793365425962,
         "total": 2786,
         "broadcast": 186,
         "multicast": 348,
@@ -4834,7 +5882,7 @@
         "dups": 0
       },
       {
-        "t": 1793361281580,
+        "t": 1793365426962,
         "total": 2763,
         "broadcast": 163,
         "multicast": 319,
@@ -4844,7 +5892,7 @@
         "dups": 0
       },
       {
-        "t": 1793361282580,
+        "t": 1793365427962,
         "total": 2740,
         "broadcast": 140,
         "multicast": 330,
@@ -4854,7 +5902,7 @@
         "dups": 0
       },
       {
-        "t": 1793361283580,
+        "t": 1793365428962,
         "total": 2777,
         "broadcast": 177,
         "multicast": 341,
@@ -4864,7 +5912,7 @@
         "dups": 0
       },
       {
-        "t": 1793361284580,
+        "t": 1793365429962,
         "total": 2754,
         "broadcast": 154,
         "multicast": 312,
@@ -4874,7 +5922,7 @@
         "dups": 0
       },
       {
-        "t": 1793361285580,
+        "t": 1793365430962,
         "total": 2791,
         "broadcast": 191,
         "multicast": 323,
@@ -4884,7 +5932,7 @@
         "dups": 0
       },
       {
-        "t": 1793361286580,
+        "t": 1793365431962,
         "total": 2768,
         "broadcast": 168,
         "multicast": 334,
@@ -4894,7 +5942,7 @@
         "dups": 0
       },
       {
-        "t": 1793361287580,
+        "t": 1793365432962,
         "total": 2745,
         "broadcast": 145,
         "multicast": 345,
@@ -4904,7 +5952,7 @@
         "dups": 0
       },
       {
-        "t": 1793361288580,
+        "t": 1793365433962,
         "total": 2782,
         "broadcast": 182,
         "multicast": 316,
@@ -4914,7 +5962,7 @@
         "dups": 0
       },
       {
-        "t": 1793361289580,
+        "t": 1793365434962,
         "total": 2759,
         "broadcast": 159,
         "multicast": 327,
@@ -4924,7 +5972,7 @@
         "dups": 0
       },
       {
-        "t": 1793361290580,
+        "t": 1793365435962,
         "total": 2796,
         "broadcast": 196,
         "multicast": 338,
@@ -4934,7 +5982,7 @@
         "dups": 0
       },
       {
-        "t": 1793361291580,
+        "t": 1793365436962,
         "total": 2773,
         "broadcast": 173,
         "multicast": 349,
@@ -4944,7 +5992,7 @@
         "dups": 0
       },
       {
-        "t": 1793361292580,
+        "t": 1793365437962,
         "total": 2750,
         "broadcast": 150,
         "multicast": 320,
@@ -4954,7 +6002,7 @@
         "dups": 0
       },
       {
-        "t": 1793361293580,
+        "t": 1793365438962,
         "total": 2787,
         "broadcast": 187,
         "multicast": 331,
@@ -4964,7 +6012,7 @@
         "dups": 0
       },
       {
-        "t": 1793361294580,
+        "t": 1793365439962,
         "total": 2764,
         "broadcast": 164,
         "multicast": 342,
@@ -4974,7 +6022,7 @@
         "dups": 0
       },
       {
-        "t": 1793361295580,
+        "t": 1793365440962,
         "total": 2741,
         "broadcast": 141,
         "multicast": 313,
@@ -4984,7 +6032,7 @@
         "dups": 0
       },
       {
-        "t": 1793361296580,
+        "t": 1793365441962,
         "total": 2778,
         "broadcast": 178,
         "multicast": 324,
@@ -4994,7 +6042,7 @@
         "dups": 0
       },
       {
-        "t": 1793361297580,
+        "t": 1793365442962,
         "total": 2755,
         "broadcast": 155,
         "multicast": 335,
@@ -5004,7 +6052,7 @@
         "dups": 0
       },
       {
-        "t": 1793361298580,
+        "t": 1793365443962,
         "total": 2792,
         "broadcast": 192,
         "multicast": 346,
@@ -5014,7 +6062,7 @@
         "dups": 0
       },
       {
-        "t": 1793361299580,
+        "t": 1793365444962,
         "total": 2769,
         "broadcast": 169,
         "multicast": 317,
@@ -5024,7 +6072,7 @@
         "dups": 0
       },
       {
-        "t": 1793361300580,
+        "t": 1793365445962,
         "total": 2746,
         "broadcast": 146,
         "multicast": 328,
@@ -5034,7 +6082,7 @@
         "dups": 0
       },
       {
-        "t": 1793361301580,
+        "t": 1793365446962,
         "total": 2783,
         "broadcast": 183,
         "multicast": 339,
@@ -5044,7 +6092,7 @@
         "dups": 0
       },
       {
-        "t": 1793361302580,
+        "t": 1793365447962,
         "total": 2760,
         "broadcast": 160,
         "multicast": 310,
@@ -5054,7 +6102,7 @@
         "dups": 0
       },
       {
-        "t": 1793361303580,
+        "t": 1793365448962,
         "total": 2797,
         "broadcast": 197,
         "multicast": 321,
@@ -5064,7 +6112,7 @@
         "dups": 0
       },
       {
-        "t": 1793361304580,
+        "t": 1793365449962,
         "total": 2774,
         "broadcast": 174,
         "multicast": 332,
@@ -5074,7 +6122,7 @@
         "dups": 0
       },
       {
-        "t": 1793361305580,
+        "t": 1793365450962,
         "total": 2751,
         "broadcast": 151,
         "multicast": 343,
@@ -5084,7 +6132,7 @@
         "dups": 0
       },
       {
-        "t": 1793361306580,
+        "t": 1793365451962,
         "total": 2788,
         "broadcast": 188,
         "multicast": 314,
@@ -5094,7 +6142,7 @@
         "dups": 0
       },
       {
-        "t": 1793361307580,
+        "t": 1793365452962,
         "total": 2765,
         "broadcast": 165,
         "multicast": 325,
@@ -5104,7 +6152,7 @@
         "dups": 0
       },
       {
-        "t": 1793361308580,
+        "t": 1793365453962,
         "total": 2742,
         "broadcast": 142,
         "multicast": 336,
@@ -5114,7 +6162,7 @@
         "dups": 0
       },
       {
-        "t": 1793361309580,
+        "t": 1793365454962,
         "total": 2779,
         "broadcast": 179,
         "multicast": 347,
@@ -5124,7 +6172,7 @@
         "dups": 0
       },
       {
-        "t": 1793361310580,
+        "t": 1793365455962,
         "total": 2756,
         "broadcast": 156,
         "multicast": 318,
@@ -5134,7 +6182,7 @@
         "dups": 0
       },
       {
-        "t": 1793361311580,
+        "t": 1793365456962,
         "total": 2793,
         "broadcast": 193,
         "multicast": 329,
@@ -5144,7 +6192,7 @@
         "dups": 0
       },
       {
-        "t": 1793361312580,
+        "t": 1793365457962,
         "total": 2770,
         "broadcast": 170,
         "multicast": 340,
@@ -5154,7 +6202,7 @@
         "dups": 0
       },
       {
-        "t": 1793361313580,
+        "t": 1793365458962,
         "total": 2747,
         "broadcast": 147,
         "multicast": 311,
@@ -5164,7 +6212,7 @@
         "dups": 0
       },
       {
-        "t": 1793361314580,
+        "t": 1793365459962,
         "total": 2784,
         "broadcast": 184,
         "multicast": 322,
@@ -5174,7 +6222,7 @@
         "dups": 0
       },
       {
-        "t": 1793361315580,
+        "t": 1793365460962,
         "total": 2761,
         "broadcast": 161,
         "multicast": 333,
@@ -5184,7 +6232,7 @@
         "dups": 0
       },
       {
-        "t": 1793361316580,
+        "t": 1793365461962,
         "total": 2798,
         "broadcast": 198,
         "multicast": 344,
@@ -5194,7 +6242,7 @@
         "dups": 0
       },
       {
-        "t": 1793361317580,
+        "t": 1793365462962,
         "total": 2775,
         "broadcast": 175,
         "multicast": 315,
@@ -5204,7 +6252,7 @@
         "dups": 0
       },
       {
-        "t": 1793361318580,
+        "t": 1793365463962,
         "total": 2752,
         "broadcast": 152,
         "multicast": 326,
@@ -5214,7 +6262,7 @@
         "dups": 0
       },
       {
-        "t": 1793361319580,
+        "t": 1793365464962,
         "total": 2789,
         "broadcast": 189,
         "multicast": 337,
@@ -5224,7 +6272,7 @@
         "dups": 0
       },
       {
-        "t": 1793361320580,
+        "t": 1793365465962,
         "total": 2766,
         "broadcast": 166,
         "multicast": 348,
@@ -5234,7 +6282,7 @@
         "dups": 0
       },
       {
-        "t": 1793361321580,
+        "t": 1793365466962,
         "total": 2743,
         "broadcast": 143,
         "multicast": 319,
@@ -5244,7 +6292,7 @@
         "dups": 0
       },
       {
-        "t": 1793361322580,
+        "t": 1793365467962,
         "total": 2780,
         "broadcast": 180,
         "multicast": 330,
@@ -5254,7 +6302,7 @@
         "dups": 0
       },
       {
-        "t": 1793361323580,
+        "t": 1793365468962,
         "total": 2757,
         "broadcast": 157,
         "multicast": 341,
@@ -5264,7 +6312,7 @@
         "dups": 0
       },
       {
-        "t": 1793361324580,
+        "t": 1793365469962,
         "total": 2794,
         "broadcast": 194,
         "multicast": 312,
@@ -5274,7 +6322,7 @@
         "dups": 0
       },
       {
-        "t": 1793361325580,
+        "t": 1793365470962,
         "total": 2771,
         "broadcast": 171,
         "multicast": 323,
@@ -5284,7 +6332,7 @@
         "dups": 0
       },
       {
-        "t": 1793361326580,
+        "t": 1793365471962,
         "total": 2748,
         "broadcast": 148,
         "multicast": 334,
@@ -5294,7 +6342,7 @@
         "dups": 0
       },
       {
-        "t": 1793361327580,
+        "t": 1793365472962,
         "total": 2785,
         "broadcast": 185,
         "multicast": 345,
@@ -5304,7 +6352,7 @@
         "dups": 0
       },
       {
-        "t": 1793361328580,
+        "t": 1793365473962,
         "total": 2762,
         "broadcast": 162,
         "multicast": 316,
@@ -5314,7 +6362,7 @@
         "dups": 0
       },
       {
-        "t": 1793361329580,
+        "t": 1793365474962,
         "total": 2799,
         "broadcast": 199,
         "multicast": 327,
@@ -5324,7 +6372,7 @@
         "dups": 0
       },
       {
-        "t": 1793361330580,
+        "t": 1793365475962,
         "total": 2776,
         "broadcast": 176,
         "multicast": 338,
@@ -5334,7 +6382,7 @@
         "dups": 0
       },
       {
-        "t": 1793361331580,
+        "t": 1793365476962,
         "total": 2753,
         "broadcast": 153,
         "multicast": 349,
@@ -5344,7 +6392,7 @@
         "dups": 0
       },
       {
-        "t": 1793361332580,
+        "t": 1793365477962,
         "total": 2790,
         "broadcast": 190,
         "multicast": 320,
@@ -5354,7 +6402,7 @@
         "dups": 0
       },
       {
-        "t": 1793361333580,
+        "t": 1793365478962,
         "total": 2767,
         "broadcast": 167,
         "multicast": 331,
@@ -5364,7 +6412,7 @@
         "dups": 0
       },
       {
-        "t": 1793361334580,
+        "t": 1793365479962,
         "total": 2744,
         "broadcast": 144,
         "multicast": 342,
@@ -5374,7 +6422,7 @@
         "dups": 0
       },
       {
-        "t": 1793361335580,
+        "t": 1793365480962,
         "total": 2781,
         "broadcast": 181,
         "multicast": 313,
@@ -5384,7 +6432,7 @@
         "dups": 0
       },
       {
-        "t": 1793361336580,
+        "t": 1793365481962,
         "total": 2758,
         "broadcast": 158,
         "multicast": 324,
@@ -5394,7 +6442,7 @@
         "dups": 0
       },
       {
-        "t": 1793361337580,
+        "t": 1793365482962,
         "total": 2795,
         "broadcast": 195,
         "multicast": 335,
@@ -5404,7 +6452,7 @@
         "dups": 0
       },
       {
-        "t": 1793361338580,
+        "t": 1793365483962,
         "total": 2772,
         "broadcast": 172,
         "multicast": 346,
@@ -5414,7 +6462,7 @@
         "dups": 0
       },
       {
-        "t": 1793361339580,
+        "t": 1793365484962,
         "total": 2749,
         "broadcast": 149,
         "multicast": 317,
@@ -5424,7 +6472,7 @@
         "dups": 0
       },
       {
-        "t": 1793361340580,
+        "t": 1793365485962,
         "total": 2786,
         "broadcast": 186,
         "multicast": 328,
@@ -5434,7 +6482,7 @@
         "dups": 0
       },
       {
-        "t": 1793361341580,
+        "t": 1793365486962,
         "total": 2763,
         "broadcast": 163,
         "multicast": 339,
@@ -5444,7 +6492,7 @@
         "dups": 0
       },
       {
-        "t": 1793361342580,
+        "t": 1793365487962,
         "total": 2740,
         "broadcast": 140,
         "multicast": 310,
@@ -5454,7 +6502,7 @@
         "dups": 0
       },
       {
-        "t": 1793361343580,
+        "t": 1793365488962,
         "total": 2777,
         "broadcast": 177,
         "multicast": 321,
@@ -5464,7 +6512,7 @@
         "dups": 0
       },
       {
-        "t": 1793361344580,
+        "t": 1793365489962,
         "total": 2754,
         "broadcast": 154,
         "multicast": 332,
@@ -5474,7 +6522,7 @@
         "dups": 0
       },
       {
-        "t": 1793361345580,
+        "t": 1793365490962,
         "total": 2791,
         "broadcast": 191,
         "multicast": 343,
@@ -5484,7 +6532,7 @@
         "dups": 0
       },
       {
-        "t": 1793361346580,
+        "t": 1793365491962,
         "total": 2768,
         "broadcast": 168,
         "multicast": 314,
@@ -5494,7 +6542,7 @@
         "dups": 0
       },
       {
-        "t": 1793361347580,
+        "t": 1793365492962,
         "total": 2745,
         "broadcast": 145,
         "multicast": 325,
@@ -5504,7 +6552,7 @@
         "dups": 0
       },
       {
-        "t": 1793361348580,
+        "t": 1793365493962,
         "total": 2782,
         "broadcast": 182,
         "multicast": 336,
@@ -5514,7 +6562,7 @@
         "dups": 0
       },
       {
-        "t": 1793361349580,
+        "t": 1793365494962,
         "total": 2759,
         "broadcast": 159,
         "multicast": 347,
@@ -5524,7 +6572,7 @@
         "dups": 0
       },
       {
-        "t": 1793361350580,
+        "t": 1793365495962,
         "total": 2796,
         "broadcast": 196,
         "multicast": 318,
@@ -5534,7 +6582,7 @@
         "dups": 0
       },
       {
-        "t": 1793361351580,
+        "t": 1793365496962,
         "total": 2773,
         "broadcast": 173,
         "multicast": 329,
@@ -5544,7 +6592,7 @@
         "dups": 0
       },
       {
-        "t": 1793361352580,
+        "t": 1793365497962,
         "total": 2750,
         "broadcast": 150,
         "multicast": 340,
@@ -5554,7 +6602,7 @@
         "dups": 0
       },
       {
-        "t": 1793361353580,
+        "t": 1793365498962,
         "total": 2787,
         "broadcast": 187,
         "multicast": 311,
@@ -5564,7 +6612,7 @@
         "dups": 0
       },
       {
-        "t": 1793361354580,
+        "t": 1793365499962,
         "total": 2764,
         "broadcast": 164,
         "multicast": 322,
@@ -5574,7 +6622,7 @@
         "dups": 0
       },
       {
-        "t": 1793361355580,
+        "t": 1793365500962,
         "total": 2741,
         "broadcast": 141,
         "multicast": 333,
@@ -5584,7 +6632,7 @@
         "dups": 0
       },
       {
-        "t": 1793361356580,
+        "t": 1793365501962,
         "total": 2778,
         "broadcast": 178,
         "multicast": 344,
@@ -5594,7 +6642,7 @@
         "dups": 0
       },
       {
-        "t": 1793361357580,
+        "t": 1793365502962,
         "total": 2755,
         "broadcast": 155,
         "multicast": 315,
@@ -5604,7 +6652,7 @@
         "dups": 0
       },
       {
-        "t": 1793361358580,
+        "t": 1793365503962,
         "total": 2792,
         "broadcast": 192,
         "multicast": 326,
@@ -5614,7 +6662,7 @@
         "dups": 0
       },
       {
-        "t": 1793361359580,
+        "t": 1793365504962,
         "total": 2769,
         "broadcast": 169,
         "multicast": 337,
@@ -5624,7 +6672,7 @@
         "dups": 0
       },
       {
-        "t": 1793361360580,
+        "t": 1793365505962,
         "total": 2746,
         "broadcast": 146,
         "multicast": 348,
@@ -5634,7 +6682,7 @@
         "dups": 0
       },
       {
-        "t": 1793361361580,
+        "t": 1793365506962,
         "total": 2783,
         "broadcast": 183,
         "multicast": 319,
@@ -5644,7 +6692,7 @@
         "dups": 0
       },
       {
-        "t": 1793361362580,
+        "t": 1793365507962,
         "total": 2760,
         "broadcast": 160,
         "multicast": 330,
@@ -5654,7 +6702,7 @@
         "dups": 0
       },
       {
-        "t": 1793361363580,
+        "t": 1793365508962,
         "total": 2797,
         "broadcast": 197,
         "multicast": 341,
@@ -5664,7 +6712,7 @@
         "dups": 0
       },
       {
-        "t": 1793361364580,
+        "t": 1793365509962,
         "total": 2774,
         "broadcast": 174,
         "multicast": 312,
@@ -5674,7 +6722,7 @@
         "dups": 0
       },
       {
-        "t": 1793361365580,
+        "t": 1793365510962,
         "total": 2751,
         "broadcast": 151,
         "multicast": 323,
@@ -5684,7 +6732,7 @@
         "dups": 0
       },
       {
-        "t": 1793361366580,
+        "t": 1793365511962,
         "total": 2788,
         "broadcast": 188,
         "multicast": 334,
@@ -5694,7 +6742,7 @@
         "dups": 0
       },
       {
-        "t": 1793361367580,
+        "t": 1793365512962,
         "total": 2765,
         "broadcast": 165,
         "multicast": 345,
@@ -5704,7 +6752,7 @@
         "dups": 0
       },
       {
-        "t": 1793361368580,
+        "t": 1793365513962,
         "total": 2742,
         "broadcast": 142,
         "multicast": 316,
@@ -5714,7 +6762,7 @@
         "dups": 0
       },
       {
-        "t": 1793361369580,
+        "t": 1793365514962,
         "total": 2779,
         "broadcast": 179,
         "multicast": 327,
@@ -5724,7 +6772,7 @@
         "dups": 0
       },
       {
-        "t": 1793361370580,
+        "t": 1793365515962,
         "total": 2756,
         "broadcast": 156,
         "multicast": 338,
@@ -5734,7 +6782,7 @@
         "dups": 0
       },
       {
-        "t": 1793361371580,
+        "t": 1793365516962,
         "total": 2793,
         "broadcast": 193,
         "multicast": 349,
@@ -5744,7 +6792,7 @@
         "dups": 0
       },
       {
-        "t": 1793361372580,
+        "t": 1793365517962,
         "total": 2770,
         "broadcast": 170,
         "multicast": 320,
@@ -5754,7 +6802,7 @@
         "dups": 0
       },
       {
-        "t": 1793361373580,
+        "t": 1793365518962,
         "total": 2747,
         "broadcast": 147,
         "multicast": 331,
@@ -5764,7 +6812,7 @@
         "dups": 0
       },
       {
-        "t": 1793361374580,
+        "t": 1793365519962,
         "total": 2784,
         "broadcast": 184,
         "multicast": 342,
@@ -5774,7 +6822,7 @@
         "dups": 0
       },
       {
-        "t": 1793361375580,
+        "t": 1793365520962,
         "total": 2761,
         "broadcast": 161,
         "multicast": 313,
@@ -5784,7 +6832,7 @@
         "dups": 0
       },
       {
-        "t": 1793361376580,
+        "t": 1793365521962,
         "total": 2798,
         "broadcast": 198,
         "multicast": 324,
@@ -5794,7 +6842,7 @@
         "dups": 0
       },
       {
-        "t": 1793361377580,
+        "t": 1793365522962,
         "total": 2775,
         "broadcast": 175,
         "multicast": 335,
@@ -5804,7 +6852,7 @@
         "dups": 0
       },
       {
-        "t": 1793361378580,
+        "t": 1793365523962,
         "total": 2752,
         "broadcast": 152,
         "multicast": 346,
@@ -5814,7 +6862,7 @@
         "dups": 0
       },
       {
-        "t": 1793361379580,
+        "t": 1793365524962,
         "total": 2789,
         "broadcast": 189,
         "multicast": 317,
@@ -5824,7 +6872,7 @@
         "dups": 0
       },
       {
-        "t": 1793361380580,
+        "t": 1793365525962,
         "total": 2766,
         "broadcast": 166,
         "multicast": 328,
@@ -5834,7 +6882,7 @@
         "dups": 0
       },
       {
-        "t": 1793361381580,
+        "t": 1793365526962,
         "total": 2743,
         "broadcast": 143,
         "multicast": 339,
@@ -5844,7 +6892,7 @@
         "dups": 0
       },
       {
-        "t": 1793361382580,
+        "t": 1793365527962,
         "total": 2780,
         "broadcast": 180,
         "multicast": 310,
@@ -5854,7 +6902,7 @@
         "dups": 0
       },
       {
-        "t": 1793361383580,
+        "t": 1793365528962,
         "total": 2757,
         "broadcast": 157,
         "multicast": 321,
@@ -5864,7 +6912,7 @@
         "dups": 0
       },
       {
-        "t": 1793361384580,
+        "t": 1793365529962,
         "total": 2794,
         "broadcast": 194,
         "multicast": 332,
@@ -5874,7 +6922,7 @@
         "dups": 0
       },
       {
-        "t": 1793361385580,
+        "t": 1793365530962,
         "total": 2771,
         "broadcast": 171,
         "multicast": 343,
@@ -5884,7 +6932,7 @@
         "dups": 0
       },
       {
-        "t": 1793361386580,
+        "t": 1793365531962,
         "total": 2748,
         "broadcast": 148,
         "multicast": 314,
@@ -5894,7 +6942,7 @@
         "dups": 0
       },
       {
-        "t": 1793361387580,
+        "t": 1793365532962,
         "total": 2785,
         "broadcast": 185,
         "multicast": 325,
@@ -5904,7 +6952,7 @@
         "dups": 0
       },
       {
-        "t": 1793361388580,
+        "t": 1793365533962,
         "total": 2762,
         "broadcast": 162,
         "multicast": 336,
@@ -5914,7 +6962,7 @@
         "dups": 0
       },
       {
-        "t": 1793361389580,
+        "t": 1793365534962,
         "total": 2799,
         "broadcast": 199,
         "multicast": 347,
@@ -5924,7 +6972,7 @@
         "dups": 0
       },
       {
-        "t": 1793361390580,
+        "t": 1793365535962,
         "total": 2776,
         "broadcast": 176,
         "multicast": 318,
@@ -5934,7 +6982,7 @@
         "dups": 0
       },
       {
-        "t": 1793361391580,
+        "t": 1793365536962,
         "total": 2753,
         "broadcast": 153,
         "multicast": 329,
@@ -5944,7 +6992,7 @@
         "dups": 0
       },
       {
-        "t": 1793361392580,
+        "t": 1793365537962,
         "total": 2790,
         "broadcast": 190,
         "multicast": 340,
@@ -5954,7 +7002,7 @@
         "dups": 0
       },
       {
-        "t": 1793361393580,
+        "t": 1793365538962,
         "total": 2767,
         "broadcast": 167,
         "multicast": 311,
@@ -5964,7 +7012,7 @@
         "dups": 0
       },
       {
-        "t": 1793361394580,
+        "t": 1793365539962,
         "total": 2744,
         "broadcast": 144,
         "multicast": 322,
@@ -5974,7 +7022,7 @@
         "dups": 0
       },
       {
-        "t": 1793361395580,
+        "t": 1793365540962,
         "total": 2781,
         "broadcast": 181,
         "multicast": 333,
@@ -5984,7 +7032,7 @@
         "dups": 0
       },
       {
-        "t": 1793361396580,
+        "t": 1793365541962,
         "total": 2758,
         "broadcast": 158,
         "multicast": 344,
@@ -5994,7 +7042,7 @@
         "dups": 0
       },
       {
-        "t": 1793361397580,
+        "t": 1793365542962,
         "total": 2795,
         "broadcast": 195,
         "multicast": 315,
@@ -6004,7 +7052,7 @@
         "dups": 0
       },
       {
-        "t": 1793361398580,
+        "t": 1793365543962,
         "total": 2772,
         "broadcast": 172,
         "multicast": 326,
@@ -6014,7 +7062,7 @@
         "dups": 0
       },
       {
-        "t": 1793361399580,
+        "t": 1793365544962,
         "total": 2749,
         "broadcast": 149,
         "multicast": 337,
@@ -6024,7 +7072,7 @@
         "dups": 0
       },
       {
-        "t": 1793361400580,
+        "t": 1793365545962,
         "total": 2786,
         "broadcast": 186,
         "multicast": 348,
@@ -6034,7 +7082,7 @@
         "dups": 0
       },
       {
-        "t": 1793361401580,
+        "t": 1793365546962,
         "total": 2763,
         "broadcast": 163,
         "multicast": 319,
@@ -6044,7 +7092,7 @@
         "dups": 0
       },
       {
-        "t": 1793361402580,
+        "t": 1793365547962,
         "total": 2740,
         "broadcast": 140,
         "multicast": 330,
@@ -6054,7 +7102,7 @@
         "dups": 0
       },
       {
-        "t": 1793361403580,
+        "t": 1793365548962,
         "total": 4090,
         "broadcast": 1490,
         "multicast": 341,
@@ -6064,7 +7112,7 @@
         "dups": 0
       },
       {
-        "t": 1793361404580,
+        "t": 1793365549962,
         "total": 4180,
         "broadcast": 1580,
         "multicast": 312,
@@ -6074,7 +7122,7 @@
         "dups": 0
       },
       {
-        "t": 1793361405580,
+        "t": 1793365550962,
         "total": 4270,
         "broadcast": 1670,
         "multicast": 323,
@@ -6084,7 +7132,7 @@
         "dups": 0
       },
       {
-        "t": 1793361406580,
+        "t": 1793365551962,
         "total": 4360,
         "broadcast": 1760,
         "multicast": 334,
@@ -6094,7 +7142,7 @@
         "dups": 0
       },
       {
-        "t": 1793361407580,
+        "t": 1793365552962,
         "total": 4450,
         "broadcast": 1850,
         "multicast": 345,
@@ -6104,7 +7152,7 @@
         "dups": 0
       },
       {
-        "t": 1793361408580,
+        "t": 1793365553962,
         "total": 4540,
         "broadcast": 1940,
         "multicast": 316,
@@ -6114,7 +7162,7 @@
         "dups": 0
       },
       {
-        "t": 1793361409580,
+        "t": 1793365554962,
         "total": 4630,
         "broadcast": 2030,
         "multicast": 327,
@@ -6124,7 +7172,7 @@
         "dups": 0
       },
       {
-        "t": 1793361410580,
+        "t": 1793365555962,
         "total": 4720,
         "broadcast": 2120,
         "multicast": 338,
@@ -6134,7 +7182,7 @@
         "dups": 0
       },
       {
-        "t": 1793361411580,
+        "t": 1793365556962,
         "total": 4810,
         "broadcast": 2210,
         "multicast": 349,
@@ -6144,7 +7192,7 @@
         "dups": 0
       },
       {
-        "t": 1793361412580,
+        "t": 1793365557962,
         "total": 4900,
         "broadcast": 2300,
         "multicast": 320,
@@ -6154,7 +7202,7 @@
         "dups": 0
       },
       {
-        "t": 1793361413580,
+        "t": 1793365558962,
         "total": 4990,
         "broadcast": 2390,
         "multicast": 331,
@@ -6164,7 +7212,7 @@
         "dups": 0
       },
       {
-        "t": 1793361414580,
+        "t": 1793365559962,
         "total": 5080,
         "broadcast": 2480,
         "multicast": 342,
@@ -6174,7 +7222,7 @@
         "dups": 0
       },
       {
-        "t": 1793361415580,
+        "t": 1793365560962,
         "total": 5170,
         "broadcast": 2570,
         "multicast": 313,
@@ -6184,7 +7232,7 @@
         "dups": 0
       },
       {
-        "t": 1793361416580,
+        "t": 1793365561962,
         "total": 5260,
         "broadcast": 2660,
         "multicast": 324,
@@ -6194,7 +7242,7 @@
         "dups": 0
       },
       {
-        "t": 1793361417580,
+        "t": 1793365562962,
         "total": 5350,
         "broadcast": 2750,
         "multicast": 335,
@@ -6204,7 +7252,7 @@
         "dups": 0
       },
       {
-        "t": 1793361418580,
+        "t": 1793365563962,
         "total": 2792,
         "broadcast": 192,
         "multicast": 346,
@@ -6214,7 +7262,7 @@
         "dups": 0
       },
       {
-        "t": 1793361419580,
+        "t": 1793365564962,
         "total": 2769,
         "broadcast": 169,
         "multicast": 317,
@@ -6224,7 +7272,7 @@
         "dups": 0
       },
       {
-        "t": 1793361420580,
+        "t": 1793365565962,
         "total": 2746,
         "broadcast": 146,
         "multicast": 328,
@@ -6234,7 +7282,7 @@
         "dups": 0
       },
       {
-        "t": 1793361421580,
+        "t": 1793365566962,
         "total": 2783,
         "broadcast": 183,
         "multicast": 339,
@@ -6244,7 +7292,7 @@
         "dups": 0
       },
       {
-        "t": 1793361422580,
+        "t": 1793365567962,
         "total": 2760,
         "broadcast": 160,
         "multicast": 310,
@@ -6254,7 +7302,7 @@
         "dups": 0
       },
       {
-        "t": 1793361423580,
+        "t": 1793365568962,
         "total": 2797,
         "broadcast": 197,
         "multicast": 321,
@@ -6264,7 +7312,7 @@
         "dups": 0
       },
       {
-        "t": 1793361424580,
+        "t": 1793365569962,
         "total": 2774,
         "broadcast": 174,
         "multicast": 332,
@@ -6274,7 +7322,7 @@
         "dups": 0
       },
       {
-        "t": 1793361425580,
+        "t": 1793365570962,
         "total": 2751,
         "broadcast": 151,
         "multicast": 343,
@@ -6284,7 +7332,7 @@
         "dups": 0
       },
       {
-        "t": 1793361426580,
+        "t": 1793365571962,
         "total": 2788,
         "broadcast": 188,
         "multicast": 314,
@@ -6294,7 +7342,7 @@
         "dups": 0
       },
       {
-        "t": 1793361427580,
+        "t": 1793365572962,
         "total": 2765,
         "broadcast": 165,
         "multicast": 325,
@@ -6304,7 +7352,7 @@
         "dups": 0
       },
       {
-        "t": 1793361428580,
+        "t": 1793365573962,
         "total": 2742,
         "broadcast": 142,
         "multicast": 336,
@@ -6314,7 +7362,7 @@
         "dups": 0
       },
       {
-        "t": 1793361429580,
+        "t": 1793365574962,
         "total": 2779,
         "broadcast": 179,
         "multicast": 347,
@@ -6324,7 +7372,7 @@
         "dups": 0
       },
       {
-        "t": 1793361430580,
+        "t": 1793365575962,
         "total": 2756,
         "broadcast": 156,
         "multicast": 318,
@@ -6334,7 +7382,7 @@
         "dups": 0
       },
       {
-        "t": 1793361431580,
+        "t": 1793365576962,
         "total": 2793,
         "broadcast": 193,
         "multicast": 329,
@@ -6344,7 +7392,7 @@
         "dups": 0
       },
       {
-        "t": 1793361432580,
+        "t": 1793365577962,
         "total": 2770,
         "broadcast": 170,
         "multicast": 340,
@@ -6354,7 +7402,7 @@
         "dups": 0
       },
       {
-        "t": 1793361433580,
+        "t": 1793365578962,
         "total": 2747,
         "broadcast": 147,
         "multicast": 311,
@@ -6364,7 +7412,7 @@
         "dups": 0
       },
       {
-        "t": 1793361434580,
+        "t": 1793365579962,
         "total": 2784,
         "broadcast": 184,
         "multicast": 322,
@@ -6374,7 +7422,7 @@
         "dups": 0
       },
       {
-        "t": 1793361435580,
+        "t": 1793365580962,
         "total": 2761,
         "broadcast": 161,
         "multicast": 333,
@@ -6384,7 +7432,7 @@
         "dups": 0
       },
       {
-        "t": 1793361436580,
+        "t": 1793365581962,
         "total": 2798,
         "broadcast": 198,
         "multicast": 344,
@@ -6394,7 +7442,7 @@
         "dups": 0
       },
       {
-        "t": 1793361437580,
+        "t": 1793365582962,
         "total": 2775,
         "broadcast": 175,
         "multicast": 315,
@@ -6404,7 +7452,7 @@
         "dups": 0
       },
       {
-        "t": 1793361438580,
+        "t": 1793365583962,
         "total": 2752,
         "broadcast": 152,
         "multicast": 326,
@@ -6414,7 +7462,7 @@
         "dups": 0
       },
       {
-        "t": 1793361439580,
+        "t": 1793365584962,
         "total": 2789,
         "broadcast": 189,
         "multicast": 337,
@@ -6424,7 +7472,7 @@
         "dups": 0
       },
       {
-        "t": 1793361440580,
+        "t": 1793365585962,
         "total": 2766,
         "broadcast": 166,
         "multicast": 348,
@@ -6434,7 +7482,7 @@
         "dups": 0
       },
       {
-        "t": 1793361441580,
+        "t": 1793365586962,
         "total": 2743,
         "broadcast": 143,
         "multicast": 319,
@@ -6444,7 +7492,7 @@
         "dups": 0
       },
       {
-        "t": 1793361442580,
+        "t": 1793365587962,
         "total": 2780,
         "broadcast": 180,
         "multicast": 330,
@@ -6454,7 +7502,7 @@
         "dups": 0
       },
       {
-        "t": 1793361443580,
+        "t": 1793365588962,
         "total": 2757,
         "broadcast": 157,
         "multicast": 341,
@@ -6464,7 +7512,7 @@
         "dups": 0
       },
       {
-        "t": 1793361444580,
+        "t": 1793365589962,
         "total": 2794,
         "broadcast": 194,
         "multicast": 312,
@@ -6474,7 +7522,7 @@
         "dups": 0
       },
       {
-        "t": 1793361445580,
+        "t": 1793365590962,
         "total": 2771,
         "broadcast": 171,
         "multicast": 323,
@@ -6484,7 +7532,7 @@
         "dups": 0
       },
       {
-        "t": 1793361446580,
+        "t": 1793365591962,
         "total": 2748,
         "broadcast": 148,
         "multicast": 334,
@@ -6494,7 +7542,7 @@
         "dups": 0
       },
       {
-        "t": 1793361447580,
+        "t": 1793365592962,
         "total": 2785,
         "broadcast": 185,
         "multicast": 345,
@@ -6504,7 +7552,7 @@
         "dups": 0
       },
       {
-        "t": 1793361448580,
+        "t": 1793365593962,
         "total": 2762,
         "broadcast": 162,
         "multicast": 316,
@@ -6514,7 +7562,7 @@
         "dups": 0
       },
       {
-        "t": 1793361449580,
+        "t": 1793365594962,
         "total": 2799,
         "broadcast": 199,
         "multicast": 327,
@@ -6524,7 +7572,7 @@
         "dups": 0
       },
       {
-        "t": 1793361450580,
+        "t": 1793365595962,
         "total": 2776,
         "broadcast": 176,
         "multicast": 338,
@@ -6534,7 +7582,7 @@
         "dups": 0
       },
       {
-        "t": 1793361451580,
+        "t": 1793365596962,
         "total": 2753,
         "broadcast": 153,
         "multicast": 349,
@@ -6544,7 +7592,7 @@
         "dups": 0
       },
       {
-        "t": 1793361452580,
+        "t": 1793365597962,
         "total": 2790,
         "broadcast": 190,
         "multicast": 320,
@@ -6554,7 +7602,7 @@
         "dups": 0
       },
       {
-        "t": 1793361453580,
+        "t": 1793365598962,
         "total": 2767,
         "broadcast": 167,
         "multicast": 331,
@@ -6564,7 +7612,7 @@
         "dups": 0
       },
       {
-        "t": 1793361454580,
+        "t": 1793365599962,
         "total": 2744,
         "broadcast": 144,
         "multicast": 342,
@@ -6574,7 +7622,7 @@
         "dups": 0
       },
       {
-        "t": 1793361455580,
+        "t": 1793365600962,
         "total": 2781,
         "broadcast": 181,
         "multicast": 313,
@@ -6584,7 +7632,7 @@
         "dups": 0
       },
       {
-        "t": 1793361456580,
+        "t": 1793365601962,
         "total": 2758,
         "broadcast": 158,
         "multicast": 324,
@@ -6594,7 +7642,7 @@
         "dups": 0
       },
       {
-        "t": 1793361457580,
+        "t": 1793365602962,
         "total": 2795,
         "broadcast": 195,
         "multicast": 335,
@@ -6604,7 +7652,7 @@
         "dups": 0
       },
       {
-        "t": 1793361458580,
+        "t": 1793365603962,
         "total": 2772,
         "broadcast": 172,
         "multicast": 346,
@@ -6614,7 +7662,7 @@
         "dups": 0
       },
       {
-        "t": 1793361459580,
+        "t": 1793365604962,
         "total": 2749,
         "broadcast": 149,
         "multicast": 317,
@@ -6624,7 +7672,7 @@
         "dups": 0
       },
       {
-        "t": 1793361460580,
+        "t": 1793365605962,
         "total": 2786,
         "broadcast": 186,
         "multicast": 328,
@@ -6634,7 +7682,7 @@
         "dups": 0
       },
       {
-        "t": 1793361461580,
+        "t": 1793365606962,
         "total": 2763,
         "broadcast": 163,
         "multicast": 339,
@@ -6644,7 +7692,7 @@
         "dups": 0
       },
       {
-        "t": 1793361462580,
+        "t": 1793365607962,
         "total": 2740,
         "broadcast": 140,
         "multicast": 310,
@@ -6654,7 +7702,7 @@
         "dups": 0
       },
       {
-        "t": 1793361463580,
+        "t": 1793365608962,
         "total": 2777,
         "broadcast": 177,
         "multicast": 321,
@@ -6664,7 +7712,7 @@
         "dups": 0
       },
       {
-        "t": 1793361464580,
+        "t": 1793365609962,
         "total": 2754,
         "broadcast": 154,
         "multicast": 332,
@@ -6674,7 +7722,7 @@
         "dups": 0
       },
       {
-        "t": 1793361465580,
+        "t": 1793365610962,
         "total": 2791,
         "broadcast": 191,
         "multicast": 343,
@@ -6684,7 +7732,7 @@
         "dups": 0
       },
       {
-        "t": 1793361466580,
+        "t": 1793365611962,
         "total": 2768,
         "broadcast": 168,
         "multicast": 314,
@@ -6694,7 +7742,7 @@
         "dups": 0
       },
       {
-        "t": 1793361467580,
+        "t": 1793365612962,
         "total": 2745,
         "broadcast": 145,
         "multicast": 325,
@@ -6704,7 +7752,7 @@
         "dups": 0
       },
       {
-        "t": 1793361468580,
+        "t": 1793365613962,
         "total": 2782,
         "broadcast": 182,
         "multicast": 336,
@@ -6714,7 +7762,7 @@
         "dups": 0
       },
       {
-        "t": 1793361469580,
+        "t": 1793365614962,
         "total": 2759,
         "broadcast": 159,
         "multicast": 347,
@@ -6724,7 +7772,7 @@
         "dups": 0
       },
       {
-        "t": 1793361470580,
+        "t": 1793365615962,
         "total": 2796,
         "broadcast": 196,
         "multicast": 318,
@@ -6734,7 +7782,7 @@
         "dups": 0
       },
       {
-        "t": 1793361471580,
+        "t": 1793365616962,
         "total": 2773,
         "broadcast": 173,
         "multicast": 329,
@@ -6744,7 +7792,7 @@
         "dups": 0
       },
       {
-        "t": 1793361472580,
+        "t": 1793365617962,
         "total": 2750,
         "broadcast": 150,
         "multicast": 340,
@@ -6754,7 +7802,7 @@
         "dups": 0
       },
       {
-        "t": 1793361473580,
+        "t": 1793365618962,
         "total": 2787,
         "broadcast": 187,
         "multicast": 311,
@@ -6764,7 +7812,7 @@
         "dups": 0
       },
       {
-        "t": 1793361474580,
+        "t": 1793365619962,
         "total": 2764,
         "broadcast": 164,
         "multicast": 322,
@@ -6774,7 +7822,7 @@
         "dups": 0
       },
       {
-        "t": 1793361475580,
+        "t": 1793365620962,
         "total": 2741,
         "broadcast": 141,
         "multicast": 333,
@@ -6784,7 +7832,7 @@
         "dups": 0
       },
       {
-        "t": 1793361476580,
+        "t": 1793365621962,
         "total": 2778,
         "broadcast": 178,
         "multicast": 344,
@@ -6794,7 +7842,7 @@
         "dups": 0
       },
       {
-        "t": 1793361477580,
+        "t": 1793365622962,
         "total": 2755,
         "broadcast": 155,
         "multicast": 315,
@@ -6804,7 +7852,7 @@
         "dups": 0
       },
       {
-        "t": 1793361478580,
+        "t": 1793365623962,
         "total": 2792,
         "broadcast": 192,
         "multicast": 326,
@@ -6814,7 +7862,7 @@
         "dups": 0
       },
       {
-        "t": 1793361479580,
+        "t": 1793365624962,
         "total": 2769,
         "broadcast": 169,
         "multicast": 337,
@@ -6824,7 +7872,7 @@
         "dups": 0
       },
       {
-        "t": 1793361480580,
+        "t": 1793365625962,
         "total": 2746,
         "broadcast": 146,
         "multicast": 348,
@@ -6834,7 +7882,7 @@
         "dups": 0
       },
       {
-        "t": 1793361481580,
+        "t": 1793365626962,
         "total": 2783,
         "broadcast": 183,
         "multicast": 319,
@@ -6844,7 +7892,7 @@
         "dups": 0
       },
       {
-        "t": 1793361482580,
+        "t": 1793365627962,
         "total": 2760,
         "broadcast": 160,
         "multicast": 330,
@@ -6854,7 +7902,7 @@
         "dups": 0
       },
       {
-        "t": 1793361483580,
+        "t": 1793365628962,
         "total": 2797,
         "broadcast": 197,
         "multicast": 341,
@@ -6864,7 +7912,7 @@
         "dups": 0
       },
       {
-        "t": 1793361484580,
+        "t": 1793365629962,
         "total": 2774,
         "broadcast": 174,
         "multicast": 312,
@@ -6874,7 +7922,7 @@
         "dups": 0
       },
       {
-        "t": 1793361485580,
+        "t": 1793365630962,
         "total": 2751,
         "broadcast": 151,
         "multicast": 323,
@@ -6884,7 +7932,7 @@
         "dups": 0
       },
       {
-        "t": 1793361486580,
+        "t": 1793365631962,
         "total": 2788,
         "broadcast": 188,
         "multicast": 334,
@@ -6894,7 +7942,7 @@
         "dups": 0
       },
       {
-        "t": 1793361487580,
+        "t": 1793365632962,
         "total": 2765,
         "broadcast": 165,
         "multicast": 345,
@@ -6904,7 +7952,7 @@
         "dups": 0
       },
       {
-        "t": 1793361488580,
+        "t": 1793365633962,
         "total": 2742,
         "broadcast": 142,
         "multicast": 316,
@@ -6914,7 +7962,7 @@
         "dups": 0
       },
       {
-        "t": 1793361489580,
+        "t": 1793365634962,
         "total": 2779,
         "broadcast": 179,
         "multicast": 327,
@@ -6924,7 +7972,7 @@
         "dups": 0
       },
       {
-        "t": 1793361490580,
+        "t": 1793365635962,
         "total": 2756,
         "broadcast": 156,
         "multicast": 338,
@@ -6934,7 +7982,7 @@
         "dups": 0
       },
       {
-        "t": 1793361491580,
+        "t": 1793365636962,
         "total": 2793,
         "broadcast": 193,
         "multicast": 349,
@@ -6944,7 +7992,7 @@
         "dups": 0
       },
       {
-        "t": 1793361492580,
+        "t": 1793365637962,
         "total": 2770,
         "broadcast": 170,
         "multicast": 320,
@@ -6954,7 +8002,7 @@
         "dups": 0
       },
       {
-        "t": 1793361493580,
+        "t": 1793365638962,
         "total": 2747,
         "broadcast": 147,
         "multicast": 331,
@@ -6964,7 +8012,7 @@
         "dups": 0
       },
       {
-        "t": 1793361494580,
+        "t": 1793365639962,
         "total": 2784,
         "broadcast": 184,
         "multicast": 342,
@@ -6974,7 +8022,7 @@
         "dups": 0
       },
       {
-        "t": 1793361495580,
+        "t": 1793365640962,
         "total": 2761,
         "broadcast": 161,
         "multicast": 313,
@@ -6984,7 +8032,7 @@
         "dups": 0
       },
       {
-        "t": 1793361496580,
+        "t": 1793365641962,
         "total": 2798,
         "broadcast": 198,
         "multicast": 324,
@@ -6994,7 +8042,7 @@
         "dups": 0
       },
       {
-        "t": 1793361497580,
+        "t": 1793365642962,
         "total": 2775,
         "broadcast": 175,
         "multicast": 335,
@@ -7004,7 +8052,7 @@
         "dups": 0
       },
       {
-        "t": 1793361498580,
+        "t": 1793365643962,
         "total": 2752,
         "broadcast": 152,
         "multicast": 346,
@@ -7014,7 +8062,7 @@
         "dups": 0
       },
       {
-        "t": 1793361499580,
+        "t": 1793365644962,
         "total": 2789,
         "broadcast": 189,
         "multicast": 317,
@@ -7024,7 +8072,7 @@
         "dups": 0
       },
       {
-        "t": 1793361500580,
+        "t": 1793365645962,
         "total": 2766,
         "broadcast": 166,
         "multicast": 328,
@@ -7034,7 +8082,7 @@
         "dups": 0
       },
       {
-        "t": 1793361501580,
+        "t": 1793365646962,
         "total": 2743,
         "broadcast": 143,
         "multicast": 339,
@@ -7044,7 +8092,7 @@
         "dups": 0
       },
       {
-        "t": 1793361502580,
+        "t": 1793365647962,
         "total": 2780,
         "broadcast": 180,
         "multicast": 310,
@@ -7054,7 +8102,7 @@
         "dups": 0
       },
       {
-        "t": 1793361503580,
+        "t": 1793365648962,
         "total": 2757,
         "broadcast": 157,
         "multicast": 321,
@@ -7064,7 +8112,7 @@
         "dups": 0
       },
       {
-        "t": 1793361504580,
+        "t": 1793365649962,
         "total": 2794,
         "broadcast": 194,
         "multicast": 332,
@@ -7074,7 +8122,7 @@
         "dups": 0
       },
       {
-        "t": 1793361505580,
+        "t": 1793365650962,
         "total": 2771,
         "broadcast": 171,
         "multicast": 343,
@@ -7084,7 +8132,7 @@
         "dups": 0
       },
       {
-        "t": 1793361506580,
+        "t": 1793365651962,
         "total": 2748,
         "broadcast": 148,
         "multicast": 314,
@@ -7094,7 +8142,7 @@
         "dups": 0
       },
       {
-        "t": 1793361507580,
+        "t": 1793365652962,
         "total": 2785,
         "broadcast": 185,
         "multicast": 325,
@@ -7104,7 +8152,7 @@
         "dups": 0
       },
       {
-        "t": 1793361508580,
+        "t": 1793365653962,
         "total": 2762,
         "broadcast": 162,
         "multicast": 336,
@@ -7114,7 +8162,7 @@
         "dups": 0
       },
       {
-        "t": 1793361509580,
+        "t": 1793365654962,
         "total": 2799,
         "broadcast": 199,
         "multicast": 347,
@@ -7124,7 +8172,7 @@
         "dups": 0
       },
       {
-        "t": 1793361510580,
+        "t": 1793365655962,
         "total": 2776,
         "broadcast": 176,
         "multicast": 318,
@@ -7134,7 +8182,7 @@
         "dups": 0
       },
       {
-        "t": 1793361511580,
+        "t": 1793365656962,
         "total": 2753,
         "broadcast": 153,
         "multicast": 329,
@@ -7144,7 +8192,7 @@
         "dups": 0
       },
       {
-        "t": 1793361512580,
+        "t": 1793365657962,
         "total": 2790,
         "broadcast": 190,
         "multicast": 340,
@@ -7154,7 +8202,7 @@
         "dups": 0
       },
       {
-        "t": 1793361513580,
+        "t": 1793365658962,
         "total": 2767,
         "broadcast": 167,
         "multicast": 311,
@@ -7164,7 +8212,7 @@
         "dups": 0
       },
       {
-        "t": 1793361514580,
+        "t": 1793365659962,
         "total": 2744,
         "broadcast": 144,
         "multicast": 322,
@@ -7174,7 +8222,7 @@
         "dups": 0
       },
       {
-        "t": 1793361515580,
+        "t": 1793365660962,
         "total": 2781,
         "broadcast": 181,
         "multicast": 333,
@@ -7184,7 +8232,7 @@
         "dups": 0
       },
       {
-        "t": 1793361516580,
+        "t": 1793365661962,
         "total": 2758,
         "broadcast": 158,
         "multicast": 344,
@@ -7194,7 +8242,7 @@
         "dups": 0
       },
       {
-        "t": 1793361517580,
+        "t": 1793365662962,
         "total": 2795,
         "broadcast": 195,
         "multicast": 315,
@@ -7204,7 +8252,7 @@
         "dups": 0
       },
       {
-        "t": 1793361518580,
+        "t": 1793365663962,
         "total": 2772,
         "broadcast": 172,
         "multicast": 326,
@@ -7214,7 +8262,7 @@
         "dups": 0
       },
       {
-        "t": 1793361519580,
+        "t": 1793365664962,
         "total": 2749,
         "broadcast": 149,
         "multicast": 337,
@@ -7224,7 +8272,7 @@
         "dups": 0
       },
       {
-        "t": 1793361520580,
+        "t": 1793365665962,
         "total": 2786,
         "broadcast": 186,
         "multicast": 348,
@@ -7234,7 +8282,7 @@
         "dups": 0
       },
       {
-        "t": 1793361521580,
+        "t": 1793365666962,
         "total": 2763,
         "broadcast": 163,
         "multicast": 319,
@@ -7288,8 +8336,8 @@
     "running": false,
     "phase": "Analysis",
     "progress": 1,
-    "started": "2026-10-30T07:32:42.580167-04:00",
-    "finished": "2026-10-30T07:58:42.580167-04:00",
+    "started": "2026-10-30T08:41:47.962036-04:00",
+    "finished": "2026-10-30T09:07:47.962036-04:00",
     "message": "Assessment complete",
     "phases": [
       {

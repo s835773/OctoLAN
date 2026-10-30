@@ -50,7 +50,7 @@ One self-contained binary per platform: Windows, macOS and Linux (x86-64 and ARM
 
 ### The customer report
 
-**Export → Open report** produces one self-contained HTML file. Print it to PDF from any browser. [See the full example PDF](docs/sample-report.pdf) (11 pages).
+**Export → Open report** produces one self-contained HTML file. Print it to PDF from any browser. [See the full example PDF](docs/sample-report.pdf) (14 pages).
 
 | Executive summary | Topology |
 |---|---|
@@ -81,7 +81,7 @@ Plus the inventory and mapping you'd expect from a network management platform:
 - **Name resolution**: reverse DNS, NetBIOS node status, unicast mDNS, SMB/NTLM computer and domain names.
 - **Security posture checks**, scored 0–100 with a letter grade:
   Telnet/FTP, Cisco Smart Install, unauthenticated Docker/Redis/Elasticsearch/MongoDB, VNC, RDP on workstations, TR-069, PPTP, plain-HTTP management UIs, default SNMP communities, SNMPv1/v2c, SMBv1, SMB signing not required, end-of-life OS, old OpenSSH, expired/expiring/self-signed certificates, legacy TLS, UPnP on the gateway, rogue DHCP, duplicate IPs, broadcast storms, STP instability/root changes/default priority, flat networks, IoT not segmented, interface errors, high latency, long uptime (unpatched).
-  *Scoring:* each finding costs points by severity, more affected devices cost more, and penalties have diminishing returns (a very neglected network lands around 30–50, not 0, so progress after remediation stays visible). The worst issue caps the grade: any critical finding means a D at best, any high finding a C at best.
+  *Scoring:* each finding costs points by severity, more affected devices cost more, and penalties have diminishing returns (so even a very neglected network stays above 0 and progress after remediation is visible). The worst issue caps the grade: any critical finding means a D at best, any high finding a C at best.
 - **Reports**: a single self-contained HTML report (interactive map, executive summary, priority actions, findings with remediation, full inventory, methodology). Print to PDF straight from the browser. Also CSV (devices, findings) and JSON session files.
 
 ## Quick start
@@ -132,7 +132,9 @@ octolan scan             Full assessment in the terminal; writes report + sessio
   -rate 400                       sweep packets/second
   -out ./reports
   -collector tech-laptop          name shown for this computer in the report
+  -vault                          use the site's credential vault (prompts for the passphrase)
 
+octolan vault init|add|list|rm|passwd -site "Acme"   Manage a customer's credential vault
 octolan report session.json      Rebuild the HTML report from a saved session
 octolan storm [-warn 1000 -crit 5000]   Live broadcast-storm / STP meter
 octolan netflow [-listen :2055]  NetFlow/IPFIX collector with live top talkers
@@ -140,12 +142,58 @@ octolan passive [-seconds 300]   Listen-only discovery
 octolan interfaces               Interfaces and what this host can do
 ```
 
-Sessions and reports are saved under `~/OctoLAN/<site>/`. SNMP communities and v3 passwords are held in memory only and are never written to session files or reports.
+Sessions and reports are saved under `~/OctoLAN/<site>/`. SNMP communities and v3 passwords typed into a scan are held in memory only and are never written to session files or reports. To keep credentials between visits, use the [credential vault](#credential-vault).
 
 Reopening a saved session (`octolan -load session.json`) shows it exactly as it was captured. Live monitoring of the network you're on now only starts when you run a new assessment, so reviewing a customer's results back at the office won't mix in the office network.
 
+## Credential vault
+
+When a customer hands over admin or switch credentials, store them in the site's **encrypted vault** and OctoLAN logs in during the scan to collect much more:
+
+| Credential | Used for | What it adds |
+|---|---|---|
+| **Windows admin** (domain or local) | WinRM (5985, NTLM-encrypted; or 5986) | OS build and patch level, last update, Defender and other AV status, BitLocker, firewall profiles, local administrators, installed software, disks, pending reboot, auto-logon, RDP NLA, hardware model and serial |
+| **SSH** (password or key, optional Cisco enable secret) | Switches, routers, firewalls, Linux and NAS | **Config backup** (Cisco IOS/NX-OS, Arista, Aruba, Juniper, FortiGate, MikroTik) with a hardening audit; model, serial, firmware and uptime; Linux distribution, kernel, CPU, memory and disk |
+| **SNMP** (v2c community or v3 user) | SNMP polling | Saved so you don't retype them each visit |
+
+New findings come from this data: Windows updates older than 60 days, real-time antivirus off, BitLocker off, firewall off, automatic logon, too many local admins, RDP without NLA, plaintext/weak enable passwords, Telnet on VTY lines, SNMP write communities, no syslog/NTP/AAA, and more.
+
+| Credentials page | Windows host details | Switch with config backup |
+|---|---|---|
+| ![Credentials](docs/images/dashboard-credentials.png) | ![Windows host details](docs/images/dashboard-host-windows.png) | ![Switch host details](docs/images/dashboard-host-switch.png) |
+
+**How it's protected**
+
+- **One vault per customer**: `~/OctoLAN/<site>/credentials.octovault`. Changing the site in the dashboard locks the open vault, so one customer's credentials can't be used at the next site.
+- **Encryption**: the passphrase (minimum 10 characters) is stretched with **Argon2id** (64 MiB, 3 passes) and the vault is sealed with **XChaCha20-Poly1305**. The file header is authenticated too, so tampering or weakened parameters are rejected. The file is readable only by your user. The passphrase is never stored; if it's lost, the vault can't be opened.
+- **Secrets never leave the vault in readable form**: the dashboard can save credentials but never reads secrets back, and they never appear in session files, reports or logs. The vault auto-locks after 30 minutes idle, and repeated wrong passphrases are slowed down.
+- **Config backups** contain secrets of their own (password hashes, SNMP communities), so they're stored inside the encrypted vault (the newest five versions per device), not in sessions or reports.
+
+**How credentials are used during a scan**
+
+- **Scope**: a credential is only sent to hosts in its scope. Blank means the scan's targets; otherwise list CIDRs, ranges or IPs.
+- **Matching devices only**: Windows credentials go to hosts with Windows evidence and WinRM open; SSH credentials go to hosts with SSH open.
+- **Same domain only**: domain credentials are only offered to hosts that report the same domain. This stops a rogue machine on the LAN from collecting a domain admin's NTLM login.
+- **Lockout protection**: each credential is tried once per host, and is paused for the rest of the scan after 3 rejections, so a wrong or expired password can't lock the customer's account.
+- **SSH host keys are remembered**: if a device presents a different key on a later visit, the login is refused and flagged as possible interception.
+- **Read-only**: only read-only commands are run (`show …`, `Get-…`, `uname`). Nothing is changed on customer devices.
+
+**Using it**
+
+- **Dashboard**: open **Credentials**, create the vault (or unlock it), add credentials, and use **Test** to try one against a host. Then start an assessment with **Use saved credentials** ticked.
+- **Terminal**:
+
+  ```
+  octolan vault init -site "Acme Dental"
+  octolan vault add  -site "Acme Dental"      # prompts; secrets aren't echoed
+  octolan scan -site "Acme Dental" -vault     # prompts for the vault passphrase
+  ```
+
+WinRM is enabled by default on Windows Server. On workstations it's usually enabled by group policy in managed environments; hosts without it are still assessed without logging in.
+
 ## Using it on site: tips
 
+- **Ask for credentials**: a domain admin login (ideally a dedicated account created for the visit and disabled afterwards) plus the switch login turns the assessment from "what's on the network" into "how well is it maintained". Store them in the [credential vault](#credential-vault) and have the customer rotate them afterwards.
 - **Get the most from SNMP**: ask the customer for the read-only community (or v3 user). Switch MAC tables and LLDP/CDP neighbors are what turn a device list into an accurate map.
 - **NetFlow**: point the firewall's flow export at the laptop's IP, UDP 2055, and leave the dashboard open for a while.
 - **Mirror/SPAN port**: plugging into a mirror port gives Storm Guard and the passive listener visibility of the whole switch.
@@ -170,7 +218,7 @@ go test -race ./...
 The screenshots and [example report](docs/sample-report.pdf) come from a fictional dental practice generated by `tools/docsdemo`. The devices are invented, but they go through OctoLAN's real classifier, topology builder and posture checks. To regenerate:
 
 ```
-go run ./tools/docsdemo docs/sample/session.json
+go run ./tools/docsdemo docs/sample/session.json      # add -vault DIR for a sample vault (passphrase "sample passphrase")
 go run ./cmd/octolan report docs/sample/session.json -o docs/sample/report.html
 go run ./cmd/octolan -load docs/sample/session.json   # browse it in the dashboard
 ```
@@ -195,6 +243,8 @@ internal/storm      Storm Guard (PPS meter, loop detection, STP)
 internal/netflow    NetFlow v5/v9/IPFIX collector
 internal/topology   map builder
 internal/assess     posture checks and scoring
+internal/vault      encrypted per-site credential vault (Argon2id + XChaCha20-Poly1305)
+internal/collect    credentialed checks: WinRM (Windows) and SSH (network gear, Linux), config audit
 internal/engine     scan pipeline and monitors
 internal/report     HTML/CSV reports
 internal/web        dashboard API (JSON + server-sent events)

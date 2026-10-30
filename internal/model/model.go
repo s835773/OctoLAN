@@ -80,6 +80,13 @@ type Device struct {
 	TLS        []TLSInfo   `json:"tls,omitempty"`
 	SMB        *SMBInfo    `json:"smb,omitempty"`
 
+	// Credentialed collection (from the vault).
+	Windows   *WindowsInfo `json:"windows,omitempty"`
+	Linux     *LinuxInfo   `json:"linux,omitempty"`
+	NetOS     *NetOSInfo   `json:"netos,omitempty"`
+	Config    *ConfigInfo  `json:"config,omitempty"`
+	CredTries []CredResult `json:"credTries,omitempty"`
+
 	Sources   []string  `json:"sources"`
 	FirstSeen time.Time `json:"firstSeen"`
 	LastSeen  time.Time `json:"lastSeen"`
@@ -198,6 +205,112 @@ type SMBInfo struct {
 	DNSDomain    string `json:"dnsDomain,omitempty"`
 	OSBuild      string `json:"osBuild,omitempty"`
 	OSMajorMinor string `json:"osVersion,omitempty"`
+}
+
+// CredResult records one credential attempt (never the secret).
+type CredResult struct {
+	Method   string    `json:"method"` // winrm | ssh | snmp
+	CredID   string    `json:"credId"`
+	CredName string    `json:"credName"`
+	OK       bool      `json:"ok"`
+	Error    string    `json:"error,omitempty"`
+	At       time.Time `json:"at"`
+}
+
+// WindowsInfo comes from an authenticated WinRM session.
+type WindowsInfo struct {
+	OS             string          `json:"os"`
+	Version        string          `json:"version"`
+	Build          string          `json:"build"`
+	UBR            int             `json:"ubr,omitempty"`
+	DisplayVersion string          `json:"displayVersion,omitempty"`
+	InstallDate    time.Time       `json:"installDate,omitempty"`
+	LastBoot       time.Time       `json:"lastBoot,omitempty"`
+	Manufacturer   string          `json:"manufacturer,omitempty"`
+	Model          string          `json:"model,omitempty"`
+	Serial         string          `json:"serial,omitempty"`
+	CPU            string          `json:"cpu,omitempty"`
+	RAMGB          float64         `json:"ramGb,omitempty"`
+	Domain         string          `json:"domain,omitempty"`
+	DomainJoined   bool            `json:"domainJoined"`
+	HotfixCount    int             `json:"hotfixCount"`
+	LastHotfix     time.Time       `json:"lastHotfix,omitempty"`
+	LastHotfixID   string          `json:"lastHotfixId,omitempty"`
+	DefenderRTP    *bool           `json:"defenderRealtime,omitempty"`
+	DefenderOn     *bool           `json:"defenderEnabled,omitempty"`
+	SigAgeDays     int             `json:"signatureAgeDays,omitempty"`
+	AVProducts     []string        `json:"avProducts,omitempty"`
+	Firewall       map[string]bool `json:"firewall,omitempty"`
+	BitLocker      []DriveCrypt    `json:"bitlocker,omitempty"`
+	Disks          []Disk          `json:"disks,omitempty"`
+	PendingReboot  bool            `json:"pendingReboot"`
+	SMB1Enabled    *bool           `json:"smb1Enabled,omitempty"`
+	RDPNLA         *bool           `json:"rdpNla,omitempty"`
+	AutoLogon      bool            `json:"autoLogon"`
+	Admins         []string        `json:"admins,omitempty"`
+	LocalUsers     []LocalUser     `json:"localUsers,omitempty"`
+	SoftwareCount  int             `json:"softwareCount"`
+	Software       []Software      `json:"software,omitempty"`
+	Collected      time.Time       `json:"collected"`
+}
+
+// DriveCrypt is BitLocker status for one volume.
+type DriveCrypt struct {
+	Drive     string `json:"drive"`
+	Protected bool   `json:"protected"`
+}
+
+// Disk is a fixed volume's capacity.
+type Disk struct {
+	Drive  string  `json:"drive"`
+	SizeGB float64 `json:"sizeGb"`
+	FreeGB float64 `json:"freeGb"`
+}
+
+// LocalUser is a local account.
+type LocalUser struct {
+	Name    string    `json:"name"`
+	Enabled bool      `json:"enabled"`
+	PwLast  time.Time `json:"passwordLastSet,omitempty"`
+}
+
+// Software is one installed application.
+type Software struct {
+	Name      string `json:"name"`
+	Version   string `json:"version,omitempty"`
+	Publisher string `json:"publisher,omitempty"`
+}
+
+// LinuxInfo comes from an SSH session on a Unix-like host.
+type LinuxInfo struct {
+	Distro    string    `json:"distro,omitempty"`
+	Kernel    string    `json:"kernel,omitempty"`
+	Uptime    string    `json:"uptime,omitempty"`
+	CPUs      int       `json:"cpus,omitempty"`
+	MemMB     int       `json:"memMb,omitempty"`
+	RootUse   int       `json:"rootUsePct,omitempty"`
+	Collected time.Time `json:"collected"`
+}
+
+// NetOSInfo is what a network device reported over SSH.
+type NetOSInfo struct {
+	Platform  string    `json:"platform"`
+	Version   string    `json:"version,omitempty"`
+	Model     string    `json:"model,omitempty"`
+	Serial    string    `json:"serial,omitempty"`
+	Uptime    string    `json:"uptime,omitempty"`
+	Collected time.Time `json:"collected"`
+}
+
+// ConfigInfo summarizes a config backup; the text itself lives only in
+// the encrypted vault.
+type ConfigInfo struct {
+	Platform string    `json:"platform"`
+	Lines    int       `json:"lines"`
+	SHA256   string    `json:"sha256"`
+	Captured time.Time `json:"captured"`
+	Changed  bool      `json:"changed"` // differs from the previous backup
+	Issues   []string  `json:"issues,omitempty"`
 }
 
 // Link is an edge on the topology map.
@@ -387,6 +500,7 @@ type ScanConfig struct {
 	SkipARP        bool          `json:"skipArp,omitempty"`
 	SkipPorts      bool          `json:"skipPorts,omitempty"`
 	SkipSNMP       bool          `json:"skipSnmp,omitempty"`
+	UseVault       bool          `json:"useVault,omitempty"`
 	Rate           int           `json:"rate"` // packets/s for sweeps
 	Timeout        time.Duration `json:"timeoutMs"`
 }
