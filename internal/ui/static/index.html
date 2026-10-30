@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OcuLAN</title>
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=localStorage.getItem('oculan-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side" id="side">
+    <a class="brand" href="#/overview">
+      <img src="logo.svg" alt="" width="28" height="28">
+      <span>Ocu<b>LAN</b></span>
+    </a>
+    <nav id="nav">
+      <a href="#/overview" data-v="overview"><svg viewBox="0 0 24 24"><path d="M3 13h8V3H3zM13 21h8V11h-8zM3 21h8v-6H3zM13 3v6h8V3z"/></svg>Overview</a>
+      <a href="#/map" data-v="map"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M12 11.5l-6 5.5M12 11.5l6 5.5"/></svg>Network map</a>
+      <a href="#/devices" data-v="devices"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H4zM9 20h6M12 16v4"/></svg>Devices<span class="count" id="nav-devices"></span></a>
+      <a href="#/findings" data-v="findings"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3zM12 10v4M12 17v.5"/></svg>Findings<span class="count" id="nav-findings"></span></a>
+      <a href="#/l2" data-v="l2"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16M8 4v4M16 10v4M10 16v4"/></svg>VLANs &amp; L2</a>
+      <a href="#/traffic" data-v="traffic"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 4 8-9M15 6h5v5"/></svg>Traffic</a>
+      <a href="#/storm" data-v="storm"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Storm Guard<span class="dot" id="nav-storm"></span></a>
+      <a href="#/activity" data-v="activity"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13"/></svg>Activity</a>
+    </nav>
+    <div class="side-foot">
+      <div id="cap-pill" class="pill"></div>
+      <button class="ghost small" id="theme-btn" title="Toggle light/dark">◐ Theme</button>
+      <div class="ver" id="ver"></div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="top">
+      <button class="ghost icon-only" id="menu-btn" aria-label="Menu">☰</button>
+      <div class="site">
+        <input id="site-name" placeholder="Customer / site name" aria-label="Site name" autocomplete="off">
+      </div>
+      <div class="scanbar" id="scanbar" hidden>
+        <div class="scan-text"><b id="scan-phase"></b> <span id="scan-msg"></span></div>
+        <div class="progress"><i id="scan-prog"></i></div>
+      </div>
+      <div class="actions">
+        <div class="menu-wrap">
+          <button class="ghost" id="export-btn">Export ▾</button>
+          <div class="menu" id="export-menu" hidden>
+            <a href="/api/export/report.html" target="_blank" rel="noopener">Open report</a>
+            <a href="/api/export/report.html?download=1">Download report (.html)</a>
+            <a href="/api/export/devices.csv">Devices (.csv)</a>
+            <a href="/api/export/findings.csv">Findings (.csv)</a>
+            <a href="/api/export/session.json">Session data (.json)</a>
+          </div>
+        </div>
+        <button class="danger" id="stop-btn" hidden>Stop</button>
+        <button class="primary" id="scan-btn">New assessment</button>
+      </div>
+    </header>
+    <section id="view" class="view"></section>
+  </main>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-head">
+    <div><h2 id="dr-title"></h2><div class="muted" id="dr-sub"></div></div>
+    <button class="ghost icon-only" id="dr-close" aria-label="Close">✕</button>
+  </div>
+  <div class="tabs" id="dr-tabs"></div>
+  <div class="drawer-body" id="dr-body"></div>
+</div>
+
+<div class="modal-bg" id="modal" hidden>
+  <form class="modal" id="scan-form" autocomplete="off">
+    <div class="modal-head"><h2>New assessment</h2><button type="button" class="ghost icon-only" id="modal-close" aria-label="Close">✕</button></div>
+    <div class="modal-body">
+      <div class="grid2">
+        <label>Site / customer<input name="site" placeholder="Acme Dental, Main St"></label>
+        <label>Interface<select name="interface" id="f-iface"></select></label>
+      </div>
+      <label>Targets <span class="muted">CIDRs, ranges or IPs: e.g. 10.0.0.0/24, 10.0.5.1-50</span>
+        <textarea name="targets" rows="2" id="f-targets"></textarea></label>
+      <div class="grid2">
+        <label>SNMP communities <span class="muted">comma separated</span><input name="communities" value="public, private"></label>
+        <label>TCP ports
+          <select name="ports">
+            <option value="default">Assessment set (~60 ports)</option>
+            <option value="top">Extended (1–1024 + assessment set)</option>
+            <option value="none">None (discovery only)</option>
+          </select>
+        </label>
+      </div>
+      <details>
+        <summary>SNMPv3 credentials</summary>
+        <div class="grid3">
+          <label>User<input name="v3user"></label>
+          <label>Auth<select name="v3auth"><option>SHA</option><option>SHA256</option><option>SHA512</option><option>MD5</option></select></label>
+          <label>Auth password<input name="v3authpass" type="password"></label>
+          <label>Privacy<select name="v3priv"><option>AES</option><option>AES256</option><option>AES192</option><option>DES</option></select></label>
+          <label>Privacy password<input name="v3privpass" type="password"></label>
+        </div>
+        <p class="muted small">Credentials stay in memory only and are never written to session files or reports.</p>
+      </details>
+      <div class="grid2">
+        <label>Passive listening window
+          <select name="passive">
+            <option value="60">1 minute</option>
+            <option value="180" selected>3 minutes (catches DHCP, LLDP, STP)</option>
+            <option value="600">10 minutes</option>
+            <option value="0">Don't wait</option>
+          </select>
+        </label>
+        <label>Sweep rate<select name="rate"><option value="200">Gentle (200 pps)</option><option value="400" selected>Normal (400 pps)</option><option value="1000">Fast (1000 pps)</option></select></label>
+      </div>
+      <label class="check"><input type="checkbox" name="zero"> <span><b>Zero-footprint mode</b>: listen only, never transmit a packet (sensitive networks)</span></label>
+      <div id="f-caps" class="note"></div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="ghost" id="modal-cancel">Cancel</button>
+      <button type="submit" class="primary">Start assessment</button>
+    </div>
+  </form>
+</div>
+
+<div id="toasts" class="toasts"></div>
+<script src="map.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,333 +1,137 @@
-# OctoLAN: On-Premise Network Intelligence, NetFlow Telemetry & Storm Guard
+# OcuLAN
 
-<div align="center">
+**Portable network discovery, mapping and posture assessment for MSP field techs.**
 
-<img src="./public/octolan-mascot.svg" alt="OctoLAN Mascot" width="200" />
+Plug a laptop into a customer's network, run one file, and get a live map of the network, a full device inventory, traffic and layer-2 health monitoring, and a scored security-posture report you can hand to the customer. No installer, no runtime, no agents, no cloud.
 
-### *“8 Tentacles Probing Every Packet Across Your Broadcast Domain”*
+```
+oculan            # opens the live dashboard in your browser
+oculan scan       # or run the whole assessment from the terminal
+```
 
-**An educational, enterprise-grade on-premise network reconnaissance, flow telemetry, and broadcast watchdog suite.**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](#license)
-[![Mascot: Inky the Octo](https://img.shields.io/badge/Mascot-Inky%20the%20Octopus-238636.svg?logo=octopus-deploy&logoColor=white)](#-meet-the-mascot-inky-the-octolan-guardian)
-[![One-Line Install](https://img.shields.io/badge/Install-curl%20%7C%20bash-orange.svg)](#-one-line-curl-installation)
-[![Podman Ready](https://img.shields.io/badge/Podman-Containerfile%20%2F%20Rootless-892CA0.svg?logo=podman&logoColor=white)](#-container-deployment-podman--docker)
-[![Rust Engine](https://img.shields.io/badge/Rust-octolan--rs%20(Axum%20%2B%20Tokio)-f0883e.svg?logo=rust&logoColor=white)](#-rust-daemon-suite-octolan-rs)
-[![POSIX C](https://img.shields.io/badge/Language-C99%20%2F%20POSIX-00599C.svg?logo=c&logoColor=white)](#-c-source-code-suite)
-
-</div>
+One self-contained binary per platform: Windows, macOS and Linux (x86-64 and ARM), plus OpenWrt/embedded Linux (MIPS, ARM). Nothing else to install.
 
 ---
 
-## ⚡ One-Line `curl` Installation
+## What it does
 
-Install and run the complete OctoLAN suite (Rust async daemon, C toolchain, Podman container configs, and dashboard) with a single command:
+| | Capability | How |
+|---|---|---|
+| 1 | **Layer-2 ARP discovery** | Crafts raw ARP who-has frames (AF_PACKET / BPF / Npcap) to find every live MAC on the segment, even hosts that firewall ICMP and TCP. Falls back to the Windows `SendARP` API or the OS ARP cache when raw access isn't available. |
+| 2 | **ICMP sweep** | Rate-limited echo sweep with microsecond round-trip timing and TTL capture (raw sockets, unprivileged datagram ICMP, or the Windows ICMP API, whichever the host allows). |
+| 3 | **OS fingerprinting** | Initial TTL, TCP window, DF bit and MSS from the SYN-ACKs of the service scan; Windows build/version from the anonymous SMB/NTLM handshake; SNMP sysDescr; service banners; Bonjour model IDs; DHCP vendor class. Flags end-of-life systems. |
+| 4 | **LLDP/CDP and VLANs** | Hears LLDP/CDP from the switch port it's plugged into (switch name, port, native VLAN); polls LLDP-MIB and CDP tables over SNMP and **crawls neighbor management addresses**; learns VLANs from Q-BRIDGE / Cisco VTP, LLDP 802.1 TLVs and 802.1Q tags on the wire. |
+| 5 | **Zero-footprint passive listener** | DHCP hostnames, vendor classes and **rogue DHCP servers**; mDNS/Bonjour; SSDP/UPnP; any host that talks on the segment. *Zero-footprint mode* never transmits a single packet. |
+| 6 | **NetFlow v5 / v9 / IPFIX collector** | UDP 2055 listener with template handling; top talkers, applications, protocol mix, conversations and throughput over time. |
+| 7 | **Storm Guard** | Promiscuous per-second broadcast / multicast / unicast / ARP metering, repeated-frame (loop) detection, top broadcasters, spanning-tree root bridge, root changes and topology-change floods. |
+| 8 | **Runs on routers and edge devices** | The same Go code cross-compiles to static Linux binaries for MIPS/ARM routers (OpenWrt) and servers. No C toolchain or separate C engine needed. |
 
-```bash
-# Install everything (Rust daemon + C suite + launch scripts)
-curl -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh | bash
+Plus the inventory and mapping you'd expect from a network management platform:
 
-# Or install in a custom directory
-curl -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh | bash -s -- all ./my-octolan
+- **SNMP v1/v2c/v3 inventory**: system info, interfaces (speed, status, errors, traffic), model/serial/firmware (ENTITY-MIB), switch MAC tables, router ARP tables (finds hosts on *other* VLANs), VLAN names.
+- **Topology map** built from LLDP/CDP adjacencies, then switch forwarding tables (which edge port each device is on), then subnet clouds for everything else. Drag, zoom, search, infrastructure-only view.
+- **Device classification**: router, firewall, switch, AP, server, workstation, hypervisor, NAS, printer, VoIP phone, camera, mobile, media, IoT, UPS. Uses SNMP, ports, banners, OUI vendor (embedded IEEE registry), mDNS and DHCP evidence. Techs can correct the type, name and notes in the UI.
+- **Name resolution**: reverse DNS, NetBIOS node status, unicast mDNS, SMB/NTLM computer and domain names.
+- **Security posture checks**, scored 0–100 with a letter grade:
+  Telnet/FTP, Cisco Smart Install, unauthenticated Docker/Redis/Elasticsearch/MongoDB, VNC, RDP on workstations, TR-069, PPTP, plain-HTTP management UIs, default SNMP communities, SNMPv1/v2c, SMBv1, SMB signing not required, end-of-life OS, old OpenSSH, expired/expiring/self-signed certificates, legacy TLS, UPnP on the gateway, rogue DHCP, duplicate IPs, broadcast storms, STP instability/root changes/default priority, flat networks, IoT not segmented, interface errors, high latency, long uptime (unpatched).
+- **Reports**: a single self-contained HTML report (interactive map, executive summary, priority actions, findings with remediation, full inventory, methodology). Print to PDF straight from the browser. Also CSV (devices, findings) and JSON session files.
 
-# Or install only the high-performance Rust daemon
-curl -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh | bash -s -- rust
+## Quick start
 
-# Or install only the standalone POSIX C suite
-curl -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh | bash -s -- c
+1. Download the binary for your laptop from [Releases](../../releases) (or build it, below).
+2. Plug into the customer network (ideally a normal access port in the main VLAN).
+3. Run it:
+
+| OS | Full capability | Without admin rights |
+|---|---|---|
+| **macOS** | `sudo ./oculan-darwin-universal` | `./oculan-darwin-universal` |
+| **Linux** | `sudo ./oculan-linux-amd64` | `./oculan-linux-amd64` |
+| **Windows** | Install free [Npcap](https://npcap.com), then run `oculan-windows-amd64.exe` | Just run it |
+
+The dashboard opens at `http://127.0.0.1:8484`. Enter the customer name, click **New assessment**, and watch the map fill in. When it's done, **Export → Open report** and print to PDF.
+
+> **First run on macOS:** downloaded binaries are quarantined by Gatekeeper. Run `xattr -d com.apple.quarantine ./oculan-darwin-universal` once (or right-click → Open).
+> **Windows SmartScreen** may warn about an unsigned executable: *More info → Run anyway*.
+
+### What raw capture adds
+
+Without admin/root (or Npcap on Windows) OcuLAN still discovers devices via ping, the OS ARP cache, TCP, SNMP, SMB, DNS, NetBIOS and mDNS. Raw packet access adds:
+ARP sweeps (finds firewalled hosts), passive DHCP/LLDP/CDP/STP/VLAN listening, Storm Guard, and SYN-ACK stack fingerprinting. The sidebar shows which mode you're in and why.
+
+On Linux you can grant raw access once instead of using sudo:
+`sudo setcap cap_net_raw,cap_net_admin+ep ./oculan-linux-amd64`
+
+## Command line
+
+```
+oculan [serve]          Live dashboard (default)
+  -site "Acme Dental"     customer / site name
+  -iface en0              interface (default: the one with the default route)
+  -listen 0.0.0.0:8484    share the dashboard with teammates (prints a tokenized URL)
+  -netflow :2055          start the NetFlow collector too
+  -load session.json      reopen a saved assessment
+  -scan                   start an assessment immediately
+
+oculan scan             Full assessment in the terminal; writes report + session
+  -t 10.0.0.0/24 -t 10.0.5.1-50   targets (default: local subnet)
+  -c public -c s3cr3t             SNMP communities (default: public, private)
+  -v3 user:SHA:authpass:AES:privpass
+  -ports default|top|none|22,80,8000-8100
+  -passive 180                    seconds of passive listening (DHCP/LLDP/STP)
+  -zero-footprint                 listen only; never transmit
+  -rate 400                       sweep packets/second
+  -out ./reports
+
+oculan report session.json      Rebuild the HTML report from a saved session
+oculan storm [-warn 1000 -crit 5000]   Live broadcast-storm / STP meter
+oculan netflow [-listen :2055]  NetFlow/IPFIX collector with live top talkers
+oculan passive [-seconds 300]   Listen-only discovery
+oculan interfaces               Interfaces and what this host can do
 ```
 
-### Direct Local Execution (No Git Clone Required)
-```bash
-# 1. Download installer script
-curl -o install-bundle.sh -fsSL https://raw.githubusercontent.com/example/octolan/main/scripts/install-bundle.sh
-chmod +x install-bundle.sh
+Sessions and reports are saved under `~/OcuLAN/<site>/`. SNMP communities and v3 passwords are held in memory only and are never written to session files or reports.
 
-# 2. Run installer
-./install-bundle.sh
+## Using it on site: tips
 
-# 3. Start the engine on your physical or virtual network interface
-./octolan-bundle/start-octolan.sh eth0 3000
+- **Get the most from SNMP**: ask the customer for the read-only community (or v3 user). Switch MAC tables and LLDP/CDP neighbors are what turn a device list into an accurate map.
+- **NetFlow**: point the firewall's flow export at the laptop's IP, UDP 2055, and leave the dashboard open for a while.
+- **Mirror/SPAN port**: plugging into a mirror port gives Storm Guard and the passive listener visibility of the whole switch.
+- **Routed subnets**: add other VLANs' CIDRs as targets. Routers' ARP tables (via SNMP) also reveal hosts there.
+- **Sensitive environments** (medical, OT/ICS): use *Zero-footprint mode* first, then decide on active scanning.
+- **Share with a teammate**: `oculan -listen 0.0.0.0:8484` prints a URL with an access token. Without `-listen`, the dashboard is only reachable from the laptop itself.
+
+Only scan networks you are authorized to assess.
+
+## Building
+
+Requires Go 1.27+. No cgo, no C libraries.
+
+```
+go build ./cmd/oculan        # this machine
+./scripts/build.sh           # all platforms → ./dist (with SHA256SUMS)
+go test -race ./...
 ```
 
----
+To refresh the embedded MAC-vendor table:
 
-## 🐙 Meet the Mascot: Inky the OctoLAN Guardian
-
-**OctoLAN** is represented by **Inky**, a sleek monochrome black security icon on a vibrant green badge. Inky's 8 cyber tentacles represent the 8 foundational network auditing and telemetry capabilities built directly into the platform:
-
-```text
-Tentacle 1: Layer 2 ARP           -> Raw Ethernet frame crafting (AF_PACKET / ETH_P_ARP)
-Tentacle 2: Layer 3 ICMP          -> Raw socket ICMP echo sweeps with round-trip latency precision
-Tentacle 3: Layer 4 OS Fingerprint-> Heuristic TCP SYN/ACK analysis of IP TTL, TCP Window, and DF bit
-Tentacle 4: IEEE 802.1AB & VLAN   -> LLDP switch chassis discovery and 802.1Q VLAN trunk tag auditing
-Tentacle 5: Passive Sniffer       -> Stealth capture of DHCP Option 12 hostnames, mDNS, and SSDP
-Tentacle 6: NetFlow v5 & IPFIX    -> High-speed UDP listener on port 2055 extracting 5-tuple flows
-Tentacle 7: Broadcast Storm Guard -> Promiscuous PPS accounting and Spanning Tree (STP) loop protection
-Tentacle 8: POSIX C99 Engine      -> Standalone, zero-dependency C binaries for edge routers & Linux servers
+```
+curl -fsSLo manuf https://www.wireshark.org/download/automated/data/manuf
+go run ./tools/genoui manuf internal/oui/oui.txt.gz
 ```
 
-### The 8 Capabilities:
-* **Tentacle 1 (Layer 2 ARP)**: Raw Ethernet frame crafting (`AF_PACKET` / `ETH_P_ARP`) bypassing IP firewalls to uncover all active MAC addresses.
-* **Tentacle 2 (Layer 3 ICMP)**: Raw socket ICMP echo sweeps with microsecond round-trip latency measurements.
-* **Tentacle 3 (Layer 4 OS Fingerprinting)**: Heuristic inspection of initial IP TTL, TCP Window Size, and DF (Don't Fragment) flag.
-* **Tentacle 4 (IEEE 802.1AB & VLAN)**: LLDP switch chassis discovery and IEEE 802.1Q tagged/untagged trunk verification.
-* **Tentacle 5 (Zero-Footprint Passive Sniffer)**: Stealth listening on `eth0` for DHCP Option 12 client hostnames, mDNS announcements, and SSDP broadcasts without transmitting any packets.
-* **Tentacle 6 (NetFlow v5 & IPFIX)**: High-throughput UDP listener on port 2055 aggregating conversation flows, byte counters, and protocol splits.
-* **Tentacle 7 (Broadcast Storm Guard)**: Promiscuous Packets-Per-Second (PPS) meter and Spanning Tree (STP) bridging loop protector.
-* **Tentacle 8 (POSIX C99 Static Engine)**: Standalone, zero-dependency C tools that compile statically for embedded routers, OpenWrt, and Linux environments.
+### Layout
 
----
-
-## 📸 Key Modules & Functional Overview
-
-### 1. Interactive Layer 2/3 Topology & Active Discovery Console
-
-```text
-GATEWAY: 192.168.1.1 (Cisco ISR 4451)
-  │
-  └── CORE-SW01: 192.168.1.2 (Cisco Catalyst 2960-X)
-        ├── VLAN 10 (Corp Workstations): 192.168.10.0/24
-        │     ├── 192.168.10.100 (Dell OptiPlex 7090 - Win11) [TTL: 128 | Win: 64512]
-        │     ├── 192.168.10.101 (Apple MacBook Pro - macOS)  [TTL: 64  | Win: 65535]
-        │     └── 192.168.10.102 (Ubuntu Linux Server - Linux) [TTL: 64  | Win: 29200]
-        ├── VLAN 20 (Voice VoIP): 192.168.20.0/24
-        │     └── 192.168.20.10  (Cisco IP Phone 8845 - SIP 5060)
-        ├── VLAN 30 (Surveillance): 192.168.30.0/24
-        │     └── 192.168.30.101 (Axis 4K Dome Camera - RTSP 554)
-        └── VLAN 50 (IoT / Guest): 192.168.50.0/24
-              └── 192.168.50.42  (Smart Thermostat - MQTT 1883)
 ```
-
-* **Interactive Multi-View Layouts**: Switch seamlessly between Card Grid view, Hierarchical Tree view, and 2D Interactive Canvas Graph.
-* **VLAN Cluster Grouping**: Organizes endpoints by 802.1Q broadcast domains with collapsible cluster hubs.
-* **Deep Device Inspector**: Audits MAC vendor OUI allocations, TCP/UDP open ports, OS fingerprinting heuristics, and vulnerability risk scores.
-* **Multi-Subnet Layer 2 Probing**: Promiscuous ARP and ICMP discovery capable of identifying stealth devices filtering ping requests.
-
----
-
-### 2. NetFlow v5 & IPFIX Telemetry Collector
-
-```text
-NetFlow Collector: UDP Port 2055 | Active Flows: 8 | Cumulative Rate: 14.8 MB/s
-
-TIME      SOURCE ENDPOINT          DESTINATION ENDPOINT     PROTO  PACKETS    OCTETS (BYTES)  FLAGS
-17:18:02  192.168.10.101:54122     192.168.10.15:445 (SMB)  TCP    34,120     48,920,150 B    [ACK, PSH]
-17:18:00  192.168.30.101:554(RTSP) 192.168.10.15:58920     TCP    14,200     18,450,000 B    [ACK, PSH]
-17:17:58  192.168.10.102:49812     192.168.10.20:5432 (SQL) TCP     9,800     12,400,500 B    [ACK, PSH]
-17:17:55  192.168.20.51:16402      192.168.20.10:10240      UDP     4,200        840,000 B    [-]
-17:17:50  192.168.50.42:38910(IoT) 192.168.1.1:80 (MGMT!)  TCP       450         28,900 B    ⚠️ LEAK!
+cmd/oculan          CLI entry point
+internal/capture    raw Ethernet I/O: AF_PACKET (Linux), BPF (macOS/BSD), Npcap loaded at runtime (Windows)
+internal/discovery  ARP, ICMP, TCP + banners, SYN-ACK fingerprinting, TLS, SMB/NTLM, names, SNMP, classifier
+internal/passive    listen-only discovery (DHCP, LLDP, CDP, mDNS, SSDP, 802.1Q)
+internal/storm      Storm Guard (PPS meter, loop detection, STP)
+internal/netflow    NetFlow v5/v9/IPFIX collector
+internal/topology   map builder
+internal/assess     posture checks and scoring
+internal/engine     scan pipeline and monitors
+internal/report     HTML/CSV reports
+internal/web        dashboard API (JSON + server-sent events)
+internal/ui/static  dashboard front end (vanilla JS, embedded)
 ```
-
-* **5-Tuple Flow Aggregation**: Decouples packet payload inspection by collecting unidirectional flow tuples:
-  $$\text{Flow} = (\text{Src IP}, \text{Src Port}, \text{Dst IP}, \text{Dst Port}, \text{Proto}, \text{Octets}, \text{Packets}, \text{TCP Flags})$$
-* **Top Talkers & Bandwidth Analyzer**: Identifies heavy bandwidth consumers and packet volume anomalies to spot unauthorized file transfers, streaming hogs, and egress spikes.
-* **Inter-VLAN Boundary Leak Detection**: Flags unexpected traffic crossing isolated broadcast domains (e.g., IoT VLAN 50 sending packets directly to Management VLAN 1).
-* **Native C UDP Daemon (`netflow_collector.c`)**: Listens on UDP port 2055 with zero dynamic memory allocations per packet for ultra-low latency processing.
-
----
-
-### 3. Layer 2 Broadcast Storm & STP Loop Watchdog
-
-```text
-Interface: eth0 | Current Rate: 42 PPS | Alarm Threshold: 250 PPS | Status: NORMAL
-
-Node Chatter Breakdown:
-- 192.168.1.1 (Gateway):       18 PPS [Normal - ARP/Default Route]
-- 192.168.10.100 (Workstation): 8 PPS [Normal - NetBIOS/mDNS]
-- 192.168.10.101 (Workstation): 6 PPS [Normal - SSDP]
-- 192.168.50.254 (Rogue Hub): 380 PPS [CRITICAL - Storm / Bridging Loop]
-
-STP Diagnostic: BPDU Guard Enabled | PortFast Filtering Active | Status: 0 Loops Detected
-```
-
-* **Dynamic Chatter & Pulse Rings**: Visualizes expanding halo rings around nodes exhibiting elevated broadcast (`FF:FF:FF:FF:FF:FF`) or multicast (`01:00:5E` / `33:33`) output.
-* **Real-Time PPS Threshold Meter**: Live gauge tracking Layer 2 chatter against user-configurable Packets-Per-Second (PPS) alarm triggers.
-* **Spanning Tree Protocol (STP) Diagnostics**: Isolates unmanaged hub bridging loops and ARP flooding storms before switch control-plane CPU exhaustion occurs.
-* **Promiscuous C Sniffer (`storm_detector.c`)**: Directly taps `AF_PACKET` with `ETH_P_ALL` to calculate per-second L2 broadcast metrics.
-
----
-
-### 4. Continuous Presence & Anomaly Alerting Engine
-
-```text
-Alert Engine: Active Rules: 4/4 | Dispatch Channels: SMTP + Webhook JSON
-
-Recent Dispatches:
-- [CRITICAL] 17:15:10 - Rogue Access Point Broadcast (SSID: "CORP-GUEST-FREE", BSSID: 00:14:22:98:76:54)
-- [HIGH]     17:10:04 - Inter-VLAN Boundary Leak (VLAN 50 IoT host 192.168.50.42 -> VLAN 1 Switch HTTP)
-- [INFO]     17:02:11 - New Authorized Device Joined (MAC: 3c:22:fb:11:22:33, Hostname: "MacBook-Air")
-- [STATUS]   Webhook Dispatcher: Payload delivered to https://api.corp.internal/hooks/lan-alerts (HTTP 200 OK)
-```
-
-* **Automated Anomaly Detection**: Generates instant notifications when newly connected MAC addresses, rogue APs, or abnormal port states appear.
-* **Multi-Channel Dispatch**:
-  * **SMTP Email Notifications**: Automated incident summaries with source IP, MAC vendor, and recommended mitigation actions.
-  * **Webhook Integration**: Direct JSON payload delivery to webhook endpoints and log management systems.
-* **Interactive Simulator**: Test webhook and email endpoints on demand directly from the UI.
-
----
-
-### 5. 802.1Q VLAN Segmentation & Trunk Audit
-
-* **VLAN Matrix**: Visualizes Management (VLAN 1), Corporate Workstations (VLAN 10), Voice VoIP (VLAN 20), Surveillance (VLAN 30), and Guest/IoT (VLAN 50).
-* **Trunk Tagging Verifier**: Parses IEEE 802.1Q 4-byte tags (`TPID 0x8100` + `TCI: PCP/VID`) to verify untagged access vs. tagged trunk configurations.
-* **Broadcast Isolation Score**: Evaluates subnet segregation health to minimize cross-boundary attack surfaces.
-
----
-
-### 6. AI Network Hygiene Advisor
-
-* **Automated Security Auditing**: Analyzes all discovered devices, open ports, and flow anomalies to generate an actionable hardening checklist.
-* **Vendor-Neutral CLI Remediation**: Generates ready-to-paste CLI commands for standard network operating systems (Cisco IOS, Linux iptables/nftables, MikroTik, Ubiquiti).
-
----
-
-## 📦 Container Deployment (Podman & Docker)
-
-OctoLAN is fully containerized with a rootless, multi-stage `Containerfile` / `Dockerfile` powered by an unprivileged Alpine Nginx server serving the static frontend and REST telemetry endpoints on port `3000`.
-
-### 1. Quick Start with Podman (Rootless CLI)
-
-```bash
-# Build the rootless container image using the native Containerfile
-podman build -t octolan:latest -f Containerfile .
-
-# Run the container (maps host port 3000 -> container 3000)
-podman run -d \
-  --name octolan-console \
-  -p 3000:3000 \
-  --restart unless-stopped \
-  octolan:latest
-
-# Open the console in your browser
-# URL: http://localhost:3000
-```
-
-### 2. Run with Host Networking (For LAN Sniffing & NetFlow Visibility)
-
-If you are running network auditing utilities on your local machine and want the container to share the host's network interfaces directly:
-
-```bash
-podman run -d \
-  --name octolan-console \
-  --network host \
-  --restart unless-stopped \
-  octolan:latest
-```
-
-### 3. Quick Start with Podman Compose
-
-```bash
-# Start via podman-compose
-podman-compose up -d
-
-# Check running status and health check
-podman-compose ps
-
-# View container logs
-podman-compose logs -f
-```
-
-### 4. Running via Podman Quadlet (systemd on Fedora / RHEL / Debian / Ubuntu)
-
-OctoLAN includes an `octolan.container` Quadlet unit file for native systemd service management:
-
-```bash
-# Copy Quadlet unit file to user systemd directory
-mkdir -p ~/.config/containers/systemd/
-cp octolan.container ~/.config/containers/systemd/
-
-# Reload systemd and start the OctoLAN service
-systemctl --user daemon-reload
-systemctl --user start octolan
-
-# Enable at startup (rootless linger)
-systemctl --user enable octolan
-loginctl enable-linger $USER
-```
-
-### 5. Automated Launcher Script
-
-You can also use the included launcher script:
-
-```bash
-# Run standard rootless container
-./scripts/run-podman.sh
-
-# Rebuild and run with host networking
-./scripts/run-podman.sh --build --host-net
-```
-
----
-
-## 🛠️ C Source Code Suite
-
-All scanning and telemetry tools are written in clean, dependency-free POSIX C99.
-
-| Filename | Description | Protocol / Socket | Privileges |
-| :--- | :--- | :--- | :--- |
-| `netflow_collector.c` | UDP NetFlow v5 collector on port 2055 with 5-tuple flow parser | `SOCK_DGRAM` (UDP) | Standard User |
-| `storm_detector.c` | Promiscuous broadcast PPS meter & STP loop watchdog | `AF_PACKET` (`ETH_P_ALL`) | `CAP_NET_RAW` / Root |
-| `arp_scan.c` | High-speed Layer 2 MAC/vendor discovery sweep | `AF_PACKET` (`ETH_P_ARP`) | `CAP_NET_RAW` / Root |
-| `icmp_sweep.c` | Multi-threaded raw socket ICMP echo probe | `AF_INET` (`IPPROTO_ICMP`) | `CAP_NET_RAW` / Root |
-| `os_fingerprint.c` | TCP SYN / TTL / Window Size OS identification | `SOCK_RAW` / `IPPROTO_TCP` | `CAP_NET_RAW` / Root |
-| `lldp_vlan_sniff.c` | IEEE 802.1AB LLDP & 802.1Q VLAN tag decoder | `AF_PACKET` (`ETH_P_ALL`) | `CAP_NET_RAW` / Root |
-| `passive_monitor.c` | Zero-footprint passive DHCP, mDNS & ARP listener | `AF_PACKET` (`ETH_P_ALL`) | `CAP_NET_RAW` / Root |
-| `lan_recon.sh` | Zero-dependency Bash orchestrator using native `/proc` & `/sys` | Bash + standard POSIX utils | Standard User |
-
----
-
-## 🚀 Quick Start & Compilation
-
-### Build All C Tools
-```bash
-# 1. Clone repository
-git clone https://github.com/example/octolan.git
-cd octolan
-
-# 2. Build with native GCC
-make
-
-# 3. Build fully static portable binaries (works on Alpine, OpenWrt, minimal containers)
-make static
-
-# 4. Cross-compile for ARM / Raspberry Pi
-make arm
-```
-
-### Running the NetFlow Collector
-```bash
-# Start NetFlow v5 listener on UDP port 2055
-./netflow_collector 2055
-```
-
-### Running the Broadcast Storm Watchdog
-```bash
-# Monitor eth0 with a threshold of 250 broadcast PPS
-sudo ./storm_detector eth0 250
-```
-
-### Running the Full LAN Reconnaissance Sweep
-```bash
-# Execute native ARP discovery on eth0
-sudo ./arp_scan eth0 192.168.1.0/24
-```
-
----
-
-## 🔬 Architectural Overview
-
-| Auditing Layer | Core Mechanism | Purpose | Primary Protocols |
-| :--- | :--- | :--- | :--- |
-| **Layer 2 Topology** | Raw Frame Snooping & Link Layer Discovery | Map physical adjacency and switchports | ARP, IEEE 802.1AB (LLDP), CDP |
-| **Flow Telemetry** | Unidirectional 5-Tuple Aggregation | Bandwidth accounting & conversation tracking | NetFlow v5/v9, IPFIX (RFC 7011) |
-| **Storm Guard** | Promiscuous PPS Rate Accounting | Prevent network outage from loops and floods | Ethernet Broadcast, STP BPDU (IEEE 802.1D) |
-| **Segment Isolation** | 802.1Q Tag Inspection & ACL Auditing | Enforce broadcast domain isolation | IEEE 802.1Q, IP Subnetting |
-| **Presence Alerting** | Continuous MAC & Lease Monitoring | Detect rogue and unauthorized network joins | DHCP Snooping, ARP Resolution |
-
----
-
-## 🛡️ License
-
-This project is distributed under the **MIT License**. Created strictly for educational, research, and network engineering training purposes.
