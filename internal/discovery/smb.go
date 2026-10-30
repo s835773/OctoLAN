@@ -12,7 +12,7 @@ import (
 	"time"
 	"unicode/utf16"
 
-	"github.com/s835773/OcuLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/model"
 )
 
 // ProbeSMB checks SMBv1 support and pulls the host's Windows version,

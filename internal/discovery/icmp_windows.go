@@ -54,7 +54,7 @@ func pingSweep(ctx context.Context, targets []netip.Addr, rate int, timeout time
 	}
 	defer procIcmpClose.Call(h)
 
-	payload := []byte("OcuLAN-ping-0123456789abcdef")
+	payload := []byte("OctoLAN-ping-0123456789abcdef")
 	work := make(chan netip.Addr)
 	var wg sync.WaitGroup
 	workers := 128

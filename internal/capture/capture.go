@@ -1,4 +1,4 @@
-// Package capture gives OcuLAN raw Ethernet send/receive on every OS
+// Package capture gives OctoLAN raw Ethernet send/receive on every OS
 // without cgo or external libraries:
 //
 //   - Linux:   AF_PACKET sockets (root or CAP_NET_RAW)

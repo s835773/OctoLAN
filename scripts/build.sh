@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Cross-compiles OcuLAN for every supported platform into ./dist.
+# Cross-compiles OctoLAN for every supported platform into ./dist.
 # Each binary is a single static file: copy it to a laptop/router and run.
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -24,14 +24,14 @@ for t in "${targets[@]}"; do
   for x in $rest; do
     case "$x" in .exe) ext=".exe" ;; *=*) extra+=("$x") ;; esac
   done
-  out="dist/oculan-${os}-${arch}${ext}"
+  out="dist/octolan-${os}-${arch}${ext}"
   echo "→ ${out}"
   env CGO_ENABLED=0 GOOS="$os" GOARCH="$arch" ${extra[@]+"${extra[@]}"} \
-    go build -trimpath -ldflags "$LDFLAGS" -o "$out" ./cmd/oculan
+    go build -trimpath -ldflags "$LDFLAGS" -o "$out" ./cmd/octolan
 done
 # Universal macOS binary when lipo is available.
 if command -v lipo >/dev/null; then
-  lipo -create -output dist/oculan-darwin-universal dist/oculan-darwin-arm64 dist/oculan-darwin-amd64
+  lipo -create -output dist/octolan-darwin-universal dist/octolan-darwin-arm64 dist/octolan-darwin-amd64
 fi
-(cd dist && shasum -a 256 oculan-* > SHA256SUMS)
+(cd dist && shasum -a 256 octolan-* > SHA256SUMS)
 ls -lh dist

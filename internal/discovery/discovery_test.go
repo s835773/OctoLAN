@@ -5,7 +5,7 @@ import (
 	"net"
 	"testing"
 
-	"github.com/s835773/OcuLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/model"
 )
 
 func TestParseSynAck(t *testing.T) {

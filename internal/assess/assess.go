@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/s835773/OcuLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/model"
 )
 
 // Input is everything the checks look at.
@@ -90,7 +90,7 @@ func Run(in Input) ([]model.Finding, int, string) {
 		if d.Type == model.TypeUnknown && d.Alive {
 			unknown++
 			b.add("unidentified-devices", model.SevInfo, "Inventory", "Unidentified devices",
-				"These devices answered on the network but OcuLAN could not determine what they are (no hostname, open services, SNMP or vendor match).",
+				"These devices answered on the network but OctoLAN could not determine what they are (no hostname, open services, SNMP or vendor match).",
 				"Identify and label each device. Unknown devices are a common source of shadow IT and unmanaged risk.", d.ID)
 		}
 	}

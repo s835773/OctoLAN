@@ -1,4 +1,4 @@
-// Package model holds the data types shared across OcuLAN: devices,
+// Package model holds the data types shared across OctoLAN: devices,
 // links, findings, flows and the live telemetry snapshots.
 package model
 

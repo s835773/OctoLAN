@@ -16,8 +16,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/s835773/OcuLAN/internal/capture"
-	"github.com/s835773/OcuLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/capture"
+	"github.com/s835773/OctoLAN/internal/model"
 )
 
 // DefaultPorts are the TCP ports an MSP assessment cares about: remote
@@ -421,7 +421,7 @@ func httpBanner(ctx context.Context, ip netip.Addr, port int, useTLS bool, timeo
 	}
 	defer c.Close()
 	_ = c.SetDeadline(time.Now().Add(timeout + 1500*time.Millisecond))
-	fmt.Fprintf(c, "GET / HTTP/1.0\r\nHost: %s\r\nUser-Agent: OcuLAN-assessment\r\nAccept: */*\r\n\r\n", ip)
+	fmt.Fprintf(c, "GET / HTTP/1.0\r\nHost: %s\r\nUser-Agent: OctoLAN-assessment\r\nAccept: */*\r\n\r\n", ip)
 	r := bufio.NewReader(io.LimitReader(c, 64<<10))
 	status, _ := r.ReadString('\n')
 	if !strings.HasPrefix(status, "HTTP/") {
@@ -494,5 +494,5 @@ func certName(cn string, sans []string, full string) string {
 	return full
 }
 
-// IsTLSPort reports whether OcuLAN expects TLS on port.
+// IsTLSPort reports whether OctoLAN expects TLS on port.
 func IsTLSPort(p int) bool { return tlsPorts[p] }

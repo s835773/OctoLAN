@@ -15,7 +15,7 @@ import (
 	"golang.org/x/sys/windows"
 )
 
-// Npcap is loaded lazily from its install directory so OcuLAN still runs
+// Npcap is loaded lazily from its install directory so OctoLAN still runs
 // (in reduced mode) on machines without it.
 
 var (

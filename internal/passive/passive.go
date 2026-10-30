@@ -16,10 +16,10 @@ import (
 	"github.com/gopacket/gopacket"
 	"github.com/gopacket/gopacket/layers"
 
-	"github.com/s835773/OcuLAN/internal/capture"
-	"github.com/s835773/OcuLAN/internal/model"
-	"github.com/s835773/OcuLAN/internal/netutil"
-	"github.com/s835773/OcuLAN/internal/store"
+	"github.com/s835773/OctoLAN/internal/capture"
+	"github.com/s835773/OctoLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/netutil"
+	"github.com/s835773/OctoLAN/internal/store"
 )
 
 // Stats counts what the listener has heard.

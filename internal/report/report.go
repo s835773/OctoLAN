@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/s835773/OcuLAN/internal/model"
-	"github.com/s835773/OcuLAN/internal/ui"
+	"github.com/s835773/OctoLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/ui"
 )
 
 // Label is the short display name for a device.
@@ -221,7 +221,7 @@ func Write(w io.Writer, s *model.Snapshot) error {
 
 func summary(s *model.Snapshot, v view) string {
 	var parts []string
-	parts = append(parts, fmt.Sprintf("OcuLAN identified %d devices (%d responding during the assessment) across %d subnet(s)", len(s.Devices), v.Alive, len(s.Subnets)))
+	parts = append(parts, fmt.Sprintf("OctoLAN identified %d devices (%d responding during the assessment) across %d subnet(s)", len(s.Devices), v.Alive, len(s.Subnets)))
 	if v.Infra > 0 {
 		parts[0] += fmt.Sprintf(", including %d network infrastructure devices", v.Infra)
 	}

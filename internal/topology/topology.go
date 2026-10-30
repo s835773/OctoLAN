@@ -9,7 +9,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/s835773/OcuLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/model"
 )
 
 // uplinkMACThreshold: a switch port with more MACs than this is treated as

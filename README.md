@@ -1,12 +1,12 @@
-# OcuLAN
+# OctoLAN
 
 **Portable network discovery, mapping and posture assessment for MSP field techs.**
 
 Plug a laptop into a customer's network, run one file, and get a live map of the network, a full device inventory, traffic and layer-2 health monitoring, and a scored security-posture report you can hand to the customer. No installer, no runtime, no agents, no cloud.
 
 ```
-oculan            # opens the live dashboard in your browser
-oculan scan       # or run the whole assessment from the terminal
+octolan            # opens the live dashboard in your browser
+octolan scan       # or run the whole assessment from the terminal
 ```
 
 One self-contained binary per platform: Windows, macOS and Linux (x86-64 and ARM), plus OpenWrt/embedded Linux (MIPS, ARM). Nothing else to install.
@@ -44,27 +44,27 @@ Plus the inventory and mapping you'd expect from a network management platform:
 
 | OS | Full capability | Without admin rights |
 |---|---|---|
-| **macOS** | `sudo ./oculan-darwin-universal` | `./oculan-darwin-universal` |
-| **Linux** | `sudo ./oculan-linux-amd64` | `./oculan-linux-amd64` |
-| **Windows** | Install free [Npcap](https://npcap.com), then run `oculan-windows-amd64.exe` | Just run it |
+| **macOS** | `sudo ./octolan-darwin-universal` | `./octolan-darwin-universal` |
+| **Linux** | `sudo ./octolan-linux-amd64` | `./octolan-linux-amd64` |
+| **Windows** | Install free [Npcap](https://npcap.com), then run `octolan-windows-amd64.exe` | Just run it |
 
 The dashboard opens at `http://127.0.0.1:8484`. Enter the customer name, click **New assessment**, and watch the map fill in. When it's done, **Export → Open report** and print to PDF.
 
-> **First run on macOS:** downloaded binaries are quarantined by Gatekeeper. Run `xattr -d com.apple.quarantine ./oculan-darwin-universal` once (or right-click → Open).
+> **First run on macOS:** downloaded binaries are quarantined by Gatekeeper. Run `xattr -d com.apple.quarantine ./octolan-darwin-universal` once (or right-click → Open).
 > **Windows SmartScreen** may warn about an unsigned executable: *More info → Run anyway*.
 
 ### What raw capture adds
 
-Without admin/root (or Npcap on Windows) OcuLAN still discovers devices via ping, the OS ARP cache, TCP, SNMP, SMB, DNS, NetBIOS and mDNS. Raw packet access adds:
+Without admin/root (or Npcap on Windows) OctoLAN still discovers devices via ping, the OS ARP cache, TCP, SNMP, SMB, DNS, NetBIOS and mDNS. Raw packet access adds:
 ARP sweeps (finds firewalled hosts), passive DHCP/LLDP/CDP/STP/VLAN listening, Storm Guard, and SYN-ACK stack fingerprinting. The sidebar shows which mode you're in and why.
 
 On Linux you can grant raw access once instead of using sudo:
-`sudo setcap cap_net_raw,cap_net_admin+ep ./oculan-linux-amd64`
+`sudo setcap cap_net_raw,cap_net_admin+ep ./octolan-linux-amd64`
 
 ## Command line
 
 ```
-oculan [serve]          Live dashboard (default)
+octolan [serve]          Live dashboard (default)
   -site "Acme Dental"     customer / site name
   -iface en0              interface (default: the one with the default route)
   -listen 0.0.0.0:8484    share the dashboard with teammates (prints a tokenized URL)
@@ -72,7 +72,7 @@ oculan [serve]          Live dashboard (default)
   -load session.json      reopen a saved assessment
   -scan                   start an assessment immediately
 
-oculan scan             Full assessment in the terminal; writes report + session
+octolan scan             Full assessment in the terminal; writes report + session
   -t 10.0.0.0/24 -t 10.0.5.1-50   targets (default: local subnet)
   -c public -c s3cr3t             SNMP communities (default: public, private)
   -v3 user:SHA:authpass:AES:privpass
@@ -82,14 +82,14 @@ oculan scan             Full assessment in the terminal; writes report + session
   -rate 400                       sweep packets/second
   -out ./reports
 
-oculan report session.json      Rebuild the HTML report from a saved session
-oculan storm [-warn 1000 -crit 5000]   Live broadcast-storm / STP meter
-oculan netflow [-listen :2055]  NetFlow/IPFIX collector with live top talkers
-oculan passive [-seconds 300]   Listen-only discovery
-oculan interfaces               Interfaces and what this host can do
+octolan report session.json      Rebuild the HTML report from a saved session
+octolan storm [-warn 1000 -crit 5000]   Live broadcast-storm / STP meter
+octolan netflow [-listen :2055]  NetFlow/IPFIX collector with live top talkers
+octolan passive [-seconds 300]   Listen-only discovery
+octolan interfaces               Interfaces and what this host can do
 ```
 
-Sessions and reports are saved under `~/OcuLAN/<site>/`. SNMP communities and v3 passwords are held in memory only and are never written to session files or reports.
+Sessions and reports are saved under `~/OctoLAN/<site>/`. SNMP communities and v3 passwords are held in memory only and are never written to session files or reports.
 
 ## Using it on site: tips
 
@@ -98,7 +98,7 @@ Sessions and reports are saved under `~/OcuLAN/<site>/`. SNMP communities and v3
 - **Mirror/SPAN port**: plugging into a mirror port gives Storm Guard and the passive listener visibility of the whole switch.
 - **Routed subnets**: add other VLANs' CIDRs as targets. Routers' ARP tables (via SNMP) also reveal hosts there.
 - **Sensitive environments** (medical, OT/ICS): use *Zero-footprint mode* first, then decide on active scanning.
-- **Share with a teammate**: `oculan -listen 0.0.0.0:8484` prints a URL with an access token. Without `-listen`, the dashboard is only reachable from the laptop itself.
+- **Share with a teammate**: `octolan -listen 0.0.0.0:8484` prints a URL with an access token. Without `-listen`, the dashboard is only reachable from the laptop itself.
 
 Only scan networks you are authorized to assess.
 
@@ -107,7 +107,7 @@ Only scan networks you are authorized to assess.
 Requires Go 1.27+. No cgo, no C libraries.
 
 ```
-go build ./cmd/oculan        # this machine
+go build ./cmd/octolan        # this machine
 ./scripts/build.sh           # all platforms → ./dist (with SHA256SUMS)
 go test -race ./...
 ```
@@ -122,7 +122,7 @@ go run ./tools/genoui manuf internal/oui/oui.txt.gz
 ### Layout
 
 ```
-cmd/oculan          CLI entry point
+cmd/octolan          CLI entry point
 internal/capture    raw Ethernet I/O: AF_PACKET (Linux), BPF (macOS/BSD), Npcap loaded at runtime (Windows)
 internal/discovery  ARP, ICMP, TCP + banners, SYN-ACK fingerprinting, TLS, SMB/NTLM, names, SNMP, classifier
 internal/passive    listen-only discovery (DHCP, LLDP, CDP, mDNS, SSDP, 802.1Q)

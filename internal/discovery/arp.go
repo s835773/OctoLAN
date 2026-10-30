@@ -10,8 +10,8 @@ import (
 	"github.com/gopacket/gopacket"
 	"github.com/gopacket/gopacket/layers"
 
-	"github.com/s835773/OcuLAN/internal/capture"
-	"github.com/s835773/OcuLAN/internal/netutil"
+	"github.com/s835773/OctoLAN/internal/capture"
+	"github.com/s835773/OctoLAN/internal/netutil"
 )
 
 // ARPResult is a host that answered (or announced itself) on layer 2.

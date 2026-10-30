@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/s835773/OcuLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/model"
 )
 
 func TestRun(t *testing.T) {

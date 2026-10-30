@@ -15,8 +15,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/s835773/OcuLAN/internal/model"
-	"github.com/s835773/OcuLAN/internal/oui"
+	"github.com/s835773/OctoLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/oui"
 )
 
 const maxEvents = 5000

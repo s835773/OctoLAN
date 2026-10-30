@@ -16,7 +16,7 @@ import (
 	"golang.org/x/net/ipv4"
 )
 
-var pingMagic = []byte("OcuLAN-ping")
+var pingMagic = []byte("OctoLAN-ping")
 
 func listenICMP() (*icmp.PacketConn, string, error) {
 	if c, err := icmp.ListenPacket("ip4:icmp", "0.0.0.0"); err == nil {

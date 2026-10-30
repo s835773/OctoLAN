@@ -12,7 +12,7 @@ import (
 
 	"github.com/gosnmp/gosnmp"
 
-	"github.com/s835773/OcuLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/model"
 )
 
 // SNMP OIDs (no leading dot; gosnmp returns names with one).

@@ -85,7 +85,7 @@ func (h *linuxHandle) Close() error {
 func explain(err error) string {
 	s := err.Error()
 	if strings.Contains(s, "operation not permitted") || strings.Contains(s, "permission") {
-		return "raw sockets need root: run with sudo, or grant once with `sudo setcap cap_net_raw,cap_net_admin+ep ./oculan`"
+		return "raw sockets need root: run with sudo, or grant once with `sudo setcap cap_net_raw,cap_net_admin+ep ./octolan`"
 	}
 	return s
 }

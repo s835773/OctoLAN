@@ -11,10 +11,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/s835773/OcuLAN/internal/capture"
-	"github.com/s835773/OcuLAN/internal/model"
-	"github.com/s835773/OcuLAN/internal/oui"
-	"github.com/s835773/OcuLAN/internal/store"
+	"github.com/s835773/OctoLAN/internal/capture"
+	"github.com/s835773/OctoLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/oui"
+	"github.com/s835773/OctoLAN/internal/store"
 )
 
 const seriesLen = 300 // five minutes of 1-second samples

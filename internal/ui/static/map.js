@@ -1,4 +1,4 @@
-/* OcuMap: dependency-free topology renderer shared by the dashboard and
+/* OctoMap: dependency-free topology renderer shared by the dashboard and
  * the HTML report. Tiered force layout (gateway → switches → APs →
  * endpoints), pan/zoom, node drag, severity badges. */
 (function (global) {
@@ -52,7 +52,7 @@
     opts = opts || {};
     container.innerHTML = '';
     var w = container.clientWidth || 900, h = container.clientHeight || 600;
-    var svg = el('svg', { width: '100%', height: '100%', viewBox: '0 0 ' + w + ' ' + h, 'class': 'ocumap' }, container);
+    var svg = el('svg', { width: '100%', height: '100%', viewBox: '0 0 ' + w + ' ' + h, 'class': 'octomap' }, container);
     svg.style.display = 'block';
     svg.style.cursor = 'grab';
     svg.style.userSelect = 'none';
@@ -156,7 +156,7 @@
         l.el = ln;
       });
       nodes.forEach(function (nd) {
-        var g = el('g', { transform: 'translate(' + nd.x + ',' + nd.y + ')', 'class': 'ocunode' }, gn);
+        var g = el('g', { transform: 'translate(' + nd.x + ',' + nd.y + ')', 'class': 'octonode' }, gn);
         g.style.cursor = 'pointer';
         var r = nd.kind === 'cloud' ? 15 : (INFRA[nd.type] || nd.gateway ? 19 : 14);
         var match = !q || (nd.label + ' ' + (nd.ip || '') + ' ' + (nd.vendor || '')).toLowerCase().indexOf(q) >= 0;
@@ -250,5 +250,5 @@
     };
   }
 
-  global.OcuMap = { render: render, colors: COLORS, icons: ICONS };
+  global.OctoMap = { render: render, colors: COLORS, icons: ICONS };
 })(window);

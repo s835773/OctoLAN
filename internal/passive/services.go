@@ -13,9 +13,9 @@ import (
 	"golang.org/x/net/dns/dnsmessage"
 	"golang.org/x/net/ipv4"
 
-	"github.com/s835773/OcuLAN/internal/model"
-	"github.com/s835773/OcuLAN/internal/netutil"
-	"github.com/s835773/OcuLAN/internal/store"
+	"github.com/s835773/OctoLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/netutil"
+	"github.com/s835773/OctoLAN/internal/store"
 )
 
 const maxServices = 40
@@ -267,7 +267,7 @@ func ActiveServiceDiscovery(ctx context.Context, st *store.Store, local netutil.
 			_, _ = c.WriteToUDP(m, mdnsGroup)
 		}
 	}
-	msearch := "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 2\r\nST: ssdp:all\r\nUSER-AGENT: OcuLAN/1.0 UPnP/1.1\r\n\r\n"
+	msearch := "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 2\r\nST: ssdp:all\r\nUSER-AGENT: OctoLAN/1.0 UPnP/1.1\r\n\r\n"
 	_, _ = c.WriteToUDP([]byte(msearch), ssdpGroup)
 
 	deadline := time.Now().Add(wait)

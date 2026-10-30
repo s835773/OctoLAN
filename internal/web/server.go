@@ -1,4 +1,4 @@
-// Package web serves the OcuLAN dashboard and its JSON API.
+// Package web serves the OctoLAN dashboard and its JSON API.
 package web
 
 import (
@@ -16,11 +16,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/s835773/OcuLAN/internal/discovery"
-	"github.com/s835773/OcuLAN/internal/engine"
-	"github.com/s835773/OcuLAN/internal/model"
-	"github.com/s835773/OcuLAN/internal/report"
-	"github.com/s835773/OcuLAN/internal/ui"
+	"github.com/s835773/OctoLAN/internal/discovery"
+	"github.com/s835773/OctoLAN/internal/engine"
+	"github.com/s835773/OctoLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/report"
+	"github.com/s835773/OctoLAN/internal/ui"
 )
 
 // Server is the HTTP front end.
@@ -82,7 +82,7 @@ func (s *Server) auth(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet {
 			// Same-origin only for writes (defends against CSRF from a
-			// malicious page the tech browses while OcuLAN runs).
+			// malicious page the tech browses while OctoLAN runs).
 			if o := r.Header.Get("Origin"); o != "" && !strings.HasSuffix(o, "://"+r.Host) {
 				http.Error(w, "cross-origin request refused", http.StatusForbidden)
 				return
@@ -93,17 +93,17 @@ func (s *Server) auth(h http.Handler) http.Handler {
 			return
 		}
 		if q := r.URL.Query().Get("token"); q != "" && subtle.ConstantTimeCompare([]byte(q), []byte(s.Token)) == 1 {
-			http.SetCookie(w, &http.Cookie{Name: "oculan", Value: s.Token, Path: "/", HttpOnly: true, SameSite: http.SameSiteStrictMode})
+			http.SetCookie(w, &http.Cookie{Name: "octolan", Value: s.Token, Path: "/", HttpOnly: true, SameSite: http.SameSiteStrictMode})
 			h.ServeHTTP(w, r)
 			return
 		}
-		if c, err := r.Cookie("oculan"); err == nil && subtle.ConstantTimeCompare([]byte(c.Value), []byte(s.Token)) == 1 {
+		if c, err := r.Cookie("octolan"); err == nil && subtle.ConstantTimeCompare([]byte(c.Value), []byte(s.Token)) == 1 {
 			h.ServeHTTP(w, r)
 			return
 		}
 		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 		w.WriteHeader(http.StatusUnauthorized)
-		fmt.Fprintln(w, "OcuLAN: open the URL printed in the terminal (it includes the access token).")
+		fmt.Fprintln(w, "OctoLAN: open the URL printed in the terminal (it includes the access token).")
 	})
 }
 
@@ -471,7 +471,7 @@ func (s *Server) filename(ext string) string {
 		return r
 	}, s.E.St.Site())
 	if site == "" {
-		site = "oculan"
+		site = "octolan"
 	}
 	return fmt.Sprintf("%s-%s.%s", site, time.Now().Format("2006-01-02"), ext)
 }

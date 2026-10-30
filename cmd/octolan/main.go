@@ -1,14 +1,14 @@
-// Command oculan is a portable network discovery and assessment tool for
+// Command octolan is a portable network discovery and assessment tool for
 // MSP technicians: run it on a laptop at a customer site to map the
 // network, inventory devices and score its security posture.
 //
-//	oculan                      start the live dashboard in your browser
-//	oculan scan [flags]         run a full assessment from the terminal
-//	oculan report <session>     regenerate a report from a saved session
-//	oculan storm                live broadcast-storm / STP meter
-//	oculan netflow              live NetFlow/IPFIX top talkers
-//	oculan passive              listen-only discovery (sends nothing)
-//	oculan interfaces           show interfaces and what this host can do
+//	octolan                      start the live dashboard in your browser
+//	octolan scan [flags]         run a full assessment from the terminal
+//	octolan report <session>     regenerate a report from a saved session
+//	octolan storm                live broadcast-storm / STP meter
+//	octolan netflow              live NetFlow/IPFIX top talkers
+//	octolan passive              listen-only discovery (sends nothing)
+//	octolan interfaces           show interfaces and what this host can do
 package main
 
 import (
@@ -29,20 +29,20 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"github.com/s835773/OcuLAN/internal/engine"
-	"github.com/s835773/OcuLAN/internal/model"
-	"github.com/s835773/OcuLAN/internal/report"
-	"github.com/s835773/OcuLAN/internal/store"
-	"github.com/s835773/OcuLAN/internal/web"
+	"github.com/s835773/OctoLAN/internal/engine"
+	"github.com/s835773/OctoLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/report"
+	"github.com/s835773/OctoLAN/internal/store"
+	"github.com/s835773/OctoLAN/internal/web"
 )
 
 // Version is set at build time with -ldflags "-X main.Version=...".
 var Version = "dev"
 
-const banner = `   ____            _      ___    _  __
-  / __ \_______ __/ /    / _ |  / |/ /
- / /_/ / __/ // / /__  / __ | /    /
- \____/\__/\_,_/____/ /_/ |_|/_/|_/   network assessment %s
+const banner = `   ____       __        __   ___    _  __
+  / __ \_____/ /_____  / /  / _ |  / |/ /
+ / /_/ / __/ __/ __ \/ /__/ __ | /    /
+ \____/\__/\__/\____/____/_/ |_|/_/|_/   network assessment %s
 `
 
 func main() {
@@ -68,7 +68,7 @@ func main() {
 	case "interfaces", "ifaces", "caps":
 		err = cmdInterfaces()
 	case "version", "--version":
-		fmt.Println("oculan", Version, runtime.GOOS+"/"+runtime.GOARCH)
+		fmt.Println("octolan", Version, runtime.GOOS+"/"+runtime.GOARCH)
 	case "help", "-h", "--help":
 		usage()
 	default:
@@ -86,16 +86,16 @@ func usage() {
 	fmt.Printf(banner, Version)
 	fmt.Print(`
 Usage:
-  oculan [serve]        Live dashboard (opens your browser)
-  oculan scan           Full assessment from the terminal; writes report.html
-  oculan report FILE    Rebuild the HTML report from a saved session JSON
-  oculan storm          Live broadcast/multicast PPS meter and STP watch
-  oculan netflow        NetFlow v5/v9/IPFIX collector with live top talkers
-  oculan passive        Listen-only discovery: never transmits a packet
-  oculan interfaces     List interfaces and this host's capabilities
-  oculan version
+  octolan [serve]        Live dashboard (opens your browser)
+  octolan scan           Full assessment from the terminal; writes report.html
+  octolan report FILE    Rebuild the HTML report from a saved session JSON
+  octolan storm          Live broadcast/multicast PPS meter and STP watch
+  octolan netflow        NetFlow v5/v9/IPFIX collector with live top talkers
+  octolan passive        Listen-only discovery: never transmits a packet
+  octolan interfaces     List interfaces and this host's capabilities
+  octolan version
 
-Run "oculan <command> -h" for flags. Raw-packet features (ARP sweep,
+Run "octolan <command> -h" for flags. Raw-packet features (ARP sweep,
 passive capture, Storm Guard, SYN-ACK fingerprinting) need sudo on
 Linux/macOS, or Npcap on Windows; everything else works without them.
 `)
@@ -103,9 +103,9 @@ Linux/macOS, or Npcap on Windows; everything else works without them.
 
 func defaultDataDir() string {
 	if d, err := os.UserHomeDir(); err == nil {
-		return filepath.Join(d, "OcuLAN")
+		return filepath.Join(d, "OctoLAN")
 	}
-	return "oculan-data"
+	return "octolan-data"
 }
 
 func signalCtx() (context.Context, context.CancelFunc) {
@@ -158,7 +158,7 @@ func cmdServe(args []string) error {
 	}
 	ln, err := net.Listen("tcp", *listen)
 	if err != nil {
-		return fmt.Errorf("can't listen on %s: %w (is another OcuLAN running? try -listen 127.0.0.1:0)", *listen, err)
+		return fmt.Errorf("can't listen on %s: %w (is another OctoLAN running? try -listen 127.0.0.1:0)", *listen, err)
 	}
 	srv := &web.Server{E: e}
 	loopback := false
@@ -275,7 +275,7 @@ func cmdScan(args []string) error {
 	zero := fs.Bool("zero-footprint", false, "passive only: never transmit a packet")
 	noSNMP := fs.Bool("no-snmp", false, "skip SNMP polling")
 	rate := fs.Int("rate", 400, "packets per second for ARP/ICMP sweeps")
-	out := fs.String("out", "", "output directory (default: ~/OcuLAN/<site>)")
+	out := fs.String("out", "", "output directory (default: ~/OctoLAN/<site>)")
 	nf := fs.String("netflow", "", "also collect NetFlow on this address during the scan (e.g. :2055)")
 	_ = fs.Parse(args)
 
@@ -415,7 +415,7 @@ func cmdReport(args []string) error {
 	out := fs.String("o", "", "output HTML file (default: next to the session)")
 	_ = fs.Parse(flagsFirst(args, map[string]bool{"-o": true, "--o": true}))
 	if fs.NArg() != 1 {
-		return errors.New("usage: oculan report [-o out.html] session.json")
+		return errors.New("usage: octolan report [-o out.html] session.json")
 	}
 	snap, err := store.LoadSnapshot(fs.Arg(0))
 	if err != nil {

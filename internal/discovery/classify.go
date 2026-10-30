@@ -5,7 +5,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/s835773/OcuLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/model"
 )
 
 // sysObjectID enterprise numbers → vendor family.

@@ -1,4 +1,4 @@
-// Package engine orchestrates an OcuLAN assessment: it owns the
+// Package engine orchestrates an OctoLAN assessment: it owns the
 // long-running monitors (passive listener, Storm Guard, NetFlow) and runs
 // the scan pipeline that fills the store.
 package engine
@@ -17,16 +17,16 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/s835773/OcuLAN/internal/assess"
-	"github.com/s835773/OcuLAN/internal/capture"
-	"github.com/s835773/OcuLAN/internal/discovery"
-	"github.com/s835773/OcuLAN/internal/model"
-	"github.com/s835773/OcuLAN/internal/netflow"
-	"github.com/s835773/OcuLAN/internal/netutil"
-	"github.com/s835773/OcuLAN/internal/passive"
-	"github.com/s835773/OcuLAN/internal/store"
-	"github.com/s835773/OcuLAN/internal/storm"
-	"github.com/s835773/OcuLAN/internal/topology"
+	"github.com/s835773/OctoLAN/internal/assess"
+	"github.com/s835773/OctoLAN/internal/capture"
+	"github.com/s835773/OctoLAN/internal/discovery"
+	"github.com/s835773/OctoLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/netflow"
+	"github.com/s835773/OctoLAN/internal/netutil"
+	"github.com/s835773/OctoLAN/internal/passive"
+	"github.com/s835773/OctoLAN/internal/store"
+	"github.com/s835773/OctoLAN/internal/storm"
+	"github.com/s835773/OctoLAN/internal/topology"
 )
 
 // Engine is safe for concurrent use.
@@ -213,7 +213,7 @@ func (e *Engine) observeSelf(local netutil.LocalIface) string {
 	return e.St.Observe(local.Addr.String(), local.Iface.HardwareAddr.String(), model.SrcLocalHost, func(d *model.Device) {
 		d.IsSelf = true
 		store.AddName(d, host)
-		d.Notes = "OcuLAN collector"
+		d.Notes = "OctoLAN collector"
 		d.OS.Family = map[string]string{"windows": "Windows", "darwin": "macOS", "linux": "Linux"}[runtime.GOOS]
 		d.OS.Confidence = 100
 		if d.Type == model.TypeUnknown {

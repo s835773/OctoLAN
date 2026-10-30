@@ -1,5 +1,5 @@
 // Package netflow is a NetFlow v5 / v9 / IPFIX collector. Point a
-// router, firewall or switch at the OcuLAN laptop on UDP 2055 and it
+// router, firewall or switch at the OctoLAN laptop on UDP 2055 and it
 // aggregates conversations, top talkers, applications and protocol mix.
 package netflow
 
@@ -13,8 +13,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/s835773/OcuLAN/internal/model"
-	"github.com/s835773/OcuLAN/internal/store"
+	"github.com/s835773/OctoLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/store"
 )
 
 const (

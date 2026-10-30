@@ -1,4 +1,4 @@
-/* OcuLAN dashboard. Vanilla JS, no build step, no CDN. */
+/* OctoLAN dashboard. Vanilla JS, no build step, no CDN. */
 (function () {
   'use strict';
 
@@ -62,7 +62,7 @@
   }
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 
-  var TYPE_COLORS = window.OcuMap ? OcuMap.colors : {};
+  var TYPE_COLORS = window.OctoMap ? OctoMap.colors : {};
   var SEV_ORDER = ['critical', 'high', 'medium', 'low', 'info'];
   var SEV_COLORS = { critical: 'var(--critical)', high: 'var(--high)', medium: 'var(--medium)', low: 'var(--low)', info: 'var(--info)' };
 
@@ -83,10 +83,10 @@
   // ---------- chrome (sidebar, top bar) ----------
   function chrome() {
     var s = S.state; if (!s) return;
-    $('#ver').textContent = 'OcuLAN ' + s.version + ' · ' + s.capabilities.os + '/' + s.capabilities.arch;
+    $('#ver').textContent = 'OctoLAN ' + s.version + ' · ' + s.capabilities.os + '/' + s.capabilities.arch;
     var siteInput = $('#site-name');
     if (document.activeElement !== siteInput) siteInput.value = s.site || '';
-    document.title = (s.site ? s.site + ' · ' : '') + 'OcuLAN';
+    document.title = (s.site ? s.site + ' · ' : '') + 'OctoLAN';
     $('#nav-devices').textContent = s.counts.devices || '';
     var sevN = (s.severity.critical || 0) + (s.severity.high || 0);
     $('#nav-findings').textContent = s.counts.findings ? (sevN ? sevN + ' ⚠' : s.counts.findings) : '';
@@ -174,14 +174,14 @@
   function welcome(s) {
     var c = s.capabilities;
     return '<div class="hero"><div><h1>Ready to assess ' + esc(s.site || 'this network') + '</h1>' +
-      '<p>OcuLAN maps the network from this laptop: discovery, SNMP inventory, topology, traffic and a scored security posture report.</p>' +
+      '<p>OctoLAN maps the network from this laptop: discovery, SNMP inventory, topology, traffic and a scored security posture report.</p>' +
       '<p><button class="primary" id="go-scan">Start assessment</button> <button class="ghost" id="go-passive">Passive only</button></p></div>' +
       '<div class="card"><h3>This collector</h3><dl class="kv">' +
       '<dt>Host</dt><dd>' + esc(c.hostname) + ' (' + esc(c.os) + '/' + esc(c.arch) + ')</dd>' +
       '<dt>Interface</dt><dd>' + esc(c.defaultIface || 'none') + '</dd>' +
       '<dt>Raw capture</dt><dd>' + (c.rawCapture ? '<span class="status ok">available</span>' : '<span class="status warn">unavailable</span><div class="sub">' + esc(c.captureNote) + '</div>') + '</dd>' +
       '<dt>ICMP</dt><dd>' + esc(c.icmpMode) + '</dd></dl>' +
-      (c.rawCapture ? '' : '<p class="muted small" style="margin-bottom:0">Without raw capture OcuLAN still discovers via ping, the OS ARP cache, TCP, SNMP, SMB, DNS, NetBIOS and mDNS. ARP sweeps, passive DHCP/LLDP/STP and Storm Guard need it.</p>') +
+      (c.rawCapture ? '' : '<p class="muted small" style="margin-bottom:0">Without raw capture OctoLAN still discovers via ping, the OS ARP cache, TCP, SNMP, SMB, DNS, NetBIOS and mDNS. ARP sweeps, passive DHCP/LLDP/STP and Storm Guard need it.</p>') +
       '</div></div>';
   }
   function bindWelcome() {
@@ -223,7 +223,7 @@
           return '<span><span class="tdot" style="background:' + (TYPE_COLORS[k] || '#999') + '"></span>' + esc(title(k)) + '</span>';
         }).join('') + '<span>━ LLDP/CDP</span><span>╍ MAC table</span><span>┈ inferred</span></div></div>';
       var opts = Object.assign({}, mapOpts, { onSelect: openDevice, positions: (mapInst && mapInst.positions) || savedPositions() });
-      mapInst = OcuMap.render($('#mapsvg'), t, opts);
+      mapInst = OctoMap.render($('#mapsvg'), t, opts);
       $('#map-q').oninput = function () { mapInst.search(this.value); };
       $('#map-fit').onclick = function () { mapInst.fit(); };
       $('#map-relayout').onclick = function () { mapInst.relayout(); persistPositions(); };
@@ -235,8 +235,8 @@
       $('#mapsvg').addEventListener('mouseup', function () { debounce('pos', persistPositions, 500); });
     });
   };
-  function savedPositions() { try { return JSON.parse(store('oculan-pos') || '{}'); } catch (e) { return {}; } }
-  function persistPositions() { if (mapInst) store('oculan-pos', JSON.stringify(mapInst.positions)); }
+  function savedPositions() { try { return JSON.parse(store('octolan-pos') || '{}'); } catch (e) { return {}; } }
+  function persistPositions() { if (mapInst) store('octolan-pos', JSON.stringify(mapInst.positions)); }
 
   // ---------- Devices ----------
   views.devices = function () {
@@ -478,7 +478,7 @@
           '<span class="status">Off</span><input id="nf-addr" value=":2055" style="width:110px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 8px"><button class="primary small" id="nf-start">Start collector</button>') +
         '<span class="muted small">Point the customer\'s router/firewall flow export (v5, v9 or IPFIX) at this laptop: ' + esc(collectorIPs()) + '</span></div></div>';
       if (!listening || !f.totalFlows) {
-        v.innerHTML = head + '<div class="empty"><h2>' + (listening ? 'Waiting for flow exports…' : 'Traffic analysis is off') + '</h2><p>Most firewalls (FortiGate, SonicWall, Meraki, pfSense, UniFi, MikroTik, Cisco) can export NetFlow or IPFIX. OcuLAN aggregates top talkers, applications and conversations.</p>' +
+        v.innerHTML = head + '<div class="empty"><h2>' + (listening ? 'Waiting for flow exports…' : 'Traffic analysis is off') + '</h2><p>Most firewalls (FortiGate, SonicWall, Meraki, pfSense, UniFi, MikroTik, Cisco) can export NetFlow or IPFIX. OctoLAN aggregates top talkers, applications and conversations.</p>' +
           (f && f.errors && Object.keys(f.errors).length ? '<p class="small">Parser notes: ' + esc(Object.keys(f.errors).join('; ')) + '</p>' : '') + '</div>';
         bindNF();
         return;
@@ -524,7 +524,7 @@
     var v = $('#view');
     if (!s || (!s.running && s.state !== 'ok')) {
       v.innerHTML = '<div class="empty"><h2>Storm Guard unavailable</h2><p>' + esc((s && s.error) || 'Raw capture is required.') + '</p>' +
-        '<p class="muted">Storm Guard meters every frame on the wire in promiscuous mode to catch broadcast storms, layer-2 loops and spanning-tree instability. Restart OcuLAN with sudo (macOS/Linux) or install Npcap (Windows).</p></div>';
+        '<p class="muted">Storm Guard meters every frame on the wire in promiscuous mode to catch broadcast storms, layer-2 loops and spanning-tree instability. Restart OctoLAN with sudo (macOS/Linux) or install Npcap (Windows).</p></div>';
       return;
     }
     var c = s.current || {};
@@ -660,7 +660,7 @@
   document.addEventListener('click', function () { $('#export-menu').hidden = true; });
   $('#theme-btn').onclick = function () {
     var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = t; store('oculan-theme', t);
+    document.documentElement.dataset.theme = t; store('octolan-theme', t);
     if (mapInst) { mapInst.update(S.topology, mapOpts); }
     refreshCurrent();
   };

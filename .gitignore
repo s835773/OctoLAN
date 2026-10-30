@@ -1,10 +1,10 @@
 /dist/
-/oculan
-/oculan.exe
+/octolan
+/octolan.exe
 *.test
 *.out
 # Assessment output can contain customer data: never commit it.
-/OcuLAN/
+/OctoLAN/
 session-*.json
 report-*.html
 .DS_Store

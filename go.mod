@@ -1,4 +1,4 @@
-module github.com/s835773/OcuLAN
+module github.com/s835773/OctoLAN
 
 go 1.27.3
 

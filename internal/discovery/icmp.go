@@ -1,4 +1,4 @@
-// Package discovery contains OcuLAN's active probes: ICMP and ARP sweeps,
+// Package discovery contains OctoLAN's active probes: ICMP and ARP sweeps,
 // TCP service scanning with SYN-ACK fingerprinting, SMB/NTLM and TLS
 // inspection, name resolution and SNMP polling.
 package discovery

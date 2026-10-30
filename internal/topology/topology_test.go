@@ -3,7 +3,7 @@ package topology
 import (
 	"testing"
 
-	"github.com/s835773/OcuLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/model"
 )
 
 func TestBuild(t *testing.T) {

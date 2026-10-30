@@ -5,8 +5,8 @@ import (
 	"net/netip"
 	"testing"
 
-	"github.com/s835773/OcuLAN/internal/model"
-	"github.com/s835773/OcuLAN/internal/store"
+	"github.com/s835773/OctoLAN/internal/model"
+	"github.com/s835773/OctoLAN/internal/store"
 )
 
 func newTestCollector() *Collector {
